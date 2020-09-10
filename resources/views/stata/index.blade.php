@@ -37,7 +37,7 @@
             word-wrap: break-word;
             white-space: pre-wrap;
             position: relative;
-            z-index: 99999;
+            /*z-index: 99999;*/
             word-break: break-all;
             font-weight: bold;
             color: #56DB3A;
