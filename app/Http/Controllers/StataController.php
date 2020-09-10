@@ -38,7 +38,7 @@ class StataController extends Controller
             fwrite($fo,$text);
             fclose($fo);
 
-            $output = exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/${filename}.do",$output,$ddd);
+            $output = exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/${filename}.do",$output,$ddd2);
 
             $fileread = file_get_contents(public_path()."\\"."${filename}.log", true);
 //            $fileread = htmlentities($fileread);
