@@ -29,7 +29,7 @@ class StataController extends Controller
 
     public function store(Request $request)
     {
-        try {
+//        try {
             if (!empty($_POST['filename'])) {
 
             $text = $_POST["textdata"];
@@ -38,7 +38,7 @@ class StataController extends Controller
             fwrite($fo,$text);
             fclose($fo);
 
-            $output = shell_exec("Stata.exe /q /e do stata16/${filename}.do");
+            $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/${filename}.do");
 
             $fileread = file_get_contents(public_path()."\\"."${filename}.log", true);
 //            $fileread = htmlentities($fileread);
@@ -61,17 +61,10 @@ class StataController extends Controller
             //$output = shell_exec(\Storage::disk('public')->get("stata/exe.bat"));
             //Stata.exe /q /e do stata16/b.do
 
-            /*            while(!feof($file)){
-                            $old = $old . fgets($file). "<br />";
-                        }*/
-
-//            file_put_contents($_POST['filename'] . ".txt", $old . $text);
-//            //file_put_contents($_POST['filename'] . ".txt", $old . $text);
-//
-        }
-        }catch(\Throwable $e){
+            }
+       /* }catch(\Throwable $e){
             Log::debug($e);
-        }
+        }*/
 
 
 
