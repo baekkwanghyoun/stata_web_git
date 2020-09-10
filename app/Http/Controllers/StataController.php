@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Mockery\Exception;
 use Symfony\Component\VarDumper\VarDumper;
 
 class StataController extends Controller
@@ -27,7 +29,8 @@ class StataController extends Controller
 
     public function store(Request $request)
     {
-        if (!empty($_POST['filename'])) {
+        try {
+            if (!empty($_POST['filename'])) {
 
             $text = $_POST["textdata"];
             $filename = $_POST['filename'];
@@ -58,24 +61,19 @@ class StataController extends Controller
             //$output = shell_exec(\Storage::disk('public')->get("stata/exe.bat"));
             //Stata.exe /q /e do stata16/b.do
 
-/*            while(!feof($file)){
-                $old = $old . fgets($file). "<br />";
-            }*/
+            /*            while(!feof($file)){
+                            $old = $old . fgets($file). "<br />";
+                        }*/
 
 //            file_put_contents($_POST['filename'] . ".txt", $old . $text);
 //            //file_put_contents($_POST['filename'] . ".txt", $old . $text);
 //
         }
+        }catch(\Throwable $e){
+            Log::debug($e);
+        }
 
-/*        if ($_POST['submitopen'] == "Submit File Request") {
-            if(!file_exists($_POST['filename'] . ".txt")){
-                exit("Error: File does not exist.");
-            }
-            $file = fopen($_POST['filename'] . ".txt", "r");
-            while(!feof($file)){
-                echo fgets($file). "<br />";
-            }
-            fclose($file);
-        }*/
+
+
     }
 }
