@@ -2890,6 +2890,7 @@
             $("#kt_select2_3").val('').trigger('change');
             $("#kt_select2_4").val('').trigger('change');
             $("#kt_select2_5").val('').trigger('change');
+            $("#kt_select2_5").val('').trigger('change');
             $('.result').html('');
         })
 
