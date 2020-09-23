@@ -1,0 +1,17 @@
+
+
+. cd c:\Temp
+c:\Temp
+
+. smart_klips h_kidage06 h_hmarital p_age p_religion , wave( 05 07) wd( ) websi
+> te( ) save( )
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                            22,626  
+    -----------------------------------------
+file klips_final.dta saved
+
+. 
+end of do-file
