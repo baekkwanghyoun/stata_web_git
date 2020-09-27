@@ -13,7 +13,8 @@ class StataController extends Controller
 {
     public function index()
     {
-        return view('stata.index');
+        $isSuccess = false;
+        return view('stata.index', compact('isSuccess'));
     }
 
     public function create()
@@ -61,7 +62,8 @@ class StataController extends Controller
             //echo($fileread);
             //session()->flashInput([$fileread]);
             session()->flashInput($request->input());
-            return view('stata.index', compact('fileread'));
+            $isSuccess = false;
+            return view('stata.index', compact('fileread', 'isSuccess'));
             //return back()->withInput();
 
 
@@ -86,8 +88,13 @@ class StataController extends Controller
 //        try {
         $_POST['filename'] = 'testSession';
         if (!empty($_POST['filename'])) {
+            if(env('APP_ENV')=='local') {
+                $text = "cd C:\project\stata_web\public\klips\n";
+            }
+            else {
+                $text = "cd C:\www\stata_web_git\public\klips\n";
+            }
 
-            $text = "cd C:\www\stata_web_git\public\klips\n";
 
             $households = implode(" ", is_array(request('kt_select2_3'))?request('kt_select2_3'):array(request('kt_select2_3') ));
             $persons = implode(" ", is_array(request('kt_select2_4'))?request('kt_select2_4'):array(request('kt_select2_4') ));
@@ -118,13 +125,19 @@ class StataController extends Controller
             $fileread = preg_replace("/(\r\n\r\n)/i","<br />\n", $fileread);
             $fileread = preg_replace("/  /i","&nbsp;&nbsp;", $fileread);
             $fileread = preg_replace("/(<br\s*\/>)+/", "", $fileread);
+
+            $isSuccess = false;
+            if(Str::contains($fileread, 'saved')) {
+                $isSuccess = true;
+            }
+
             //$fileread = preg_replace('/[\n\r]+/', '', $fileread);
 
             //$fileread = Str::replaceFirst('&rt;br',"", $fileread);
             //echo($fileread);
             //session()->flashInput([$fileread]);
             session()->flashInput($request->input());
-            return view('stata.index', compact('fileread'));
+            return view('stata.index', compact('fileread', 'isSuccess'));
             //return back()->withInput();
 
 

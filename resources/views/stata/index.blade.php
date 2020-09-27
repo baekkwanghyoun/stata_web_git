@@ -21,6 +21,8 @@
     <link href="/mtrn/assets/plugins/global/plugins.bundle.css?v=7.0.6" rel="stylesheet" type="text/css"/>
     <link href="/mtrn/assets/plugins/custom/prismjs/prismjs.bundle.css?v=7.0.6" rel="stylesheet" type="text/css"/>
     <link href="/mtrn/assets/css/style.bundle.css?v=7.0.6" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('/vendor/sweetalert2/js/sweetalert2.min.css') }}" />
+
     <!--end::Global Theme Styles-->
 
     <!--begin::Layout Themes(used by all pages)-->
@@ -45,6 +47,7 @@
             border-radius: 10px;
             padding: 14px;
         }
+
     </style>
 </head>
 <!--end::Head-->
@@ -2852,7 +2855,7 @@
 
 <!--begin::Page Scripts(used by this page)-->
 <script src="/mtrn/assets/js/pages/widgets.js?v=7.0.6"></script>
-
+<script src="{{ asset('/js/vendor/sweetalert2/js/sweetalert2.min.js') }}"></script>
 <script>
     // Class definition
     var KTSelect2 = function() {
@@ -2885,6 +2888,22 @@
 
     // Initialization
     jQuery(document).ready(function() {
+        @if($isSuccess)
+        Swal.fire({
+            title: '파일을 다운 받으시겠습니까?',
+            text: 'klips_final.dta가 생성되었습니다.',
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '다운받기',
+            cancelButtonText: '창 닫기'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.open("/klips/klips_final.dta", "_blank");
+            }
+        })
+        @endif
         KTSelect2.init();
         $("#cancel").click(function() {
             $("#kt_select2_3").val('').trigger('change');
