@@ -87,7 +87,7 @@ class StataController extends Controller
         $_POST['filename'] = 'testSession';
         if (!empty($_POST['filename'])) {
 
-            $text = "cd c:\Temp\n";
+            $text = "cd C:\www\stata_web_git\public\klips\n";
 
             $households = implode(" ", is_array(request('kt_select2_3'))?request('kt_select2_3'):array(request('kt_select2_3') ));
             $persons = implode(" ", is_array(request('kt_select2_4'))?request('kt_select2_4'):array(request('kt_select2_4') ));
