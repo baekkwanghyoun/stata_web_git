@@ -21,7 +21,7 @@
     <link href="/mtrn/assets/plugins/global/plugins.bundle.css?v=7.0.6" rel="stylesheet" type="text/css"/>
     <link href="/mtrn/assets/plugins/custom/prismjs/prismjs.bundle.css?v=7.0.6" rel="stylesheet" type="text/css"/>
     <link href="/mtrn/assets/css/style.bundle.css?v=7.0.6" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('/vendor/sweetalert2/js/sweetalert2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/sweetalert2/js/sweetalert2.min.css') }}"/>
 
     <!--end::Global Theme Styles-->
 
@@ -391,26 +391,28 @@
                                     <div class="card-body p-0">
                                         <!--begin::Nav Tabs-->
                                         <ul class="dashboard-tabs nav nav-pills nav-danger row row-paddingless m-0 p-0" role="tablist">
-                                            <!--begin::Item tab_forms_widget_1-->
+                                            <!--begin::Item 스마트 통합 패널 데이터 생성 tab_forms_widget_1-->
                                             <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
-                                                <a class="nav-link  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill"
+                                                <a class="nav-link active border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill"
                                                    href="#tab_forms_widget_1">
                                                 <span class="nav-icon py-2 w-auto">
-                                                    <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Home/Library.svg--><svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                                                                                       width="24px"
-                                                                                                                                                                       height="24px" viewBox="0 0 24 24"
-                                                                                                                                                                       version="1.1">
+                                                    <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Home/Library.svg--><svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24px"
+                                                            height="24px" viewBox="0 0 24 24"
+                                                            version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <rect x="0" y="0" width="24" height="24"/>
                                     <path
                                         d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z"
                                         fill="#000000"/>
-                                    <rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3"
+                                    <rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) "
+                                          x="16.3255682" y="2.94551858" width="3"
                                           height="18" rx="1"/>
                                 </g>
                             </svg><!--end::Svg Icon--></span>                    </span>
-                                                                                <span class="nav-text font-size-lg py-2 font-weight-bold text-center">
-                                                    Stata Command
+                                                    <span class="nav-text font-size-lg py-2 font-weight-bold text-center">
+                                                    스마트 통합 패널 데이터 생성
                                                 </span>
                                                 </a>
                                             </li>
@@ -420,70 +422,22 @@
                                             <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
                                                 <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill"
                                                    href="#tab_forms_widget_2">
-                    <span class="nav-icon py-2 w-auto">
-                        <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Layout/Layout-4-blocks.svg--><svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24px" height="24px"
-                                viewBox="0 0 24 24" version="1.1">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect x="0" y="0" width="24" height="24"/>
-        <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"/>
-        <path
-            d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-            fill="#000000" opacity="0.3"/>
-    </g>
-</svg><!--end::Svg Icon--></span>                    </span>
-                                                    <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
-                        Edit
-                    </span>
-                                                </a>
-                                            </li>
-                                            <!--end::Item-->
-
-                                            <!--begin::Item-->
-                                            <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
-                                                <a class="nav-link  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill"
-                                                   href="#tab_forms_widget_3">
-                    <span class="nav-icon py-2 w-auto">
-                        <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Media/Movie-Lane2.svg--><svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                                                                width="24px" height="24px"
-                                                                                                                                                viewBox="0 0 24 24" version="1.1">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect x="0" y="0" width="24" height="24"/>
-        <path
-            d="M6,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,5 C4,3.8954305 4.8954305,3 6,3 Z M5.5,5 C5.22385763,5 5,5.22385763 5,5.5 L5,6.5 C5,6.77614237 5.22385763,7 5.5,7 L6.5,7 C6.77614237,7 7,6.77614237 7,6.5 L7,5.5 C7,5.22385763 6.77614237,5 6.5,5 L5.5,5 Z M17.5,5 C17.2238576,5 17,5.22385763 17,5.5 L17,6.5 C17,6.77614237 17.2238576,7 17.5,7 L18.5,7 C18.7761424,7 19,6.77614237 19,6.5 L19,5.5 C19,5.22385763 18.7761424,5 18.5,5 L17.5,5 Z M5.5,9 C5.22385763,9 5,9.22385763 5,9.5 L5,10.5 C5,10.7761424 5.22385763,11 5.5,11 L6.5,11 C6.77614237,11 7,10.7761424 7,10.5 L7,9.5 C7,9.22385763 6.77614237,9 6.5,9 L5.5,9 Z M17.5,9 C17.2238576,9 17,9.22385763 17,9.5 L17,10.5 C17,10.7761424 17.2238576,11 17.5,11 L18.5,11 C18.7761424,11 19,10.7761424 19,10.5 L19,9.5 C19,9.22385763 18.7761424,9 18.5,9 L17.5,9 Z M5.5,13 C5.22385763,13 5,13.2238576 5,13.5 L5,14.5 C5,14.7761424 5.22385763,15 5.5,15 L6.5,15 C6.77614237,15 7,14.7761424 7,14.5 L7,13.5 C7,13.2238576 6.77614237,13 6.5,13 L5.5,13 Z M17.5,13 C17.2238576,13 17,13.2238576 17,13.5 L17,14.5 C17,14.7761424 17.2238576,15 17.5,15 L18.5,15 C18.7761424,15 19,14.7761424 19,14.5 L19,13.5 C19,13.2238576 18.7761424,13 18.5,13 L17.5,13 Z M17.5,17 C17.2238576,17 17,17.2238576 17,17.5 L17,18.5 C17,18.7761424 17.2238576,19 17.5,19 L18.5,19 C18.7761424,19 19,18.7761424 19,18.5 L19,17.5 C19,17.2238576 18.7761424,17 18.5,17 L17.5,17 Z M5.5,17 C5.22385763,17 5,17.2238576 5,17.5 L5,18.5 C5,18.7761424 5.22385763,19 5.5,19 L6.5,19 C6.77614237,19 7,18.7761424 7,18.5 L7,17.5 C7,17.2238576 6.77614237,17 6.5,17 L5.5,17 Z"
-            fill="#000000" opacity="0.3"/>
-        <path
-            d="M11.3521577,14.5722612 L13.9568442,12.7918113 C14.1848159,12.6359797 14.2432972,12.3248456 14.0874656,12.0968739 C14.0526941,12.0460053 14.0088196,12.002002 13.9580532,11.9670814 L11.3533667,10.1754041 C11.1258528,10.0189048 10.8145486,10.0764735 10.6580493,10.3039875 C10.6007019,10.3873574 10.5699997,10.4861652 10.5699997,10.5873545 L10.5699997,14.1594818 C10.5699997,14.4356241 10.7938573,14.6594818 11.0699997,14.6594818 C11.1706891,14.6594818 11.2690327,14.6290818 11.3521577,14.5722612 Z"
-            fill="#000000"/>
-    </g>
-</svg><!--end::Svg Icon--></span>                    </span>
-                                                    <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
-                         Data
-                    </span>
-                                                </a>
-                                            </li>
-                                            <!--end::Item-->
-
-                                            <!--begin::Item-->
-                                            <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0">
-                                                <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill"
-                                                   href="#tab_forms_widget_4">
-                    <span class="nav-icon py-2 w-auto">
-                        <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Media/Equalizer.svg--><svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                                                              width="24px" height="24px"
-                                                                                                                                              viewBox="0 0 24 24" version="1.1">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect x="0" y="0" width="24" height="24"/>
-        <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
-        <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
-        <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
-        <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
-    </g>
-</svg><!--end::Svg Icon--></span>                    </span>
-                                                    <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
-                        Graphics
-                    </span>
+                                                                <span class="nav-icon py-2 w-auto">
+                                                                    <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Layout/Layout-4-blocks.svg--><svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24px" height="24px"
+                                                                            viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"/>
+                                                    <path
+                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+                                                        fill="#000000" opacity="0.3"/>
+                                                </g>
+                                            </svg><!--end::Svg Icon--></span>                    </span>
+                                                                                                <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
+                                                                    스마트 검색
+                                                                </span>
                                                 </a>
                                             </li>
                                             <!--end::Item-->
@@ -509,19 +463,21 @@
                                                                             fill="#000000"/>
                                                                     </g>
                                                                 </svg><!--end::Svg Icon--></span>                    </span>
-                                                                <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
-                                                            User
+                                                    <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
+                                                            스마트 변수 추가
                                                         </span>
                                                 </a>
                                             </li>
                                             <!--end::Item-->
 
-                                            <!--begin::Item-->
+                                            <!--begin::Item 명령어 샌드박스-->
+                                            {{--
                                             <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-0 mb-3 mb-lg-0">
-                                                <a class="nav-link active border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill"
+                                                <a class="nav-link  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill"
                                                    href="#tab_forms_widget_6">
                                                     <span class="nav-icon py-2 w-auto">
-                                                        <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Communication/Group.svg--><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <span class="svg-icon svg-icon-3x"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Communication/Group.svg--><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                 <polygon points="0 0 24 0 24 24 0 24"/>
                                                                 <path
@@ -534,10 +490,11 @@
                                                         </svg><!--end::Svg Icon--></span>
                                                     </span>
                                                     <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">
-                                                        Smart_klips
+                                                        명령어 샌드박스
                                                     </span>
                                                 </a>
                                             </li>
+                                            --}}
                                             <!--end::Item-->
                                         </ul>
                                         <!--end::Nav Tabs-->
@@ -550,7 +507,6 @@
                             </div>
 
 
-
                             <div class="col-xl-4">
                                 <!--begin::Engage Widget 8-->
                                 <div class="card card-custom gutter-b card-stretch card-shadowless">
@@ -558,13 +514,13 @@
                                         <div class="d-flex align-items-start justify-content-start flex-grow-1 bg-light-warning p-8 card-rounded flex-grow-1 position-relative">
                                             <div class="d-flex flex-column align-items-start flex-grow-1 h-100">
                                                 <div class="p-1 flex-grow-1">
-                                                    <h4 class="text-warning font-weight-bolder">30 Days Free Trial</h4>
+                                                    <h4 class="text-warning font-weight-bolder">스마트 클립스 가이드</h4>
                                                     <p class="text-dark-50 font-weight-bold mt-3">
-                                                        Pay 0$ for the First Month
+                                                        용어 설명 / FAQ
                                                     </p>
                                                 </div>
                                                 <a href='#' class="btn btn-link btn-link-warning font-weight-bold">
-                                                    Create Report
+                                                    시작하기
                                                     <span class="svg-icon svg-icon-lg svg-icon-warning"><!--begin::Svg Icon | path:/mtrn/assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -591,544 +547,169 @@
                         <!--end::Row-->
 
                         <!--begin::Nav Content-->
-                        <div class="tab-content m-0 p-0">
-                            <div class="tab-pane pt-10 " id="tab_forms_widget_1" role="tabpanel">
-                                <!--begin::Row-->
-                                <!--silver-->
-                                <div class="row">
-                                    <div class="col-xl-5">
-                                        <div class="card card-custom bg-white gutter-b">
-                                            <!--begin::Header-->
-                                            <div class="card-header border-0 pt-5">
-                                                <h3 class="card-title align-items-start flex-column">
-                                                    <span class="card-label font-weight-bold font-size-h4 text-dark-75">Command</span>
-                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm">Last week <span
-                                                            class="text-primary font-weight-bolder">9 execute</span></span>
-                                                </h3>
-                                                <div class="card-toolbar">
-                                                    <ul class="nav nav-pills nav-pills-sm nav-dark">
-                                                        <li class="nav-item ml-0">
-                                                            <a class="nav-link py-2 px-4 font-weight-bolder font-size-sm" data-toggle="tab" href="#kt_tab_pane_1">Active Cases</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4 active font-weight-bolder font-size-sm" data-toggle="tab" href="#kt_tab_pane_2">Create</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!--end::Header-->
-
-                                            <!--begin::Body-->
-                                            <div class="card-body pt-1">
-                                                <div class="tab-content mt-5" id="myTabContent">
-                                                    <!--begin::Tap pane-->
-                                                    <div class="tab-pane fade" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
-
-                                                    </div>
-                                                    <!--end::Tap pane-->
-
-                                                    <!--begin::Tap pane-->
-                                                    <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-                                                        <!--begin::Form-->
-                                                        <form name="savefile" method="post" action="/stata/store">
-                                                            @csrf
-
-                                                            <div class="form-group mb-6">
-                                                                <input type="text" class="form-control border-0 form-control-solid pl-6 min-h-50px font-size-lg font-weight-bolder"
-                                                                       name="filename" placeholder="Do file Name" value="{{old('filename')}}" required>
-                                                            </div>
-                                                            <div class="form-group mb-6">
-                                                                <input type="text" class="form-control border-0 form-control-solid pl-6 min-h-50px font-size-lg font-weight-bolder"
-                                                                       name="imgname" placeholder="Write down the image used in the command window" value="{{old('imgname')}}">
-                                                            </div>
-
-                                                            <div class="form-group mb-6">
-                                                        <textarea class="form-control border-0 form-control-solid pl-6 font-size-lg font-weight-bolder min-h-130px" name="textdata"
-                                                                  rows="4" placeholder="Details" id="kt_forms_widget_7_input"
-                                                                  style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 130px;">{{old('textdata')}}</textarea>
-                                                            </div>
-                                                            <div>
-                                                                <button name="submitsave"  class="btn btn-primary font-weight-bold">Send Report</button>
-                                                            </div>
-                                                        </form>
-                                                        <!--end::Form-->
-                                                    </div>
-                                                    <!--end::Tap pane-->
-                                                </div>
-                                            </div>
-                                            <!--end::Body-->
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-7">
-                                        <!--begin::List Widget 2-->
-                                        <div class="card card-custom bg-gray-100 gutter-b card-stretch card-shadowless">
-                                            <!--begin::Header-->
-                                            <div class="card-header border-0">
-                                                <h3 class="card-title font-weight-bolder text-success">Result</h3>
-                                                <div class="card-toolbar">
-                                                    <div class="dropdown dropdown-inline">
-                                                        <a href="#" class="btn btn-clean btn-hover-success btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true"
-                                                           aria-expanded="false">
-                                                            <i class="ki ki-bold-more-ver text-success"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                                                            <!--begin::Naviigation-->
-                                                            <ul class="navi">
-                                                                <li class="navi-header font-weight-bold py-5">
-                                                                    <span class="font-size-lg">Add New:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right"
-                                                                       title="Click to learn more..."></i>
-                                                                </li>
-                                                                <li class="navi-separator mb-3 opacity-70"></li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="flaticon2-shopping-cart-1"></i></span>
-                                                                        <span class="navi-text">Order</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="navi-icon flaticon2-calendar-8"></i></span>
-                                                                        <span class="navi-text">Members</span>
-                                                                        <span class="navi-label">
-                <span class="label label-light-danger label-rounded font-weight-bold">3</span>
-            </span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="navi-icon flaticon2-telegram-logo"></i></span>
-                                                                        <span class="navi-text">Project</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="navi-icon flaticon2-new-email"></i></span>
-                                                                        <span class="navi-text">Record</span>
-                                                                        <span class="navi-label">
-                <span class="label label-light-success label-rounded font-weight-bold">5</span>
-            </span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-separator mt-3 opacity-70"></li>
-                                                                <li class="navi-footer pt-5 pb-4">
-                                                                    <a class="btn btn-light-primary font-weight-bolder btn-sm" href="#">More options</a>
-                                                                    <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right"
-                                                                       title="Click to learn more...">Learn more</a>
-                                                                </li>
-                                                            </ul>
-                                                            <!--end::Naviigation-->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--end::Header-->
-
-                                            <!--begin::Body-->
-                                            <div class="card-body pt-2">
-                                                <!--begin::Item-->
-                                                <div class="d-flex align-items-center mb-10">
-                                                    <div class="result">
-                                                        {{--@dump($fileread)--}}
-                                                        {!!  $fileread??''  !!}
-                                                    </div>
-                                                </div>
-                                                <!--end::Item-->
-
-                                            </div>
-                                            <!--end::Body-->
-                                        </div>
-                                        <!--end::List Widget 2-->
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="mr-3">
-                                            @if(old('imgname'))
-                                                <img alt="Pic" src="/{{old('imgname')}}"/>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Row-->
-                            </div>
-
-
-                            <div class="tab-pane" id="tab_forms_widget_2" role="tabpanel">
-                                Edit empty
-                            </div>
-                            <div class="tab-pane" id="tab_forms_widget_3" role="tabpanel">
-                                Data empty
-                            </div>
-                            <div class="tab-pane" id="tab_forms_widget_4" role="tabpanel">
-                                Graphics empty
-                            </div>
-                            <div class="tab-pane " id="tab_forms_widget_5" role="tabpanel">
-                                User empty
-                            </div>
-                            <div class="tab-pane active" id="tab_forms_widget_6" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <form id="frm_klips" method="post" action="/stata/storeKlips">
-                                            @csrf
-                                            <div class="card-body">
-                                                <div class="form-group">
-                                                    <div class="alert alert-custom alert-default" role="alert">
-                                                        <div class="alert-icon">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form id="frm_klips" method="post" action="/stata/storeKlips">
+                                    @csrf
+                                    <div class="card card-custom bg-white gutter-b" >
+{{--                                        <div class="form-group">
+                                            <div class="alert alert-custom alert-default" role="alert">
+                                                <div class="alert-icon">
                                                                     <span class="svg-icon svg-icon-primary svg-icon-xl">
                                                                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Tools/Compass.svg-->
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                                 <rect x="0" y="0" width="24" height="24"></rect>
-                                                                                <path d="M7.07744993,12.3040451 C7.72444571,13.0716094 8.54044565,13.6920474 9.46808594,14.1079953 L5,23 L4.5,18 L7.07744993,12.3040451 Z M14.5865511,14.2597864 C15.5319561,13.9019016 16.375416,13.3366121 17.0614026,12.6194459 L19.5,18 L19,23 L14.5865511,14.2597864 Z M12,3.55271368e-14 C12.8284271,3.53749572e-14 13.5,0.671572875 13.5,1.5 L13.5,4 L10.5,4 L10.5,1.5 C10.5,0.671572875 11.1715729,3.56793164e-14 12,3.55271368e-14 Z" fill="#000000" opacity="0.3"></path>
-                                                                                <path d="M12,10 C13.1045695,10 14,9.1045695 14,8 C14,6.8954305 13.1045695,6 12,6 C10.8954305,6 10,6.8954305 10,8 C10,9.1045695 10.8954305,10 12,10 Z M12,13 C9.23857625,13 7,10.7614237 7,8 C7,5.23857625 9.23857625,3 12,3 C14.7614237,3 17,5.23857625 17,8 C17,10.7614237 14.7614237,13 12,13 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                                                <path
+                                                                                    d="M7.07744993,12.3040451 C7.72444571,13.0716094 8.54044565,13.6920474 9.46808594,14.1079953 L5,23 L4.5,18 L7.07744993,12.3040451 Z M14.5865511,14.2597864 C15.5319561,13.9019016 16.375416,13.3366121 17.0614026,12.6194459 L19.5,18 L19,23 L14.5865511,14.2597864 Z M12,3.55271368e-14 C12.8284271,3.53749572e-14 13.5,0.671572875 13.5,1.5 L13.5,4 L10.5,4 L10.5,1.5 C10.5,0.671572875 11.1715729,3.56793164e-14 12,3.55271368e-14 Z"
+                                                                                    fill="#000000" opacity="0.3"></path>
+                                                                                <path
+                                                                                    d="M12,10 C13.1045695,10 14,9.1045695 14,8 C14,6.8954305 13.1045695,6 12,6 C10.8954305,6 10,6.8954305 10,8 C10,9.1045695 10.8954305,10 12,10 Z M12,13 C9.23857625,13 7,10.7614237 7,8 C7,5.23857625 9.23857625,3 12,3 C14.7614237,3 17,5.23857625 17,8 C17,10.7614237 14.7614237,13 12,13 Z"
+                                                                                    fill="#000000" fill-rule="nonzero"></path>
                                                                             </g>
                                                                         </svg>
                                                                         <!--end::Svg Icon-->
                                                                     </span>
-                                                        </div>
-                                                        <div class="col-8 alert-text font-size-h3">KLIPS 패널 데이터 만들기 </div>
-                                                        <div class="col-4">v.2020-02-28</div>
-                                                    </div>
                                                 </div>
-
-                                                <div class="form-group mb-20">
-                                                    <h3 class="text-dark font-weight-bold mb-6">smart command:</h3>
-
-                                                    <div class="">
-                                                        <div class="checkbox-inline">
-                                                            <label class="checkbox checkbox-success checkbox-lg checkbox-square">
-                                                                <input type="checkbox" name="Checkboxes11" checked="checked">
-                                                                <span></span>smart_klips
-                                                            </label>
-                                                            <label class="checkbox checkbox-success checkbox-lg checkbox-square">
-                                                                <input type="checkbox" name="Checkboxes11">
-                                                                <span></span>smart_search
-                                                            </label>
-                                                            <label class="checkbox checkbox-success checkbox-lg checkbox-square">
-                                                                <input type="checkbox" name="Checkboxes11">
-                                                                <span></span>smart_klips_add
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <h3 class="text-dark font-weight-bold mb-6">smart_klips:</h3>
-                                                <div class="form-group">
-                                                    <label>가구 레벨 변수:</label>
-                                                    <select class="form-control select2" id="kt_select2_3" name="kt_select2_3[]" multiple="multiple" required>
-                                                        <option value="h_resid_type" >h_resid_type</option>
-                                                        <option value="h_hprice" >h_hprice</option>
-                                                        <option value="h_region" >h_region</option>
-                                                        <option value="h_hsex" >h_hsex</option>
-                                                        <option value="h_hage" >h_hage</option>
-                                                        <option value="h_kidage06" >h_kidage06</option>
-                                                        <option value="h_kidage712" >h_kidage712</option>
-                                                        <option value="h_kidage1315" >h_kidage1315</option>
-                                                        <option value="h_kid" >h_kid</option>
-                                                        <option value="h_num" >h_num</option>
-                                                        <option value="h_hmarital" >h_hmarital</option>
-                                                        <option value="h_hedu" >h_hedu</option>
-                                                        <option value="h_inc_1" >h_inc_1</option>
-                                                        <option value="h_inc_2" >h_inc_2</option>
-                                                        <option value="h_inc_3" >h_inc_3</option>
-                                                        <option value="h_inc_4" >h_inc_4</option>
-                                                        <option value="h_inc_5" >h_inc_5</option>
-                                                        <option value="h_inc_6" >h_inc_6</option>
-                                                        <option value="h_inc_total" >h_inc_total</option>
-                                                        <option value="h_incomeq" >h_incomeq</option>
-                                                        <option value="h_asset_1" >h_asset_1</option>
-                                                        <option value="h_asset_2_1" >h_asset_2_1</option>
-                                                        <option value="h_asset_2_2" >h_asset_2_2</option>
-                                                        <option value="h_asset_3_1" >h_asset_3_1</option>
-                                                        <option value="h_asset_3_2" >h_asset_3_2</option>
-                                                        <option value="h_debt_total" >h_debt_total</option>
-                                                        <option value="h_debt_pay" >h_debt_pay</option>
-                                                        <option value="h_eqscale_ori" >h_eqscale_ori</option>
-                                                        <option value="h_eqscale_mod" >h_eqscale_mod</option>
-                                                        <option value="h_sample98" >h_sample98</option>
-                                                        <option value="h_sample09" >h_sample09</option>
-                                                        <option value="h_weight_1" >h_weight_1</option>
-                                                        <option value="h_weight_2" >h_weight_2</option>
-                                                    </select>
-
-                                                    <span class="form-text text-muted">멀티 선택이 가능합니다.</span>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>가구원 레벨 변수:</label>
-                                                    <select class="form-control select2" id="kt_select2_4" name="kt_select2_4[]" multiple="multiple" required>
-                                                        <option value="p_sex" >p_sex</option>
-                                                        <option value="p_age" >p_age</option>
-                                                        <option value="p_rel" >p_rel</option>
-                                                        <option value="p_edu" >p_edu</option>
-                                                        <option value="p_religion" >p_religion</option>
-                                                        <option value="p_married" >p_married</option>
-                                                        <option value="p_region" >p_region</option>
-                                                        <option value="p_econstat" >p_econstat</option>
-                                                        <option value="p_job_type" >p_job_type</option>
-                                                        <option value="p_wage" >p_wage</option>
-                                                        <option value="p_hours" >p_hours</option>
-                                                        <option value="p_employ_type" >p_employ_type</option>
-                                                        <option value="p_job_status" >p_job_status</option>
-                                                        <option value="p_ind2000" >p_ind2000</option>
-                                                        <option value="p_ind2007" >p_ind2007</option>
-                                                        <option value="p_ind2017" >p_ind2017</option>
-                                                        <option value="p_jobfam2000" >p_jobfam2000</option>
-                                                        <option value="p_jobfam2007" >p_jobfam2007</option>
-                                                        <option value="p_jobfam2017" >p_jobfam2017</option>
-                                                        <option value="p_firm_size" >p_firm_size</option>
-                                                        <option value="p_job_begin" >p_job_begin</option>
-                                                        <option value="p_weight_1" >p_weight_1</option>
-                                                        <option value="p_weight_2" >p_weight_2</option>
-                                                        <option value="p_weight_3" >p_weight_3</option>
-                                                        <option value="p_weight_4" >p_weight_4</option>
-                                                        <option value="p_sample98" >p_sample98</option>
-                                                        <option value="p_sample09" >p_sample09</option>
-                                                        <option value="" ></option>
-                                                    </select>
-
-                                                    <span class="form-text text-muted">멀티 선택이 가능합니다.</span>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>save file:</label>
-                                                    <div class="row align-items-center">
-                                                        <div class="col-8">
-                                                            <input type="text" class="form-control" placeholder="파일명을 입력하세요."/>
-                                                        </div>
-                                                        <div class="col-4 ">
-                                                            <div class="row align-items-center">
-                                                               <label class="mr-4">wide panel </label>
-                                                               <span class="switch">
-                                                                <label>
-                                                                 <input type="checkbox" checked="checked" name="select"/>
-                                                                 <span></span>
-                                                                </label>
-                                                               </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <h3 class="text-dark font-weight-bold mb-6">smart_search:</h3>
-
-                                                <div class="form-group mb-0">
-                                                    <label>h or p (Required)</label>
-                                                    <div class="">
-                                                        <div class="checkbox-inline">
-                                                            <label class="checkbox checkbox-primary">
-                                                                <input type="checkbox" name="Checkboxes11" checked="checked">
-                                                                <span></span>household
-                                                            </label>
-                                                            <label class="checkbox checkbox-primary">
-                                                                <input type="checkbox" name="Checkboxes11">
-                                                                <span></span>person
-                                                            </label>
-
-
-                                                            <label  class=" col-form-label">word </label>
-                                                            <input type="text" class="form-control ml-8" placeholder=""/>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <h3 class="text-dark font-weight-bold my-8">smart_klips_add :</h3>
-
-                                                <div class="form-group mb-0">
-                                                    <label>MasterType (Required)</label>
-                                                    <div class="pb-4">
-                                                        <div class="checkbox-inline">
-                                                            <label class="checkbox checkbox-primary">
-                                                                <input type="checkbox" name="Checkboxes11" checked="checked">
-                                                                <span></span>household
-                                                            </label>
-                                                            <label class="checkbox checkbox-primary">
-                                                                <input type="checkbox" name="Checkboxes11">
-                                                                <span></span>person
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <label>AddType (Required)</label>
-                                                    <div class="">
-                                                        <div class="checkbox-inline">
-                                                            <label class="checkbox checkbox-primary">
-                                                                <input type="checkbox" name="Checkboxes11" checked="checked">
-                                                                <span></span>household
-                                                            </label>
-                                                            <label class="checkbox checkbox-primary">
-                                                                <input type="checkbox" name="Checkboxes11">
-                                                                <span></span>person
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group pt-8">
-                                                        <label>추가하고자 하는 변수 이름 (REQUIRED):</label>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-12">
-                                                                <input type="text" class="form-control" placeholder="추가하고자 하는 변수"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group pt-4">
-                                                        <label>추가하고자 하는 변수 이름 (REQUIRED):</label>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-12">
-                                                                <input type="text" class="form-control" placeholder="추가하고자 하는 변수"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label  class="col-2 col-form-label">master file</label>
-                                                        <div class="col-4">
-                                                            <input class="form-control" type="text" value="" id="example-text-input"/>
-                                                        </div>
-
-                                                        <label  class="col-2 col-form-label">save file</label>
-                                                        <div class="col-4">
-                                                            <input class="form-control" type="text" value="" id="example-text-input"/>
-                                                        </div>
-                                                    </div>
-    {{--                                                <div class="form-group row">
-                                                        <label  class="col-2 col-form-label">추가하고자 하는 변수 이름 (REQUIRED)</label>
-                                                        <div class="col-10">
-                                                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input"/>
-                                                        </div>
-                                                    </div>--}}
-                                                </div>
-
-                                                <h3 class="text-dark font-weight-bold my-8">Common :</h3>
-                                                <div class="form-group">
-                                                    <label>Waves:01~21(REQUIRED):</label>
-
-                                                    <select class="form-control select2" id="kt_select2_5" name="kt_select2_5[]" multiple="multiple" required>
-                                                        @for ($i = 1; $i <= 21; $i++)
-                                                            <option value="{{str_pad($i, 2, '0', STR_PAD_LEFT)}}" >{{str_pad($i, 2, '0', STR_PAD_LEFT)}}</option>
-                                                        @endfor
-
-                                                    </select>
-
-                                                    <span class="form-text text-muted">멀티 선택이 가능합니다.</span>
-                                                </div>
-
-
-                                                <div class="form-group row">
-                                                    <label  class="col-2 col-form-label">wd : </label>
-                                                    <div class="col-2">
-                                                        <input class="form-control" type="text" value="" id="example-text-input"/>
-                                                    </div>
-
-                                                    <label  class="col-6 col-form-label">website (http://로 시작)</label>
-                                                    <div class="col-2">
-                                                        <input class="form-control" type="text" value="" id="example-text-input"/>
-                                                    </div>
-                                                </div>
-
+                                                <div class="col-8 alert-text font-size-h3">KLIPS 패널 데이터 만들기</div>
+                                                <div class="col-4">v.2020-02-28</div>
                                             </div>
-                                            <div class="card-footer">
-                                                <div class="row">
-                                                    <div class="col text-left">
-                                                        <button type="submit" class="btn btn-success mr-2">ok</button>
-                                                        <button type="button" id="cancel" class="btn btn-secondary" >Cancel</button>
-                                                    </div>
-                                                    <div class="col text-right">
-                                                        <button type="submit" class="btn btn-danger">Submit</button>
-                                                    </div>
+                                        </div>--}}
+                                        <div class="card-header border-0 pt-5">
+                                            <h3 class="card-title align-items-start flex-column">
+                                                <span class="card-label font-weight-bold font-size-h4 text-dark-75">Smart Klips</span>
+                                                {{--<span class="text-muted mt-3 font-weight-bold font-size-sm">Last week <span class="text-primary font-weight-bolder">9 execute</span></span>--}}
+                                            </h3>
+                                           {{-- <div class="card-toolbar">
+                                                <ul class="nav nav-pills nav-pills-sm nav-dark">
+                                                    <li class="nav-item ml-0">
+                                                        <a class="nav-link py-2 px-4 font-weight-bolder font-size-sm" data-toggle="tab" href="#kt_tab_pane_1">Active Cases</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link py-2 px-4 active font-weight-bolder font-size-sm" data-toggle="tab" href="#kt_tab_pane_2">Create</a>
+                                                    </li>
+                                                </ul>
+                                            </div>--}}
+                                        </div>
+                                        <div class="card-body pt-3">
+                                            <div class="tab-content m-0 p-0">
+                                                <div class="tab-pane  active" id="tab_forms_widget_1" role="tabpanel">
+                                                    @include('stata.partials.smartklips')
+                                                </div>
+
+                                                <div class="tab-pane" id="tab_forms_widget_2" role="tabpanel">
+                                                    @include('stata.partials.smartsearch')
+                                                </div>
+                                                <div class="tab-pane " id="tab_forms_widget_5" role="tabpanel">
+                                                    @include('stata.partials.smartadd')
                                                 </div>
                                             </div>
-                                        </form>
+                                            @include('stata.partials.smartcommon')
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col text-left">
+                                                    <button type="submit" class="btn btn-success mr-2">실행</button>
+                                                    <button type="button" id="cancel" class="btn btn-secondary">리셋</button>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <button type="submit" class="btn btn-danger">제출</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <!--begin::List Widget 2-->
+                                </form>
+                            </div>
 
-                                        <div class="card card-custom bg-gray-100 gutter-b card-stretch card-shadowless">
-                                            <!--begin::Header-->
-                                            <div class="card-header border-0">
-                                                <h3 class="card-title font-weight-bolder text-success">Result</h3>
-                                                <div class="card-toolbar">
-                                                    <div class="dropdown dropdown-inline">
-                                                        <a href="#" class="btn btn-clean btn-hover-success btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true"
-                                                           aria-expanded="false">
-                                                            <i class="ki ki-bold-more-ver text-success"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                                                            <!--begin::Naviigation-->
-                                                            <ul class="navi">
-                                                                <li class="navi-header font-weight-bold py-5">
-                                                                    <span class="font-size-lg">Add New:</span>
-                                                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right"
-                                                                       title="Click to learn more..."></i>
-                                                                </li>
-                                                                <li class="navi-separator mb-3 opacity-70"></li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="flaticon2-shopping-cart-1"></i></span>
-                                                                        <span class="navi-text">Order</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="navi-icon flaticon2-calendar-8"></i></span>
-                                                                        <span class="navi-text">Members</span>
-                                                                        <span class="navi-label">
+                            {{--우측 result--}}
+                            <div class="col-md-6">
+                                <!--begin::List Widget 2-->
+
+                                <div class="card card-custom bg-gray-100 gutter-b card-stretch card-shadowless">
+                                    <!--begin::Header-->
+                                    <div class="card-header border-0">
+                                        <h3 class="card-title font-weight-bolder text-success">Result</h3>
+                                        <div class="card-toolbar">
+                                            <div class="dropdown dropdown-inline">
+                                                <a href="#" class="btn btn-clean btn-hover-success btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true"
+                                                   aria-expanded="false">
+                                                    <i class="ki ki-bold-more-ver text-success"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                                                    <!--begin::Naviigation-->
+                                                    <ul class="navi">
+                                                        <li class="navi-header font-weight-bold py-5">
+                                                            <span class="font-size-lg">Add New:</span>
+                                                            <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right"
+                                                               title="Click to learn more..."></i>
+                                                        </li>
+                                                        <li class="navi-separator mb-3 opacity-70"></li>
+                                                        <li class="navi-item">
+                                                            <a href="#" class="navi-link">
+                                                                <span class="navi-icon"><i class="flaticon2-shopping-cart-1"></i></span>
+                                                                <span class="navi-text">Order</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="navi-item">
+                                                            <a href="#" class="navi-link">
+                                                                <span class="navi-icon"><i class="navi-icon flaticon2-calendar-8"></i></span>
+                                                                <span class="navi-text">Members</span>
+                                                                <span class="navi-label">
                     <span class="label label-light-danger label-rounded font-weight-bold">3</span>
                 </span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="navi-icon flaticon2-telegram-logo"></i></span>
-                                                                        <span class="navi-text">Project</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-item">
-                                                                    <a href="#" class="navi-link">
-                                                                        <span class="navi-icon"><i class="navi-icon flaticon2-new-email"></i></span>
-                                                                        <span class="navi-text">Record</span>
-                                                                        <span class="navi-label">
+                                                            </a>
+                                                        </li>
+                                                        <li class="navi-item">
+                                                            <a href="#" class="navi-link">
+                                                                <span class="navi-icon"><i class="navi-icon flaticon2-telegram-logo"></i></span>
+                                                                <span class="navi-text">Project</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="navi-item">
+                                                            <a href="#" class="navi-link">
+                                                                <span class="navi-icon"><i class="navi-icon flaticon2-new-email"></i></span>
+                                                                <span class="navi-text">Record</span>
+                                                                <span class="navi-label">
                     <span class="label label-light-success label-rounded font-weight-bold">5</span>
                 </span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="navi-separator mt-3 opacity-70"></li>
-                                                                <li class="navi-footer pt-5 pb-4">
-                                                                    <a class="btn btn-light-primary font-weight-bolder btn-sm" href="#">More options</a>
-                                                                    <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right"
-                                                                       title="Click to learn more...">Learn more</a>
-                                                                </li>
-                                                            </ul>
-                                                            <!--end::Naviigation-->
-                                                        </div>
-                                                    </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="navi-separator mt-3 opacity-70"></li>
+                                                        <li class="navi-footer pt-5 pb-4">
+                                                            <a class="btn btn-light-primary font-weight-bolder btn-sm" href="#">More options</a>
+                                                            <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right"
+                                                               title="Click to learn more...">Learn more</a>
+                                                        </li>
+                                                    </ul>
+                                                    <!--end::Naviigation-->
                                                 </div>
                                             </div>
-                                            <!--end::Header-->
-
-                                            <!--begin::Body-->
-                                            <div class="card-body pt-2">
-                                                <!--begin::Item-->
-                                                <div class="d-flex align-items-center mb-10">
-                                                    <div class="result">
-                                                        {{--@dump($fileread)--}}
-                                                        {!!  $fileread??''  !!}
-                                                    </div>
-                                                </div>
-                                                <!--end::Item-->
-
-                                            </div>
-                                            <!--end::Body-->
                                         </div>
-                                        <!--end::List Widget 2-->
                                     </div>
+                                    <!--end::Header-->
+
+                                    <!--begin::Body-->
+                                    <div class="card-body pt-2">
+                                        <!--begin::Item-->
+                                        <div class="d-flex align-items-center mb-10">
+                                            <div class="result">
+                                                {{--@dump($fileread)--}}
+                                                {!!  $fileread??''  !!}
+                                            </div>
+                                        </div>
+                                        <!--end::Item-->
+
+                                    </div>
+                                    <!--end::Body-->
                                 </div>
+                                <!--end::List Widget 2-->
                             </div>
                         </div>
+
+
+
                         <!--end::Nav Content-->
 
                         <!--end::Dashboard-->
@@ -2858,9 +2439,9 @@
 <script src="{{ asset('/js/vendor/sweetalert2/js/sweetalert2.min.js') }}"></script>
 <script>
     // Class definition
-    var KTSelect2 = function() {
+    var KTSelect2 = function () {
         // Private functions
-        var demos = function() {
+        var demos = function () {
 
             // multi select
             $('#kt_select2_3').select2({
@@ -2870,8 +2451,10 @@
                 placeholder: "가구원 레벨 변수를 선택하세요",
             });
             $('#kt_select2_5').select2({
-                placeholder: "가구원 레벨 변수를 선택하세요",
+                placeholder: "차수를 선택하세요",
             });
+
+
             // disabled results
             $('.kt-select2-general').select2({
                 placeholder: "Select an option"
@@ -2880,14 +2463,21 @@
 
         // Public functions
         return {
-            init: function() {
+            init: function () {
                 demos();
             }
         };
     }();
 
     // Initialization
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
+        var $selects = $('select');
+        if ($selects.length > 0) {
+            for (var i = 0; i < $selects.length; i++) {
+                $($selects[i]).parents('.form-group').attr('tabindex', '0');
+            }
+        }
+
         @if($isSuccess)
         Swal.fire({
             title: '파일을 다운 받으시겠습니까?',
@@ -2905,14 +2495,12 @@
         })
         @endif
         KTSelect2.init();
-        $("#cancel").click(function() {
+        $("#cancel").click(function () {
             $("#kt_select2_3").val('').trigger('change');
             $("#kt_select2_4").val('').trigger('change');
             $("#kt_select2_5").val('').trigger('change');
-            $("#kt_select2_5").val('').trigger('change');
             $('.result').html('');
         })
-
 
 
         $("#kt_select2_3").val({!! json_encode(old('kt_select2_3'))  !!}).trigger('change');
