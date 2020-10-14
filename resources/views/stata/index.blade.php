@@ -59,7 +59,7 @@
 <!--begin::Header Mobile-->
 <div id="kt_header_mobile" class="header-mobile  header-mobile-fixed ">
     <!--begin::Logo-->
-    <a href="index.html">
+    <a href="/stata">
         <img alt="Logo" src="/mtrn/assets/media/logos/logo-letter-1.png" class="logo-default max-h-30px"/>
     </a>
     <!--end::Logo-->
