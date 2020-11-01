@@ -22,7 +22,8 @@ Route::get('/', function () {
 ///////////////////////////////////////////////////////////////////////////
 /// STata
 ///////////////////////////////////////////////////////////////////////////
-Route::get('/stata', [StataController::class, 'index']);
+Route::get('/stata', [StataController::class, 'index'])->name('stata.index');;
+Route::get('/stata2', [StataController::class, 'index2']);
 Route::get('/stata/create', [StataController::class, 'create'])->name('stata.create');
 Route::post('/stata/store', [StataController::class, 'store'])->name('stata.store');
 Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('stata.storeKlips');

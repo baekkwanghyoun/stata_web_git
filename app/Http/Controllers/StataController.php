@@ -17,6 +17,12 @@ class StataController extends Controller
         return view('stata.index', compact('isSuccess'));
     }
 
+    public function index2()
+    {
+        $isSuccess = false;
+        return view('stata.index2', compact('isSuccess'));
+    }
+
     public function create()
     {
 
@@ -85,6 +91,19 @@ class StataController extends Controller
 
     public function storeKlips(Request $request)
     {
+
+        $request->validate([
+            'kt_select2_3' => 'required',
+            'kt_select2_4' => 'required',
+            'kt_select2_5' => 'required',
+        ],[
+            'kt_select2_5.required' => '- 차수를 선택하셔야 합니다.',
+            'kt_select2_3.required' => '- 가구 레벨 변수를 선택하셔야 합니다',
+            'kt_select2_4.required' => '- 가구원 레벨 변수를 선택하셔야 합니다',
+
+        ]);
+
+
 //        try {
         $_POST['filename'] = 'testSession';
         if (!empty($_POST['filename'])) {
@@ -137,8 +156,8 @@ class StataController extends Controller
             //echo($fileread);
             //session()->flashInput([$fileread]);
             session()->flashInput($request->input());
-            return view('stata.index', compact('fileread', 'isSuccess'));
-            //return back()->withInput();
+            //return view('stata.index', compact('fileread', 'isSuccess'));
+            return back()->withInput();
 
 
             //dump($fileread);
