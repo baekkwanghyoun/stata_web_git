@@ -169,7 +169,7 @@
                                         <div class="card-footer">
                                             <div class="row">
                                                 <div class="col text-left">
-                                                    <button type="submit" class="btn btn-danger">제출</button>
+                                                    <button type="submit" class="btn btn-danger">제출.</button>
                                                     <button type="button" id="cancel" class="btn btn-secondary">리셋</button>
                                                 </div>
                                             </div>
