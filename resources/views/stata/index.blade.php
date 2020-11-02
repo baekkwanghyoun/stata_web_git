@@ -412,7 +412,7 @@
             }
         }
 
-        @if($isSuccess)
+        @if(Session::get('isSuccess'))
         Swal.fire({
             title: '파일을 다운 받으시겠습니까?',
             text: 'klips_final.dta가 생성되었습니다.',

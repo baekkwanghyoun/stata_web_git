@@ -1,16 +1,1 @@
-
-
-. cd C:\project\stata_web\public\klips
-C:\project\stata_web\public\klips
-
-. smart_klips h_hprice p_age  , wave( 01) wd( ) website( ) save( )
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                            13,321  
-    -----------------------------------------
-file klips_final.dta saved
-
-. 
-end of do-file
+request ignored because of batch mode

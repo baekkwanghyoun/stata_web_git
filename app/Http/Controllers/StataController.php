@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Mockery\Exception;
 use phpDocumentor\Reflection\Types\Array_;
@@ -12,8 +13,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class StataController extends Controller
 {
     public function index()
-    {
-        $isSuccess = false;
+    {        $isSuccess = false;
         return view('stata.index', compact('isSuccess'));
     }
 
@@ -157,6 +157,7 @@ class StataController extends Controller
             //session()->flashInput([$fileread]);
             session()->flashInput($request->input());
             //return view('stata.index', compact('fileread', 'isSuccess'));
+            Session::flash('isSuccess', true);
             return back()->withInput();
 
 
