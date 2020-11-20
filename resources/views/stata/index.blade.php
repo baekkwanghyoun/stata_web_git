@@ -30,6 +30,9 @@
 
     <link rel="shortcut icon" href="/mtrn/assets/media/logos/favicon.ico"/>
 
+    <link href=css/vendor.55483ba5.css rel=stylesheet>
+    <link href=css/app.465dc8e7.css rel=stylesheet>
+
     <style>
         *:focus {
             outline: none;
@@ -293,7 +296,6 @@
     </g>
 </svg><!--end::Svg Icon--></span></div>
 <!--end::Scrolltop-->
-
 
 <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
 <!--begin::Global Config(global config for global JS scripts)-->

@@ -22,7 +22,9 @@ Route::get('/', function () {
 ///////////////////////////////////////////////////////////////////////////
 /// STata
 ///////////////////////////////////////////////////////////////////////////
-Route::get('/stata', [StataController::class, 'index'])->name('stata.index');;
+Route::get('/quasar', [StataController::class, 'quasar'])->name('quasar.index');
+
+Route::get('/stata', [StataController::class, 'index'])->name('stata.index');
 Route::get('/stata2', [StataController::class, 'index2']);
 Route::get('/stata/create', [StataController::class, 'create'])->name('stata.create');
 Route::post('/stata/store', [StataController::class, 'store'])->name('stata.store');
