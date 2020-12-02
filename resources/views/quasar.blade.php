@@ -10,6 +10,7 @@
 </head>
 <body>
 <div id=q-app></div>
+
 <script src=http://52.79.82.226/js/vendor.e0c8d7d6.js></script>
 <script src=http://52.79.82.226/js/app.d67cb343.js></script>
 </body>
