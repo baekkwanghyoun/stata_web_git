@@ -53,13 +53,13 @@ module.exports = function ( ctx ) {
         env: ctx.dev
             ? { // so on dev we'll have
                 //API: JSON.stringify('http://jangtu.designblue.ca'),
-                API: 'http://stataweb.test:9011',
+                API: 'http://52.79.82.226',
 
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             }
             : { // and on build (production):
                 //  API: JSON.stringify('http://jangtu.test:8086'),
-                API: 'http://52.78.87.88',
+                API: 'http://52.79.82.226',
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             },
 
@@ -146,9 +146,9 @@ module.exports = function ( ctx ) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
-        description: 'A Quasar Framework app',
+        name: 'SmartKlips',
+        short_name: 'SmartKlips',
+        description: 'A SmartKlips Framework app',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
