@@ -2,14 +2,9 @@
 <html>
 <head>
     <base href=/>
-    <title>Quasar App</title>
+    <title>SMART KLIPS App</title>
     <meta charset=utf-8>
-    <meta name=description content="A Quasar Framework app">
-    <meta name=format-detection content="telephone=no">
-    <meta name=msapplication-tap-highlight content=no>
     <meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
-
-
     <link href=http://52.79.82.226/css/vendor.55483ba5.css rel=stylesheet>
     <link href=http://52.79.82.226/css/app.465dc8e7.css rel=stylesheet>
 </head>
