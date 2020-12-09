@@ -44,7 +44,8 @@ module.exports = function ( ctx ) {
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
       'roboto-font', // optional, you are not bound to it
-      'material-icons' // optional, you are not bound to it
+      'material-icons' // optional, you are not bound thttp://stataweb.test:9011/
+        // o it
     ],
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
@@ -52,8 +53,8 @@ module.exports = function ( ctx ) {
         vueRouterMode: 'history', // available values: 'hash', 'history'
         env: ctx.dev
             ? { // so on dev we'll have
-                //API: JSON.stringify('http://jangtu.designblue.ca'),
-                API: 'http://52.79.82.226',
+                API: 'http://stataweb.test:9011',
+                //API: 'http://52.79.82.226',
 
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             }

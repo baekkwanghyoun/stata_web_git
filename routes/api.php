@@ -19,5 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/stata/storeKlipsApi', [StataController::class, 'storeKlipsApi'])->name('stata.storeKlipsApi');
+//Route::post('/stata/storeKlipsApi', [StataController::class, 'storeKlipsApi'])->name('stata.storeKlipsApi');
+Route::post('/stata/storeKlipsApi', [StataController::class, 'storeKlips'])->name('stata.storeKlips');
+
 /*Route::get('/stata/store', [StataController::class, 'store'])->name('stata.store');*/

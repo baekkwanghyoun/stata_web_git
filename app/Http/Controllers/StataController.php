@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -39,7 +40,7 @@ class StataController extends Controller
 //        $data = mb_convert_encoding($data, "UTF-8", "euc-kr");
 //        dump($data);
     }
-
+/*
     public function store(Request $request)
     {
         $sid = session()->getId();
@@ -88,11 +89,11 @@ class StataController extends Controller
             }
        /* }catch(\Throwable $e){
             Log::debug($e);
-        }*/
+        }
 
 
 
-    }
+    }*/
 
 
     public function storeKlips(Request $request)
@@ -106,10 +107,9 @@ class StataController extends Controller
             'kt_select2_5.required' => '- 차수를 선택하셔야 합니다.',
             'kt_select2_3.required' => '- 가구 레벨 변수를 선택하셔야 합니다',
             'kt_select2_4.required' => '- 가구원 레벨 변수를 선택하셔야 합니다',
-
         ]);
 
-
+        //$text = "log using \"dd.txt\", text \n";
 //        try {
         //$_POST['filename'] = 'testSession';
         if (env('APP_ENV') == 'local') {
@@ -119,15 +119,19 @@ class StataController extends Controller
         }
 
 
+
+        $filename = 'klips_final_' .Carbon::now()->format('Ymd').'_'. Str::random(8);//$_POST['filename'];
         $households = implode(" ", is_array(request('kt_select2_3')) ? request('kt_select2_3') : array(request('kt_select2_3')));
         $persons = implode(" ", is_array(request('kt_select2_4')) ? request('kt_select2_4') : array(request('kt_select2_4')));
         $waves = implode(" ", is_array(request('kt_select2_5')) ? request('kt_select2_5') : array(request('kt_select2_5')));
-        $text .= "smart_klips ${households} {$persons} , wave( {$waves}) wd( ) website( ) save( )";
+        //$text .= "smart_klips ${households} {$persons} , wave( {$waves}) wd( ) website( ) save( )";
+        $text .= "smart_klips_v3 ${households} {$persons} , wave( {$waves}) wd( ) website( ) save({$filename}) excel csv";
 //            $text .= $households;
 //            $text .= $persons;
 //            $text .= $waves;
 
-        $filename = 'session' . session()->getId();//$_POST['filename'];
+        //$text .= "log close\n";
+
 
 
         $fo = fopen('stata16/' . $filename . ".do", "w+");
@@ -152,14 +156,21 @@ class StataController extends Controller
         }
 
         //$fileread = preg_replace('/[\n\r]+/', '', $fileread);
-
         //$fileread = Str::replaceFirst('&rt;br',"", $fileread);
+
         //echo($fileread);
         //session()->flashInput([$fileread]);
         session()->flashInput($request->input());
         //return view('stata.index', compact('fileread', 'isSuccess'));
-        Session::flash('isSuccess', true);
-        return back()->withInput();
+
+        if($request->wantsJson()) {
+            return response()->json(['name' => "/klips/${filename}", 'status' => 'success',]);
+            //return response()->json(['name' => "/klips/klips_final.dta", 'status' => 'success',]);
+        }
+        else {
+            Session::flash('isSuccess', true);
+            return back()->withInput();
+        }
 
 
         //dump($fileread);
@@ -170,14 +181,11 @@ class StataController extends Controller
         /* }catch(\Throwable $e){
              Log::debug($e);
          }*/
-
-
-
     }
 
+    /* 사용 안함 : storeKlips로 합침  */
     public function storeKlipsApi(Request $request)
     {
-
         $request->validate([
             'kt_select2_3' => 'required',
             'kt_select2_4' => 'required',

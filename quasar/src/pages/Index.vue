@@ -155,6 +155,23 @@
 
     }
   },
+mounted() {
+/*  Swal.fire({
+    title: '파일을 다운 받으시겠습니까?',
+    html:'<a href="//daf.txt" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(48, 133, 214);">dta 저장</a>' +
+      '<a href="//daf.txt" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(0, 151, 123);">csv 저장</a>' +
+      '<a href="//daf.txt" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: black;">excel 저장</a>',
+      // +'<a href="//d.txt"></a> <a href="//d.txt">csv 저장</a> <a href="//d.txt">excel 저장</a> ',
+    text: 'dta가 생성되었습니다.',
+    icon: 'success',
+    confirmButtonColor: 'grey',
+    confirmButtonText: '닫기',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //window.open(process.env.API+res.data.name+'.dta', "_blank");
+    }
+  })*/
+},
   methods: {
     onSubmit(evt) {
       console.log('@submit - do something here', evt)
@@ -185,18 +202,33 @@
         if(res.data.name) {
           Swal.fire({
             title: '파일을 다운 받으시겠습니까?',
-            text: 'klips_final.dta가 생성되었습니다.',
+            html:'<a href="'+process.env.API+res.data.name+'.dta" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(48, 133, 214);">dta 저장</a>' +
+              '<a href="'+process.env.API+res.data.name+'.csv" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(0, 151, 123);">csv 저장</a>' +
+              '<a href="'+process.env.API+res.data.name+'.xlsx" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: black;">excel 저장</a>',
+            text: 'dta가 생성되었습니다.',
             icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '다운받기',
-            cancelButtonText: '창 닫기'
+            confirmButtonColor: 'grey',
+            confirmButtonText: '닫기',
           }).then((result) => {
             if (result.isConfirmed) {
-              window.open(process.env.API+"/klips/klips_final.dta", "_blank");
+              //window.open(process.env.API+res.data.name+'.dta', "_blank");
             }
           })
+         /* Swal.fire({
+            title: '파일을 다운 받으시겠습니까?',
+            text: 'dta가 생성되었습니다.',
+            icon: 'success',
+            showCancelButton: true,
+            showDenyButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#00977b',
+            denyButtonColor: '#595959',
+            cancelButtonText: '닫기',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.open(process.env.API+res.data.name+'.dta', "_blank");
+            }
+          })*/
         }
         else {
 

@@ -30,6 +30,7 @@ Route::get('/stata2', [StataController::class, 'index2']);
 Route::get('/stata/create', [StataController::class, 'create'])->name('stata.create');
 Route::post('/stata/store', [StataController::class, 'store'])->name('stata.store');
 Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('stata.storeKlips');
+
 /*Route::get('/stata/create', function () {
     return view('welcome');
 });
