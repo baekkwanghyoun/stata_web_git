@@ -140,7 +140,8 @@ class StataController extends Controller
 
 
         //$filename = 'klips_final';//$_POST['filename'];
-        $foldername = Carbon::now()->format('Ymd').'_'. Str::random(8);
+        $nowDate = Carbon::now()->format('Ymd');
+        $foldername = Str::random(16);
         $filename = 'klips_final_' .$foldername;
         $households = implode(" ", is_array(request('kt_select2_3')) ? request('kt_select2_3') : array(request('kt_select2_3')));
         $persons = implode(" ", is_array(request('kt_select2_4')) ? request('kt_select2_4') : array(request('kt_select2_4')));
@@ -158,32 +159,33 @@ class StataController extends Controller
             $text .= "smart_klips_search_v3 , wave( {$waves}) wd() hp(${hp}) word({$word}) ";
         }
 
-        Storage::makeDirectory('stata16/do');
-        $fo = fopen('stata16/do/' . $filename . ".do", "w+");
+        Storage::makeDirectory('stata16/do/'.$nowDate);
+        $fo = fopen('stata16/do/'.$nowDate.'/' . $filename . ".do", "w+");
         fwrite($fo, $text);
         fclose($fo);
 
         if (env('APP_ENV') == 'local') {
-            $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/do/${filename}.do");
+            $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/do/${nowDate}/${filename}.do");
         } else {
-            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/do/${filename}.do");
+            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/do/${nowDate}/${filename}.do");
         }
-        //$files = Storage::allFiles('C:/stata/');
-        Storage::move($filename.'.log', 'stata16/log/'.$filename.'.log');
+
+        Storage::move($filename.'.log', 'stata16/log/'.$nowDate.'/'.$filename.'.log');
+
         if(file_exists('stata16/klips/'.$filename.'.dta') ) {
-            Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$foldername.'/klips_final.dta');
+            Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$nowDate.'/'.$foldername.'/klips_final.dta');
         }
         if(file_exists('stata16/klips/'.$filename.'.csv') ) {
-            Storage::move('stata16/klips/'.$filename.'.csv', 'stata16/result/'.$foldername.'/klips_final.csv');
+            Storage::move('stata16/klips/'.$filename.'.csv', 'stata16/result/'.$nowDate.'/'.$foldername.'/klips_final.csv');
         }
         if(file_exists('stata16/klips/'.$filename.'.xlsx') ) {
-            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$foldername.'/klips_final.xlsx');
+            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$nowDate.'/'.$foldername.'/klips_final.xlsx');
         }
             //Storage::move('stata16/klips/'.$filename.'.data', 'stata16/result/'.$filename.'.dta');
         //Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$filename.'.xlsx');
 
 
-        $fileread = Storage::get('stata16/log/'.$filename.'.log');
+        $fileread = Storage::get('stata16/log/'.$nowDate.'/'.$filename.'.log');
 //      $fileread = file_get_contents(public_path() . "\\" . "${filename}.log", true);// $fileread = htmlentities($fileread);
 //      $fileread = preg_replace("/(\r\n\r\n)/i", "<br />\n", $fileread);
 //      $fileread = preg_replace("/  /i", "&nbsp;&nbsp;", $fileread);
@@ -204,7 +206,7 @@ class StataController extends Controller
 
         if($request->wantsJson()) {
             if($tab==='create') {
-                return response()->json(['name' => "/stata16/result/${foldername}/klips_final", 'status' => 'success',]);
+                return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/klips_final", 'status' => 'success',]);
             }
             else if($tab==='search') {
                 return response()->json($fileread);
