@@ -182,7 +182,28 @@
 
                                 </form>
                             </div>
+                            @php
 
+                                $fileread = ". cd C:\project\stata_web\public\klips
+    C:\project\stata_web\public\klips
+    . smart_klips_search_v3 , wave( 21 20 19 18 17) wd() hp(h) word(가구)
+
+    ===============klips21h.dta 파일 중에서 가구 포함한 변수 리스트===============
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;storage&nbsp;&nbsp; display&nbsp;&nbsp;&nbsp;&nbsp;value
+    variable name&nbsp;&nbsp; type&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;&nbsp;&nbsp;&nbsp; label&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variable label
+    -------------------------------------------------------------------------------
+    orghid98&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp; %8.0g&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;패널고유가구번호 (98표본)
+    orghid09&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;&nbsp;&nbsp;&nbsp;%12.0g&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 패널고유가구번호 (통합표본)";
+    /*
+                            $fileread = preg_replace("/(\r\n\r\n)/i","<br />\n", $fileread);
+                            $fileread = preg_replace("/  /i","&nbsp;&nbsp;", $fileread);
+                            $fileread = preg_replace("/(<br\s*\/>)+/", "", $fileread);
+                            */
+                            //$fileread = preg_replace('/[\n\r]+/', '', $fileread);
+                            //$fileread = Str::replaceFirst('&rt;br',"", $fileread);
+                            @endphp
+                            @ {!!  $fileread??'#'  !!} @
+                            @dump($fileread)
                             {{--우측 result--}}
                             {{--
                             <div class="col-md-6">

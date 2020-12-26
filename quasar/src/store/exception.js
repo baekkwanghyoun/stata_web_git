@@ -6,7 +6,8 @@ function exeption(e) {
     const errors = e.response.data.errors;
     let errormsgs = '';
     for (const property in errors) {
-      errormsgs += `${property}: ${errors[property]}<br>`;
+      errormsgs += `${errors[property]}<br>`;
+      //errormsgs += `${property}: ${errors[property]}<br>`;
     }
     Notify.create({message: errormsgs, type: 'negative', html: true})
   }

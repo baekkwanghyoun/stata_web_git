@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Mockery\Exception;
 use phpDocumentor\Reflection\Types\Array_;
@@ -98,57 +99,95 @@ class StataController extends Controller
 
     public function storeKlips(Request $request)
     {
+        $sid = session()->getId();
 
-        $request->validate([
-            'kt_select2_3' => 'required',
-            'kt_select2_4' => 'required',
-            'kt_select2_5' => 'required',
-        ],[
-            'kt_select2_5.required' => '- 차수를 선택하셔야 합니다.',
-            'kt_select2_3.required' => '- 가구 레벨 변수를 선택하셔야 합니다',
-            'kt_select2_4.required' => '- 가구원 레벨 변수를 선택하셔야 합니다',
-        ]);
+//        Storage::disk('local')->put('/public/'.$sid.'/file.txt', 'Contents');
+//        $c = asset('storage/file.txt');
+
+        $tab = request('tab');
+
+        if($tab=='create') {
+            $request->validate([
+                'kt_select2_3' => 'required',
+                'kt_select2_4' => 'required',
+                'kt_select2_5' => 'required',
+            ],[
+                'kt_select2_5.required' => '- 차수를 선택하셔야 합니다.',
+                'kt_select2_3.required' => '- 가구 레벨 변수를 선택하셔야 합니다',
+                'kt_select2_4.required' => '- 가구원 레벨 변수를 선택하셔야 합니다',
+            ]);
+        }
+        else if($tab=='search') {
+            $request->validate([
+                'kt_select2_5' => 'required',
+                'word' => 'required',
+            ],[
+                'kt_select2_5.required' => '- 차수를 선택하셔야 합니다.',
+                'required' => '- 검색할 단어를 입력하셔야 합니다.',
+            ]);
+        }
+
 
         //$text = "log using \"dd.txt\", text \n";
 //        try {
         //$_POST['filename'] = 'testSession';
         if (env('APP_ENV') == 'local') {
-            $text = "cd C:\project\stata_web\public\klips\n";
+            $text = "cd C:\project\stata_web\public\stata16\klips\n";
         } else {
-            $text = "cd C:\www\stata_web_git\public\klips\n";
+            $text = "cd C:\www\stata_web_git\public\stata16\klips\n";
         }
 
 
 
-        $filename = 'klips_final_' .Carbon::now()->format('Ymd').'_'. Str::random(8);//$_POST['filename'];
+        //$filename = 'klips_final';//$_POST['filename'];
+        $foldername = Carbon::now()->format('Ymd').'_'. Str::random(8);
+        $filename = 'klips_final_' .$foldername;
         $households = implode(" ", is_array(request('kt_select2_3')) ? request('kt_select2_3') : array(request('kt_select2_3')));
         $persons = implode(" ", is_array(request('kt_select2_4')) ? request('kt_select2_4') : array(request('kt_select2_4')));
         $waves = implode(" ", is_array(request('kt_select2_5')) ? request('kt_select2_5') : array(request('kt_select2_5')));
         //$text .= "smart_klips ${households} {$persons} , wave( {$waves}) wd( ) website( ) save( )";
-        $text .= "smart_klips_v3 ${households} {$persons} , wave( {$waves}) wd( ) website( ) save({$filename}) excel csv";
-//            $text .= $households;
-//            $text .= $persons;
-//            $text .= $waves;
-
-        //$text .= "log close\n";
+        $hp = request('hp');
+        $word = request('word');
 
 
+        if($tab==='create') {//C:\\ado\\plus\\s
+            $text .= "smart_klips_v3 ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename}) sfolder( ) excel csv"; //D:\\0.silver
 
-        $fo = fopen('stata16/' . $filename . ".do", "w+");
+        }
+        else if($tab==='search') {
+            $text .= "smart_klips_search_v3 , wave( {$waves}) wd() hp(${hp}) word({$word}) ";
+        }
+
+        Storage::makeDirectory('stata16/do');
+        $fo = fopen('stata16/do/' . $filename . ".do", "w+");
         fwrite($fo, $text);
         fclose($fo);
 
         if (env('APP_ENV') == 'local') {
-            $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/${filename}.do");
+            $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/do/${filename}.do");
         } else {
-            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/${filename}.do");
+            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/do/${filename}.do");
         }
+        //$files = Storage::allFiles('C:/stata/');
+        Storage::move($filename.'.log', 'stata16/log/'.$filename.'.log');
+        if(file_exists('stata16/klips/'.$filename.'.dta') ) {
+            Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$foldername.'/klips_final.dta');
+        }
+        if(file_exists('stata16/klips/'.$filename.'.csv') ) {
+            Storage::move('stata16/klips/'.$filename.'.csv', 'stata16/result/'.$foldername.'/klips_final.csv');
+        }
+        if(file_exists('stata16/klips/'.$filename.'.xlsx') ) {
+            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$foldername.'/klips_final.xlsx');
+        }
+            //Storage::move('stata16/klips/'.$filename.'.data', 'stata16/result/'.$filename.'.dta');
+        //Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$filename.'.xlsx');
 
-        $fileread = file_get_contents(public_path() . "\\" . "${filename}.log", true);
-//            $fileread = htmlentities($fileread);
-        $fileread = preg_replace("/(\r\n\r\n)/i", "<br />\n", $fileread);
-        $fileread = preg_replace("/  /i", "&nbsp;&nbsp;", $fileread);
-        $fileread = preg_replace("/(<br\s*\/>)+/", "", $fileread);
+
+        $fileread = Storage::get('stata16/log/'.$filename.'.log');
+//      $fileread = file_get_contents(public_path() . "\\" . "${filename}.log", true);// $fileread = htmlentities($fileread);
+//      $fileread = preg_replace("/(\r\n\r\n)/i", "<br />\n", $fileread);
+//      $fileread = preg_replace("/  /i", "&nbsp;&nbsp;", $fileread);
+//      $fileread = preg_replace("/(<br\s*\/>)+/", "", $fileread);
 
         $isSuccess = false;
         if (Str::contains($fileread, 'saved')) {
@@ -164,7 +203,12 @@ class StataController extends Controller
         //return view('stata.index', compact('fileread', 'isSuccess'));
 
         if($request->wantsJson()) {
-            return response()->json(['name' => "/klips/${filename}", 'status' => 'success',]);
+            if($tab==='create') {
+                return response()->json(['name' => "/stata16/result/${foldername}/klips_final", 'status' => 'success',]);
+            }
+            else if($tab==='search') {
+                return response()->json($fileread);
+            }
             //return response()->json(['name' => "/klips/klips_final.dta", 'status' => 'success',]);
         }
         else {

@@ -3,6 +3,12 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
     RewriteEngine On
 
     # Handle Authorization Header
