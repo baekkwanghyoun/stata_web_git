@@ -132,7 +132,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <q-item-section>
-                                                    <q-input outlined dense v-model="filename" style=""  placeholder="추가할 단어 입력"  />
+                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 단어 입력"  />
                                                 </q-item-section>
                                             </div>
                                         </q-item>
@@ -144,7 +144,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <q-item-section>
-                                                    <q-input outlined dense v-model="filename" style=""  placeholder="추가할 단어 입력"  />
+                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 단어 입력"  />
                                                 </q-item-section>
                                             </div>
                                         </q-item>
@@ -173,14 +173,17 @@
                                         <q-item class="row items-center">
                                             <div class="col">
                                                 <q-radio v-model="filesave" val="Stata" label="Stata" />
-                                                <q-radio v-model="filesave" val="Excel" label="액셀" disable/>
-                                                <q-radio v-model="filesave" val="Csv" label="텍스트" disable/>
+                                                <q-radio v-model="filesave" val="Excel" label="액셀" />
+                                                <q-radio v-model="filesave" val="Csv" label="텍스트" />
                                             </div>
+                                            <!--
                                             <q-space></q-space>
+
                                             <q-item-label>저장할 파일명 : </q-item-label>
                                             <div class="q-pl-md">
                                                 <q-input outlined dense v-model="filename" style=""  placeholder="예:save_20201220"  />
                                             </div>
+                                            -->
                                         </q-item>
                                         <q-item-label class="q-pl-xl" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
                                         <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
@@ -333,7 +336,8 @@
       color: 'cyan',
       filename:'',
       wave:[],
-
+      add_h:'',
+      add_p:'',
       kt_select2_3:[],
       kt_select2_4:[],
       kt_select2_3_data: [
@@ -462,7 +466,7 @@ mounted() {
             kt_select2_5:this.wave,
             word:this.word,
             hp:this.hp,
-            tab:this.tab
+            tab:this.tab,
           })
           // 성공시
           if(res.data) {
@@ -494,8 +498,10 @@ mounted() {
           kt_select2_5:this.wave,
           kt_select2_3:this.kt_select2_3,
           kt_select2_4:this.kt_select2_4,
-          tab:this.tab
-
+          tab:this.tab,
+          filesave:this.filesave,
+          add_h:this.add_h,
+          add_p:this.add_p,
         })
         // 성공시
         if(res.data.name) {
@@ -532,8 +538,6 @@ mounted() {
         else {
 
         }
-
-        debugger
       } catch (e) {
         exeption(e);
       } finally {

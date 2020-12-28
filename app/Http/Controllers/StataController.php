@@ -99,20 +99,18 @@ class StataController extends Controller
 
     public function storeKlips(Request $request)
     {
-        $sid = session()->getId();
-
-//        Storage::disk('local')->put('/public/'.$sid.'/file.txt', 'Contents');
-//        $c = asset('storage/file.txt');
 
         $tab = request('tab');
 
         if($tab=='create') {
             $request->validate([
-                'kt_select2_3' => 'required',
-                'kt_select2_4' => 'required',
                 'kt_select2_5' => 'required',
+                'kt_select2_3' => 'bail:required_without:kt_select2_4',
+                'kt_select2_4' => 'required_without:kt_select2_3',
             ],[
                 'kt_select2_5.required' => '- 차수를 선택하셔야 합니다.',
+                'kt_select2_3.required_without' => '- 가구 레벨 변수 또는 가구원 레벨 변수를 선택하셔야 합니다',
+                'kt_select2_4.required_without' => '- 가구 레벨 변수 또는 가구원 레벨 변수를 선택하셔야 합니다',
                 'kt_select2_3.required' => '- 가구 레벨 변수를 선택하셔야 합니다',
                 'kt_select2_4.required' => '- 가구원 레벨 변수를 선택하셔야 합니다',
             ]);
@@ -130,7 +128,6 @@ class StataController extends Controller
 
         //$text = "log using \"dd.txt\", text \n";
 //        try {
-        //$_POST['filename'] = 'testSession';
         if (env('APP_ENV') == 'local') {
             $text = "cd C:\project\stata_web\public\stata16\klips\n";
         } else {
@@ -139,7 +136,7 @@ class StataController extends Controller
 
 
 
-        //$filename = 'klips_final';//$_POST['filename'];
+        $isSuccess = false;
         $nowDate = Carbon::now()->format('Ymd');
         $foldername = Str::random(16);
         $filename = 'klips_final_' .$foldername;
@@ -150,9 +147,27 @@ class StataController extends Controller
         $hp = request('hp');
         $word = request('word');
 
+        $filesave = request('filesave');
+        $filesaveVal = '';
+        if($filesave=='Excel') {
+            $filesaveVal = ' excel';
+        } else if($filesave=='Csv') {
+            $filesaveVal = ' csv';
+        }
+
+        $add_h = request('add_h', '');
+        $add_p = request('add_p', '');
+        if (strlen($add_h) == 7) {
+            $add_h = substr($add_h, 0,1).substr($add_h, 3,strlen($add_h));
+        }
+        if (strlen($add_p) == 7) {
+            $add_p = substr($add_p, 0,1).substr($add_p, 3,strlen($add_p));
+        }
+        $add_h = $add_h!=''?" add_h({$add_h})":'';
+        $add_p = $add_p!=''?" add_h({$add_p})":'';
 
         if($tab==='create') {//C:\\ado\\plus\\s
-            $text .= "smart_klips_v3 ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename}) sfolder( ) excel csv"; //D:\\0.silver
+            $text .= "smart_klips_v3 ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename}) sfolder( ) {$filesaveVal} {$add_h} {$add_p}"; //D:\\0.silver
 
         }
         else if($tab==='search') {
@@ -172,7 +187,10 @@ class StataController extends Controller
 
         Storage::move($filename.'.log', 'stata16/log/'.$nowDate.'/'.$filename.'.log');
 
+
+
         if(file_exists('stata16/klips/'.$filename.'.dta') ) {
+            $isSuccess = true;
             Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$nowDate.'/'.$foldername.'/klips_final.dta');
         }
         if(file_exists('stata16/klips/'.$filename.'.csv') ) {
@@ -191,10 +209,10 @@ class StataController extends Controller
 //      $fileread = preg_replace("/  /i", "&nbsp;&nbsp;", $fileread);
 //      $fileread = preg_replace("/(<br\s*\/>)+/", "", $fileread);
 
-        $isSuccess = false;
-        if (Str::contains($fileread, 'saved')) {
-            $isSuccess = true;
-        }
+//        $isSuccess = false;
+//        if (Str::contains($fileread, 'saved')) {
+//            $isSuccess = true;
+//        }
 
         //$fileread = preg_replace('/[\n\r]+/', '', $fileread);
         //$fileread = Str::replaceFirst('&rt;br',"", $fileread);
@@ -206,7 +224,12 @@ class StataController extends Controller
 
         if($request->wantsJson()) {
             if($tab==='create') {
-                return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/klips_final", 'status' => 'success',]);
+                if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
+                    return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/klips_final", 'status' => 'success',]);
+                }
+                else {
+                    return response()->json(['errors'=>['data가 조회되지 않았습니다.'], 'message'=>'data가 조회되지 않았습니다.'], 422);
+                }
             }
             else if($tab==='search') {
                 return response()->json($fileread);
