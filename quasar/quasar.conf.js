@@ -63,7 +63,7 @@ module.exports = function ( ctx ) {
                 API: 'http://52.79.82.226',
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             },
-
+        publicPath:'http://52.79.82.226'
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
