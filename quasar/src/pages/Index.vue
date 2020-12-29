@@ -332,7 +332,7 @@
   data() {
     return {
       expansionSearchResult:false,
-      tab: 'search', //'create',
+      tab: 'create', //'create',
       color: 'cyan',
       filename:'',
       wave:[],
