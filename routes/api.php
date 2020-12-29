@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+http://52.79.82.226/js/vendor.e0c8d7d6.js
+http://52.79.82.226/js/app.d67cb343.js
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
