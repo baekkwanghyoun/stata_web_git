@@ -64,6 +64,7 @@ module.exports = function ( ctx ) {
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             },
         //publicPath:'http://52.79.82.226'
+        publicPath:'klips'
 
       // transpile: false,
 

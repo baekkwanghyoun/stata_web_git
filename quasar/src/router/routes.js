@@ -1,26 +1,6 @@
 const routes = [
     {
-        path: '/',
-        component: () => import('layouts/MainLayout.vue'),
-        children: [
-            {
-                path: '',
-                component: () => import('pages/Index.vue')
-            }
-        ]
-    },
-/*    {
-        path: '/quasar',
-        component: () => import('layouts/MainLayout.vue'),
-        children: [
-            {
-                path: '',
-                component: () => import('pages/Index.vue')
-            }
-        ]
-    },*/
-    {
-        path: '/smartklips',
+        path: '/', // http://localhost:8083/klips/
         component: () => import('layouts/MainLayout.vue'),
         children: [
             {
@@ -30,17 +10,7 @@ const routes = [
         ]
     },
     {
-        path: '/klips/smartklips/',
-        component: () => import('layouts/MainLayout.vue'),
-        children: [
-            {
-                path: '',
-                component: () => import('pages/Index.vue')
-            }
-        ]
-    },
-    {
-        path: '/klips/smartklips.html',
+        path: '/smartklips.html',
         component: () => import('layouts/MainLayout.vue'),
         children: [
             {
