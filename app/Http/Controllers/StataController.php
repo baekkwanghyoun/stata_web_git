@@ -154,15 +154,29 @@ class StataController extends Controller
         } else if($filesave=='Csv') {
             $filesaveVal = ' csv';
         }
-
+        // 임시로 전부 저장
+        $filesaveVal = ' excel  csv';
         $add_h = request('add_h', '');
         $add_p = request('add_p', '');
-        if (strlen($add_h) == 7) {
+
+        ///////////////////////////////////////////////////
+        // h010150 : 7자리수에 2,3번째 글자가 숫자일경우 체크
+        if (strlen($add_h) == 7 && is_numeric(substr($add_h, 1,2)) ) {
             $add_h = substr($add_h, 0,1).substr($add_h, 3,strlen($add_h));
         }
-        if (strlen($add_p) == 7) {
+        if (strlen($add_p) == 7 && is_numeric(substr($add_p, 1,2))  ) {
             $add_p = substr($add_p, 0,1).substr($add_p, 3,strlen($add_p));
         }
+
+        ///////////////////////////////////////////////////
+        // pa215101 : 8자리수에 둘째글자 까지가 pa로 시작하면서 3,4번째 글자가 숫자일경우 체크
+        if (substr($add_h, 0, 2) === 'pa' && strlen($add_h) == 8 && is_numeric(substr($add_h, 2,2)) ) {
+            $add_h = substr($add_h, 0,1).substr($add_h, 3,strlen($add_h));
+        }
+        if (substr($add_p, 0, 2) === 'pa' && strlen($add_p) == 8 && is_numeric(substr($add_p, 2,2)) ) {
+            $add_p = substr($add_p, 0,1).substr($add_p, 3,strlen($add_h));
+        }
+
         $add_h = $add_h!=''?" add_h({$add_h})":'';
         $add_p = $add_p!=''?" add_h({$add_p})":'';
 
@@ -188,16 +202,16 @@ class StataController extends Controller
         Storage::move($filename.'.log', 'stata16/log/'.$nowDate.'/'.$filename.'.log');
 
 
-
+        $filename_req = request('filename','klips_final' );
         if(file_exists('stata16/klips/'.$filename.'.dta') ) {
             $isSuccess = true;
-            Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$nowDate.'/'.$foldername.'/klips_final.dta');
+            Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.dta');
         }
         if(file_exists('stata16/klips/'.$filename.'.csv') ) {
-            Storage::move('stata16/klips/'.$filename.'.csv', 'stata16/result/'.$nowDate.'/'.$foldername.'/klips_final.csv');
+            Storage::move('stata16/klips/'.$filename.'.csv', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.csv');
         }
         if(file_exists('stata16/klips/'.$filename.'.xlsx') ) {
-            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$nowDate.'/'.$foldername.'/klips_final.xlsx');
+            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.xlsx');
         }
             //Storage::move('stata16/klips/'.$filename.'.data', 'stata16/result/'.$filename.'.dta');
         //Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$filename.'.xlsx');
@@ -225,7 +239,7 @@ class StataController extends Controller
         if($request->wantsJson()) {
             if($tab==='create') {
                 if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
-                    return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/klips_final", 'status' => 'success',]);
+                    return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success',]);
                 }
                 else {
                     return response()->json(['errors'=>['data가 조회되지 않았습니다.'], 'message'=>'data가 조회되지 않았습니다.'], 422);

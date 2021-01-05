@@ -26,7 +26,7 @@
             <q-tab-panels class="q-pa-md" animated v-model="tab">
                 <!-- 1번째 탭 : 통합 패널데이터 생성-->
                 <q-tab-panel  name="create">
-                    <q-form  @submit="onSubmit">
+                    <q-form  @submit="onSubmit" >
                         <div class="">
                         <q-list>
                             <!-- 1단계 -->
@@ -176,14 +176,12 @@
                                                 <q-radio v-model="filesave" val="Excel" label="액셀" />
                                                 <q-radio v-model="filesave" val="Csv" label="텍스트" />
                                             </div>
-                                            <!--
                                             <q-space></q-space>
 
                                             <q-item-label>저장할 파일명 : </q-item-label>
                                             <div class="q-pl-md">
-                                                <q-input outlined dense v-model="filename" style=""  placeholder="예:save_20201220"  />
+                                                <q-input outlined dense v-model="filename" style=""  placeholder="예 : save_20201220"  />
                                             </div>
-                                            -->
                                         </q-item>
                                         <q-item-label class="q-pl-xl" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
                                         <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
@@ -207,7 +205,7 @@
                         <!-- 제출 -->
                         <div class="q-mt-md row justify-end q-gutter-sm">
                             <q-btn type="submit" color="primary" label="데이터 추출" />
-                            <q-btn color="white" text-color="black" label="초기화" />
+                            <q-btn @click="searchInit()"  color="white" text-color="black" label="초기화" />
                         </div>
                     </div>
                     </q-form>
@@ -422,7 +420,7 @@ mounted() {
   methods: {
     waveSelectChg(evt){
       if(this.waveSelect==='all') {
-        for(let i=0; i<= this.waveCount; i++) {
+        for(let i=1; i<= this.waveCount; i++) {
           this.wave.push(this.waveLabel(i))
         }
       }
@@ -451,10 +449,18 @@ mounted() {
       this.saveFile()
     },
     searchInit(){
+      this.kt_select2_3 = [];
+      this.kt_select2_4 = [];
+      this.add_h = '',
+      this.add_p = '',
+      this.filename = '',
+      this.filesave = 'Stata',
       this.wave=false;
       this.waveSelect=null;
       this.waveSelect='';
       this.expansionSearchResult=false;
+      this.word = '';
+      this.hp = 'h';
     },
     async onSearch(evt) {
       console.log('@onSearch - do something here', evt)
@@ -500,6 +506,7 @@ mounted() {
           kt_select2_4:this.kt_select2_4,
           tab:this.tab,
           filesave:this.filesave,
+          filename:this.filename,
           add_h:this.add_h,
           add_p:this.add_p,
         })

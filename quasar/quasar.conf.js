@@ -60,6 +60,7 @@ module.exports = function ( ctx ) {
             }
             : { // and on build (production):
                 //  API: JSON.stringify('http://jangtu.test:8086'),
+                //API: 'http://127.0.0.1  ',
                 API: 'http://52.79.82.226',
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             },
