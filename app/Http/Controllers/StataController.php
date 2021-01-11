@@ -158,8 +158,8 @@ class StataController extends Controller
         $filesaveVal = ' excel  csv';
         $add_h = request('add_h', '');
         $add_p = request('add_p', '');
-
-        ///////////////////////////////////////////////////
+        $this->parsingVariable($add_h, $add_p);
+        /*///////////////////////////////////////////////////
         // h010150 : 7자리수에 2,3번째 글자가 숫자일경우 체크
         if (strlen($add_h) == 7 && is_numeric(substr($add_h, 1,2)) ) {
             $add_h = substr($add_h, 0,1).substr($add_h, 3,strlen($add_h));
@@ -185,7 +185,7 @@ class StataController extends Controller
 
 
         $add_h = $add_h!=''?" add_h({$add_h})":'';
-        $add_p = $add_p!=''?" add_p({$add_p})":'';
+        $add_p = $add_p!=''?" add_p({$add_p})":'';*/
 
         if($tab==='create') {//C:\\ado\\plus\\s
             $text .= "smart_klips_v3 ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename}) sfolder( ) {$filesaveVal} {$add_h} {$add_p}"; //D:\\0.silver
@@ -273,6 +273,60 @@ class StataController extends Controller
          }*/
     }
 
+    /*
+     * h011513 h011619
+        pa215101 p21orig98
+        pa5101 porig98
+     * */
+    public function parsingVariable(&$add_h, &$add_p)
+    {
+        ////////////////////////////////
+        // 가구 "H" 변수 파싱
+        $ar_add_h = explode(' ', $add_h);
+        $add_h = '';
+        foreach ($ar_add_h as $item) {
+            ///////////////////////////////////////////////////
+            // h010150 : 7자리수에 2,3번째 글자가 숫자일경우 체크
+            if (strlen($item) == 7 && is_numeric(substr($item, 1,2)) ) {
+                $add_h = $add_h.' '.substr($item, 0,1).substr($item, 3,strlen($item)).' ';
+            }
+            ///////////////////////////////////////////////////
+            // pa215101 : 8자리수에 둘째글자 까지가 pa로 시작하면서 3,4번째 글자가 숫자일경우 체크
+            else if (substr($item, 0, 2) === 'pa' && strlen($item) == 8 && is_numeric(substr($item, 2,2)) ) {
+                $add_h = $add_h.' '.'pa'.substr($item, 4,strlen($item)).' ';
+            }
+            else {
+                $add_h = $add_h.' '.$item.' ';
+            }
+        }
+        $add_h = $add_h!=''?" add_h({$add_h})":'';
+
+        ////////////////////////////////
+        // 가구원 "P" 변수 파싱
+        $ar_add_p = explode(' ', $add_p);
+        $add_p = '';
+        foreach ($ar_add_p as $item_p) {
+            if (strlen($item_p) == 7 && is_numeric(substr($item_p, 1,2))  ) {
+                $add_p = $add_p.' '.substr($item_p, 0,2).substr($item_p, 3,strlen($item_p));
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            // pa215101 : 8자리수에 둘째글자 까지가 pa로 시작하면서 3,4번째 글자가 숫자일경우 체크
+            else if (substr($item_p, 0, 2) === 'pa' && strlen($item_p) == 8 && is_numeric(substr($item_p, 2,2)) ) {
+                $add_p = $add_p.' '.'pa'.substr($item_p, 4,strlen($item_p));
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            // 원변수가 p21orig98 : 9자리수고 첫째글자 p로 시작하면서 2,3번째 글자가 숫자일경우 체크
+            else if (substr($item_p, 0, 1) === 'p' && strlen($item_p) == 9 && is_numeric(substr($item_p, 1,2)) ) {
+                $add_p = $add_p.' '.'p'.substr($item_p, 3,strlen($item_p));
+            }
+            else {
+                $add_p = $add_p.' '.$item_p.' ';
+            }
+        }
+        $add_p = $add_p!=''?" add_p({$add_p})":'';
+
+    }
     /* 사용 안함 : storeKlips로 합침  */
     public function storeKlipsApi(Request $request)
     {
