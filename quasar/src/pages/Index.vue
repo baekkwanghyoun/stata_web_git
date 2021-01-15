@@ -7,7 +7,9 @@
                 <q-card dark  class="my-card bg-grey-9 q-mb-lg">
                     <q-card-section class="row">
                         <div class="col-1">
-                            <q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" />
+                            <a href="https://www.kli.re.kr/klips/index.do">
+                                <q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" ></q-icon>
+                            </a>
                         </div>
 
                         <div class="col-11 text-bold " >
@@ -20,7 +22,8 @@
             <q-tabs active-color="primary" align="justify" class="text-grey q-pa-md" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
                 <q-tab icon="addchart" label="통합 패널데이터 생성" name="create"/>
                 <q-tab icon="youtube_searched_for" label="추가변수 검색" name="search"/>
-                <q-tab icon="contact_support" label="사용법 안내" name="add"/>
+                <q-tab icon="contact_support" label="사용법 및 주의사항" name="add"/>
+                <q-tab icon="contact_support" label="FAQ" name="add"/>
             </q-tabs>
 
             <q-tab-panels class="q-pa-md" animated v-model="tab">
@@ -33,7 +36,7 @@
                             <q-expansion-item   ><!--default-opened expand-separator-->
                                 <template v-slot:header>
                                     <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
+                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1 차수선택<q-item-label class="q-pl-sm text-red-14 text-weight-bold"> (필수)</q-item-label></q-chip>
                                     </q-item-section>
 <!--                                    <q-item-section avatar>
                                         <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
@@ -63,22 +66,19 @@
                             </q-expansion-item>
                             <q-separator class="q-my-lg"></q-separator>
                             <!-- 2단계-1 -->
-                            <q-expansion-item   icon="house" label="">
-                                <template v-slot:header>
-                                    <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
+                            <q-expansion-item  class="step2-1" icon="house" label="" header-class="text-teal">
+                                <template v-slot:header >
+                                    <q-item-section avatar > <!--class="bg-grey-3 q-pa-sm"-->
+                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2 변수<q-item-label class="q-pl-sm  text-weight-bold"> (선택)</q-item-label></q-chip>
                                     </q-item-section>
-                                    <!--                                    <q-item-section avatar>
-                                                                            <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
-                                                                        </q-item-section>-->
-                                    <q-item-section>
-                                        가구 레벨 변수
+                                    <q-item-section  color="primary" >
+                                        가구용 변수 선택
                                     </q-item-section>
                                 </template>
                                 <q-scroll-area style="height: 400px;">
                                     <q-item v-for="(list, index) in kt_select2_3_data" :key="index" tag="label" v-ripple>
                                         <q-item-section avatar>
-                                            <q-checkbox   v-model="kt_select2_3" :val=list[0] />
+                                            <q-checkbox color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
                                         </q-item-section>
                                         <q-item-section>
                                             <q-item-label>{{list[0]}}</q-item-label>
@@ -88,7 +88,7 @@
                                 </q-scroll-area>
                             </q-expansion-item>
                             <!-- 2단계-2 -->
-                            <q-expansion-item   icon="family_restroom" label="가구원 레벨 변수">
+                            <q-expansion-item  class="step2-2" icon="family_restroom" label="개인용 변수" header-class="text-blue-8" >
                                 <template v-slot:header>
                                     <q-item-section avatar class="q-ml-xl">
 <!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
@@ -96,14 +96,14 @@
                                     <!--                                    <q-item-section avatar>
                                                                             <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
                                                                         </q-item-section>-->
-                                    <q-item-section class="" style="margin-left: 10px">
-                                        가구원 레벨 변수
+                                    <q-item-section style="margin-left: 88px">
+                                        개인용 변수
                                     </q-item-section>
                                 </template>
                                 <q-scroll-area style="height: 400px;">
                                     <q-item v-for="(list, index) in kt_select2_4_data" :key="index"  tag="label" v-ripple>
                                         <q-item-section avatar>
-                                            <q-checkbox   v-model="kt_select2_4" :val=list[0] />
+                                            <q-checkbox  color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
                                         </q-item-section>
                                         <q-item-section>
                                             <q-item-label>{{list[0]}}</q-item-label>
@@ -112,8 +112,52 @@
                                     </q-item>
                                 </q-scroll-area>
                             </q-expansion-item>
+
+                            <!-- 2단계-3 -->
+                            <q-expansion-item  class="step2-3" icon="family_restroom" label="추가 변수 입력" header-class="text-orange-8" >
+                                <template v-slot:header>
+                                    <q-item-section avatar class="q-ml-xl">
+                                    </q-item-section>
+                                    <q-item-section style="margin-left: 88px">
+                                        추가 변수 입력
+                                    </q-item-section>
+                                </template>
+                                <div class="row">
+                                    <div class="col-12 q-pb-lg " >
+                                        <q-item class="row items-center">
+                                            <div class="col-4">
+                                                <q-item-section avatar class="q-pl-md">
+                                                    <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
+                                                </q-item-section>
+                                            </div>
+                                            <div class="col-8">
+                                                <q-item-section>
+                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력"  />
+                                                </q-item-section>
+                                            </div>
+                                        </q-item>
+                                        <q-item class="row items-center">
+                                            <div class="col-4">
+                                                <q-item-section avatar class="q-pl-md">
+                                                    <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
+                                                </q-item-section>
+                                            </div>
+                                            <div class="col-8">
+                                                <q-item-section>
+                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력"  />
+                                                </q-item-section>
+                                            </div>
+                                        </q-item>
+                                        <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
+                                        <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
+                                        <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
+                                        <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
+                                    </div>
+                                </div>
+                            </q-expansion-item>
                             <q-separator class="q-my-lg"></q-separator>
                             <!-- 3단계 원변수 -->
+                            <!--
                             <q-expansion-item   >
                                 <template v-slot:header>
                                     <q-item-section avatar>
@@ -127,24 +171,24 @@
                                         <q-item class="row items-center">
                                             <div class="col-4">
                                                 <q-item-section avatar class="q-pl-md">
-                                                    <q-item-label  ><span class="text-primary text-bold">"가구"</span> 원변수 입력</q-item-label>
+                                                    <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
                                                 </q-item-section>
                                             </div>
                                             <div class="col-8">
                                                 <q-item-section>
-                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 단어 입력"  />
+                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력"  />
                                                 </q-item-section>
                                             </div>
                                         </q-item>
                                         <q-item class="row items-center">
                                             <div class="col-4">
                                                 <q-item-section avatar class="q-pl-md">
-                                                    <q-item-label  ><span class="text-primary text-bold">"가구원"</span> 원변수 입력</q-item-label>
+                                                    <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
                                                 </q-item-section>
                                             </div>
                                             <div class="col-8">
                                                 <q-item-section>
-                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 단어 입력"  />
+                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력"  />
                                                 </q-item-section>
                                             </div>
                                         </q-item>
@@ -156,34 +200,46 @@
                                 </div>
                             </q-expansion-item>
                             <q-separator class="q-my-lg"></q-separator>
+                            -->
                             <!-- 4단계 -->
                             <q-expansion-item   >
                                 <template v-slot:header>
                                     <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 4</q-chip>
+                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3 <q-item-label class="q-pl-sm text-red-14 text-weight-bold"> (필수)</q-item-label></q-chip>
                                     </q-item-section>
 
                                     <q-item-section>
-                                        저장할 파일타입
-                                        <q-item-label caption>3가지 타입중 한가지 선택</q-item-label>
+                                        저장할 파일명 변경
                                     </q-item-section>
                                 </template>
                                 <div class="row">
                                     <div class="col-12 " >
                                         <q-item class="row items-center">
                                             <div class="col">
-                                                <q-radio v-model="filesave" val="Stata" label="Stata" />
-                                                <q-radio v-model="filesave" val="Excel" label="액셀" />
-                                                <q-radio v-model="filesave" val="Csv" label="텍스트" />
-                                            </div>
-                                            <q-space></q-space>
-
-                                            <q-item-label>저장할 파일명 : </q-item-label>
-                                            <div class="q-pl-md">
-                                                <q-input outlined dense v-model="filename" style=""  placeholder="예 : save_20201220"  />
+                                                저장할 파일명 :
+                                                <q-radio v-model="Stata" val="Stata" label="Stata(*.dta)" />
+                                                <q-radio v-model="Excel" val="Excel" label="Excel(*.xlsx)" />
+                                                <q-radio v-model="Csv" val="Csv" label="Text(*.csv)" />
+                                                <q-radio v-model="Sas" val="Sas" label="Sas(*.sas7bdat)" disable/>
+                                                <q-radio v-model="Sas" val="Spss" label="Spss(*.sav)" disable/>
                                             </div>
                                         </q-item>
-                                        <q-item-label class="q-pl-xl" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
+
+                                        <q-item class="row items-center ">
+                                            <div class="col">
+                                                변수라벨 파일 :
+                                                <q-radio v-model="Stata" val="Stata" label="변수라벨(*.xlsx)" />
+                                                <q-radio v-model="Excel" val="Excel" label="변수라벨(*.csv)" />
+                                            </div>
+                                            <q-space></q-space>
+                                        </q-item>
+                                        <q-item-label class="q-pl-md q-mb-lg" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
+
+                                        <q-item class="row items-center">
+                                            <q-item-label class="q-mr-md">파일타입 : </q-item-label> <q-input outlined dense v-model="filename" style=""  placeholder="예 : save_20201220"  />
+                                        </q-item>
+
+
                                         <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
      -->
                                     </div>
@@ -366,7 +422,11 @@
         ["p_sample98", "98원가구여부 (1=98표본 원가구, 2=98표본 분가가구, 3=조사대상가구 아님)"], ["p_sample09", "통합표본 원가구여부 (1=통합표본 원가구, 2=통합표본 분가가구, 3=조사대상 가구 아님)"],
       ],
 
-      filesave:'Stata',
+      Stata:'Stata',
+      Excel:'Excel',
+      Csv:'Csv',
+      Sas:'',
+      Spss:'',
       waveCount:21,
       waveSelect:'',
       waveSelectOptions:[
@@ -514,9 +574,11 @@ mounted() {
         if(res.data.name) {
           Swal.fire({
             title: '파일을 다운 받으시겠습니까?',
-            html:'<a href="'+process.env.API+res.data.name+'.dta" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(48, 133, 214);">dta 저장</a>' +
-              '<a href="'+process.env.API+res.data.name+'.csv" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(0, 151, 123);">csv 저장</a>' +
-              '<a href="'+process.env.API+res.data.name+'.xlsx" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: black;">excel 저장</a>',
+            html:'<a href="'+process.env.API+res.data.name+'.dta" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(48, 133, 214);">Dta 저장</a>' +
+              '<a href="'+process.env.API+res.data.name+'.csv" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(0, 151, 123);">Excel 저장</a>' +
+              '<a href="'+process.env.API+res.data.name+'.xlsx" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: black;">Csv 저장</a>'+
+              '<a href="'+process.env.API+res.data.name+'_v.csv" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color:#2777b0ad ;">변수라벨.csv 저장</a>'+
+              '<a href="'+process.env.API+res.data.name+'_v.xlsx" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color:#2777b0ad ;">변수라벨.xlsx 저장</a>',
             text: 'dta가 생성되었습니다.',
             icon: 'success',
             confirmButtonColor: 'grey',
@@ -581,4 +643,31 @@ mounted() {
         font-stretch: normal;
         font-family: Menlo, Monaco, Consolas, monospace;
     }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .bg_step2{
+        /*background: #e0e0e0 !important;*/
+    }
+
+/*    .q-item.q-item-type.row.no-wrap.q-item--clickable.q-link.cursor-pointer.q-focusable.q-hoverable {
+        background: #e0e0e0 !important;
+    }*/
+.step2-1.q-expansion-item--expanded {
+    background-color: #D8E5E4;
+}
+.step2-2.q-expansion-item--expanded {
+    background-color: #E9EEF5;
+}
+.step2-3.q-expansion-item--expanded {
+    background-color: #FFF3E0;
+}
+.swal2-styled.swal2-confirm {
+    font-size: 1em !important;
+}
+/*    .swal2-confirm {
+        display: inline-block;background-color: white;border: 1px;border-style: solid;border-color: gray;color: gray !important;
+    }*/
 </style>
