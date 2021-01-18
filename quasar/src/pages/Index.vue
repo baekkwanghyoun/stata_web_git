@@ -288,20 +288,20 @@
                                 <div class="row">
                                     <div class="col-12 " >
                                         <q-item class="row items-center">
-                                            <q-item-label class="q-mr-md">파일타입 : </q-item-label> <q-input outlined dense v-model="filename" style=""  placeholder="예 : save_20201220"  />
+                                            <q-item-label class="q-mr-md">저장할 파일명 : </q-item-label> <q-input outlined dense v-model="filename" style=""  placeholder="예 : save_20201220"  />
                                         </q-item>
 
                                         <q-item class="row items-center">
                                             <div class="col">
-                                                저장할 파일명 :
-                                                <q-radio v-model="Stata" val="Stata" label="Stata(*.dta)" />
-                                                <q-radio v-model="Excel" val="Excel" label="Excel(*.xlsx)" />
-                                                <q-radio v-model="Csv" val="Csv" label="Text(*.csv)" />
+                                                파일타입 :
+                                                <q-radio v-model="filesave" val="Stata" label="Stata(*.dta)" />
+                                                <q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
+                                                <q-radio v-model="filesave" val="Csv" label="Text(*.csv)" />
                                                 <q-radio v-model="Sas" val="Sas" label="Sas(*.sas7bdat)" disable/>
                                                 <q-radio v-model="Sas" val="Spss" label="Spss(*.sav)" disable/>
                                             </div>
                                         </q-item>
-
+<!--
                                         <q-item class="row items-center ">
                                             <div class="col">
                                                 변수라벨 파일 :
@@ -310,6 +310,7 @@
                                             </div>
                                             <q-space></q-space>
                                         </q-item>
+                                        -->
                                         <q-item-label class="q-pl-md q-mb-lg" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
 
 
@@ -470,6 +471,7 @@
       expansionSearchResult:false,
       tab: 'create', //'create',
       color: 'cyan',
+      filesave:'Stata',
       filename:'',
       wave:[],
       add_h:'',
@@ -642,8 +644,9 @@ mounted() {
           device_name: 'browser'
         });
 */
+        let res;
         try {
-          let res = await Api().post('/api/stata/storeKlipsApi', {
+          res = await Api().post('/api/stata/storeKlipsApi', {
             kt_select2_5:this.wave,
             kt_select2_3:this.kt_select2_3,
             kt_select2_4:this.kt_select2_4,
@@ -660,20 +663,23 @@ mounted() {
 
         // 성공시
         if(res.data.name) {
+          //window.open(process.env.API+res.data.name+'.zip', "_blank");
           Swal.fire({
             title: '파일을 다운 받으시겠습니까?',
+            /*
             html:'<a href="'+process.env.API+res.data.name+'.dta" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(48, 133, 214);">Dta 저장</a>' +
               '<a href="'+process.env.API+res.data.name+'.csv" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(0, 151, 123);">Excel 저장</a>' +
               '<a href="'+process.env.API+res.data.name+'.xlsx" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: black;">Csv 저장</a>'+
               '<a href="'+process.env.API+res.data.name+'_v.csv" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color:#2777b0ad ;">변수라벨.csv 저장</a>'+
               '<a href="'+process.env.API+res.data.name+'_v.xlsx" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color:#2777b0ad ;">변수라벨.xlsx 저장</a>',
-            text: 'dta가 생성되었습니다.',
+            */
+            text: '파일이 생성되었습니다.',
             icon: 'success',
-            confirmButtonColor: 'grey',
-            confirmButtonText: '닫기',
+            confirmButtonColor: '',
+            confirmButtonText: '저장하기',
           }).then((result) => {
             if (result.isConfirmed) {
-              //window.open(process.env.API+res.data.name+'.dta', "_blank");
+              window.open(process.env.API+res.data.name+'.zip', "_blank");
             }
           })
          /* Swal.fire({

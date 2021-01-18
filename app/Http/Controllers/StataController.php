@@ -157,7 +157,7 @@ class StataController extends Controller
             $filesaveVal = ' csv';
         }
         // 임시로 전부 저장
-        $filesaveVal = ' excel  csv';
+        //$filesaveVal = ' excel  csv';
         $add_h = request('add_h', '');
         $add_p = request('add_p', '');
         $this->parsingVariable($add_h, $add_p);
@@ -212,6 +212,11 @@ class StataController extends Controller
 
 
         $filename_req = request('filename','klips_final' );
+        if(file_exists('stata16/klips/'.$filename.'.zip') ) {
+            $isSuccess = true;
+            Storage::move('stata16/klips/'.$filename.'.zip', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.zip');
+        }
+        /*
         if(file_exists('stata16/klips/'.$filename.'.dta') ) {
             $isSuccess = true;
             Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.dta');
@@ -228,11 +233,12 @@ class StataController extends Controller
         if(file_exists('stata16/klips/'.$filename.'.xlsx') ) {
             Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.xlsx');
         }
-            //Storage::move('stata16/klips/'.$filename.'.data', 'stata16/result/'.$filename.'.dta');
+        */
+        //Storage::move('stata16/klips/'.$filename.'.data', 'stata16/result/'.$filename.'.dta');
         //Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$filename.'.xlsx');
 
 
-        $fileread = Storage::get('stata16/log/'.$nowDate.'/'.$filename.'.log');
+         $fileread = Storage::get('stata16/log/'.$nowDate.'/'.$filename.'.log');
 //      $fileread = file_get_contents(public_path() . "\\" . "${filename}.log", true);// $fileread = htmlentities($fileread);
 //      $fileread = preg_replace("/(\r\n\r\n)/i", "<br />\n", $fileread);
 //      $fileread = preg_replace("/  /i", "&nbsp;&nbsp;", $fileread);
@@ -354,7 +360,8 @@ class StataController extends Controller
         $_POST['filename'] = 'testSession';
         if (!empty($_POST['filename'])) {
             if(env('APP_ENV')=='local') {
-                $text = "cd C:\project\stata_web\public\klips\n";
+                $text = "cd C:\project\stata_web\public\stata16\klips \n";
+                //$text = "cd C:\project\stata_web\public\klips\n";
             }
             else {
                 $text = "cd C:\www\stata_web_git\public\klips\n";
