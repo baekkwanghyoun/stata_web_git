@@ -7,7 +7,7 @@
                 <q-card dark  class="my-card bg-grey-9 q-mb-lg">
                     <q-card-section class="row">
                         <div class="col-3">
-                            <a href="https://www.kli.re.kr/klips/index.do">
+                            <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
                                 <!--<q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" ></q-icon>-->
 
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -140,7 +140,7 @@
                                     </q-item-section>
                                     <q-item-section  color="primary" >
                                         가구용 변수 선택
-                                        <q-item-label caption>가구용 / 개인용 변수 하나 이상 선택 되어야 합니다.</q-item-label>
+                                        <q-item-label caption>가구용 / 개인용 변수 하나 이상 선택 <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span></q-item-label>
                                     </q-item-section>
                                 </template>
                                 <q-scroll-area style="height: 400px;">
@@ -182,7 +182,7 @@
                             </q-expansion-item>
 
                             <!-- 2단계-3 -->
-                            <q-expansion-item  class="step2-3" icon="family_restroom" label="추가 변수 입력" header-class="text-orange-8" >
+                            <q-expansion-item  class="step2-3" icon="family_restroom" label="추가 변수 입력" header-class="text-grey-10" >
                                 <template v-slot:header>
                                     <q-item-section avatar class="q-ml-xl">
                                     </q-item-section>
@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <q-item-section>
-                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력"  />
+                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력      예1) h0141      예2) h0141 h0142"  />
                                                 </q-item-section>
                                             </div>
                                         </q-item>
@@ -212,12 +212,12 @@
                                             </div>
                                             <div class="col-8">
                                                 <q-item-section>
-                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력"  />
+                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력      예1) p0101      예2) h0141 p0102"  />
                                                 </q-item-section>
                                             </div>
                                         </q-item>
-                                        <q-item-label class="q-pl-lg" caption> - 추가변수검색(var name) 또는 통합코드북(가구/개인 통합변수명)의 변수 입력가능
-                                            <span class="text-red text-bold">(선택사항)</span>
+                                        <q-item-label class="q-pl-lg" caption> 추가변수검색 탭 또는 통합코드북 이용 변수 입력가능
+                                            <!--<span class="text-red text-bold">(선택사항)</span>-->
                                         </q-item-label>
                                        <!-- <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
                                         <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
@@ -294,11 +294,11 @@
                                         <q-item class="row items-center">
                                             <div class="col">
                                                 파일타입 :
-                                                <q-radio v-model="filesave" val="Stata" label="Stata(*.dta)" />
+                                                <q-radio v-model="filesave" val="Stata" label="STATA(*.dta)" />
                                                 <q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
                                                 <q-radio v-model="filesave" val="Csv" label="Text(*.csv)" />
-                                                <q-radio v-model="Sas" val="Sas" label="Sas(*.sas7bdat)" disable/>
-                                                <q-radio v-model="Sas" val="Spss" label="Spss(*.sav)" disable/>
+                                                <q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
+                                                <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>
                                             </div>
                                         </q-item>
 <!--
@@ -501,7 +501,7 @@
         ["p_job_status", "종사상지위 (1=상용직, 2=임시직, 3=일용직, 4=고용주/자영업자, 5=무급가족 종사자)"], ["p_ind2000", "업종(한국표준산업분류8차 개정:2000년 code) KLIPS 코드북 참고"],
         ["p_ind2007", "업종(한국표준산업준류 9차 개정: 2007년 code) KLIPS 코드북 참고"], ["p_ind2017", "업종(한국표준산업준류 10차 개정: 2017년 code) KLIPS 코드북 참고"],
         ["p_jobfam2000", "직종(한국표준직업분류 5차: 2000년 code) KLIPS 코드북 참고"], ["p_jobfam2007", "직종(한국표준직업분류 6차: 2007년 code) KLIPS 코드북 참고"],
-        ["p_jobfam2017", "직종(한국표준직업분류 6차: 2017년 code) KLIPS 코드북 참고"], ["p_firm_size", "종업원규모(범주형) (1=10명미만, 2=10명~29명, 3=30명~99명, 4=100명~299명, 5=300명~499명, 6=500명이상)"],
+        ["p_jobfam2017", "직종(한국표준직업분류 7차: 2017년 code) KLIPS 코드북 참고"], ["p_firm_size", "종업원규모(범주형) (1=10명미만, 2=10명~29명, 3=30명~99명, 4=100명~299명, 5=300명~499명, 6=500명이상)"],
         ["p_job_begin", "취업시기(년도와 월)"], ["p_weight_1", "종단가중치(98표본)"], ["p_weight_2", "횡단가중치(98표본)"], ["p_weight_3", "종단가중치(통합표본)"], ["p_weight_4", "횡단가중치(통합표본)"],
         ["p_sample98", "98원가구여부 (1=98표본 원가구, 2=98표본 분가가구, 3=조사대상가구 아님)"], ["p_sample09", "통합표본 원가구여부 (1=통합표본 원가구, 2=통합표본 분가가구, 3=조사대상 가구 아님)"],
       ],
@@ -723,10 +723,13 @@ mounted() {
         border-radius: 8px;
         padding: 20px;
         font-weight: bold !important;
-        background-color: #18171B;
+        border-style: solid;
+        border-width: 1px;
+        /*background-color: #18171B;*/
         line-height: 1.2em;
         font-size: 12px;
-        color: #56DB3A;
+        /*color: #56DB3A;*/
+        color: #343434;
         font: 12px Menlo, Monaco, Consolas, monospace;
         font-style: normal;
         font-variant-ligatures: normal;
@@ -756,7 +759,7 @@ mounted() {
     background-color: #E9EEF5;
 }
 .step2-3.q-expansion-item--expanded {
-    background-color: #FFF3E0;
+    background-color: #E0E0E0;
 }
 .swal2-styled.swal2-confirm {
     font-size: 1em !important;

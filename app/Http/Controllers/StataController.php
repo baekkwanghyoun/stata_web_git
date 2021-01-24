@@ -15,8 +15,20 @@ use Symfony\Component\VarDumper\VarDumper;
 class StataController extends Controller
 {
     public function quasar()
-    {        $isSuccess = false;
-        return view('quasar');
+    {
+        $isSuccess = false;
+        $acceptDomain = ['http://jat.co.kr/', 'https://www.kli.re.kr/', 'http://designblue.NONO/','http://designblue.test:9090/'];
+
+        $referer = request()->headers->get('referer');
+        $result = in_array($referer, $acceptDomain);
+        if($result) {
+            return view('quasar');
+        }
+        else {
+            return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=68&key=414');
+        }
+
+
     }
 
     public function index()
