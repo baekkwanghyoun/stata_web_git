@@ -79,380 +79,508 @@
                         </div>
 
                         <div class="col-9 text-bold " >
-                            <span class="text-h6 text-yellow-8 text-bold">'Smart Klips'</span>는 한국노동패널 조사자료를 이용하여 연구자들이 연구분석을 위해 쉽게
-                        데이터를 생성할 수 있도록 제공되는 맞춤형 “데이터추출” 지원 플랫폼입니다.
+                          <!--  <span class="text-h6 text-yellow-8 text-bold">'Smart Klips'</span>는 한국노동패널 조사자료를 이용하여 연구자들이 연구분석을 위해 쉽게
+                        데이터를 생성할 수 있도록 제공되는 맞춤형 “데이터추출” 지원 플랫폼입니다.-->
+
+                            <span class="text-h5  text-bold q-mr-sm" style="color: #03A683">'자료추출 시스템'</span>  은 사용자가 원하는 변수 및 차수를 선택 및 병합하여 원하는<br>
+                            데이터 형태로 생성하는 <span class="text-h6 text-yellow-8 text-bold">'데이터추출'</span> 시스템입니다.
                         </div>
                     </q-card-section>
                 </q-card>
 
-            <q-tabs active-color="primary" align="justify" class="text-grey q-pa-md" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
-                <q-tab icon="addchart" label="통합 패널데이터 생성" name="create"/>
-                <q-tab icon="youtube_searched_for" label="추가변수 검색" name="search"/>
-                <q-tab icon="contact_support" label="사용법 및 주의사항" name="add"/>
-                <q-tab icon="contact_support" label="FAQ" name="add"/>
-            </q-tabs>
+                    <q-tabs active-color="primary" align="justify" class="text-grey q-pa-md" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
+                        <q-tab icon="addchart" label="통합 패널데이터 생성" name="create"/>
+                        <q-tab icon="youtube_searched_for" label="추가변수 검색" name="search"/>
+                        <q-tab icon="contact_support" label="사용법 및 주의사항" name="howto"/>
+                        <q-tab icon="contact_support" label="FAQ" name="faq"/>
+                    </q-tabs>
 
-            <q-tab-panels class="q-pa-md" animated v-model="tab">
-                <!-- 1번째 탭 : 통합 패널데이터 생성-->
-                <q-tab-panel  name="create">
-                    <q-form  @submit="onSubmit" >
-                        <div class="">
-                        <q-list>
-                            <!-- 1단계 -->
-                            <q-expansion-item   ><!--default-opened expand-separator-->
-                                <template v-slot:header>
-                                    <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
-                                    </q-item-section>
+                    <q-tab-panels class="q-pa-md" animated v-model="tab">
+                        <!-- 1번째 탭 : 통합 패널데이터 생성-->
+                        <q-tab-panel  name="create">
+                            <q-form  @submit="onSubmit" >
+                                <div class="">
+                                <q-list>
+                                    <!-- 1단계 -->
+                                    <q-expansion-item   ><!--default-opened expand-separator-->
+                                        <template v-slot:header>
+                                            <q-item-section avatar>
+                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
+                                            </q-item-section>
 
-                                    <q-item-section >
-                                        <div class="text-grey-8 q-gutter-xs">
-                                            <span class=""  >차수선택</span>
-                                            <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
-                                            <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
+                                            <q-item-section >
+                                                <div class="text-grey-8 q-gutter-xs">
+                                                    <span class=""  >차수선택</span>
+                                                    <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                                    <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
+                                                </div>
+                                            </q-item-section>
+                                        </template>
+                                        <div class="row">
+                                            <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
+                                                <q-option-group @input="waveSelectChg()" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
+                                            </div>
                                         </div>
-                                    </q-item-section>
-                                </template>
-                                <div class="row">
-                                    <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
-                                        <q-option-group @input="waveSelectChg()" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
-                                        <q-item dense>
-                                            <q-item-section class="itemSectionWave" avatar>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
+                                                <q-item dense>
+                                                    <q-item-section class="itemSectionWave" avatar>
+                                                        <q-checkbox    v-model="wave" :val=waveLabel(index) />
+                                                    </q-item-section>
+                                                    <q-item-section>
+                                                        <q-item-label>{{waveLabel(index)}}차수</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                            </div>
+                                        </div>
+                                    </q-expansion-item>
+                                    <q-separator class="q-my-lg"></q-separator>
+                                    <!-- 2단계-1 -->
+                                    <q-expansion-item  class="step2-1" icon="house" label="" header-class="text-teal">
+                                        <template v-slot:header >
+                                            <q-item-section avatar > <!--class="bg-grey-3 q-pa-sm"-->
+                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
+                                            </q-item-section>
+                                            <q-item-section  color="primary" >
+                                                가구용 변수 선택
+                                                <q-item-label caption>가구용 / 개인용 변수 하나 이상 선택 <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span></q-item-label>
+                                            </q-item-section>
+                                        </template>
+                                        <q-scroll-area style="height: 400px;">
+                                            <q-item v-for="(list, index) in kt_select2_3_data" :key="index" tag="label" v-ripple>
+                                                <q-item-section avatar>
+                                                    <q-checkbox color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
+                                                </q-item-section>
+                                                <q-item-section>
+                                                    <q-item-label>{{list[0]}}</q-item-label>
+                                                    <q-item-label caption>{{list[1]}}</q-item-label>
+                                                </q-item-section>
+                                            </q-item>
+                                        </q-scroll-area>
+                                    </q-expansion-item>
+                                    <!-- 2단계-2 -->
+                                    <q-expansion-item  class="step2-2" icon="family_restroom" label="개인용 변수" header-class="text-blue-8" >
+                                        <template v-slot:header>
+                                            <q-item-section avatar class="q-ml-xl">
+        <!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
+                                            </q-item-section>
+                                            <!--                                    <q-item-section avatar>
+                                                                                    <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
+                                                                                </q-item-section>-->
+                                            <q-item-section style="margin-left: 10px">
+                                                개인용 변수 선택
+                                            </q-item-section>
+                                        </template>
+                                        <q-scroll-area style="height: 400px;">
+                                            <q-item v-for="(list, index) in kt_select2_4_data" :key="index"  tag="label" v-ripple>
+                                                <q-item-section avatar>
+                                                    <q-checkbox  color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
+                                                </q-item-section>
+                                                <q-item-section>
+                                                    <q-item-label>{{list[0]}}</q-item-label>
+                                                    <q-item-label caption>{{list[1]}}</q-item-label>
+                                                </q-item-section>
+                                            </q-item>
+                                        </q-scroll-area>
+                                    </q-expansion-item>
+
+                                    <!-- 2단계-3 -->
+                                    <q-expansion-item  class="step2-3" icon="family_restroom" label="추가 변수 입력" header-class="text-grey-10" >
+                                        <template v-slot:header>
+                                            <q-item-section avatar class="q-ml-xl">
+                                            </q-item-section>
+                                            <q-item-section style="margin-left: 10px">
+                                                추가 변수 입력
+                                            </q-item-section>
+                                        </template>
+                                        <div class="row">
+                                            <div class="col-12 q-pb-lg " >
+                                                <q-item class="row items-center">
+                                                    <div class="col-4">
+                                                        <q-item-section avatar class="q-pl-md">
+                                                            <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
+                                                        </q-item-section>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <q-item-section>
+                                                            <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력      예1) h0141      예2) h0141 h0142"  />
+                                                        </q-item-section>
+                                                    </div>
+                                                </q-item>
+                                                <q-item class="row items-center">
+                                                    <div class="col-4">
+                                                        <q-item-section avatar class="q-pl-md">
+                                                            <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
+                                                        </q-item-section>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <q-item-section>
+                                                            <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력      예1) p0101      예2) p0141 p0102"  />
+                                                        </q-item-section>
+                                                    </div>
+                                                </q-item>
+                                                <q-item-label class="q-pl-lg" caption> 추가변수검색 탭 또는 통합코드북 이용 변수 입력가능
+                                                    <!--<span class="text-red text-bold">(선택사항)</span>-->
+                                                </q-item-label>
+                                               <!-- <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>-->
+                                            </div>
+                                        </div>
+                                    </q-expansion-item>
+                                    <q-separator class="q-my-lg"></q-separator>
+                                    <!-- 2-1단계 원변수 -->
+                                    <!--
+                                    <q-expansion-item   >
+                                        <template v-slot:header>
+                                            <q-item-section avatar>
+                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
+                                            </q-item-section>
+
+                                            <q-item-section>원변수 입력</q-item-section>
+                                        </template>
+                                        <div class="row">
+                                            <div class="col-12 " >
+                                                <q-item class="row items-center">
+                                                    <div class="col-4">
+                                                        <q-item-section avatar class="q-pl-md">
+                                                            <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
+                                                        </q-item-section>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <q-item-section>
+                                                            <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력"  />
+                                                        </q-item-section>
+                                                    </div>
+                                                </q-item>
+                                                <q-item class="row items-center">
+                                                    <div class="col-4">
+                                                        <q-item-section avatar class="q-pl-md">
+                                                            <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
+                                                        </q-item-section>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <q-item-section>
+                                                            <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력"  />
+                                                        </q-item-section>
+                                                    </div>
+                                                </q-item>
+                                                <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
+                                            </div>
+                                        </div>
+                                    </q-expansion-item>
+                                    <q-separator class="q-my-lg"></q-separator>
+                                    -->
+                                    <!-- 3단계 -->
+                                    <q-expansion-item   >
+                                        <template v-slot:header>
+                                            <q-item-section avatar>
+                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
+                                            </q-item-section>
+
+                                            <q-item-section>
+                                                <div class="text-grey-8 q-gutter-xs">
+                                                    <span class=""  >저장파일</span>
+                                                    <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                                </div>
+                                            </q-item-section>
+                                        </template>
+                                        <div class="row">
+                                            <div class="col-12 " >
+                                                <q-item class="row items-center">
+                                                    <q-item-label class="q-mr-md">저장할 파일명 : </q-item-label> <q-input outlined dense v-model="filename" style=""  placeholder="예 : save_20201220"  />
+                                                </q-item>
+
+                                                <q-item class="row items-center">
+                                                    <div class="col">
+                                                        파일타입 :
+                                                        <q-radio v-model="filesave" val="Stata" label="STATA(*.dta)" />
+                                                        <q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
+                                                        <q-radio v-model="filesave" val="Csv" label="Text(*.csv)" />
+                                                        <q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
+                                                        <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>
+                                                    </div>
+                                                </q-item>
+        <!--
+                                                <q-item class="row items-center ">
+                                                    <div class="col">
+                                                        변수라벨 파일 :
+                                                        <q-radio v-model="Stata" val="Stata" label="변수라벨(*.xlsx)" />
+                                                        <q-radio v-model="Excel" val="Excel" label="변수라벨(*.csv)" />
+                                                    </div>
+                                                    <q-space></q-space>
+                                                </q-item>
+                                                -->
+                                                <q-item-label class="q-pl-md q-mb-lg" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
+
+
+
+
+                                                <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
+             -->
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <q-item v-for="index in 21" tag="label" v-ripple>
+                                            <q-item-section avatar>
                                                 <q-checkbox    v-model="wave" :val=waveLabel(index) />
                                             </q-item-section>
                                             <q-item-section>
                                                 <q-item-label>{{waveLabel(index)}}차수</q-item-label>
                                             </q-item-section>
                                         </q-item>
-                                    </div>
-                                </div>
-                            </q-expansion-item>
-                            <q-separator class="q-my-lg"></q-separator>
-                            <!-- 2단계-1 -->
-                            <q-expansion-item  class="step2-1" icon="house" label="" header-class="text-teal">
-                                <template v-slot:header >
-                                    <q-item-section avatar > <!--class="bg-grey-3 q-pa-sm"-->
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
-                                    </q-item-section>
-                                    <q-item-section  color="primary" >
-                                        가구용 변수 선택
-                                        <q-item-label caption>가구용 / 개인용 변수 하나 이상 선택 <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span></q-item-label>
-                                    </q-item-section>
-                                </template>
-                                <q-scroll-area style="height: 400px;">
-                                    <q-item v-for="(list, index) in kt_select2_3_data" :key="index" tag="label" v-ripple>
-                                        <q-item-section avatar>
-                                            <q-checkbox color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
-                                        </q-item-section>
-                                        <q-item-section>
-                                            <q-item-label>{{list[0]}}</q-item-label>
-                                            <q-item-label caption>{{list[1]}}</q-item-label>
-                                        </q-item-section>
-                                    </q-item>
-                                </q-scroll-area>
-                            </q-expansion-item>
-                            <!-- 2단계-2 -->
-                            <q-expansion-item  class="step2-2" icon="family_restroom" label="개인용 변수" header-class="text-blue-8" >
-                                <template v-slot:header>
-                                    <q-item-section avatar class="q-ml-xl">
-<!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
-                                    </q-item-section>
-                                    <!--                                    <q-item-section avatar>
-                                                                            <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
-                                                                        </q-item-section>-->
-                                    <q-item-section style="margin-left: 10px">
-                                        개인용 변수 선택
-                                    </q-item-section>
-                                </template>
-                                <q-scroll-area style="height: 400px;">
-                                    <q-item v-for="(list, index) in kt_select2_4_data" :key="index"  tag="label" v-ripple>
-                                        <q-item-section avatar>
-                                            <q-checkbox  color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
-                                        </q-item-section>
-                                        <q-item-section>
-                                            <q-item-label>{{list[0]}}</q-item-label>
-                                            <q-item-label caption>{{list[1]}}</q-item-label>
-                                        </q-item-section>
-                                    </q-item>
-                                </q-scroll-area>
-                            </q-expansion-item>
-
-                            <!-- 2단계-3 -->
-                            <q-expansion-item  class="step2-3" icon="family_restroom" label="추가 변수 입력" header-class="text-grey-10" >
-                                <template v-slot:header>
-                                    <q-item-section avatar class="q-ml-xl">
-                                    </q-item-section>
-                                    <q-item-section style="margin-left: 10px">
-                                        추가 변수 입력
-                                    </q-item-section>
-                                </template>
-                                <div class="row">
-                                    <div class="col-12 q-pb-lg " >
-                                        <q-item class="row items-center">
-                                            <div class="col-4">
-                                                <q-item-section avatar class="q-pl-md">
-                                                    <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
-                                                </q-item-section>
-                                            </div>
-                                            <div class="col-8">
-                                                <q-item-section>
-                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력      예1) h0141      예2) h0141 h0142"  />
-                                                </q-item-section>
-                                            </div>
-                                        </q-item>
-                                        <q-item class="row items-center">
-                                            <div class="col-4">
-                                                <q-item-section avatar class="q-pl-md">
-                                                    <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
-                                                </q-item-section>
-                                            </div>
-                                            <div class="col-8">
-                                                <q-item-section>
-                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력      예1) p0101      예2) h0141 p0102"  />
-                                                </q-item-section>
-                                            </div>
-                                        </q-item>
-                                        <q-item-label class="q-pl-lg" caption> 추가변수검색 탭 또는 통합코드북 이용 변수 입력가능
-                                            <!--<span class="text-red text-bold">(선택사항)</span>-->
-                                        </q-item-label>
-                                       <!-- <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>-->
-                                    </div>
-                                </div>
-                            </q-expansion-item>
-                            <q-separator class="q-my-lg"></q-separator>
-                            <!-- 2-1단계 원변수 -->
-                            <!--
-                            <q-expansion-item   >
-                                <template v-slot:header>
-                                    <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
-                                    </q-item-section>
-
-                                    <q-item-section>원변수 입력</q-item-section>
-                                </template>
-                                <div class="row">
-                                    <div class="col-12 " >
-                                        <q-item class="row items-center">
-                                            <div class="col-4">
-                                                <q-item-section avatar class="q-pl-md">
-                                                    <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
-                                                </q-item-section>
-                                            </div>
-                                            <div class="col-8">
-                                                <q-item-section>
-                                                    <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력"  />
-                                                </q-item-section>
-                                            </div>
-                                        </q-item>
-                                        <q-item class="row items-center">
-                                            <div class="col-4">
-                                                <q-item-section avatar class="q-pl-md">
-                                                    <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
-                                                </q-item-section>
-                                            </div>
-                                            <div class="col-8">
-                                                <q-item-section>
-                                                    <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력"  />
-                                                </q-item-section>
-                                            </div>
-                                        </q-item>
-                                        <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
-                                    </div>
-                                </div>
-                            </q-expansion-item>
-                            <q-separator class="q-my-lg"></q-separator>
-                            -->
-                            <!-- 3단계 -->
-                            <q-expansion-item   >
-                                <template v-slot:header>
-                                    <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
-                                    </q-item-section>
-
-                                    <q-item-section>
-                                        <div class="text-grey-8 q-gutter-xs">
-                                            <span class=""  >저장파일</span>
-                                            <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
-                                        </div>
-                                    </q-item-section>
-                                </template>
-                                <div class="row">
-                                    <div class="col-12 " >
-                                        <q-item class="row items-center">
-                                            <q-item-label class="q-mr-md">저장할 파일명 : </q-item-label> <q-input outlined dense v-model="filename" style=""  placeholder="예 : save_20201220"  />
-                                        </q-item>
-
-                                        <q-item class="row items-center">
-                                            <div class="col">
-                                                파일타입 :
-                                                <q-radio v-model="filesave" val="Stata" label="STATA(*.dta)" />
-                                                <q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
-                                                <q-radio v-model="filesave" val="Csv" label="Text(*.csv)" />
-                                                <q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
-                                                <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>
-                                            </div>
-                                        </q-item>
-<!--
-                                        <q-item class="row items-center ">
-                                            <div class="col">
-                                                변수라벨 파일 :
-                                                <q-radio v-model="Stata" val="Stata" label="변수라벨(*.xlsx)" />
-                                                <q-radio v-model="Excel" val="Excel" label="변수라벨(*.csv)" />
-                                            </div>
-                                            <q-space></q-space>
-                                        </q-item>
                                         -->
-                                        <q-item-label class="q-pl-md q-mb-lg" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
-
-
-
-
-                                        <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
-     -->
-                                    </div>
+                                    </q-expansion-item>
+                                    <q-separator class="q-my-lg"></q-separator>
+                                </q-list>
+                                <div class="q-mb-xl"></div>
+                                <!-- 제출 -->
+                                <div class="q-mt-md row justify-end q-gutter-sm">
+                                    <q-btn type="submit" color="primary" label="데이터 추출" />
+                                    <q-btn @click="searchInit()"  color="white" text-color="black" label="초기화" />
                                 </div>
-                                <!--
-                                <q-item v-for="index in 21" tag="label" v-ripple>
-                                    <q-item-section avatar>
-                                        <q-checkbox    v-model="wave" :val=waveLabel(index) />
-                                    </q-item-section>
-                                    <q-item-section>
-                                        <q-item-label>{{waveLabel(index)}}차수</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                                -->
-                            </q-expansion-item>
-                            <q-separator class="q-my-lg"></q-separator>
-                        </q-list>
-                        <div class="q-mb-xl"></div>
-                        <!-- 제출 -->
-                        <div class="q-mt-md row justify-end q-gutter-sm">
-                            <q-btn type="submit" color="primary" label="데이터 추출" />
-                            <q-btn @click="searchInit()"  color="white" text-color="black" label="초기화" />
-                        </div>
-                    </div>
-                    </q-form>
-                </q-tab-panel>
+                            </div>
+                            </q-form>
+                        </q-tab-panel>
 
 
-                <!-- 2번째 탭 : 추가변수 검색 -->
-                <q-tab-panel name="search" >
-                    <q-form id="frmSearch"  @submit="onSearch">
-                        <div class="">
-                        <q-list>
-                            <!-- 1단계 -->
-                            <q-expansion-item   ><!--default-opened expand-separator-->
-                                <template v-slot:header>
+                        <!-- 2번째 탭 : 추가변수 검색 -->
+                        <q-tab-panel name="search" >
+                            <q-form id="frmSearch"  @submit="onSearch">
+                                <div class="">
+                                <q-list>
+                                    <!-- 1단계 -->
+                                    <q-expansion-item   ><!--default-opened expand-separator-->
+                                        <template v-slot:header>
 
-                                    <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
-                                    </q-item-section>
-
-                                    <q-item-section >
-                                        <div class="text-grey-8 q-gutter-xs">
-                                            <span class=""  >차수선택</span>
-                                            <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
-                                            <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
-                                        </div>
-                                    </q-item-section>
-                                </template>
-                                <div class="row">
-                                    <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
-                                        <q-option-group @input="waveSelectChg()" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
-                                        <q-item dense>
-                                            <q-item-section class="itemSectionWave" avatar>
-                                                <q-checkbox    v-model="wave" :val=waveLabel(index) />
+                                            <q-item-section avatar>
+                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
                                             </q-item-section>
+
+                                            <q-item-section >
+                                                <div class="text-grey-8 q-gutter-xs">
+                                                    <span class=""  >차수선택</span>
+                                                    <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                                    <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
+                                                </div>
+                                            </q-item-section>
+                                        </template>
+                                        <div class="row">
+                                            <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
+                                                <q-option-group @input="waveSelectChg()" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
+                                                <q-item dense>
+                                                    <q-item-section class="itemSectionWave" avatar>
+                                                        <q-checkbox    v-model="wave" :val=waveLabel(index) />
+                                                    </q-item-section>
+                                                    <q-item-section>
+                                                        <q-item-label>{{waveLabel(index)}}차수</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                            </div>
+                                        </div>
+                                    </q-expansion-item>
+                                    <q-separator class="q-my-lg"></q-separator>
+
+                                    <q-expansion-item>
+                                        <template v-slot:header>
+                                            <q-item-section avatar>
+                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
+                                            </q-item-section>
+
                                             <q-item-section>
-                                                <q-item-label>{{waveLabel(index)}}차수</q-item-label>
+                                                <div class="text-grey-8 q-gutter-xs">
+                                                    <span class=""  >가구용 또는 개인용 선택</span>
+                                                    <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                                </div>
                                             </q-item-section>
-                                        </q-item>
-                                    </div>
-                                </div>
-                            </q-expansion-item>
-                            <q-separator class="q-my-lg"></q-separator>
-
-                            <q-expansion-item>
-                                <template v-slot:header>
-                                    <q-item-section avatar>
-                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
-                                    </q-item-section>
-
-                                    <q-item-section>
-                                        <div class="text-grey-8 q-gutter-xs">
-                                            <span class=""  >가구용 또는 개인용 선택</span>
-                                            <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                        </template>
+                                        <div class="row">
+                                            <div class="col-12 " >
+                                                <q-item class="row items-center">
+                                                    <div class="col-4">
+                                                        <q-item-section avatar class="q-pl-md">
+                                                            <q-option-group v-model="hp" :options="hpOptions" color="primary" inline/>
+                                                        </q-item-section>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <q-item-section>
+                                                            <q-input outlined dense v-model="word" style=""  placeholder="검색할 단어를 입력하세요."  />
+                                                        </q-item-section>
+                                                    </div>
+                                                </q-item>
+                                               <!--
+                                                <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
+                                                <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
+                                                -->
+                                            </div>
                                         </div>
-                                    </q-item-section>
-                                </template>
-                                <div class="row">
-                                    <div class="col-12 " >
-                                        <q-item class="row items-center">
-                                            <div class="col-4">
-                                                <q-item-section avatar class="q-pl-md">
-                                                    <q-option-group v-model="hp" :options="hpOptions" color="primary" inline/>
-                                                </q-item-section>
-                                            </div>
-                                            <div class="col-8">
-                                                <q-item-section>
-                                                    <q-input outlined dense v-model="word" style=""  placeholder="검색할 단어를 입력하세요."  />
-                                                </q-item-section>
-                                            </div>
-                                        </q-item>
-                                       <!--
-                                        <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
-                                        <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
-                                        -->
-                                    </div>
+                                    </q-expansion-item>
+                                    <q-separator class="q-my-lg"></q-separator>
+                                    <q-expansion-item v-model="expansionSearchResult">
+                                        <template v-slot:header>
+                                            <q-item-section avatar>
+                                                <q-chip class="glossy" color="red-8" text-color="white" icon="star">검색결과</q-chip>
+                                            </q-item-section>
+
+                                            <q-item-section>여기를 클릭하시면 open / close가 가능합니다.</q-item-section>
+                                        </template>
+                                        <div class="row">
+                                            <pre id="searchResult" class="" style="width: 100%" v-html="searchResult" ></pre>
+                                        </div>
+                                    </q-expansion-item>
+                                </q-list>
+                                <div class="q-mb-xl"></div>
+
+                                <!-- 제출 -->
+                                <div class="q-mt-md row justify-end q-gutter-sm">
+                                    <q-btn type="submit" color="primary" label="검색하기" />
+                                    <q-btn @click="searchInit" color="white" text-color="black" label="초기화" />
                                 </div>
-                            </q-expansion-item>
-                            <q-separator class="q-my-lg"></q-separator>
-                            <q-expansion-item v-model="expansionSearchResult">
-                                <template v-slot:header>
-                                    <q-item-section avatar>
-                                        <q-chip class="glossy" color="red-8" text-color="white" icon="star">검색결과</q-chip>
-                                    </q-item-section>
+                            </div>
+                            </q-form>
+                        </q-tab-panel>
 
-                                    <q-item-section>여기를 클릭하시면 open / close가 가능합니다.</q-item-section>
-                                </template>
-                                <div class="row">
-                                    <pre id="searchResult" class="" style="width: 100%" v-html="searchResult" ></pre>
-                                </div>
-                            </q-expansion-item>
-                        </q-list>
-                        <div class="q-mb-xl"></div>
+                        <!-- 3번째 탭 : 사용법 안내 -->
+                        <q-tab-panel name="howto">
+                            <div class="q-mb-xl">
+                                <p class="text-h5 text-bold">통합 패널데이터 생성 사용법 안내</p>
+                                <p class="text-subtitle1 text-bold text-bold" ><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
+                                <p class="text-body2">사용자는 데이터생성을 원하는 차수를 선택합니다. (차수는 계속 추가될 예정)</p>
+                                <q-card bordered  flat>
+                                    <q-card-section>
+                                        <q-img bordered class="border" src="~assets/howto/1.jpg" transition="fade" />
+                                    </q-card-section>
+                                </q-card>
+                            </div>
 
-                        <!-- 제출 -->
-                        <div class="q-mt-md row justify-end q-gutter-sm">
-                            <q-btn type="submit" color="primary" label="검색하기" />
-                            <q-btn @click="searchInit" color="white" text-color="black" label="초기화" />
-                        </div>
-                    </div>
-                    </q-form>
-                </q-tab-panel>
+                            <div class="q-mb-xl">
+                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 가구용 변수 선택 / 개인용 변수 선택(둘 중 하나 이상 선택 <span class="text-red">필수</span>)</p>
+                                <p class="text-body2">사용자는 원하는 가구용 변수, 개인용 변수를 선택하여 데이터를 생성하면 됩니다. 둘 다 선택도 가능합니다.</p>
+                                <q-card bordered  flat>
+                                    <q-card-section>
+                                        <q-img bordered class="border" src="~assets/howto/2.jpg" transition="fade" />
+                                    </q-card-section>
+                                </q-card>
+                            </div>
 
-                <!-- 3번째 탭 : 사용법 안내 -->
-                <q-tab-panel name="add">
-                    <div class="text-h6">스마트 변수 추가</div>
-                    사용법 안내 ..들어갈 자리
-                </q-tab-panel>
-            </q-tab-panels>
-        </q-card>
+                            <div class="q-mb-xl">
+                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 추가 변수 입력(필수 아님)</p>
+                                <p class="text-body2" style="white-space: pre-wrap;">사용자는 임의의 원변수를 추가하여 데이터를 생성할 수 있습니다.
+가구용 변수, 개인용 변수를 구분하여 입력란에 넣으면 그 변수를 포함한 데이터가 생성됩니다.
+단, 변수를 여러 개 입력시 변수간에는 공백으로 구분하면 됩니다.
+                                </p>
+                                <q-card bordered  flat>
+                                    <q-card-section>
+                                        <q-img bordered class="border" src="~assets/howto/3.jpg" transition="fade" />
+                                    </q-card-section>
+                                </q-card>
+                            </div>
+
+                            <div class="q-mb-xl">
+                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP3 저장파일 <span class="text-red">(필수)</span></p>
+                                <p class="text-body2" style="white-space: pre-wrap;">사용자는 저장하고자 하는 파일명을 직접 입력합니다.
+저장할 파일형식은 Stata, Excel 또는 Text 중에서 선택할 수 있습니다. (다른 포맷의 데이터는 추후 업데이트 예정)</p>
+                                <q-card bordered  flat>
+                                    <q-card-section>
+                                        <q-img bordered class="border" src="~assets/howto/4.jpg" transition="fade" />
+                                    </q-card-section>
+                                </q-card>
+                            </div>
+
+                            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                            <!-- 추가 변수 검색 -->
+                            <div class="q-mb-xl">
+                                <p class="text-h5 text-bold">추가변수 검색</p>
+                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
+                                <p class="text-body2" style="white-space: pre-wrap;">이전 “데이터생성” 탭에서 선택한 차수를 그대로 사용합니다.
+만약 차수를 변경하면 “데이터생성” 탭의 차수도 자동으로 변경됩니다.</p>
+                                <q-card bordered  flat>
+                                    <q-card-section>
+                                        <q-img bordered class="border" src="~assets/howto/1.jpg" transition="fade" />
+                                    </q-card-section>
+                                </q-card>
+                            </div>
+
+                            <div class="q-mb-xl">
+                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 가구용 또는 개인용 선택<span class="text-red">(필수)</span></p>
+                                <p class="text-body2" style="white-space: pre-wrap;">검색할 변수가 가구용 데이터에 있으면 “가구용”을 선택하고, 개인용 데이터에 있으면 “개인용”을 선택합니다.
+
+가령 “소득”이라고 입력하고 키보드의 엔터키를 누르거나 “검색하기” 버튼을 누르면 해당 차수의 원변수 중에서
+
+“소득”이 포함되어 있는 모든 변수가 검색창에 나타납니다.
+
+  * 검색시 하나의 단어만 입력해야 하며 글자간 공백은 없어야 합니다.
+                                </p>
+                                <q-card bordered  flat>
+                                    <q-card-section>
+                                        <q-img bordered class="border" src="~assets/howto/5.jpg" transition="fade" />
+                                    </q-card-section>
+                                </q-card>
+                            </div>
+
+                            <div class="q-mb-xl">
+                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 검색결과</p>
+                                <p class="text-body2" style="white-space: pre-wrap;">STEP 1, 2의 조건을 반영한 결과가 화면에 나타납니다.
+
+이때 사용자는 원하는 변수명을 마우스로 복사하여 첫번째 “데이터생성” 탭의 “추가변수 입력”란에
+
+붙여넣기 하여 그 변수가 포함된 데이터를 생성할 수 있습니다.
+
+  * 추가로 단어를 검색하여 “데이터생성” 탭 “추가변수 입력”란에 계속 추가할 수 있습니다.
+
+                                </p>
+                                <q-card bordered  flat>
+                                    <q-card-section>
+                                        <q-img bordered class="border" src="~assets/howto/6.jpg" transition="fade" />
+                                    </q-card-section>
+                                </q-card>
+                            </div>
+                        </q-tab-panel>
+
+                        <!-- 4번째 탭 : FAQ -->
+                        <q-tab-panel name="faq">
+
+                            <q-list bordered class="rounded-borders ">
+
+                                <q-expansion-item group="somegroup"  switch-toggle-side  label="질문 1) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
+                                    <q-card>
+                                        <q-card-section>
+                                            버전 14 이상에서만 사용이 가능합니다.
+                                        </q-card-section>
+                                    </q-card>
+                                </q-expansion-item>
+                                <q-separator />
+                                <q-expansion-item group="somegroup"  switch-toggle-side  label='질문 2) "추가변수 검색" 탭에서 단어검색은 한개만 가능하나요?'>
+                                    <q-card>
+                                        <q-card-section>
+                                            네, 단어는 1개씩만 검색할 수 있습니다. 그러나 반복하여 여러 개를 검색할 수 있습니다.
+                                        </q-card-section>
+                                    </q-card>
+                                </q-expansion-item>
+                                <q-separator />
+                                <q-expansion-item group="somegroup"  switch-toggle-side  label="질문 3) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
+                                    <q-card>
+                                        <q-card-section style="white-space: pre-wrap;">STATA로 지정하여 dta 파일로 추출한 후 해당 프로그램의 '불러오기' 기능을 이용해 보시기 바랍니다.
+
+Excel이나 Text로 추출하면 변수리스트 파일까지 한꺼번에 추출됩니다.
+
+이 파일을 이용해 해당 통계패키지에서 데이터에 라벨을 붙이기 바랍니다.
+                                        </q-card-section>
+                                    </q-card>
+                                </q-expansion-item>
+                            </q-list>
+                        </q-tab-panel>
+                    </q-tab-panels>
+                </q-card>
         </div>
     </q-page>
     </q-page-container>
@@ -469,7 +597,7 @@
   data() {
     return {
       expansionSearchResult:false,
-      tab: 'create', //'create',
+      tab: 'create', //'',
       color: 'cyan',
       filesave:'Stata',
       filename:'',
