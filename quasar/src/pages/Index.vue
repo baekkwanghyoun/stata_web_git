@@ -567,7 +567,7 @@
                                     </q-card>
                                 </q-expansion-item>
                                 <q-separator />
-                                <q-expansion-item group="somegroup"  switch-toggle-side  label="질문 3) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
+                                <q-expansion-item group="somegroup"  switch-toggle-side  label="질문 3) SAS, SPSS 사용자가 자료추출을 하고자 하면 어떻게 하나요?">
                                     <q-card>
                                         <q-card-section style="white-space: pre-wrap;">STATA로 지정하여 dta 파일로 추출한 후 해당 프로그램의 '불러오기' 기능을 이용해 보시기 바랍니다.
 
