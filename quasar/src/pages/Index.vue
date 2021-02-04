@@ -451,99 +451,127 @@
 
                         <!-- 3번째 탭 : 사용법 안내 -->
                         <q-tab-panel name="howto">
-                            <div class="q-mb-xl">
-                                <p class="text-h5 text-bold">통합 패널데이터 생성 사용법 안내</p>
-                                <p class="text-subtitle1 text-bold text-bold" ><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
-                                <p class="text-body2">사용자는 데이터생성을 원하는 차수를 선택합니다. (차수는 계속 추가될 예정)</p>
-                                <q-card bordered  flat>
-                                    <q-card-section>
-                                        <q-img bordered class="border" src="~assets/howto/1.jpg" transition="fade" />
-                                    </q-card-section>
-                                </q-card>
-                            </div>
 
-                            <div class="q-mb-xl">
-                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 가구용 변수 선택 / 개인용 변수 선택(둘 중 하나 이상 선택 <span class="text-red">필수</span>)</p>
-                                <p class="text-body2">사용자는 원하는 가구용 변수, 개인용 변수를 선택하여 데이터를 생성하면 됩니다. 둘 다 선택도 가능합니다.</p>
-                                <q-card bordered  flat>
-                                    <q-card-section>
-                                        <q-img bordered class="border" src="~assets/howto/2.jpg" transition="fade" />
-                                    </q-card-section>
-                                </q-card>
-                            </div>
+                            <q-list bordered class="rounded-borders ">
+                                <q-expansion-item group="somegroup"    label="">
+                                    <template v-slot:header>
+                                        <q-item-section avatar>
+                                            <q-chip class="glossy" color="primary" text-color="white" icon="star">'통합 패널데이터 생성' 탭 사용법 안내</q-chip>
+                                        </q-item-section>
+                                    </template>
+                                    <div class="q-pa-lg">
+                                        <div class="q-mb-xl">
+                                            <!--<p class="text-h5 text-bold">"통합 패널데이터 생성" 탭 사용법 안내</p>-->
+                                            <p class="text-subtitle1 text-bold text-bold" ><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
+                                            <p class="text-body2">사용자는 데이터생성을 원하는 차수를 선택합니다. (차수는 계속 추가될 예정)</p>
+                                            <q-card bordered  flat>
+                                                <q-card-section>
+                                                    <q-img bordered class="border" src="~assets/howto/1.jpg" transition="fade" />
+                                                </q-card-section>
+                                            </q-card>
+                                        </div>
 
-                            <div class="q-mb-xl">
-                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 추가 변수 입력(필수 아님)</p>
-                                <p class="text-body2" style="white-space: pre-wrap;">사용자는 임의의 원변수를 추가하여 데이터를 생성할 수 있습니다.
-가구용 변수, 개인용 변수를 구분하여 입력란에 넣으면 그 변수를 포함한 데이터가 생성됩니다.
-단, 변수를 여러 개 입력시 변수간에는 공백으로 구분하면 됩니다.
-                                </p>
-                                <q-card bordered  flat>
-                                    <q-card-section>
-                                        <q-img bordered class="border" src="~assets/howto/3.jpg" transition="fade" />
-                                    </q-card-section>
-                                </q-card>
-                            </div>
+                                        <div class="q-mb-xl">
+                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 가구용 변수 선택 / 개인용 변수 선택(둘 중 하나 이상 선택 <span class="text-red">필수</span>)</p>
+                                            <p class="text-body2">사용자는 원하는 가구용 변수, 개인용 변수를 선택하여 데이터를 생성하면 됩니다. 둘 다 선택도 가능합니다.</p>
+                                            <q-card bordered  flat>
+                                                <q-card-section>
+                                                    <q-img bordered class="border" src="~assets/howto/2.jpg" transition="fade" />
+                                                </q-card-section>
+                                            </q-card>
+                                        </div>
 
-                            <div class="q-mb-xl">
-                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP3 저장파일 <span class="text-red">(필수)</span></p>
-                                <p class="text-body2" style="white-space: pre-wrap;">사용자는 저장하고자 하는 파일명을 직접 입력합니다.
-저장할 파일형식은 Stata, Excel 또는 Text 중에서 선택할 수 있습니다. (다른 포맷의 데이터는 추후 업데이트 예정)</p>
-                                <q-card bordered  flat>
-                                    <q-card-section>
-                                        <q-img bordered class="border" src="~assets/howto/4.jpg" transition="fade" />
-                                    </q-card-section>
-                                </q-card>
-                            </div>
+                                        <div class="q-mb-xl">
+                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 추가 변수 입력(필수 아님)</p>
+                                            <p class="text-body2" style="white-space: pre-wrap;">사용자는 임의의 원변수를 추가하여 데이터를 생성할 수 있습니다.
+                                                가구용 변수, 개인용 변수를 구분하여 입력란에 넣으면 그 변수를 포함한 데이터가 생성됩니다.
+                                                단, 변수를 여러 개 입력시 변수간에는 공백으로 구분하면 됩니다.
+                                            </p>
+                                            <q-card bordered  flat>
+                                                <q-card-section>
+                                                    <q-img bordered class="border" src="~assets/howto/3.jpg" transition="fade" />
+                                                </q-card-section>
+                                            </q-card>
+                                        </div>
 
-                            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                            <!-- 추가 변수 검색 -->
-                            <div class="q-mb-xl">
-                                <p class="text-h5 text-bold">추가변수 검색</p>
-                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
-                                <p class="text-body2" style="white-space: pre-wrap;">이전 “데이터생성” 탭에서 선택한 차수를 그대로 사용합니다.
-만약 차수를 변경하면 “데이터생성” 탭의 차수도 자동으로 변경됩니다.</p>
-                                <q-card bordered  flat>
-                                    <q-card-section>
-                                        <q-img bordered class="border" src="~assets/howto/1.jpg" transition="fade" />
-                                    </q-card-section>
-                                </q-card>
-                            </div>
+                                        <div class="q-mb-xl">
+                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP3 저장파일 <span class="text-red">(필수)</span></p>
+                                            <p class="text-body2" style="white-space: pre-wrap;">사용자는 저장하고자 하는 파일명을 직접 입력합니다.
+                                                저장할 파일형식은 Stata, Excel 또는 Text 중에서 선택할 수 있습니다. (다른 포맷의 데이터는 추후 업데이트 예정)</p>
+                                            <q-card bordered  flat>
+                                                <q-card-section>
+                                                    <q-img bordered class="border" src="~assets/howto/4.jpg" transition="fade" />
+                                                </q-card-section>
+                                            </q-card>
+                                        </div>
+                                    </div>
+                                </q-expansion-item>
 
-                            <div class="q-mb-xl">
-                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 가구용 또는 개인용 선택<span class="text-red">(필수)</span></p>
-                                <p class="text-body2" style="white-space: pre-wrap;">검색할 변수가 가구용 데이터에 있으면 “가구용”을 선택하고, 개인용 데이터에 있으면 “개인용”을 선택합니다.
+                                <q-separator class="q-my-xs"></q-separator>
 
-가령 “소득”이라고 입력하고 키보드의 엔터키를 누르거나 “검색하기” 버튼을 누르면 해당 차수의 원변수 중에서
 
-“소득”이 포함되어 있는 모든 변수가 검색창에 나타납니다.
+                                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                                <!-- 추가 변수 검색 -->
+                                <q-expansion-item group="somegroup"    label="">
+                                    <template v-slot:header>
+                                        <q-item-section avatar>
+                                            <q-chip class="glossy" color="primary" text-color="white" icon="star">'추가변수 검색' 탭 사용법 안내</q-chip>
+                                        </q-item-section>
+                                    </template>
 
-  * 검색시 하나의 단어만 입력해야 하며 글자간 공백은 없어야 합니다.
-                                </p>
-                                <q-card bordered  flat>
-                                    <q-card-section>
-                                        <q-img bordered class="border" src="~assets/howto/5.jpg" transition="fade" />
-                                    </q-card-section>
-                                </q-card>
-                            </div>
+                                    <div class="q-pa-lg">
+                                        <div class="q-mb-xl">
+                                            <!--<p class="text-h5 text-bold">"추가변수 검색" 탭 사용법 안내</p>-->
+                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
+                                            <p class="text-body2" style="white-space: pre-wrap;">이전 “데이터생성” 탭에서 선택한 차수를 그대로 사용합니다.
+                                                만약 차수를 변경하면 “데이터생성” 탭의 차수도 자동으로 변경됩니다.</p>
+                                            <q-card bordered  flat>
+                                                <q-card-section>
+                                                    <q-img bordered class="border" src="~assets/howto/1.jpg" transition="fade" />
+                                                </q-card-section>
+                                            </q-card>
+                                        </div>
 
-                            <div class="q-mb-xl">
-                                <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 검색결과</p>
-                                <p class="text-body2" style="white-space: pre-wrap;">STEP 1, 2의 조건을 반영한 결과가 화면에 나타납니다.
+                                        <div class="q-mb-xl">
+                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 가구용 또는 개인용 선택<span class="text-red">(필수)</span></p>
+                                            <p class="text-body2" style="white-space: pre-wrap;">검색할 변수가 가구용 데이터에 있으면 “가구용”을 선택하고, 개인용 데이터에 있으면 “개인용”을 선택합니다.
 
-이때 사용자는 원하는 변수명을 마우스로 복사하여 첫번째 “데이터생성” 탭의 “추가변수 입력”란에
+                                                가령 “소득”이라고 입력하고 키보드의 엔터키를 누르거나 “검색하기” 버튼을 누르면 해당 차수의 원변수 중에서
 
-붙여넣기 하여 그 변수가 포함된 데이터를 생성할 수 있습니다.
+                                                “소득”이 포함되어 있는 모든 변수가 검색창에 나타납니다.
 
-  * 추가로 단어를 검색하여 “데이터생성” 탭 “추가변수 입력”란에 계속 추가할 수 있습니다.
+                                                * 검색시 하나의 단어만 입력해야 하며 글자간 공백은 없어야 합니다.
+                                            </p>
+                                            <q-card bordered  flat>
+                                                <q-card-section>
+                                                    <q-img bordered class="border" src="~assets/howto/5.jpg" transition="fade" />
+                                                </q-card-section>
+                                            </q-card>
+                                        </div>
 
-                                </p>
-                                <q-card bordered  flat>
-                                    <q-card-section>
-                                        <q-img bordered class="border" src="~assets/howto/6.jpg" transition="fade" />
-                                    </q-card-section>
-                                </q-card>
-                            </div>
+                                        <div class="q-mb-xl">
+                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 검색결과</p>
+                                            <p class="text-body2" style="white-space: pre-wrap;">STEP 1, 2의 조건을 반영한 결과가 화면에 나타납니다.
+
+                                                이때 사용자는 원하는 변수명을 마우스로 복사하여 첫번째 “데이터생성” 탭의 “추가변수 입력”란에
+
+                                                붙여넣기 하여 그 변수가 포함된 데이터를 생성할 수 있습니다.
+
+                                                * 추가로 단어를 검색하여 “데이터생성” 탭 “추가변수 입력”란에 계속 추가할 수 있습니다.
+
+                                            </p>
+                                            <q-card bordered  flat>
+                                                <q-card-section>
+                                                    <q-img bordered class="border" src="~assets/howto/6.jpg" transition="fade" />
+                                                </q-card-section>
+                                            </q-card>
+                                        </div>
+                                    </div>
+                                </q-expansion-item>
+                            </q-list>
+
+
+
                         </q-tab-panel>
 
                         <!-- 4번째 탭 : FAQ -->
@@ -571,7 +599,7 @@
                                     <q-card>
                                         <q-card-section style="white-space: pre-wrap;">STATA로 지정하여 dta 파일로 추출한 후 해당 프로그램의 '불러오기' 기능을 이용해 보시기 바랍니다.
 
-Excel이나 Text로 추출하면 변수리스트 파일까지 한꺼번에 추출됩니다.
+또는 Excel이나 Text로 추출하면 변수리스트 파일까지 한꺼번에 추출됩니다.
 
 이 파일을 이용해 해당 통계패키지에서 데이터에 라벨을 붙이기 바랍니다.
                                         </q-card-section>
