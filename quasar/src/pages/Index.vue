@@ -114,6 +114,10 @@
                                                     <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
                                                     <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
                                                 </div>
+                                                <!--선택한 값 적용-->
+                                                <div v-if="wave.length>0" class="text-grey-8 q-gutter-xs">
+                                                    <span class="text-caption text-weight-bold"  >{{wave.join()}}</span>
+                                                </div>
                                             </q-item-section>
                                         </template>
                                         <div class="row">
@@ -144,6 +148,11 @@
                                             <q-item-section  color="primary" >
                                                 가구용 변수 선택
                                                 <q-item-label caption>가구용 / 개인용 변수 하나 이상 선택 <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span></q-item-label>
+
+                                                <!--선택한 값 적용-->
+                                                <div v-if="kt_select2_3.length>0" class="text-grey-8 q-gutter-xs">
+                                                    <span class="text-caption text-weight-bold" style="word-break: break-all" >{{kt_select2_3.join()}}</span>
+                                                </div>
                                             </q-item-section>
                                         </template>
                                         <q-scroll-area style="height: 400px;">
@@ -169,6 +178,10 @@
                                                                                 </q-item-section>-->
                                             <q-item-section style="margin-left: 10px">
                                                 개인용 변수 선택
+                                                <!--선택한 값 적용-->
+                                                <div v-if="kt_select2_4.length>0" class="text-grey-8 q-gutter-xs">
+                                                    <span class="text-caption text-weight-bold" style="word-break: break-all" >{{kt_select2_4.join()}}</span>
+                                                </div>
                                             </q-item-section>
                                         </template>
                                         <q-scroll-area style="height: 400px;">
@@ -191,6 +204,14 @@
                                             </q-item-section>
                                             <q-item-section style="margin-left: 10px">
                                                 추가 변수 입력
+                                                <!--선택한 값 적용-->
+                                                <div v-if="add_h" class="text-grey-8 q-gutter-xs q-mb-sm">
+                                                    <span class="text-caption text-weight-bold " style="word-break: break-all" >가구용:{{add_h}}</span>
+                                                </div>
+
+                                                <div v-if="add_p" class="text-grey-8 q-gutter-xs">
+                                                    <span class="text-caption text-weight-bold" style="word-break: break-all" >개인용:{{add_p}}</span>
+                                                </div>
                                             </q-item-section>
                                         </template>
                                         <div class="row">
