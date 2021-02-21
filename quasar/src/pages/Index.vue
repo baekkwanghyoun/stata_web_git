@@ -115,13 +115,15 @@
                                                     <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
                                                 </div>
                                                 <!--선택한 값 적용-->
-                                                <div v-if="wave.length>0" class="text-grey-8 q-gutter-xs">
-                                                    <span class="text-caption text-weight-bold"  >{{wave.join()}}</span>
-                                                </div>
+                                                <q-card v-if="wave.length>0" class="my-card border q-mt-sm">
+                                                    <q-card-section class="q-pa-sm">
+                                                        <span class="  " style="word-break: break-all" >{{wave.join(' ')}}</span>
+                                                    </q-card-section>
+                                                </q-card>
                                             </q-item-section>
                                         </template>
                                         <div class="row">
-                                            <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
+                                            <div class="q-pa-sm q-ma-md bg-grey-2  rounded-borders">
                                                 <q-option-group @input="waveSelectChg()" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
                                             </div>
                                         </div>
@@ -147,15 +149,24 @@
                                             </q-item-section>
                                             <q-item-section  color="primary" >
                                                 가구용 변수 선택
-                                                <q-item-label caption>가구용 / 개인용 변수 하나 이상 선택 <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span></q-item-label>
+                                                <q-item-label caption>가구용 / 개인용 변수 하나 이상 선택 <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                                </q-item-label>
 
                                                 <!--선택한 값 적용-->
-                                                <div v-if="kt_select2_3.length>0" class="text-grey-8 q-gutter-xs">
-                                                    <span class="text-caption text-weight-bold" style="word-break: break-all" >{{kt_select2_3.join()}}</span>
-                                                </div>
+                                                <q-card v-if="kt_select2_3.length>0" class="my-card border q-mt-sm">
+                                                    <q-card-section class="q-pa-sm">
+                                                        <span class="  " style="word-break: break-all" >{{kt_select2_3.join(' ')}}</span>
+                                                    </q-card-section>
+                                                </q-card>
                                             </q-item-section>
                                         </template>
                                         <q-scroll-area style="height: 400px;">
+                                            <div class="row q-ma-lg">
+                                                <div class="full-width q-pa-sm q-pr-lg bg-grey-2  rounded-borders">
+                                                    <q-option-group @input="waveSelect2Chg()" v-model="waveSelect2" :options="waveSelect2Options" color="primary" inline/>
+                                                </div>
+                                            </div>
+
                                             <q-item v-for="(list, index) in kt_select2_3_data" :key="index" tag="label" v-ripple>
                                                 <q-item-section avatar>
                                                     <q-checkbox color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
@@ -179,12 +190,21 @@
                                             <q-item-section style="margin-left: 10px">
                                                 개인용 변수 선택
                                                 <!--선택한 값 적용-->
-                                                <div v-if="kt_select2_4.length>0" class="text-grey-8 q-gutter-xs">
-                                                    <span class="text-caption text-weight-bold" style="word-break: break-all" >{{kt_select2_4.join()}}</span>
-                                                </div>
+                                                <q-card v-if="kt_select2_4.length>0" class="my-card border q-mt-sm">
+                                                    <q-card-section class="q-pa-sm">
+                                                        <span class="  " style="word-break: break-all" >{{kt_select2_4.join(' ')}}</span>
+                                                    </q-card-section>
+                                                </q-card>
                                             </q-item-section>
                                         </template>
                                         <q-scroll-area style="height: 400px;">
+                                            <div class="row q-ma-lg">
+                                                <div class="full-width q-pa-sm q-pr-lg bg-grey-2  rounded-borders">
+                                                    <q-option-group @input="waveSelect3Chg()" v-model="waveSelect3" :options="waveSelect3Options" color="primary" inline/>
+                                                </div>
+                                            </div>
+
+
                                             <q-item v-for="(list, index) in kt_select2_4_data" :key="index"  tag="label" v-ripple>
                                                 <q-item-section avatar>
                                                     <q-checkbox  color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
@@ -651,6 +671,7 @@
       filesave:'Stata',
       filename:'',
       wave:[],
+
       add_h:'',
       add_p:'',
       kt_select2_3:[],
@@ -668,7 +689,7 @@
         ["h_asset_3_2", "임차보증금(범주형) (1=1천만원 미만, 2=1천 ~ 5천만원 미만, 3=5천 ~ 1억원 미만, 4=1억 ~ 5억원 미만, 5=5억 ~10억원 미만, 6=10억 이상) "],
         ["h_debt_total", "부채총액(임대보증금 포함) (단위: 만원)"], ["h_debt_pay", "부채상환액 (단위: 만원/월)"], ["h_eqscale_ori", "OECD 가구균등화지수_original"],
         ["h_eqscale_mod", "OECD 가구균등화지수_modified"], ["h_sample98", "98원가구여부 (1=98표본 원가구, 2=98표본 분가가구, 3=조사대상가구 아님)"],
-        ["h_sample09", "통합표본 원가구여부 (1=통합표본 원가구, 2=통합표본 분가가구, 3=조사대상 가구 아님)"], ["h_weight_1", "98표본 가구 가중치"], ["h_weight_2", "통합표본 가구 가중치"]
+        ["h_sample09", "09통합표본 원가구여부 (1=09통합표본 원가구, 2=09분가가구, 3=조사대상아님)"],["h_sample18", "18통합표본 원가구여부 (1=18통합표본 원가구, 2=18분가가구, 3=조사대상아님)"], ["h_weight_1", "98표본 가구 가중치"], ["h_weight_2", "09통합표본 가구 가중치"], ["h_weight_3", "18통합표본 가구 가중치"]
       ],
       kt_select2_4_data: [
         ["p_sex", "가구원 성별 (1=남자, 2=여자)"], ["p_age", "가구원 나이"], ["p_rel", "가구주와의 관계 KLIPS 코드북 참고"], ["p_edu", "교육수준 (1=무학, 2=고졸미만, 3=고졸, 4=전문대졸, 5=대졸이상)"],
@@ -679,8 +700,10 @@
         ["p_ind2007", "업종(한국표준산업준류 9차 개정: 2007년 code) KLIPS 코드북 참고"], ["p_ind2017", "업종(한국표준산업준류 10차 개정: 2017년 code) KLIPS 코드북 참고"],
         ["p_jobfam2000", "직종(한국표준직업분류 5차: 2000년 code) KLIPS 코드북 참고"], ["p_jobfam2007", "직종(한국표준직업분류 6차: 2007년 code) KLIPS 코드북 참고"],
         ["p_jobfam2017", "직종(한국표준직업분류 7차: 2017년 code) KLIPS 코드북 참고"], ["p_firm_size", "종업원규모(범주형) (1=10명미만, 2=10명~29명, 3=30명~99명, 4=100명~299명, 5=300명~499명, 6=500명이상)"],
-        ["p_job_begin", "취업시기(년도와 월)"], ["p_weight_1", "종단가중치(98표본)"], ["p_weight_2", "횡단가중치(98표본)"], ["p_weight_3", "종단가중치(통합표본)"], ["p_weight_4", "횡단가중치(통합표본)"],
-        ["p_sample98", "98원가구여부 (1=98표본 원가구, 2=98표본 분가가구, 3=조사대상가구 아님)"], ["p_sample09", "통합표본 원가구여부 (1=통합표본 원가구, 2=통합표본 분가가구, 3=조사대상 가구 아님)"],
+        ["p_job_begin", "취업시기(년도와 월)"], ["p_weight_1", "종단가중치(98표본)"],
+        ["p_weight_2", "횡단가중치(98표본)"], ["p_weight_3", "종단가중치(09통합표본)"], ["p_weight_4", "횡단가중치(09통합표본)"],["p_weight_5", "종단가중치(18통합표본)"],["p_weight_6", "횡단가중치(18통합표본)"],
+        ["p_sample98", "98원가구여부 (1=98표본 원가구, 2=98표본 분가가구, 3=조사대상가구 아님)"], ["p_sample09", "09통합표본 원가구여부 (1=09통합표본 원가구, 2=09분가가구, 3=조사대상아님)"],
+        ["p_sample18", "18통합표본 원가구여부 (1=18통합표본 원가구, 2=18분가가구, 3=조사대상아님)"],
       ],
 
       Stata:'Stata',
@@ -688,7 +711,7 @@
       Csv:'Csv',
       Sas:'',
       Spss:'',
-      waveCount:21,
+      waveCount:22,
       waveSelect:'',
       waveSelectOptions:[
         {
@@ -711,6 +734,30 @@
           label: '취소',
           value: 'cancel'
         }*/
+      ],
+
+      waveSelect2:'',
+      waveSelect2Options:[
+        {
+          label: '전체선택',
+          value: 'all'
+        },
+        {
+          label: '전체해제',
+          value: 'none'
+        }
+      ],
+
+      waveSelect3:'',
+      waveSelect3Options:[
+        {
+          label: '전체선택',
+          value: 'all'
+        },
+        {
+          label: '전체해제',
+          value: 'none'
+        }
       ],
       // 2번째 탭 검색
       searchResult:'',
@@ -741,6 +788,7 @@ mounted() {
   methods: {
     waveSelectChg(evt){
       if(this.waveSelect==='all') {
+        this.wave = [];
         for(let i=1; i<= this.waveCount; i++) {
           this.wave.push(this.waveLabel(i))
         }
@@ -762,6 +810,30 @@ mounted() {
         for(let i=this.waveCount; i> this.waveCount-10; i--) {
           this.wave.push(this.waveLabel(i))
         }
+      }
+    },
+
+    waveSelect2Chg(evt){
+      if(this.waveSelect2==='all') {
+        this.kt_select2_3 = [];
+        for(let i=0; i< this.kt_select2_3_data.length; i++) {
+          this.kt_select2_3.push(this.kt_select2_3_data[i][0])
+        }
+      }
+      else if(this.waveSelect2==='none') {
+        this.kt_select2_3 = [];
+      }
+    },
+    waveSelect3Chg(evt){
+      if(this.waveSelect3==='all') {
+        this.kt_select2_4 = [];
+
+        for(let i=0; i< this.kt_select2_4_data.length; i++) {
+          this.kt_select2_4.push(this.kt_select2_4_data[i][0])
+        }
+      }
+      else if(this.waveSelect3==='none') {
+        this.kt_select2_4 = [];
       }
     },
     onSubmit(evt) {
