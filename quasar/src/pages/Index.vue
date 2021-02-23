@@ -9,6 +9,7 @@
                         <div class="col-3">
                             <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
                                 <!--<q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" ></q-icon>-->
+<!--
 
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                      width="101.333px" height="46.224px" viewBox="0 0 101.333 46.224" enable-background="new 0 0 101.333 46.224"
@@ -73,8 +74,9 @@
 	c0,2.39-0.914,4.329-2.742,5.817S93.303,26.293,90,26.293c-1.43,0-2.782-0.176-4.06-0.527s-2.414-0.896-3.41-1.635
 	s-1.781-1.675-2.355-2.813c-0.574-1.137-0.861-2.454-0.861-3.954H84.657z"/>
 </svg>
+-->
 
-                                <!--<q-img class="" src="~assets/logo.svg" ></q-img>-->
+                                <q-img class="" src="~assets/logov2.png" style="max-width: 140px"></q-img>
                             </a>
                         </div>
 
@@ -117,7 +119,7 @@
                                                 <!--선택한 값 적용-->
                                                 <q-card v-if="wave.length>0" class="my-card border q-mt-sm">
                                                     <q-card-section class="q-pa-sm">
-                                                        <span class="  " style="word-break: break-all" >{{wave.join(' ')}}</span>
+                                                        <span class="  " style="word-break: break-all" >{{wave.join('&nbsp;&nbsp;')}}</span>
                                                     </q-card-section>
                                                 </q-card>
                                             </q-item-section>
@@ -155,7 +157,7 @@
                                                 <!--선택한 값 적용-->
                                                 <q-card v-if="kt_select2_3.length>0" class="my-card border q-mt-sm">
                                                     <q-card-section class="q-pa-sm">
-                                                        <span class="  " style="word-break: break-all" >{{kt_select2_3.join(' ')}}</span>
+                                                        <span class="  " style="word-break: break-all; color: black" >{{kt_select2_3.join('&nbsp;&nbsp;&nbsp;')}}</span>
                                                     </q-card-section>
                                                 </q-card>
                                             </q-item-section>
@@ -192,7 +194,7 @@
                                                 <!--선택한 값 적용-->
                                                 <q-card v-if="kt_select2_4.length>0" class="my-card border q-mt-sm">
                                                     <q-card-section class="q-pa-sm">
-                                                        <span class="  " style="word-break: break-all" >{{kt_select2_4.join(' ')}}</span>
+                                                        <span class="  " style="word-break: break-all; color: black" >{{kt_select2_4.join('&nbsp;&nbsp;&nbsp;')}}</span>
                                                     </q-card-section>
                                                 </q-card>
                                             </q-item-section>
@@ -689,19 +691,22 @@
         ["h_asset_3_2", "임차보증금(범주형) (1=1천만원 미만, 2=1천 ~ 5천만원 미만, 3=5천 ~ 1억원 미만, 4=1억 ~ 5억원 미만, 5=5억 ~10억원 미만, 6=10억 이상) "],
         ["h_debt_total", "부채총액(임대보증금 포함) (단위: 만원)"], ["h_debt_pay", "부채상환액 (단위: 만원/월)"], ["h_eqscale_ori", "OECD 가구균등화지수_original"],
         ["h_eqscale_mod", "OECD 가구균등화지수_modified"], ["h_sample98", "98원가구여부 (1=98표본 원가구, 2=98표본 분가가구, 3=조사대상가구 아님)"],
-        ["h_sample09", "09통합표본 원가구여부 (1=09통합표본 원가구, 2=09분가가구, 3=조사대상아님)"],["h_sample18", "18통합표본 원가구여부 (1=18통합표본 원가구, 2=18분가가구, 3=조사대상아님)"], ["h_weight_1", "98표본 가구 가중치"], ["h_weight_2", "09통합표본 가구 가중치"], ["h_weight_3", "18통합표본 가구 가중치"]
+        ["h_sample09", "09통합표본 원가구여부 (1=09통합표본 원가구, 2=09분가가구, 3=조사대상아님)"],["h_sample18", "18통합표본 원가구여부 (1=18통합표본 원가구, 2=18분가가구, 3=조사대상아님)"],
+        ["h_weight98", "98표본 가구 가중치"], ["h_weight09", "09통합표본 가구 가중치"], ["h_weight18", "18통합표본 가구 가중치"]
       ],
       kt_select2_4_data: [
         ["p_sex", "가구원 성별 (1=남자, 2=여자)"], ["p_age", "가구원 나이"], ["p_rel", "가구주와의 관계 KLIPS 코드북 참고"], ["p_edu", "교육수준 (1=무학, 2=고졸미만, 3=고졸, 4=전문대졸, 5=대졸이상)"],
         ["p_religion", "종교 (1=무교, 2=불교, 3=기독교(개신교), 4=천주교, 5~10: KLIPS 코드북 참고)"], ["p_married", "가구원 혼인상태 (1=미혼, 2=기혼유배우, 3=기혼무배우)"],
-        ["p_region", "거주지역(16개시도, 19=세종시) KLIPS 코드북참고"], ["p_econstat", "ILO기준경제활동 (1=취업자, 2=ILO기준실업자, 3=비경제활동자)"], ["p_job_type", "임금근로자 여부 (1=임금근로자, 2=비임금근로자)"],
+        ["p_region", "거주지역(16개시도, 19=세종시) KLIPS 코드북참고"], ["p_econstat", "ILO기준경제활동 (1=취업자, 2=ILO기준실업자, 3=비경제활동자)"], ["p_jobtype", "임금근로자 여부 (1=임금근로자, 2=비임금근로자)"],
         ["p_wage", "월평균 임금 또는 소득 (단위: 만원)"], ["p_hours", "주당 평균근로시간(임금근로자)"], ["p_employ_type", "취업형태 (1=임금근로자, 2=자영업, 3=무급가족종사자)"],
         ["p_job_status", "종사상지위 (1=상용직, 2=임시직, 3=일용직, 4=고용주/자영업자, 5=무급가족 종사자)"], ["p_ind2000", "업종(한국표준산업분류8차 개정:2000년 code) KLIPS 코드북 참고"],
         ["p_ind2007", "업종(한국표준산업준류 9차 개정: 2007년 code) KLIPS 코드북 참고"], ["p_ind2017", "업종(한국표준산업준류 10차 개정: 2017년 code) KLIPS 코드북 참고"],
         ["p_jobfam2000", "직종(한국표준직업분류 5차: 2000년 code) KLIPS 코드북 참고"], ["p_jobfam2007", "직종(한국표준직업분류 6차: 2007년 code) KLIPS 코드북 참고"],
         ["p_jobfam2017", "직종(한국표준직업분류 7차: 2017년 code) KLIPS 코드북 참고"], ["p_firm_size", "종업원규모(범주형) (1=10명미만, 2=10명~29명, 3=30명~99명, 4=100명~299명, 5=300명~499명, 6=500명이상)"],
-        ["p_job_begin", "취업시기(년도와 월)"], ["p_weight_1", "종단가중치(98표본)"],
-        ["p_weight_2", "횡단가중치(98표본)"], ["p_weight_3", "종단가중치(09통합표본)"], ["p_weight_4", "횡단가중치(09통합표본)"],["p_weight_5", "종단가중치(18통합표본)"],["p_weight_6", "횡단가중치(18통합표본)"],
+        ["p_job_begin", "취업시기(년도와 월)"],
+        ["p_weight98_l", "종단가중치(98통합표본)"],["p_weight98_c", "횡단가중치(98통합표본)"],
+        ["p_weight09_l", "종단가중치(09통합표본)"],["p_weight09_c", "횡단가중치(09통합표본)"],
+        ["p_weight18_l", "종단가중치(18통합표본)"],["p_weight18_c", "횡단가중치(18통합표본)"],
         ["p_sample98", "98원가구여부 (1=98표본 원가구, 2=98표본 분가가구, 3=조사대상가구 아님)"], ["p_sample09", "09통합표본 원가구여부 (1=09통합표본 원가구, 2=09분가가구, 3=조사대상아님)"],
         ["p_sample18", "18통합표본 원가구여부 (1=18통합표본 원가구, 2=18분가가구, 3=조사대상아님)"],
       ],
@@ -963,6 +968,9 @@ mounted() {
   }
 }</script>
 <style>
+    #q-app {
+        font-size: 16px;
+    }
 /*    .itemSectionWave {
         padding-right: 0;
     }*/
