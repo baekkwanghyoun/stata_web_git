@@ -22,6 +22,9 @@ Route::get('/', function () {
 ///////////////////////////////////////////////////////////////////////////
 /// STata
 ///////////////////////////////////////////////////////////////////////////
+
+Route::get('/chart', [StataController::class, 'chart'])->name('chart.index');
+
 Route::get('/quasar', [StataController::class, 'quasar'])->name('quasar.index');
 Route::get('/klips/smartklips', [StataController::class, 'quasar'])->name('quasar.index');
 Route::get('/klips/smartklips.do', [StataController::class, 'quasar'])->name('quasar.index');

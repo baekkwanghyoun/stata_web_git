@@ -171,7 +171,7 @@
 
                                             <q-item v-for="(list, index) in kt_select2_3_data" :key="index" tag="label" v-ripple>
                                                 <q-item-section avatar>
-                                                    <q-checkbox color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
+                                                    <q-checkbox @input="waveSelect2DataChg()" color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
                                                 </q-item-section>
                                                 <q-item-section>
                                                     <q-item-label>{{list[0]}}</q-item-label>
@@ -209,7 +209,7 @@
 
                                             <q-item v-for="(list, index) in kt_select2_4_data" :key="index"  tag="label" v-ripple>
                                                 <q-item-section avatar>
-                                                    <q-checkbox  color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
+                                                    <q-checkbox  @input="waveSelect3DataChg()" color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
                                                 </q-item-section>
                                                 <q-item-section>
                                                     <q-item-label>{{list[0]}}</q-item-label>
@@ -246,7 +246,7 @@
                                                     </div>
                                                     <div class="col-8">
                                                         <q-item-section>
-                                                            <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력      예1) h0141      예2) h0141 h0142"  />
+                                                            <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_h" style=""  placeholder="추가할 변수를 입력 하세요. 예1) h0141      예2) h0141 h0142"  />
                                                         </q-item-section>
                                                     </div>
                                                 </q-item>
@@ -258,7 +258,7 @@
                                                     </div>
                                                     <div class="col-8">
                                                         <q-item-section>
-                                                            <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력      예1) p0101      예2) p0141 p0102"  />
+                                                            <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_p" style=""  placeholder="추가할 변수를 입력 하세요. 예1) p0101      예2) p0141 p0102"  />
                                                         </q-item-section>
                                                     </div>
                                                 </q-item>
@@ -454,7 +454,7 @@
                                                     </div>
                                                     <div class="col-8">
                                                         <q-item-section>
-                                                            <q-input outlined dense v-model="word" style=""  placeholder="검색할 단어를 입력하세요."  />
+                                                            <q-input outlined dense v-model="word" style=""  placeholder="검색할 단어를 입력하세요. 예) 소득"  />
                                                         </q-item-section>
                                                     </div>
                                                 </q-item>
@@ -829,6 +829,9 @@ mounted() {
         this.kt_select2_3 = [];
       }
     },
+    waveSelect2DataChg(evt) {
+      this.waveSelect2='';
+    },
     waveSelect3Chg(evt){
       if(this.waveSelect3==='all') {
         this.kt_select2_4 = [];
@@ -841,12 +844,17 @@ mounted() {
         this.kt_select2_4 = [];
       }
     },
+    waveSelect3DataChg(evt) {
+      this.waveSelect3='';
+    },
     onSubmit(evt) {
       console.log('@submit - do something here', evt)
       //Notify.create({message: e.message, type: 'negative', html: true})
       this.saveFile()
     },
     searchInit(){
+      this.waveSelect2=''
+      this.waveSelect3=''
       this.kt_select2_3 = [];
       this.kt_select2_4 = [];
       this.add_h = '',
