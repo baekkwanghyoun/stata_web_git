@@ -227,13 +227,14 @@
                                             <q-item-section style="margin-left: 10px">
                                                 추가 변수 입력
                                                 <!--선택한 값 적용-->
+                                                <!--
                                                 <div v-if="add_h" class="text-grey-8 q-gutter-xs q-mb-sm">
                                                     <span class="text-caption text-weight-bold " style="word-break: break-all" >가구용:{{add_h}}</span>
                                                 </div>
 
                                                 <div v-if="add_p" class="text-grey-8 q-gutter-xs">
                                                     <span class="text-caption text-weight-bold" style="word-break: break-all" >개인용:{{add_p}}</span>
-                                                </div>
+                                                </div>-->
                                             </q-item-section>
                                         </template>
                                         <div class="row">
