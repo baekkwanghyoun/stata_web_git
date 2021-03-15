@@ -76,7 +76,7 @@
 </svg>
 -->
 
-                                <q-img class="" src="~assets/logov2.png" style="max-width: 140px"></q-img>
+                                <q-img class="" src="~assets/logo1.png" style="max-width: 140px" ></q-img>
                             </a>
                         </div>
 
@@ -650,6 +650,10 @@
                                     </q-card>
                                 </q-expansion-item>
                             </q-list>
+                            <div class="q-pt-lg  vertical-middle">
+                                한국노동패널조사에 대하여 문의해주세요.
+                                <q-btn @click="openURL('mailto:klips@kli.re.kr')" target="_blank" icon="mail"  class="q-ml-lg" type="submit" color="primary" label="문의하기" />
+                            </div>
                         </q-tab-panel>
                     </q-tab-panels>
                 </q-card>
@@ -660,6 +664,7 @@
 
 <script>
   import exeption from 'src/store/exception'
+  import {openURL} from 'quasar'
   import { Loading } from 'quasar'
   import Api from 'src/apis/Api'
   import Swal from 'sweetalert2'
@@ -792,6 +797,7 @@ mounted() {
     })*/
 },
   methods: {
+    openURL,
     waveSelectChg(evt){
       if(this.waveSelect==='all') {
         this.wave = [];
