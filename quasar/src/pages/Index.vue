@@ -157,7 +157,10 @@
                                                     <q-badge color="green-6" align="middle" class="q-mr-sm">1</q-badge>
                                                     가구용 가공 변수 선택
                                                     <q-badge v-if="kt_select2_3.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-sm"></q-icon> 선택완료
+                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택완료
+                                                    </q-badge>
+                                                    <q-badge v-else class="q-ml-md" color="warning" align="middle" >
+                                                        <q-icon name="search_off" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택안함
                                                     </q-badge>
                                                 </q-item-label>
 
@@ -203,7 +206,11 @@
                                                     <q-badge color="blue" align="middle" class="q-mr-sm">2</q-badge>
                                                     개인용 가공 변수 선택
                                                     <q-badge v-if="kt_select2_4.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-sm"></q-icon> 선택완료
+                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택완료
+                                                    </q-badge>
+                                                    <!--privacy_tip-->
+                                                    <q-badge v-else  class="q-ml-md" color="warning" align="middle" >
+                                                        <q-icon name="search_off" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택안함
                                                     </q-badge>
                                                 </q-item-label>
 
@@ -245,7 +252,10 @@
                                                     <q-badge color="black" align="middle" class="q-mr-sm">3</q-badge>
                                                     KLIPS 원자료 변수 추가
                                                     <q-badge v-if="add_h.length>0 || add_p.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-sm"></q-icon> 선택완료
+                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택완료
+                                                    </q-badge>
+                                                    <q-badge v-else class="q-ml-md" color="warning" align="middle" >
+                                                        <q-icon name="search_off" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택안함
                                                     </q-badge>
                                                 </q-item-label>
 
@@ -286,8 +296,7 @@
                                                         </q-item-section>
                                                     </div>
                                                 </q-item>
-                                                <q-item-label class="q-pl-lg" caption> 추가할 KLIPS 원자료 변수를 입력할 때는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다.
-
+                                                <q-item-label class="q-pl-lg" caption> 추가할 KLIPS 원자료 변수를 입력할 때는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다. 예) h202145 -> h2145 또는 p210101  p210102 -> p0101  p0102
                                                     <!--<span class="text-red text-bold">(선택사항)</span>-->
                                                 </q-item-label>
                                                <!-- <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
