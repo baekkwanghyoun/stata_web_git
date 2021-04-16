@@ -537,10 +537,10 @@ smart_klips 명령어
 			
     /*=============================================================================*/	
     if "`save'"==""  & "`excel'"=="excel" {
-                        export excel using "klips_final_add.xlsx", replace first(variable)	
+        export excel using "klips_final_add.xlsx", replace first(variable)	
     }
     if "`save'"==""  &  "`csv'"=="csv" {
-                        export delimited using "klips_final_add.csv", replace 
+        export delimited using "klips_final_add.csv", replace 
     }
 
 
@@ -579,26 +579,19 @@ smart_klips 명령어
     drop if vname==""
     quietly {
         if "`save'"=="" {
-            if "`excel'"=="excel" {
-                export excel using "klips_final_codebook.xlsx", replace first(variable)    
-            }
-            if "`csv'"=="csv" {
-                export delimited using "klips_final_var.csv", replace 
-                unicode convertfile klips_final_var.csv klips_final_var_1.csv, dstencoding(cp949) replace
-                capture erase klips_final_var.csv
-                shell ren klips_final_var_1.csv klips_final_codebook.csv
-            }
+            export excel using "klips_final_codebook.xlsx", replace first(variable)    
+            export delimited using "klips_final_var.csv", replace 
+            unicode convertfile klips_final_var.csv klips_final_var_1.csv, dstencoding(cp949) replace
+            capture erase klips_final_var.csv
+            shell ren klips_final_var_1.csv klips_final_codebook.csv
         }
         if "`save'" ~= "" {
-            if "`excel'"=="excel" {
-                export excel using "`save'_codebook.xlsx", replace first(variable)    
-            }
-            if "`csv'"=="csv" {
-                export delimited using "`save'_var.csv", replace 
-                unicode convertfile `save'_var.csv `save'_var_1.csv, dstencoding(cp949) replace
-                capture erase `save'_var.csv
-                shell ren `save'_var_1.csv `save'_codebook.csv
-            }
+            export excel using "`save'_codebook.xlsx", replace first(variable)    
+            export delimited using "`save'_var.csv", replace 
+            unicode convertfile `save'_var.csv `save'_var_1.csv, dstencoding(cp949) replace
+            shell rename `save'_var_1.csv `save'_codebook.csv
+            capture erase `save'_var.csv
+            capture erase `save'_var_1.csv
         }
     }
     snapshot restore `snum300'
@@ -624,57 +617,40 @@ smart_klips 명령어
     capture erase klips_add_a20.dta
     capture	erase klips_add_a21.dta
     capture	erase klips_add_a22.dta
+    
     if "`save'" ~= "" {
         if "`csv'"==""  &  "`excel'"=="" {
-            zipfile    "`save'*.dta", saving ("`save'.zip", replace )
-        }
-        else if "`csv'"=="csv"  &  "`excel'"=="excel" {
+            zipfile    "`save'*.*", saving ("`save'.zip", replace )
+            capture    erase "`save'.dta"
+        } 
+        if "`csv'"~=""  ||  "`excel'"~="" {
             capture    erase "`save'.dta"
             zipfile    "`save'*.*", saving ("`save'.zip", replace )
-            capture    erase "`save'.xlsx"
-            capture    erase "`save'_codebook.xlsx"
-            capture    erase "`save'.codebook"
-            capture    erase "`save'_codebook.csv"
         }
-        else if "`excel'"=="excel" {
-            zipfile    "`save'*.xlsx", saving ("`save'.zip", replace )
-            capture    erase "`save'.xlsx"
-            capture    erase "`save'_codebook.xlsx"
-        }
-        else if "`csv'"=="csv" {
-            zipfile    "`save'*.csv", saving ("`save'.zip", replace )
-            capture    erase "`save'.csv"
-            capture    erase "`save'_codebook.csv"
-        }
-        capture    erase "`save'.dta"
+        capture    erase "`save'.xlsx"
+        capture    erase "`save'_codebook.xlsx"
+        capture    erase "`save'.csv"
+        capture    erase "`save'_codebook.csv"
+        capture    erase klips_final.dta
     } 
 
     if "`save'" == "" {
+        capture    erase "klips_final_add.dta"
         if "`csv'"==""  &  "`excel'"=="" {
-            zipfile    "klips_final.dta", saving ("klips_final.zip", replace )
+            zipfile    "klips_final*.*", saving ("klips_final.zip", replace )
+            capture    erase "klips_final.dta"
         }
-        else if "`csv'"=="csv"  &  "`excel'"=="excel" {
+        if "`csv'"~=""  ||  "`excel'"~="" {
             capture    erase "klips_final.dta"
             zipfile    "klips_final*.*", saving ("klips_final.zip", replace )
-            capture    erase "klips_final.xlsx"
-            capture    erase "klips_final_codebook.xlsx"
-            capture    erase "klips_final.csv"
-            capture    erase "klips_final_codebook.csv"
         }
-        else if "`excel'"=="excel" {
-            zipfile    "klips_final.xlsx", saving ("klips_final.zip", replace )
-            capture    erase "klips_final.xlsx"
-            capture    erase "klips_final_codebook.xlsx"
-        }
-        else if "`csv'"=="csv" {
-            zipfile    "klips_final.csv", saving ("klips_final.zip", replace )
-            capture    erase "klips_final.csv"
-            capture    erase "klips_final_codebook.csv"
-        }
-        capture    erase "klips_final.dta"
+        capture    erase "klips_final.xlsx"
+        capture    erase "klips_final_add.xlsx"
+        capture    erase "klips_final_codebook.xlsx"
+        capture    erase "klips_final.csv"
+        capture    erase "klips_final_add.csv"
+        capture    erase "klips_final_codebook.csv"
     }
-
-    capture    erase klips_final.dta
 end
 
 	

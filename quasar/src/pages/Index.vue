@@ -152,7 +152,7 @@
                                                 <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
                                             </q-item-section>
                                             <q-item-section  color="primary" >
-                                                <q-item-label caption>가구용 또는 개인용 가공 변수를 반드시 하나 이상 선택해야 합니다.</q-item-label>
+                                                <q-item-label class="text-black text-bold"  caption>가구용 또는 개인용 가공 변수를 반드시 하나 이상 선택해야 합니다.</q-item-label>
                                                 <q-item-label >
                                                     <q-badge color="green-6" align="middle" class="q-mr-sm">1</q-badge>
                                                     가구용 가공 변수 선택
@@ -280,7 +280,7 @@
                                                     </div>
                                                     <div class="col-8">
                                                         <q-item-section>
-                                                            <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_h" style=""  placeholder="추가할 변수를 입력 하세요. 예1) h0141      예2) h0141 h0142"  />
+                                                            <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_h" style=""  placeholder="추가할 변수를 입력 하세요. 예1) h0141      예2) h0151 h0152"  />
                                                         </q-item-section>
                                                     </div>
                                                 </q-item>
@@ -292,11 +292,11 @@
                                                     </div>
                                                     <div class="col-8">
                                                         <q-item-section>
-                                                            <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_p" style=""  placeholder="추가할 변수를 입력 하세요. 예1) p0101      예2) p0141 p0102"  />
+                                                            <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_p" style=""  placeholder="추가할 변수를 입력 하세요. 예1) p0101      예2) p0201 p0202"  />
                                                         </q-item-section>
                                                     </div>
                                                 </q-item>
-                                                <q-item-label class="q-pl-lg" caption> 추가할 KLIPS 원자료 변수를 입력할 때는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다. 예) h202145 -> h2145 또는 p210101  p210102 -> p0101  p0102
+                                                <q-item-label class="q-pl-lg text-black text-bold" caption> 추가할 KLIPS 원자료 변수를 입력할 때는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다. 예) h220141 -> h0141 또는 p220201 p220202 -> p0201 p0202
                                                     <!--<span class="text-red text-bold">(선택사항)</span>-->
                                                 </q-item-label>
                                                <!-- <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
@@ -391,7 +391,7 @@
                                                     <q-space></q-space>
                                                 </q-item>
                                                 -->
-                                                <q-item-label class="q-pl-md q-mb-lg" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
+                                                <q-item-label class="q-pl-md q-mb-lg text-black text-bold" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
 
 
 
@@ -563,7 +563,7 @@
 
                                         <div class="q-mb-xl">
                                             <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 KLIPS 원변수 변수 추가(필수 아님)</p>
-                                            <p class="text-body2" style="white-space: pre-wrap;">사용자가 원하는 임의의 Klips 원변수를 추가하여 데이터를 생성할 수 있습니다.<br>가구용, 개인용 변수를 구분하여 입력란에 넣으면 그 변수를 포함한 데이터가 생성됩니다.<br>변수 입력시에는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다.<br>단, 변수를 여러 개 입력시 변수간에는 공백으로 구분하면 됩니다.
+                                            <p class="text-body2" style="white-space: pre-wrap;">사용자가 원하는 임의의 KLIPS 원변수를 추가하여 데이터를 생성할 수 있습니다.<br>가구용, 개인용 변수를 구분하여 입력란에 넣으면 그 변수를 포함한 데이터가 생성됩니다.<br>변수 입력시에는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다.<br>단, 변수를 여러 개 입력시 변수간에는 공백으로 구분하면 됩니다.
                                             </p>
                                             <q-card bordered  flat>
                                                 <q-card-section>
@@ -645,7 +645,11 @@
 
                                 <q-expansion-item group="somegroup"  switch-toggle-side  label="질문 1) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
                                     <q-card>
-                                        <q-card-section>Stata 버전 14 이상에서만 사용이 가능합니다.<br>Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터를 추출한 후, 해당 프로그램에서 데이터를 불러오시기 바랍니다.</q-card-section>
+                                        <q-card-section style="white-space: pre-wrap;">Stata 버전 14 이상에서만 사용이 가능합니다.
+
+Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터를 추출한 후,
+
+해당 프로그램에서 데이터를 불러오시기 바랍니다.</q-card-section>
                                     </q-card>
                                 </q-expansion-item>
                                 <q-separator />
