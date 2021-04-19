@@ -596,7 +596,7 @@ smart_klips 명령어
     }
     snapshot restore `snum300'
     /*=====================================================================*/
-					
+
     capture	erase klips_h_final.dta 
     capture	erase klips_p_final.dta 	
     capture	erase klips_add_h.dta
