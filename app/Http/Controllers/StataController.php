@@ -84,8 +84,6 @@ class StataController extends Controller
         else {
             return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=68&key=414');
         }
-
-
     }
 
     public function index()
@@ -279,7 +277,7 @@ class StataController extends Controller
         } else {
             $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/do/${nowDate}/${filename_req}.do");
         }
-
+        /*C:/stata/isstata/Stata.exe /e  do "C:\www\stata_web_git\public\stata16\do\20210419\test222.do"*/
         Storage::move($filename_req.'.log', 'stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 
 

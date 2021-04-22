@@ -14,9 +14,15 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', [StataController::class, 'quasar'])->name('quasar.index');
+
+
+/*
+Route::get('/khp', [StataController::class, 'khp'])->name('khp');*/
 
 
 ///////////////////////////////////////////////////////////////////////////

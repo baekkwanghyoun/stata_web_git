@@ -1,5 +1,15 @@
 const routes = [
     {
+        path: '/khp', // http://localhost:8083/klips/
+        component: () => import('layouts/MainLayout.vue'),
+        children: [
+            {
+                path: '',
+                component: () => import('pages/Khp.vue')
+            }
+        ]
+    },
+    {
         path: '/', // http://localhost:8083/klips/
         component: () => import('layouts/MainLayout.vue'),
         children: [
