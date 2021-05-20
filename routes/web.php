@@ -40,7 +40,7 @@ Route::get('/stata', [StataController::class, 'index'])->name('stata.index');
 Route::get('/stata2', [StataController::class, 'index2']);
 Route::get('/stata/create', [StataController::class, 'create'])->name('stata.create');
 Route::post('/stata/store', [StataController::class, 'store'])->name('stata.store');
-Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('stata.storeKlips');
+Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('stata.storeKlips'); //storeKlipsapi api라우터에서 대체 처리
 
 /*Route::get('/stata/create', function () {
     return view('welcome');

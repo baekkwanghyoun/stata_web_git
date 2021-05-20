@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -167,6 +168,7 @@ class StataController extends Controller
     }*/
 
 
+    /* 실 api 호출 */
     public function storeKlips(Request $request)
     {
 
@@ -222,7 +224,11 @@ class StataController extends Controller
         $hp = request('hp');
         $word = request('word');
 
-        $filesave = implode(" ", request('filesave'));
+        $arFile = request('filesave')??[];
+        $arFile = Arr::where($arFile, function ($val, $key) {
+           return $key != 'Stata';
+        });
+        $filesave = implode(" ", $arFile);
 
         $filesaveVal = strtolower($filesave);
         /*if($filesave=='Excel') {
@@ -416,6 +422,7 @@ class StataController extends Controller
         $add_p = $add_p!=''?" add_p({$add_p})":'';
 
     }
+
     /* 사용 안함 : storeKlips로 합침  */
     public function storeKlipsApi(Request $request)
     {
