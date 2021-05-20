@@ -374,11 +374,11 @@
                                                 <q-item class="row items-center">
                                                     <div class="col">
                                                         파일타입 :
-                                                        <q-radio v-model="filesave" val="Stata" label="STATA(*.dta)" />
-                                                        <q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
-                                                        <q-radio v-model="filesave" val="Csv" label="Text(*.csv)" />
-                                                        <q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
-                                                        <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>
+                                                        <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" />
+                                                        <q-checkbox v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
+                                                        <q-checkbox v-model="filesave" val="Csv" label="Text(*.csv)" />
+                                                        <!--<q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
+                                                        <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>-->
                                                     </div>
                                                 </q-item>
         <!--
@@ -391,7 +391,7 @@
                                                     <q-space></q-space>
                                                 </q-item>
                                                 -->
-                                                <q-item-label class="q-pl-md q-mb-lg text-black text-bold" caption>다른 저장 포맷은 추후 지원예정</q-item-label>
+                                                <q-item-label class="q-pl-md q-mb-lg text-black text-bold" caption>다른 저장 포멧(SAS, SPSS)은 추후 지원예정</q-item-label>
 
 
 
@@ -697,7 +697,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       expansionSearchResult:false,
       tab: 'create', //'',
       color: 'cyan',
-      filesave:'Stata',
+      filesave:['Stata'],
       filename:'',
       wave:[],
 
@@ -906,7 +906,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       this.add_h = '',
       this.add_p = '',
       this.filename = '',
-      this.filesave = 'Stata',
+      this.filesave = ['Stata'],
       this.wave=false;
       this.waveSelect=null;
       this.waveSelect='';

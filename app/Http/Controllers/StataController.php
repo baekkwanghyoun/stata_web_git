@@ -81,8 +81,11 @@ class StataController extends Controller
         if($result || request()->getHttpHost()=='stataweb.test:9011') {
             return view('quasar');
         }
+        else if(Str::contains($referer, 'kli.re.kr')) {
+            return view('quasar');
+        }
         else {
-            return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=68&key=414');
+            return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');
         }
     }
 
@@ -219,13 +222,14 @@ class StataController extends Controller
         $hp = request('hp');
         $word = request('word');
 
-        $filesave = request('filesave');
-        $filesaveVal = '';
-        if($filesave=='Excel') {
+        $filesave = implode(request('filesave'), " ");
+
+        $filesaveVal = strtolower($filesave);
+        /*if($filesave=='Excel') {
             $filesaveVal = ' excel';
         } else if($filesave=='Csv') {
             $filesaveVal = ' csv';
-        }
+        }*/
         // 임시로 전부 저장
         //$filesaveVal = ' excel  csv';
         $add_h = request('add_h', '');
@@ -391,7 +395,8 @@ class StataController extends Controller
         $add_p = '';
         foreach ($ar_add_p as $item_p) {
             if (strlen($item_p) == 7 && is_numeric(substr($item_p, 1,2))  ) {
-                $add_p = $add_p.' '.substr($item_p, 0,2).substr($item_p, 3,strlen($item_p));
+                $add_p = $add_p.' '.substr($item_p, 0,1).substr($item_p, 3,strlen($item_p));
+                //$add_p = $add_p.' '.substr($item_p, 0,2).substr($item_p, 3,strlen($item_p));
             }
             ///////////////////////////////////////////////////////////////////////////////////////////
             // pa215101 : 8자리수에 둘째글자 까지가 pa로 시작하면서 3,4번째 글자가 숫자일경우 체크
