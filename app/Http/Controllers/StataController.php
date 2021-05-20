@@ -222,7 +222,7 @@ class StataController extends Controller
         $hp = request('hp');
         $word = request('word');
 
-        $filesave = implode(request('filesave'), ",");
+        $filesave = implode(" ", request('filesave'));
 
         $filesaveVal = strtolower($filesave);
         /*if($filesave=='Excel') {
