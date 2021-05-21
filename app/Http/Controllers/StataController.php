@@ -76,6 +76,8 @@ class StataController extends Controller
         $acceptDomain = ['http://stataweb.test:9011/','http://jat.co.kr/', 'https://www.kli.re.kr/', 'http://designblue.NONO/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
         $referer = request()->headers->get('referer');
+        $this->remotelog($referer);
+
         //dd($referer);
         $result = in_array($referer, $acceptDomain);
 
@@ -88,6 +90,23 @@ class StataController extends Controller
         else {
             return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');
         }
+    }
+
+    public function remotelog($v)
+    {
+        $url = 'http://designblue.ca/api/log';
+        $data = array('log' => $v);
+
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === FALSE) { /* Handle error */ }
     }
 
     public function index()

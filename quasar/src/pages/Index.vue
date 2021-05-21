@@ -374,7 +374,7 @@
                                                 <q-item class="row items-center">
                                                     <div class="col">
                                                         파일타입 :
-                                                        <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" />
+                                                        <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" disable/>
                                                         <q-checkbox v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
                                                         <q-checkbox v-model="filesave" val="Csv" label="Text(*.csv)" />
                                                         <!--<q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
