@@ -581,17 +581,14 @@ smart_klips 명령어
         if "`save'"=="" {
              export excel using "klips_final_codebook.xlsx", replace first(variable)
              export delimited using "klips_final_var.csv", replace
-             unicode convertfile klips_final_var.csv klips_final_var_1.csv, dstencoding(cp949) replace
+             unicode convertfile klips_final_var.csv klips_final_codebook.csv, dstencoding(cp949) replace
              capture erase klips_final_var.csv
-             shell ren klips_final_var_1.csv klips_final_codebook.csv
         }
         if "`save'" ~= "" {
              export excel using "`save'_codebook.xlsx", replace first(variable)
              export delimited using "`save'_var.csv", replace
-             unicode convertfile `save'_var.csv `save'_var_1.csv, dstencoding(cp949) replace
-             shell rename `save'_var_1.csv `save'_codebook.csv
-             capture erase `save'_var.csv
-             capture erase `save'_var_1.csv
+             unicode convertfile "`save'_var.csv" "`save'_codebook.csv", dstencoding(cp949) replace
+             capture erase "`save'_var.csv"
         }
     }
    /* ==================================================================================
@@ -627,6 +624,9 @@ smart_klips 명령어
     * ================================================================================== */
     quietly {
         if "`save'" ~= "" {
+            if "`csv'"=="" {
+                
+            }
             zipfile    "`save'.dta" "`save'.xlsx" "`save'.csv" "`save'_codebook.xlsx" "`save'_codebook.csv", saving ("`save'.zip", replace )
             capture    erase "`save'.dta"
             capture    erase "`save'.xlsx"
