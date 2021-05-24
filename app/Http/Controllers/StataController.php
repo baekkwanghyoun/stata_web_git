@@ -84,6 +84,9 @@ class StataController extends Controller
         if($result || request()->getHttpHost()=='stataweb.test:9011') {
             return view('quasar');
         }
+        else if(Str::contains($referer, 'jat.co.kr')) {
+            return view('quasar');
+        }
         else if(Str::contains($referer, 'kli.re.kr')) {
             return view('quasar');
         }
