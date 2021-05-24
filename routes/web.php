@@ -32,6 +32,12 @@ Route::get('/khp', [StataController::class, 'khp'])->name('khp');*/
 Route::get('/chart', [StataController::class, 'chart'])->name('chart.index');
 
 Route::get('/quasar', [StataController::class, 'quasar'])->name('quasar.index');
+Route::get('/klipstest', function () {
+    return view('stata.klipstest');
+});
+
+
+
 Route::get('/klips/smartklips', [StataController::class, 'quasar'])->name('quasar.index');
 Route::get('/klips/smartklips.do', [StataController::class, 'quasar'])->name('quasar.index');
 //Route::get('/klips/smartklips', [StataController::class, 'quasar'])->name('quasar.index');
