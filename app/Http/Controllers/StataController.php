@@ -78,7 +78,7 @@ class StataController extends Controller
         $referer = request()->headers->get('referer');
         $this->remotelog($referer);
 
-        //dd($referer);
+        dd($referer);
         $result = in_array($referer, $acceptDomain);
 
         if($result || request()->getHttpHost()=='stataweb.test:9011') {
