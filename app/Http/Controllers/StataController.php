@@ -94,6 +94,9 @@ class StataController extends Controller
 
     public function remotelog($v)
     {
+        if($v==null || $v=='') {
+            return;
+        }
         $url = 'http://designblue.ca/api/log';
         $data = array('log' => $v);
 

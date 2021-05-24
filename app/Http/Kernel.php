@@ -28,6 +28,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //todo  : 쿠키 삭제
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
