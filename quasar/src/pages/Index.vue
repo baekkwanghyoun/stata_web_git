@@ -230,8 +230,8 @@
                                                                                     <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
                                                                                 </q-item-section>-->
                                             <q-item-section style="margin-left: 10px">
-                                                <q-item-label class="text-weight-bolder">
-                                                    <q-badge color="blue" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
+                                                <q-item-label class="text-weight-bolder" style="color: #03B0F3">
+                                                    <q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
                                                     개인용 가공 변수 선택
                                                     <q-badge v-if="kt_select2_4.length>0" class="q-ml-md" color="green-6" align="middle" >
                                                         <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
@@ -276,8 +276,8 @@
                                             <q-item-section avatar class="q-ml-xl">
                                             </q-item-section>
                                             <q-item-section style="margin-left: 10px">
-                                                <q-item-label class="text-weight-bold" >
-                                                    <q-badge color="black" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">3</q-badge>
+                                                <q-item-label class="text-weight-bold " style="color: #B79958" >
+                                                    <q-badge style="background-color: #B79958" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">3</q-badge>
                                                     KLIPS 원자료 변수 추가
                                                     <q-badge v-if="add_h.length>0 || add_p.length>0" class="q-ml-md" color="green-6" align="middle" >
                                                         <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
