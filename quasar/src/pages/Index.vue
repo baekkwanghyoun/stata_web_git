@@ -4,97 +4,92 @@
         <div class="	" style="max-width: 900px; margin-right: auto;; margin-left: auto;">
 
             <q-card>
-                <q-card dark  class="my-card bg-grey-9 q-mb-lg">
-                    <q-card-section class="row">
-                        <div class="col-3">
-                            <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
-                                <!--<q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" ></q-icon>-->
-<!--
+                    <q-card dark  class="my-card " style="background-color: #233D64;" >
+                        <q-card-section class="row">
+                            <div class="col-12 col-sm-3 q-mb-md "> <!--gt-sm-->
+                                <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
+                                    <!--<q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" ></q-icon>-->
+    <!--
 
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     width="101.333px" height="46.224px" viewBox="0 0 101.333 46.224" enable-background="new 0 0 101.333 46.224"
-                                     xml:space="preserve">
-<path fill="#FFFFFF" d="M24.567,33.016H14.73v1.557h9.099v2.545H14.73v1.558h4.608v1.032H14.73v1.558h9.099v3.101h1.695v-4.658
-	h-0.793h-0.902h-2.798v-1.032h3.7h0.793v-4.701C25.524,33.434,25.106,33.016,24.567,33.016"/>
-                                    <path fill="#FFFFFF" d="M28.461,33.029h-1.707v4.701c0,0.539,0.432,0.959,0.961,0.959h9.848v-1.557h-9.102V33.029z"/>
-                                    <polygon fill="#FFFFFF" points="32.984,39.707 31.274,39.707 31.274,42.82 26.694,42.82 26.694,44.376 37.563,44.376 37.563,42.82
-	32.984,42.82 "/>
-                                    <path fill="#FFFFFF" d="M10.737,33.016v9.789H3.969v-2.244H2.26v2.842c0,0.526,0.434,0.963,0.957,0.963h9.225v-1.318v-0.242v-8.232
-	h1.72v-1.557h-1.72H10.737z"/>
-                                    <path fill="#FFFFFF" d="M5.36,40.516c2.021,0,3.668-1.646,3.668-3.67c0-0.853-0.313-1.644-0.809-2.275h1.635v-1.555H6.141v-1.334
-	H4.583v1.334H0.87v1.555h1.635c-0.512,0.632-0.811,1.423-0.811,2.275C1.694,38.869,3.34,40.516,5.36,40.516 M5.36,34.751
-	c1.152,0,2.098,0.944,2.098,2.095c0,1.17-0.945,2.098-2.098,2.098s-2.094-0.928-2.094-2.098C3.266,35.695,4.208,34.751,5.36,34.751"
-                                    />
-                                    <path fill="#FFFFFF" d="M38.721,33.076h-0.119v2.903v0.013c0,0.525,0.435,0.947,0.957,0.947h3.775v1.047h-4.613v1.553h2.563
-	c-0.479,0.617-0.768,1.381-0.768,2.235c0,2.021,1.637,3.649,3.67,3.649c2.022,0,3.67-1.629,3.67-3.649
-	c0-0.854-0.301-1.618-0.779-2.235h2.576v-1.553H45.04v-1.047h4.613v-1.424h-9.342v-1.139h9.342v-1.301h-9.342H38.721z
-	 M46.286,41.774c0,1.149-0.947,2.095-2.1,2.095c-1.164,0-2.109-0.945-2.109-2.095c0-1.168,0.945-2.112,2.109-2.112
-	C45.338,39.662,46.286,40.606,46.286,41.774"/>
-                                    <polygon fill="#FFFFFF" points="81.509,39.104 79.97,39.104 79.97,42.521 75.026,42.521 75.026,43.927 86.454,43.927 86.454,42.521
-	81.509,42.521 "/>
-                                    <path fill="#FFFFFF" d="M80.713,36.9c0.467,0.686,1.215,1.215,2.242,1.596c0.838,0.297,1.81,0.477,2.917,0.539v-1.5
-	c-1.359-0.107-2.337-0.314-2.931-0.619c-0.811-0.424-1.262-1.14-1.352-2.149h4.12v-1.403h-9.954v1.403h4.064
-	c-0.09,1.001-0.535,1.712-1.336,2.134c-0.605,0.316-1.586,0.532-2.946,0.648v1.486c1.108-0.063,2.075-0.238,2.903-0.525
-	C79.479,38.14,80.235,37.604,80.713,36.9"/>
-                                    <path fill="#FFFFFF" d="M92.442,38.698c-0.505-1.181-0.758-3.04-0.758-5.579h-1.633c0,2.539-0.264,4.398-0.785,5.579
-	c-0.467,1.045-1.184,1.657-2.148,1.837v1.607c0.748-0.107,1.438-0.408,2.068-0.905c0.729-0.576,1.283-1.347,1.66-2.31
-	c0.369,0.992,0.887,1.761,1.553,2.31c0.613,0.506,1.334,0.808,2.162,0.905v-1.621C93.598,40.359,92.891,39.752,92.442,38.698"/>
-                                    <path fill="#FFFFFF" d="M60.59,33.119h-1.244h-0.822h-0.637v7.455h-1.783v-6.066h0.676v-1.389h-5.389v1.389h0.633v6.066h-0.633
-	v1.393h6.496l1.463,0.007l-0.004-3.777v-1.432v-2.248h1.244v2.248v1.393v6.39h1.5V33.119h-0.469H60.59z M54.672,40.574h-1.215V34.51
-	h1.215V40.574z"/>
-                                    <path fill="#FFFFFF" d="M71.131,37.686v-1.38h-6.119v-3.187h-1.581v3.525c0,0.379,0.077,0.648,0.229,0.813
-	c0.145,0.15,0.378,0.229,0.703,0.229H71.131z"/>
-                                    <path fill="#FFFFFF" d="M63.944,40.075h8.525v0.839h-8.525v2.551c0,0.362,0.082,0.623,0.244,0.785
-	c0.154,0.153,0.387,0.23,0.703,0.23h9.156v-1.379h-8.522V42.25h8.522v-3.537H63.944V40.075z"/>
-                                    <polygon fill="#FFFFFF" points="72.469,33.119 69.403,33.119 69.403,34.424 72.469,34.424 72.469,35.414 72.469,37.901
-	74.047,37.901 74.047,33.119 72.856,33.119 "/>
-                                    <polygon fill="#FFFFFF" points="99.583,33.119 97.993,33.119 97.059,33.119 96.411,33.119 96.411,44.547 97.993,44.547
-	97.993,38.576 97.993,37.186 97.993,34.495 99.583,34.495 "/>
-                                    <polygon fill="#FFFFFF" points="0.856,0.598 6.375,0.598 6.375,11.002 16.182,0.598 23.073,0.598 13.265,10.51 24.022,25.695
-	17.096,25.695 9.54,14.412 6.375,17.611 6.375,25.695 0.856,25.695 "/>
-                                    <polygon fill="#FFFFFF" points="26.235,0.598 31.754,0.598 31.754,21.055 43.987,21.055 43.987,25.695 26.235,25.695 "/>
-                                    <rect x="47.08" y="0.598" fill="#FFFFFF" width="5.519" height="25.098"/>
-                                    <path fill="#FFFFFF" d="M57.45,0.598h11.318c1.5,0,2.807,0.217,3.92,0.65c1.112,0.434,2.02,1.031,2.723,1.792
-	c0.703,0.763,1.219,1.623,1.547,2.584s0.492,1.968,0.492,3.022s-0.164,2.063-0.492,3.023s-0.844,1.822-1.547,2.584
-	s-1.61,1.359-2.723,1.793c-1.113,0.434-2.42,0.65-3.92,0.65h-5.8v8.998H57.45V0.598z M62.968,12.408h4.288
-	c0.703,0,1.336-0.053,1.898-0.158s1.072-0.293,1.529-0.563s0.809-0.65,1.055-1.143s0.369-1.125,0.369-1.898
-	s-0.123-1.406-0.369-1.898S71.141,5.87,70.684,5.59c-0.457-0.283-0.967-0.47-1.529-0.563c-0.563-0.093-1.195-0.14-1.898-0.14h-4.288
-	V12.408z"/>
-                                    <path fill="#FFFFFF" d="M84.657,17.364c0,1.569,0.521,2.735,1.564,3.497c1.041,0.764,2.373,1.143,3.99,1.143
-	c0.537,0,1.082-0.047,1.633-0.141c0.551-0.093,1.078-0.257,1.582-0.492c0.504-0.234,0.908-0.556,1.213-0.967
-	c0.305-0.409,0.457-0.919,0.457-1.527c0-0.563-0.152-1.037-0.457-1.425c-0.305-0.387-0.715-0.714-1.23-0.983
-	s-1.078-0.498-1.688-0.686s-1.43-0.398-2.461-0.633c-0.68-0.188-1.218-0.328-1.617-0.422c-1.101-0.305-2.072-0.621-2.916-0.949
-	s-1.611-0.756-2.303-1.283s-1.242-1.195-1.652-2.004s-0.615-1.775-0.615-2.9c0-1.242,0.264-2.342,0.791-3.304
-	c0.527-0.96,1.242-1.757,2.145-2.39s1.91-1.107,3.023-1.424C87.227,0.158,88.37,0,89.542,0c1.358,0,2.642,0.152,3.849,0.457
-	s2.273,0.785,3.199,1.441s1.658,1.5,2.197,2.529c0.539,1.033,0.809,2.25,0.809,3.656h-5.344c-0.07-1.406-0.545-2.39-1.424-2.951
-	c-0.879-0.563-2.056-0.845-3.531-0.845c-1.033,0-1.923,0.234-2.672,0.703C85.875,5.461,85.5,6.176,85.5,7.135
-	c0,0.492,0.094,0.885,0.281,1.178c0.188,0.294,0.516,0.551,0.984,0.773c0.468,0.223,1.089,0.451,1.863,0.686
-	c0.772,0.234,2.038,0.574,3.795,1.02c0.07,0,0.258,0.047,0.563,0.141c0.07,0.023,0.141,0.035,0.211,0.035
-	c0.844,0.211,1.617,0.445,2.32,0.703s1.441,0.65,2.215,1.178s1.418,1.242,1.934,2.145c0.514,0.902,0.773,1.985,0.773,3.251
-	c0,2.39-0.914,4.329-2.742,5.817S93.303,26.293,90,26.293c-1.43,0-2.782-0.176-4.06-0.527s-2.414-0.896-3.41-1.635
-	s-1.781-1.675-2.355-2.813c-0.574-1.137-0.861-2.454-0.861-3.954H84.657z"/>
-</svg>
--->
-
-                                <q-img class="" src="~assets/logo1.png" style="max-width: 140px" ></q-img>
-                            </a>
-                        </div>
-
-                        <div class="col-9 text-bold " >
-                          <!--  <span class="text-h6 text-yellow-8 text-bold">'Smart Klips'</span>는 한국노동패널 조사자료를 이용하여 연구자들이 연구분석을 위해 쉽게
-                        데이터를 생성할 수 있도록 제공되는 맞춤형 “데이터추출” 지원 플랫폼입니다.-->
-
-                            <span class="text-h5  text-bold q-mr-sm" style="color: #03A683">'자료추출 시스템'</span>  은 사용자가 원하는 변수 및 차수를 선택 및 병합하여 원하는<br>
-                            데이터 형태로 생성하는 <span class="text-h6 text-yellow-8 text-bold">'데이터추출'</span> 시스템입니다.
-                        </div>
-                    </q-card-section>
-                </q-card>
-
-                    <q-tabs active-color="primary" align="justify" class="text-grey q-pa-md" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
-                        <q-tab icon="addchart" label="통합 패널데이터 생성" name="create"/>
-                        <q-tab icon="youtube_searched_for" label="KLIPS 원자료 변수 검색" name="search"/>
-                        <q-tab icon="contact_support" label="사용법 및 주의사항" name="howto"/>
-                        <q-tab icon="contact_support" label="FAQ" name="faq"/>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="101.333px" height="46.224px" viewBox="0 0 101.333 46.224" enable-background="new 0 0 101.333 46.224"
+                                         xml:space="preserve">
+    <path fill="#FFFFFF" d="M24.567,33.016H14.73v1.557h9.099v2.545H14.73v1.558h4.608v1.032H14.73v1.558h9.099v3.101h1.695v-4.658
+        h-0.793h-0.902h-2.798v-1.032h3.7h0.793v-4.701C25.524,33.434,25.106,33.016,24.567,33.016"/>
+                                        <path fill="#FFFFFF" d="M28.461,33.029h-1.707v4.701c0,0.539,0.432,0.959,0.961,0.959h9.848v-1.557h-9.102V33.029z"/>
+                                        <polygon fill="#FFFFFF" points="32.984,39.707 31.274,39.707 31.274,42.82 26.694,42.82 26.694,44.376 37.563,44.376 37.563,42.82
+        32.984,42.82 "/>
+                                        <path fill="#FFFFFF" d="M10.737,33.016v9.789H3.969v-2.244H2.26v2.842c0,0.526,0.434,0.963,0.957,0.963h9.225v-1.318v-0.242v-8.232
+        h1.72v-1.557h-1.72H10.737z"/>
+                                        <path fill="#FFFFFF" d="M5.36,40.516c2.021,0,3.668-1.646,3.668-3.67c0-0.853-0.313-1.644-0.809-2.275h1.635v-1.555H6.141v-1.334
+        H4.583v1.334H0.87v1.555h1.635c-0.512,0.632-0.811,1.423-0.811,2.275C1.694,38.869,3.34,40.516,5.36,40.516 M5.36,34.751
+        c1.152,0,2.098,0.944,2.098,2.095c0,1.17-0.945,2.098-2.098,2.098s-2.094-0.928-2.094-2.098C3.266,35.695,4.208,34.751,5.36,34.751"
+                                        />
+                                        <path fill="#FFFFFF" d="M38.721,33.076h-0.119v2.903v0.013c0,0.525,0.435,0.947,0.957,0.947h3.775v1.047h-4.613v1.553h2.563
+        c-0.479,0.617-0.768,1.381-0.768,2.235c0,2.021,1.637,3.649,3.67,3.649c2.022,0,3.67-1.629,3.67-3.649
+        c0-0.854-0.301-1.618-0.779-2.235h2.576v-1.553H45.04v-1.047h4.613v-1.424h-9.342v-1.139h9.342v-1.301h-9.342H38.721z
+         M46.286,41.774c0,1.149-0.947,2.095-2.1,2.095c-1.164,0-2.109-0.945-2.109-2.095c0-1.168,0.945-2.112,2.109-2.112
+        C45.338,39.662,46.286,40.606,46.286,41.774"/>
+                                        <polygon fill="#FFFFFF" points="81.509,39.104 79.97,39.104 79.97,42.521 75.026,42.521 75.026,43.927 86.454,43.927 86.454,42.521
+        81.509,42.521 "/>
+                                        <path fill="#FFFFFF" d="M80.713,36.9c0.467,0.686,1.215,1.215,2.242,1.596c0.838,0.297,1.81,0.477,2.917,0.539v-1.5
+        c-1.359-0.107-2.337-0.314-2.931-0.619c-0.811-0.424-1.262-1.14-1.352-2.149h4.12v-1.403h-9.954v1.403h4.064
+        c-0.09,1.001-0.535,1.712-1.336,2.134c-0.605,0.316-1.586,0.532-2.946,0.648v1.486c1.108-0.063,2.075-0.238,2.903-0.525
+        C79.479,38.14,80.235,37.604,80.713,36.9"/>
+                                        <path fill="#FFFFFF" d="M92.442,38.698c-0.505-1.181-0.758-3.04-0.758-5.579h-1.633c0,2.539-0.264,4.398-0.785,5.579
+        c-0.467,1.045-1.184,1.657-2.148,1.837v1.607c0.748-0.107,1.438-0.408,2.068-0.905c0.729-0.576,1.283-1.347,1.66-2.31
+        c0.369,0.992,0.887,1.761,1.553,2.31c0.613,0.506,1.334,0.808,2.162,0.905v-1.621C93.598,40.359,92.891,39.752,92.442,38.698"/>
+                                        <path fill="#FFFFFF" d="M60.59,33.119h-1.244h-0.822h-0.637v7.455h-1.783v-6.066h0.676v-1.389h-5.389v1.389h0.633v6.066h-0.633
+        v1.393h6.496l1.463,0.007l-0.004-3.777v-1.432v-2.248h1.244v2.248v1.393v6.39h1.5V33.119h-0.469H60.59z M54.672,40.574h-1.215V34.51
+        h1.215V40.574z"/>
+                                        <path fill="#FFFFFF" d="M71.131,37.686v-1.38h-6.119v-3.187h-1.581v3.525c0,0.379,0.077,0.648,0.229,0.813
+        c0.145,0.15,0.378,0.229,0.703,0.229H71.131z"/>
+                                        <path fill="#FFFFFF" d="M63.944,40.075h8.525v0.839h-8.525v2.551c0,0.362,0.082,0.623,0.244,0.785
+        c0.154,0.153,0.387,0.23,0.703,0.23h9.156v-1.379h-8.522V42.25h8.522v-3.537H63.944V40.075z"/>
+                                        <polygon fill="#FFFFFF" points="72.469,33.119 69.403,33.119 69.403,34.424 72.469,34.424 72.469,35.414 72.469,37.901
+        74.047,37.901 74.047,33.119 72.856,33.119 "/>
+                                        <polygon fill="#FFFFFF" points="99.583,33.119 97.993,33.119 97.059,33.119 96.411,33.119 96.411,44.547 97.993,44.547
+        97.993,38.576 97.993,37.186 97.993,34.495 99.583,34.495 "/>
+                                        <polygon fill="#FFFFFF" points="0.856,0.598 6.375,0.598 6.375,11.002 16.182,0.598 23.073,0.598 13.265,10.51 24.022,25.695
+        17.096,25.695 9.54,14.412 6.375,17.611 6.375,25.695 0.856,25.695 "/>
+                                        <polygon fill="#FFFFFF" points="26.235,0.598 31.754,0.598 31.754,21.055 43.987,21.055 43.987,25.695 26.235,25.695 "/>
+                                        <rect x="47.08" y="0.598" fill="#FFFFFF" width="5.519" height="25.098"/>
+                                        <path fill="#FFFFFF" d="M57.45,0.598h11.318c1.5,0,2.807,0.217,3.92,0.65c1.112,0.434,2.02,1.031,2.723,1.792
+        c0.703,0.763,1.219,1.623,1.547,2.584s0.492,1.968,0.492,3.022s-0.164,2.063-0.492,3.023s-0.844,1.822-1.547,2.584
+        s-1.61,1.359-2.723,1.793c-1.113,0.434-2.42,0.65-3.92,0.65h-5.8v8.998H57.45V0.598z M62.968,12.408h4.288
+        c0.703,0,1.336-0.053,1.898-0.158s1.072-0.293,1.529-0.563s0.809-0.65,1.055-1.143s0.369-1.125,0.369-1.898
+        s-0.123-1.406-0.369-1.898S71.141,5.87,70.684,5.59c-0.457-0.283-0.967-0.47-1.529-0.563c-0.563-0.093-1.195-0.14-1.898-0.14h-4.288
+        V12.408z"/>
+                                        <path fill="#FFFFFF" d="M84.657,17.364c0,1.569,0.521,2.735,1.564,3.497c1.041,0.764,2.373,1.143,3.99,1.143
+        c0.537,0,1.082-0.047,1.633-0.141c0.551-0.093,1.078-0.257,1.582-0.492c0.504-0.234,0.908-0.556,1.213-0.967
+        c0.305-0.409,0.457-0.919,0.457-1.527c0-0.563-0.152-1.037-0.457-1.425c-0.305-0.387-0.715-0.714-1.23-0.983
+        s-1.078-0.498-1.688-0.686s-1.43-0.398-2.461-0.633c-0.68-0.188-1.218-0.328-1.617-0.422c-1.101-0.305-2.072-0.621-2.916-0.949
+        s-1.611-0.756-2.303-1.283s-1.242-1.195-1.652-2.004s-0.615-1.775-0.615-2.9c0-1.242,0.264-2.342,0.791-3.304
+        c0.527-0.96,1.242-1.757,2.145-2.39s1.91-1.107,3.023-1.424C87.227,0.158,88.37,0,89.542,0c1.358,0,2.642,0.152,3.849,0.457
+        s2.273,0.785,3.199,1.441s1.658,1.5,2.197,2.529c0.539,1.033,0.809,2.25,0.809,3.656h-5.344c-0.07-1.406-0.545-2.39-1.424-2.951
+        c-0.879-0.563-2.056-0.845-3.531-0.845c-1.033,0-1.923,0.234-2.672,0.703C85.875,5.461,85.5,6.176,85.5,7.135
+        c0,0.492,0.094,0.885,0.281,1.178c0.188,0.294,0.516,0.551,0.984,0.773c0.468,0.223,1.089,0.451,1.863,0.686
+        c0.772,0.234,2.038,0.574,3.795,1.02c0.07,0,0.258,0.047,0.563,0.141c0.07,0.023,0.141,0.035,0.211,0.035
+        c0.844,0.211,1.617,0.445,2.32,0.703s1.441,0.65,2.215,1.178s1.418,1.242,1.934,2.145c0.514,0.902,0.773,1.985,0.773,3.251
+        c0,2.39-0.914,4.329-2.742,5.817S93.303,26.293,90,26.293c-1.43,0-2.782-0.176-4.06-0.527s-2.414-0.896-3.41-1.635
+        s-1.781-1.675-2.355-2.813c-0.574-1.137-0.861-2.454-0.861-3.954H84.657z"/>
+    </svg>
+    -->
+                                    <q-img class="" src="~assets/logo1.png" style="max-width: 140px" ></q-img>
+                                </a>
+                            </div>
+                            <div class="col-9 text-bold " style="background-position: right; background-repeat: no-repeat; background-size: 50px 50px; background-image:url('https://lh3.googleusercontent.com/proxy/8EQPUpJeSAJx6Y-43x8m-euZ87LX9pzLU5chWvb84s2IBk8i6zQ9uoyd8Qx_F4vmu8Vt3-oAAr8P5_KzsLxfUDQHZeMF5qcNyzYkL8Z4IFVK')" >
+                                <span class="text-h6  text-bold q-mr-sm" style="color: #FFFF00; ">'자료추출 시스템'</span>  은 사용자가 원하는 변수 및 차수를<br>
+                                선택 및 병합하여  원하는 데이터 형태로 생성하는 <span class="text-h6  text-bold" style="color: #FFFF00">‘데이터추출’</span> 시스템입니다.
+                            </div>
+                        </q-card-section>
+                    </q-card>
+<q-space style="height: 10px; background-color: #233D64;" ></q-space>
+                    <q-tabs active-color="white"  align="justify" class="text-grey q-px-md" style="background-color: #233D64" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
+                        <q-tab icon="addchart" label="통합 패널데이터 생성" name="create" class="toptab  glossy" style=""/>
+                        <q-tab icon="youtube_searched_for" label="KLIPS 원자료 변수 검색" name="search"  class="toptab glossy"/>
+                        <q-tab icon="contact_support" label="사용법 및 주의사항" name="howto"  class="toptab glossy"/>
+                        <q-tab icon="contact_support" label="FAQ" name="faq"  class="toptab glossy"/>
                     </q-tabs>
 
                     <q-tab-panels class="q-pa-md" animated v-model="tab">
@@ -111,8 +106,8 @@
                                             </q-item-section>
 
                                             <q-item-section >
-                                                <div class="text-grey-8 q-gutter-xs">
-                                                    <span class=""  >차수선택</span>
+                                                <div class="text-grey-9 q-gutter-xs">
+                                                    <span class="text-weight-bolder" >차수선택</span>
                                                     <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
                                                     <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
                                                 </div>
@@ -123,10 +118,31 @@
                                                     </q-card-section>
                                                 </q-card>
                                             </q-item-section>
+<!--
+                                             반응형 샘플
+                                            <div class="row full-width">
+                                                <q-item-section avatar class="col-12 col-sm-2 q-pb-sm">
+                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
+                                                </q-item-section>
+
+                                                <q-item-section class="col-12 col-sm-9"  >
+                                                    <div class="text-grey-9 q-gutter-xs">
+                                                        <span class="text-weight-bolder" >차수선택</span>
+                                                        <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                                        &lt;!&ndash;<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>&ndash;&gt;
+                                                    </div>
+                                                    &lt;!&ndash;선택한 값 적용&ndash;&gt;
+                                                    <q-card v-if="wave.length>0" class="my-card border q-mt-sm">
+                                                        <q-card-section class="q-pa-sm">
+                                                            <span class="  " style="word-break: break-all" >{{sortedWave.join('&nbsp;&nbsp;')}}</span>
+                                                        </q-card-section>
+                                                    </q-card>
+                                                </q-item-section>
+                                            </div>-->
                                         </template>
                                         <div class="row">
                                             <div class="q-pa-sm q-ma-md bg-grey-2  rounded-borders">
-                                                <q-option-group @input="waveSelectChg()" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
+                                                <q-option-group @input="waveSelectChg('wave')" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -146,30 +162,42 @@
 
 
                                     <!-- 2단계-1 -->
-                                    <q-expansion-item  class="step2-1 q-mb-lg" icon="house" label="" header-class="text-teal">
-                                        <template v-slot:header >
-                                            <q-item-section avatar > <!--class="bg-grey-3 q-pa-sm"-->
-                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
+                                    <q-item>
+                                        <q-item-section avatar > <!--class="bg-grey-3 q-pa-sm"-->
+                                            <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
+                                        </q-item-section>
+                                        <q-item-section >
+                                            <div class="text-grey-9 q-gutter-xs">
+                                                <span class="text-weight-bolder text-subtitle2" >가구용 또는 개인용 가공 변수를 반드시 하나 이상 선택해야 합니다.</span>
+                                            </div>
+                                            <!--선택한 값 적용-->
+                                            <!-- <q-card v-if="kt_select2_3.length>0" class="my-card border q-mt-sm">
+                                                 <q-card-section class="q-pa-sm">
+                                                     <span class="  " style="word-break: break-all; color: black" >{{kt_select2_3.join('&nbsp;&nbsp;&nbsp;')}}</span>
+                                                 </q-card-section>
+                                             </q-card>-->
+                                        </q-item-section>
+                                    </q-item>
+                                    <q-expansion-item  class="step2-1 q-mb-lg" label="" header-class="text-teal">
+                                        <template v-slot:header>
+                                            <q-item-section avatar class="q-ml-xl">
+                                                <!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
                                             </q-item-section>
-                                            <q-item-section  color="primary" >
-                                                <q-item-label class="text-black text-bold"  caption>가구용 또는 개인용 가공 변수를 반드시 하나 이상 선택해야 합니다.</q-item-label>
-                                                <q-item-label >
-                                                    <q-badge color="green-6" align="middle" class="q-mr-sm">1</q-badge>
-                                                    가구용 가공 변수 선택
+                                            <!--                                    <q-item-section avatar>
+                                                                                    <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
+                                                                                </q-item-section>-->
+                                            <q-item-section style="margin-left: 10px">
+                                                <q-item-label class="text-weight-bolder">
+                                                    <q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
+                                                     가구용 가공 변수 선택
                                                     <q-badge v-if="kt_select2_3.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택완료
+                                                        <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
                                                     </q-badge>
-                                                    <q-badge v-else class="q-ml-md" color="warning" align="middle" >
-                                                        <q-icon name="search_off" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택안함
+                                                    <!--privacy_tip-->
+                                                    <q-badge v-else  class="q-ml-md" color="grey" align="middle" >
+                                                        <q-icon name="search_off" size="xs" class=""></q-icon>선택안함
                                                     </q-badge>
                                                 </q-item-label>
-
-                                                <!--선택한 값 적용-->
-                                               <!-- <q-card v-if="kt_select2_3.length>0" class="my-card border q-mt-sm">
-                                                    <q-card-section class="q-pa-sm">
-                                                        <span class="  " style="word-break: break-all; color: black" >{{kt_select2_3.join('&nbsp;&nbsp;&nbsp;')}}</span>
-                                                    </q-card-section>
-                                                </q-card>-->
                                             </q-item-section>
                                         </template>
                                         <q-scroll-area style="height: 400px;">
@@ -202,15 +230,15 @@
                                                                                     <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
                                                                                 </q-item-section>-->
                                             <q-item-section style="margin-left: 10px">
-                                                <q-item-label >
-                                                    <q-badge color="blue" align="middle" class="q-mr-sm">2</q-badge>
+                                                <q-item-label class="text-weight-bolder">
+                                                    <q-badge color="blue" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
                                                     개인용 가공 변수 선택
                                                     <q-badge v-if="kt_select2_4.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택완료
+                                                        <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
                                                     </q-badge>
                                                     <!--privacy_tip-->
-                                                    <q-badge v-else  class="q-ml-md" color="warning" align="middle" >
-                                                        <q-icon name="search_off" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택안함
+                                                    <q-badge v-else  class="q-ml-md" color="grey" align="middle" >
+                                                        <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
                                                     </q-badge>
                                                 </q-item-label>
 
@@ -248,14 +276,14 @@
                                             <q-item-section avatar class="q-ml-xl">
                                             </q-item-section>
                                             <q-item-section style="margin-left: 10px">
-                                                <q-item-label >
-                                                    <q-badge color="black" align="middle" class="q-mr-sm">3</q-badge>
+                                                <q-item-label class="text-weight-bold" >
+                                                    <q-badge color="black" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">3</q-badge>
                                                     KLIPS 원자료 변수 추가
                                                     <q-badge v-if="add_h.length>0 || add_p.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                        <q-icon name="verified_user" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택완료
+                                                        <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
                                                     </q-badge>
-                                                    <q-badge v-else class="q-ml-md" color="warning" align="middle" >
-                                                        <q-icon name="search_off" size="xs" class="q-mr-sm q-py-xs"></q-icon> 선택안함
+                                                    <q-badge v-else class="q-ml-md" color="grey" align="middle" >
+                                                        <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
                                                     </q-badge>
                                                 </q-item-label>
 
@@ -359,8 +387,8 @@
                                             </q-item-section>
 
                                             <q-item-section>
-                                                <div class="text-grey-8 q-gutter-xs">
-                                                    <span class=""  >저장파일</span>
+                                                <div class="text-grey-9 q-gutter-xs">
+                                                    <span class="text-weight-bolder"  >저장파일</span>
                                                     <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
                                                 </div>
                                             </q-item-section>
@@ -374,7 +402,7 @@
                                                 <q-item class="row items-center">
                                                     <div class="col">
                                                         파일타입 :
-                                                        <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" disable/>
+                                                        <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" />
                                                         <q-checkbox v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
                                                         <q-checkbox v-model="filesave" val="Csv" label="Text(*.csv)" />
                                                         <!--<q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
@@ -391,7 +419,9 @@
                                                     <q-space></q-space>
                                                 </q-item>
                                                 -->
-                                                <q-item-label class="q-pl-md q-mb-lg text-black text-bold" caption>다른 저장 포멧(SAS, SPSS)은 추후 지원예정</q-item-label>
+                                                <q-item-label class="q-pl-md text-black text-bold" caption>- 다른 저장 포멧(SAS, SPSS)은 추후 지원예정</q-item-label>
+                                                <q-item-label class="q-pl-md text-black text-bold" caption>- STATA파일은 기본적으로 저장이 됩니다.
+                                                </q-item-label>
 
 
 
@@ -415,9 +445,9 @@
                                 </q-list>
                                 <div class="q-mb-xl"></div>
                                 <!-- 제출 -->
-                                <div class="q-mt-md row justify-end q-gutter-sm">
-                                    <q-btn type="submit" color="primary" label="데이터 추출" />
-                                    <q-btn @click="searchInit()"  color="white" text-color="black" label="초기화" />
+                                <div class="q-mt-md row justify-center q-gutter-sm">
+                                    <q-btn class="glossy" type="submit" color="primary" label="데이터 추출" />
+                                    <q-btn class="glossy" @click="searchInit()"  color="white" text-color="black" label="초기화" />
                                 </div>
                             </div>
                             </q-form>
@@ -438,8 +468,8 @@
                                             </q-item-section>
 
                                             <q-item-section >
-                                                <div class="text-grey-8 q-gutter-xs">
-                                                    <span class=""  >차수선택</span>
+                                                <div class="text-grey-9 q-gutter-xs">
+                                                    <span class="text-weight-bolder"  >차수선택</span>
                                                     <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
                                                     <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
                                                 </div>
@@ -447,14 +477,14 @@
                                         </template>
                                         <div class="row">
                                             <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
-                                                <q-option-group @input="waveSelectChg()" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
+                                                <q-option-group @input="waveSelectChg('wave2')" v-model="waveSelect2" :options="waveSelectOptions" color="primary" inline/>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
                                                 <q-item dense>
                                                     <q-item-section class="itemSectionWave" avatar>
-                                                        <q-checkbox    v-model="wave" :val=waveLabel(index) />
+                                                        <q-checkbox    v-model="wave2" :val=waveLabel(index) />
                                                     </q-item-section>
                                                     <q-item-section>
                                                         <q-item-label>{{waveLabel(index)}}차수</q-item-label>
@@ -472,8 +502,8 @@
                                             </q-item-section>
 
                                             <q-item-section>
-                                                <div class="text-grey-8 q-gutter-xs">
-                                                    <span class=""  >가구용 또는 개인용 선택</span>
+                                                <div class="text-grey-9 q-gutter-xs">
+                                                    <span class="text-weight-bolder"  >가구용 또는 개인용 선택</span>
                                                     <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
                                                 </div>
                                             </q-item-section>
@@ -503,9 +533,9 @@
                                     </q-expansion-item>
                                     <q-separator class="q-my-lg"></q-separator>
                                     <!-- 제출 -->
-                                    <div class="q-mt-md row justify-end q-gutter-sm">
-                                        <q-btn type="submit" color="primary" label="검색하기" />
-                                        <q-btn @click="searchInit" color="white" text-color="black" label="초기화" />
+                                    <div class="q-mt-md q-mb-xl row justify-center q-gutter-sm">
+                                        <q-btn type="submit" class="glossy"  color="primary" label="검색하기" />
+                                        <q-btn @click="searchInit2" class="glossy"  color="white" text-color="black" label="초기화" />
                                     </div>
                                     <q-expansion-item v-model="expansionSearchResult">
                                         <template v-slot:header>
@@ -513,7 +543,8 @@
                                                 <q-chip class="glossy" color="red-8" text-color="white" icon="star">검색결과</q-chip>
                                             </q-item-section>
 
-                                            <q-item-section>여기를 클릭하시면 open / close가 가능합니다.</q-item-section>
+                                            <q-item-section></q-item-section>
+                                            <!--<q-item-section>여기를 클릭하시면 open / close가 가능합니다.</q-item-section>-->
                                         </template>
                                         <div class="row">
                                             <pre id="searchResult" class="" style="width: 100%" v-html="searchResult" ></pre>
@@ -643,7 +674,7 @@
 
                             <q-list bordered class="rounded-borders ">
 
-                                <q-expansion-item group="somegroup"  switch-toggle-side  label="질문 1) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
+                                <q-expansion-item group="somegroup" header-style="font-weight: bolder" switch-toggle-side  label="질문 1) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
                                     <q-card>
                                         <q-card-section style="white-space: pre-wrap;">Stata 버전 14 이상에서만 사용이 가능합니다.
 
@@ -653,7 +684,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
                                     </q-card>
                                 </q-expansion-item>
                                 <q-separator />
-                                <q-expansion-item group="somegroup"  switch-toggle-side  label='질문 2) “KLIPS 원자료 변수 검색” 탭에서 단어검색은 한 개만 가능한가요?'>
+                                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label='질문 2) “KLIPS 원자료 변수 검색” 탭에서 단어검색은 한 개만 가능한가요?'>
                                     <q-card>
                                         <q-card-section>
                                             네, 단어는 1개씩만 검색할 수 있습니다. 그러나 반복하여 여러 개를 검색할 수 있습니다.
@@ -661,7 +692,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
                                     </q-card>
                                 </q-expansion-item>
                                 <q-separator />
-                                <q-expansion-item group="somegroup"  switch-toggle-side  label="질문 3) SAS, SPSS 사용자가 자료추출을 하고자 하면 어떻게 하나요?">
+                                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label="질문 3) SAS, SPSS 사용자가 자료추출을 하고자 하면 어떻게 하나요?">
                                     <q-card>
                                         <q-card-section style="white-space: pre-wrap;">STATA로 지정하여 dta 파일로 추출한 후 해당 프로그램의 '불러오기' 기능을 이용해 보시기 바랍니다.
 
@@ -671,13 +702,39 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
                                         </q-card-section>
                                     </q-card>
                                 </q-expansion-item>
+
+                                <q-separator />
+                                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label="질문 4) Internet Explorer사용시 에러가 발생합니다.">
+                                    <q-card>
+                                        <q-card-section style="white-space: pre-wrap;">자료추출시스템은 크롬 또는 마이크로소프트 Edge 브라우저에 최적화 되어있으니,
+
+해당 브라우져 사용을 권장합니다. Internet Explorer 사용시 정상적으로 작동하지 않을 수 있습니다.
+                                        </q-card-section>
+                                    </q-card>
+                                </q-expansion-item>
                             </q-list>
                             <div class="q-pt-lg  vertical-middle">
                                 한국노동패널조사에 대하여 문의해주세요.
-                                <q-btn @click="openURL('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=87&key=442')" target="_blank" icon="mail"  class="q-ml-lg" type="submit" color="primary" label="문의하기" />
+                                <q-btn @click="openURL('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=87&key=442')"  target="_blank" icon="mail"  class="q-ml-lg glossy" type="submit" color="primary" label="문의하기" />
                             </div>
                         </q-tab-panel>
                     </q-tab-panels>
+
+                    <q-card dark  class="my-card  q-mb-sm" style="background-color: #233D64;">
+                        <q-card-section class="row">
+                            <div class="col-12 col-sm-3 q-mb-md ">
+                                <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
+                                    <q-img class="" src="~assets/logo1.png" style="max-width: 100px" ></q-img>
+                                </a>
+                            </div>
+
+                            <div class="col-9 text-bold " >
+                                <p class="text-caption text-bold q-mb-xs " style="">COPYRIGHT KOREA LABOR INSTITUTE.ALL RIGHTS RESERVED BY KOREA LABOR INSTITUTE.</p>
+                                <p class="text-caption  q-mb-none" style=""><span class="text-bold">E-MAIL</span> : klips@kli.re.kr
+                                <span class="q-pl-xl text-bold">TEL</span> : 044-287-6651, 6652, 6653, 6654 </p>
+                            </div>
+                        </q-card-section>
+                    </q-card>
                 </q-card>
         </div>
     </q-page>
@@ -697,10 +754,10 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       expansionSearchResult:false,
       tab: 'create', //'',
       color: 'cyan',
-      filesave:['Stata'],
+      filesave:[],//['Stata'],
       filename:'',
       wave:[],
-
+      wave2:[],
       add_h:'',
       add_p:'',
       kt_select2_3:[],
@@ -745,6 +802,8 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       Spss:'',
       waveCount:22,
       waveSelect:'',
+      waveSelect2:'',
+      //waveSelectTab2:'',
       waveSelectOptions:[
         {
           label: '전체선택',
@@ -767,7 +826,6 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
           value: 'cancel'
         }*/
       ],
-
       waveSelect2:'',
       waveSelect2Options:[
         {
@@ -827,7 +885,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
           return 0;
         }
         return this.wave.sort(compare);
-      }
+      },
     },
   methods: {
     openURL,
@@ -837,29 +895,38 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       }
 
     },
-    waveSelectChg(evt){
-      if(this.waveSelect==='all') {
-        this.wave = [];
+    waveSelectChg(wavename){
+      //if(this.waveSelect==='all') {
+      var selectName="";
+      if(wavename === "wave") {
+        selectName = 'waveSelect';
+      }
+      else {
+        selectName = 'waveSelect2';
+      }
+
+      if(this[selectName]==='all') {
+        this[wavename] = [];
         for(let i=1; i<= this.waveCount; i++) {
-          this.wave.push(this.waveLabel(i))
+          this[wavename].push(this.waveLabel(i))
         }
       }
-      else if(this.waveSelect==='none') {
-        this.wave = [];
+      else if(this[selectName]==='none') {
+        this[wavename] = [];
       }
-      else if(this.waveSelect==='cancel') {
-        this.wave = [];
+      else if(this[selectName]==='cancel') {
+        this[wavename] = [];
       }
-      else if(this.waveSelect==='5') {
-        this.wave = [];
+      else if(this[selectName]==='5') {
+        this[wavename] = [];
         for(let i=this.waveCount; i> this.waveCount-5; i--) {
-          this.wave.push(this.waveLabel(i))
+          this[wavename].push(this.waveLabel(i))
         }
       }
-      else if(this.waveSelect==='10') {
-        this.wave = [];
+      else if(this[selectName]==='10') {
+        this[wavename] = [];
         for(let i=this.waveCount; i> this.waveCount-10; i--) {
-          this.wave.push(this.waveLabel(i))
+          this[wavename].push(this.waveLabel(i))
         }
       }
     },
@@ -911,9 +978,15 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       this.waveSelect=null;
       this.waveSelect='';
       this.expansionSearchResult=false;
+    },
+
+    searchInit2(){
+      this.wave2=false
+      this.waveSelect2=null;
       this.word = '';
       this.hp = 'h';
     },
+
     async onSearch(evt) {
       console.log('@onSearch - do something here', evt)
       //Notify.create({message: e.message, type: 'negative', html: true})
@@ -1080,5 +1153,20 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
 /*    .swal2-confirm {
         display: inline-block;background-color: white;border: 1px;border-style: solid;border-color: gray;color: gray !important;
     }*/
+
+    .toptab {
+        font-weight: bold;
+        background-color: #007EC5;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-right:2px;
+    }
+    .q-tab--inactive {
+        background-color: #F2F2F2;
+    }
+    .q-tab__label {
+        font-weight: bolder;
+        /*font-size: medium;*/
+    }
 </style>
 
