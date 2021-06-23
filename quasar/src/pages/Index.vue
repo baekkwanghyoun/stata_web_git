@@ -12,7 +12,7 @@
                                     <q-img class="" src="~assets/logo_new.png" style="max-width: 190px" ></q-img>
                                 </a>
                             </div>
-                            <div class="col-9  " >
+                            <div class="col-9   q-pl-sm q-pl-lg-lg" >
                                 <span class="text-h6  text-bold q-mr-sm" style="color: #FFFF00; ">'자료추출 시스템'</span>은 사용자가 원하는 변수 및 차수를 선택하여<br>
                                 자료를 원하는 형태로 병합하여 가공하는 <span class="text-h6  text-bold" style="color: #FFFF00">시스템</span>입니다.
                                 <!--병합하여  원하는 데이터 형태로 생성하는 <span class="text-h6  text-bold" style="color: #FFFF00">‘데이터추출’</span> 시스템입니다.-->
@@ -20,7 +20,7 @@
                         </q-card-section>
                     </q-card>
                     <q-space style="height: 10px; background-color: #233D64;" ></q-space>
-                    <q-tabs active-color="white"  align="justify" class="text-grey q-px-md" style="background-color: #233D64" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
+                    <q-tabs active-color="white"  align="justify" class="text-grey q-px-md shadow-up-5" style="background-color: #233D64" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
                         <q-tab icon="addchart" label="통합 패널데이터 생성" name="create" class="toptab  glossy" style=""/>
                         <q-tab icon="youtube_searched_for" label="KLIPS 원자료 변수 검색" name="search"  class="toptab glossy"/>
                         <q-tab icon="contact_support" label="사용법 및 주의사항" name="howto"  class="toptab glossy"/>
