@@ -342,10 +342,12 @@
                                                 <q-item class="row items-center">
                                                     <div class="col-2">파일타입 :</div>
                                                     <div class="col-10 " >
-                                                        <!--<q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" />-->
-                                                        <label>STATA(*.dta)</label>
-                                                        <q-checkbox v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
-                                                        <q-checkbox v-model="filesave" val="Csv" label="Text(*.csv)" />
+
+                                                        <!--<label>STATA(*.dta)</label>-->
+
+                                                        <q-radio v-model="filesave" val="Stata" label="STATA(*.dta)" />
+                                                        <q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
+                                                        <q-radio v-model="filesave" val="Csv" label="Text(*.csv)" />
                                                         <!--<q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
                                                         <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>-->
                                                     </div>
@@ -361,12 +363,7 @@
                                                 </q-item>
                                                 -->
                                                 <q-item-label class="q-pl-md text-black text-bold" caption>- 다른 저장 포멧(SAS, SPSS)은 추후 지원예정</q-item-label>
-                                                <q-item-label class="q-pl-md text-black text-bold" caption>- STATA파일은 기본적으로 저장이 됩니다.
-                                                </q-item-label>
-
-
-
-
+                                                <!--<q-item-label class="q-pl-md text-black text-bold" caption>- STATA파일은 기본적으로 저장이 됩니다.</q-item-label>-->
                                                 <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
              -->
                                             </div>
@@ -719,7 +716,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       expansionSearchResult:false,
       tab: 'create', //'',
       color: 'cyan',
-      filesave:[],//['Stata'],
+      filesave:'Stata',//['Stata'],
       filename:'',
       wave:[],
       wave2:[],
