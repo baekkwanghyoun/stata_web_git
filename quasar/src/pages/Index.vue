@@ -956,7 +956,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
       try {
           Loading.show()
           let res = await Api().post('/api/stata/storeKlipsApi', {
-            kt_select2_5:this.wave,
+            kt_select2_5:this.wave2,
             word:this.word,
             hp:this.hp,
             tab:this.tab,
