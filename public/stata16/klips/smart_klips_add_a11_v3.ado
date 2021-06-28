@@ -8,7 +8,7 @@ KLIPS 변수 추가하기
 	version 14.0 
 	clear 
 	set more off
-    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) sfoloder(string)]  
+    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) ]  
 	qui cd "`wd'" 
 	local NV=wordcount("`varlist'")
 	return scalar NV=`NV'			
@@ -63,7 +63,7 @@ KLIPS 변수 추가하기
 					  format pid %15.0g
 					  order pid wave 
 					  drop if pid==.
-					  cd "`sfolder'"
+					  
 					  save klips_add_a`v', replace				
 
 end 

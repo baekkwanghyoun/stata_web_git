@@ -14,6 +14,18 @@ version 14.0
 clear
 	syntax , [wd(string) website(string)] hp(string) word(string) wave(string)  	
 	qui cd "`wd'" 
+			local wlist ""			
+			local wave "`wave'" 
+			local wave=subinstr("`wave'"," -","-",.)
+			local wave=subinstr("`wave'","- ","-",.)
+			local wave=subinstr("`wave'"," - ","-",.)
+			local wave=subinstr("`wave'","-","/",.)
+			foreach www of numlist `wave' {
+				local www1=string(`www',"%02.0f")	
+				local wlist `wlist' `www1'	
+			}
+			local wave "`wlist'"	
+			
 	local v1 "`wave'" 
 	return scalar NW=wordcount("`v1'") 
 	

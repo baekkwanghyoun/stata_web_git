@@ -15,12 +15,19 @@
  2019-11-09: Version 3 (21차 까지 사용)
  2020-11-06: Web버전을 위한 수정 
  2020-11-09: 22차 업데이트 
-=============================================*/
+ 2021-01-12: 2000년 업종 변수 수정 , 2017년 업종 변수 추가, sample18 변수 추가 
+ 2021-02-01: KLI 요청사항 수정 
+ 2021-02-02: 노동패널팀 수정 
+ 1) 98원가구 여부(sample98) 라벨 수정 
+ 2) 18통합표본 가구가중치 (h_weight18) 변수 추가
+ 3) 가구주의 교육수준(h_edu) 문제 수정 
+ 4) wave 라벨 변경
+=====================================================================*/
 	program define smart_klips_p_v3, rclass 
 	version 14.0 
 	clear 
 	set more off
-	syntax newvarlist(min=1 max=100 numeric generate) , [wd(string) wide website(string) sfolder(string)] wave(string)   
+	syntax newvarlist(min=1 max=100 numeric generate) , [wd(string) wide website(string) ] wave(string)   
 	qui cd "`wd'" 
 	local v1 "`wave'" 
 	return scalar NW=wordcount("`v1'") 
@@ -89,15 +96,20 @@
 						label var ``i'' "가구주와의 관계(코드북 참고)" 
 						}						
 								
+
+/***** 노동패널팀 수정: 교육수준(p_edu) 변수 수정 *****/								
+								
 						* 5번 
 						else if "``i''"=="p_edu" {
 							recode p`v'0110 (1=.) (2=1) (3/4=2) (5=3) (6=5) (7/9=6) (-1 99=.), gen(``i'')
 							tempvar bb 
 							gen `bb'=p`v'0111
 							replace ``i''=2 if ``i''==3 & (`bb'>1 & `bb'<9)
-							replace ``i''=4 if (p`v'0110==5| p`v'0110==7) & (`bb'>1 & `bb'<9) 				
-							label var ``i'' "교육수준(1=무학. 2=고졸미만. 3=고졸, 4=대재및 중퇴, 5=전문대졸 6=대졸이상)" 
+							replace ``i''=4 if (p`v'0110==6 | p`v'0110==7) & (`bb'>1 & `bb'<9) 				
+							label var ``i'' "교육수준(1=무학. 2=고졸미만. 3=고졸, 4=대재/중퇴, 5=전문대졸 6=대졸이상)" 
 						}
+							
+					
 						
 						* 6번: 종교 : 2차년도부터는 신규응답자만 
 						else if "``i''"=="p_religion" {
@@ -178,14 +190,14 @@
 																					
 						* 11번 : 업종  
 						else if "``i''"=="p_ind2000" {			
-							gen ``i''=p`v'0330							
+							gen ``i''=p`v'0340   // 2021-01-12 수정 							
 							mvdecode ``i'' , mv(-1 999=.) 
 							label var ``i'' "업종(2000): 2000년 분류 , 코드북 참고  " 
 						}	
 						
 						else if "``i''"=="p_ind2007" {	
 						    if  "`v'"=="12" | "`v'"=="13" |"`v'"=="14" |"`v'"=="15"|"`v'"=="16" |"`v'"=="17"| "`v'"=="18"| "`v'"=="19" | "`v'"=="20" | "`v'"=="21"| "`v'"=="22"    {   
-								gen ``i''=p`v'0331						
+								gen ``i''=p`v'0341						
 								mvdecode ``i'' , mv(-1 999=.) 
 							}
 							else {
@@ -195,16 +207,29 @@
 							label var ``i'' "업종(2007): 2007년 분류, 코드북 참고  " 
 						}
 						
+						else if "``i''"=="p_ind2017" {	
+						    if  "`v'"=="12" | "`v'"=="13" |"`v'"=="14" |"`v'"=="15"|"`v'"=="16" |"`v'"=="17"| "`v'"=="18"| "`v'"=="19" | "`v'"=="20" | "`v'"=="21"| "`v'"=="22"    {   
+								gen ``i''=p`v'0342						
+								mvdecode ``i'' , mv(-1 999=.) 
+							}
+							else {
+								gen ``i''=.	
+							}						
+							
+							label var ``i'' "업종(2017): 2017년 분류, 코드북 참고  " 
+						}
+						
+						
 						* 직종 
 						else if "``i''"=="p_jobfam2000" {			
-							gen ``i''=p`v'0332							
+							gen ``i''=p`v'0350							
 							mvdecode ``i'' , mv(-1 999=.) 
 							label var ``i'' "직종(2000): 2000년 분류, 코드북 참고  " 
 						}	
 						
 						else if "``i''"=="p_jobfam2007" {			
 							if  "`v'"=="12" | "`v'"=="13" |"`v'"=="14" |"`v'"=="15"|"`v'"=="16" |"`v'"=="17"| "`v'"=="18"| "`v'"=="19" | "`v'"=="20"| "`v'"=="21"  | "`v'"=="22"  {   
-								gen ``i''=p`v'0333						
+								gen ``i''=p`v'0351						
 								mvdecode ``i'' , mv(-1 999=.) 
 							}
 							else {
@@ -212,7 +237,19 @@
 							}
 							label var ``i'' "직종(2007): 2007년분류, 코드북 참고 " 
 						}
-															
+						
+						else if "``i''"=="p_jobfam2017" {			
+							if  "`v'"=="12" | "`v'"=="13" |"`v'"=="14" |"`v'"=="15"|"`v'"=="16" |"`v'"=="17"| "`v'"=="18"| "`v'"=="19" | "`v'"=="20"| "`v'"=="21"  | "`v'"=="22"  {   
+								gen ``i''=p`v'0352						
+								mvdecode ``i'' , mv(-1 999=.) 
+							}
+							else {
+								gen ``i''=.	
+							}
+							label var ``i'' "직종(2017): 2017년분류, 코드북 참고 " 
+						}
+						
+						
 						* 15번 : 종업원규모 
 						else if "``i''"=="p_firm_size" {
 						tempvar size1 size2 
@@ -238,7 +275,7 @@
 							label var ``i'' " 취업시기(년도와 월)" 
 						}
 						/*================================================*/
-						else if "``i''"=="p_weight_1" {	
+						else if "``i''"=="p_weight98_l" {	
 						
 							if "`v'"=="01" {
 								gen ``i''=.
@@ -249,7 +286,7 @@
 							label var ``i'' "종단가중치(98표본)"
 						}
 						
-						else if "``i''"=="p_weight_2" {		
+						else if "``i''"=="p_weight98_c" {		
 							if "`v'"=="01" {
 								gen ``i''=w`v'p
 							}
@@ -259,7 +296,7 @@
 							label var ``i'' "횡단가중치(98표본)"
 						}
 						
-						else if "``i''"=="p_weight_3" {	
+						else if "``i''"=="p_weight09_l" {	
 						
 							if "`v'"=="12"  {
 								gen ``i''=.
@@ -270,10 +307,10 @@
 							else {
 								gen ``i''=.
 							}
-							label var ``i'' "종단가중치(통합표본)"
+							label var ``i'' "종단가중치(09통합표본)"
 						}
 						
-						else if "``i''"=="p_weight_4" {			
+						else if "``i''"=="p_weight09_c" {			
 							if "`v'"=="12"  {
 								gen ``i''=sw`v'p
 							}	
@@ -284,26 +321,72 @@
 							else {
 								gen ``i''=.
 							}
-							label var ``i'' "횡단가중치(통합표본)"
+							label var ``i'' "횡단가중치(09통합표본)"
 						}
+						
+/***** 노동패널팀 수정: 18통합표본 종단가중치 (p_weight18_l) 변수 추가 *****/		
+
+						else if "``i''"=="p_weight18_l" {	
+							if "`v'"=="21"  {
+								gen ``i''=.
+							}
+							else if "`v'"=="22" {
+								gen ``i''=nw`v'p_l
+							}
+							else {
+								gen ``i''=.
+							}
+							label var ``i'' "종단가중치(18통합표본)"
+						}
+
+						
+/***** 노동패널팀 수정: 18통합표본 횡단가중치 (p_weight18_l) 변수 추가 *****/
+
+						else if "``i''"=="p_weight18_c" {			
+							if "`v'"=="21"  {
+								gen ``i''=nw`v'p
+							}	
+							else if "`v'"=="22"{
+								gen ``i''=nw`v'p_c
+							}
+							else {
+								gen ``i''=.
+							}
+							label var ``i'' "횡단가중치(18통합표본)"
+						}				
+						
+/***** 노동패널팀 수정: 98원가구 여부(sample98) 라벨 수정 *****/
+						
 						* sample98	: 가구원 데이터에서 		
 						else if "``i''"=="p_sample98" {
 							gen   ``i''=sample98				
-							label var ``i'' "98원가구 여부(1=98원가구, 2=분가가구,3=조사대상아님) " 
+							label var ``i'' "98원가구 여부(1=98원가구, 2=98분가가구,3=조사대상아님) " 
 						}
 						
 						* sample09 : 가구원 데이터 에서 
 						else if "``i''"=="p_sample09" {
-							if "`v'"=="12" |"`v'"=="13" | "`v'"=="13" | "`v'"=="14"| "`v'"=="15"| "`v'"=="16"| "`v'"=="17"| "`v'"=="18"| "`v'"=="19"| "`v'"=="20"    | "`v'"=="21" {
+							if "`v'"=="12" |"`v'"=="13" | "`v'"=="13" | "`v'"=="14"| "`v'"=="15"| "`v'"=="16"| "`v'"=="17"| "`v'"=="18"| "`v'"=="19"| "`v'"=="20"    | "`v'"=="21" | "`v'"=="22" {
 							gen   ``i''=sample09
 							}
 							
 							else {
 							gen   ``i''=.
 							}
-							label var ``i'' "통합표본 원가구여부(1=통합표본원가구, 2=분가가구, 3=조사대상아님)" 
+							label var ``i'' "09통합표본 원가구여부(1=09통합표본원가구, 2=09분가가구, 3=조사대상아님)" 
 						}				
 			
+					* sample18 : 가구원 데이터 에서 
+						else if "``i''"=="p_sample18" {
+							if  "`v'"=="21"    | "`v'"=="22" {
+							gen   ``i''=sample18
+							}
+							
+							else {
+							gen   ``i''=.
+							}
+							label var ``i'' "18통합표본 원가구여부(1=18통합표본원가구, 2=18분가가구, 3=조사대상아님)" 
+						}	
+						
 												
 						* error message 
 						else {
@@ -316,14 +399,14 @@
 			gen wave1=real(wave)
 			drop wave
 			rename wave1 wave 
-			label var wave "서베이차수" 
+			label var wave "패널차수" 
 			gen year=wave+1997
 			label var year "조사년도"
 			rename hhid`v' hhid 
 			drop if hhid==. 
-			label var hhid "가구id"  
+			label var hhid "가구번호"  
 			drop if pid==. 
-			label var pid "가구원id"  
+			label var pid "개인고유번호"  
 			keep hhid pid wave year `varlist'
 						
 			keep hhid pid wave year p_* 
@@ -340,7 +423,7 @@
 			  tsset pid wave 	
 			  compress
 			  capture format p_job_begin* %tm 
-			  cd "`sfolder'"
+			  
 			  save klips_p_final, replace    
 			 }
 	}
@@ -361,7 +444,7 @@
 			tsset pid wave 	
 			compress
 			capture format p_job_begin* %tm 
-			cd "`sfolder'"
+			
 			save klips_p_final, replace 
 	}
 			
@@ -374,7 +457,7 @@
 	capture drop __* 
 	compress 	
 	capture format p_job_begin* %tm 
-	cd "`sfolder'"
+	
 	save klips_p_final_`wide', replace 
 	}	
 	

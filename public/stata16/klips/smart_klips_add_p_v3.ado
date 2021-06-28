@@ -15,7 +15,7 @@
 	version 14.0 
 	clear 
 	set more off
-    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) sfolder(string) ] wave(string)  
+    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string)  ] wave(string)  
 	qui cd "`wd'" 
 	local v1 "`wave'" 
 	return scalar NW=wordcount("`v1'") 
@@ -85,7 +85,7 @@
 					  format hhid pid %15.0g
 					  order hhid pid wave 
 					  drop if pid==.
-					  cd "`sfolder'"
+					  
 					  save klips_add_p, replace		 
 					  }
 					}
@@ -105,13 +105,12 @@
 						capture drop __*
 						compress
 						drop if pid==.
-						cd "`sfolder'"
+						
 						save klips_add_p, replace 		     
 									 
 				}
 			
-			
-qui cd "`wd'"
+
 end 
 
 		

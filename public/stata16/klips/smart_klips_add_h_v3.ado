@@ -15,7 +15,7 @@
 	version 14.0 
 	clear 
 	set more off
-    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) sfolder(string)] wave(string) 
+    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) ] wave(string) 
 	qui cd "`wd'"
 	local v1 "`wave'" 
 	return scalar NW=wordcount("`v1'") 
@@ -90,13 +90,10 @@
 						 order hhid wave
 						 tsset hhid wave
 						 compress
-						 format hhid %15.0g
-						 cd "`sfolder'"
-						 save klips_add_h, replace     
-									 
-				}				
+						 format hhid %15.0g						 
+						 save klips_add_h, replace   									 
+				}		
 	
-	qui cd "`wd'"
 end 
 
 		

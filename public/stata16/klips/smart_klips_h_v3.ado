@@ -26,12 +26,19 @@
  2019-10-15: 21차 업데이터 
  2019-11-09: Version 3 (21차 까지 사용)
  2020-11-09: 22차 업데이트 
+ 2021-01-12: sample18 변수 추가 
+ 2021-02-01: 자녀장려금 이전소득에 포함 
+ 2021-02-02: 노동패널팀 수정  
+ 1) 98원가구 여부(sample98) 라벨 수정 
+ 2) 18통합표본 가구가중치 (h_weight18) 변수 추가
+ 3) 가구주의 교육수준(h_edu) 문제 수정  
+ 4) wave 라벨 수정 
 ==============================================*/
 	program define smart_klips_h_v3, rclass 
 	version 14.0 
 	clear 
 	set more off
-	syntax newvarlist(min=1 max=50 numeric generate) , [wd(string) wide website(string) sfolder(string)] wave(string) 	
+	syntax newvarlist(min=1 max=50 numeric generate) , [wd(string) wide website(string) ] wave(string) 	
 	qui cd "`wd'" 
 	local v1 "`wave'" 
 	return scalar NW=wordcount("`v1'") 
@@ -137,7 +144,7 @@
 						replace `inc1'=. if h`v'2151==2
 			    }	
 			    
-				else if "`v'"=="13" | "`v'"=="14" | "`v'"=="15" | "`v'"=="16" | "`v'"=="17" | "`v'"=="18" | "`v'"=="19" | "`v'"=="20" | "`v'"=="21"| "`v'"=="22"  { 
+				else if "`v'"=="13" | "`v'"=="14" | "`v'"=="15" | "`v'"=="16" | "`v'"=="17" | "`v'"=="18"   { 
 						tempvar h`v'2156
 						gen `h`v'2156'=.  
 						
@@ -149,6 +156,18 @@
 						replace `inc1'=. if h`v'2151==2 & h`v'4001==2   // 근로소득 장려세 포함
 			    }
 				
+				else if  "`v'"=="19" | "`v'"=="20" | "`v'"=="21"| "`v'"=="22" {
+					
+					    tempvar h`v'2156
+						gen `h`v'2156'=.  
+						
+						mvdecode h`v'2152 h`v'2153 h`v'2155 `h`v'2156' ///
+						h`v'2157 h`v'2158 h`v'2159 h`v'2160 h`v'4002 h`v'4004 , mv(-1 99999  999999 9999=.)
+						
+						egen   `inc1'=rowtotal(h`v'2152 h`v'2153 h`v'2155 `h`v'2156' ///
+						h`v'2157 h`v'2158 h`v'2159 h`v'2160 h`v'4002 h`v'4004), miss
+						replace `inc1'=. if h`v'2151==2 & h`v'4001==2 & h`v'4003==2   // 근로소득 & 자녀 장려금  장려세 포함					
+				}
 				
 				else if "`v'"=="08" | "`v'"=="07" |"`v'"=="06" {
 						tempvar h`v'2157 h`v'2158 h`v'2159
@@ -557,12 +576,16 @@
 				replace `bb'=`edu0`n'' if `head`n''==10
 				}  	
 								
+/***** 노동패널팀 수정: 가구주의 교육수준(h_hedu) 변수 수정 *****/
+
 				recode `aa' (1=.) (2=1) (3/4=2) (5=3) (6=5) (7/9=6) (-1 99=.), gen(``i'')
 				replace ``i''=2 if ``i''==3 & (`bb'>1 & `bb'<9)
-				replace ``i''=4 if (`aa'==5| `aa'==7) & (`bb'>1 & `bb'<9) 
+				replace ``i''=4 if (`aa'==6 | `aa'==7) & (`bb'>1 & `bb'<9) 
 								
-				label var ``i'' "가구주 학력(1=무학. 2=고졸미만. 3=고졸, 4=대재및 중퇴, 5=전문대졸 6=대졸이상)"			
-			}
+				label var ``i'' "가구주 학력(1=무학. 2=고졸미만. 3=고졸, 4=대재/중퇴, 5=전문대졸 6=대졸이상)"			
+			}	
+			
+	
 							
 			* 6번 : 이전소득 
 			else if "``i''"=="h_inc_1" {
@@ -829,13 +852,13 @@
 			}	
 			
 			* 가중치 변수 (98표본) 
-			else if "``i''"=="h_weight_1" {
+			else if "``i''"=="h_weight98" {
 				gen   ``i''=w`v'h
 				label var ``i'' "98표본 가구가중치" 
 			}
 			
-			* 가중치 변수 (통합표본) 
-			else if "``i''"=="h_weight_2" {
+			* 가중치 변수 (09통합표본) 
+			else if "``i''"=="h_weight09" {
 			    if "`v'"=="12" |"`v'"=="13" | "`v'"=="13" | "`v'"=="14"| "`v'"=="15" | "`v'"=="16"| "`v'"=="17"| "`v'"=="18" | "`v'"=="19" | "`v'"=="20" | "`v'"=="21"| "`v'"=="22"    {
 				gen   ``i''=sw`v'h				
 				}
@@ -843,8 +866,24 @@
 				else {
 				gen   ``i''=.
 				}
-				label var ``i'' "통합표본 가구가중치" 
+				label var ``i'' "09통합표본 가구가중치" 
 			}	
+
+/***** 노동패널팀 수정: 18통합표본 가구가중치 (h_weight18) 변수 추가 *****/
+
+			* 가중치 변수 (18통합표본) 	
+			else if "``i''"=="h_weight18" {
+			    if  "`v'"=="21"| "`v'"=="22"   {
+				gen   ``i''=nw`v'h
+				}
+				
+				else {
+				gen   ``i''=.
+				}
+				label var ``i'' "18통합표본 가구가중치" 
+			}	
+			
+			
 			
 			* 소득10분위 
 			else if "``i''"=="h_incomeq" {
@@ -863,11 +902,14 @@
 				gen ``i''=1+0.5*(`h_num_total'-`h_num_kid'-1)+0.3*`h_num_kid'
 				label var ``i'' "OECD 가구균등화지수_modified(1+0.5*(number of adults-1)+0.3*number of children under 14)" 
 			}				
+
 			
+/***** 노동패널팀 수정: 98원가구 여부(sample98) 라벨 수정 *****/
+
 			* sample98			
 			else if "``i''"=="h_sample98" {
 				gen   ``i''=sample98				
-				label var ``i'' "98원가구 여부(1=98원가구, 2=분가가구,3=조사대상아님) " 
+				label var ``i'' "98원가구 여부(1=98원가구, 2=98분가가구,3=조사대상아님) " 
 			}
 			
 			* sample09
@@ -879,9 +921,22 @@
 				else {
 				gen   ``i''=.
 				}
-				label var ``i'' "통합표본 원가구여부(1=통합표본원가구, 2=분가가구, 3=조사대상아님)" 
+				label var ``i'' "09통합표본 원가구여부(1=09통합표본원가구, 2=09분가가구, 3=조사대상아님)" 
 			}				
-					
+			
+			* sample18
+			else if "``i''"=="h_sample18" {
+			    if  "`v'"=="21"| "`v'"=="22"   {
+				gen   ``i''=sample18
+				}
+				
+				else {
+				gen   ``i''=.
+				}
+				label var ``i'' "18통합표본 원가구여부(1=18통합표본원가구, 2=18분가가구, 3=조사대상아님)" 
+			}		
+			
+			
 			* error message 
 		    else {
 	     	di as err "``i'' is not supposed to be on the new variable list" 
@@ -893,13 +948,13 @@
 			gen wave1=real(wave)
 			drop wave
 			rename wave1 wave 
-			label var wave "서베이차수" 
+			label var wave "패널차수" 
 		    gen year=wave+1997
 			label var year "조사년도"
 			rename hhid`v' hhid 
 			drop if hhid==. 
 			drop if year==.
-			label var hhid "가구id"  
+			label var hhid "가구번호"  
 			keep hhid wave year `varlist'
 				        			
 	tempfile klips`v'h_1 
@@ -912,7 +967,7 @@
 		  tsset hhid wave 
 		  capture drop __*
 		  compress
-		  cd "`sfolder'"
+		  
 		  save klips_h_final, replace    
 		 }
 	}
@@ -933,7 +988,7 @@
 			 tsset hhid wave
 			 compress
 			 format hhid %15.0g
-			 cd "`sfolder'"
+			 
 			 save klips_h_final, replace 	
 			 
 	}
@@ -945,7 +1000,7 @@
 		order hhid 
 		capture drop __*
 		compress
-		cd "`sfolder'"
+		
 		save klips_h_final_`wide', replace 
 	}
 	
