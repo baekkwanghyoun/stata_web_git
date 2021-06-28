@@ -206,7 +206,7 @@ class StataController extends Controller
                 'kt_select2_4' => 'required_without:kt_select2_3',
                 'filename' => 'required',
             ],[
-                'kt_select2_5.required' => '- 차수를 선택하셔야 합니다.',
+                'kt_select2_5.required' => '- 차수를 선택하셔야 합니다. ',
                 'kt_select2_3.required_without' => '- 가구 레벨 변수 또는 가구원 레벨 변수를 선택하셔야 합니다',
                 'kt_select2_4.required_without' => '- 가구 레벨 변수 또는 가구원 레벨 변수를 선택하셔야 합니다',
                 'kt_select2_3.required' => '- 가구 레벨 변수를 선택하셔야 합니다',
