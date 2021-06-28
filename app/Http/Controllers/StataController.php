@@ -255,7 +255,13 @@ class StataController extends Controller
 //        });
 //        $filesave = implode(" ", $arFile);
         $filesave = request('filesave')??'';
-        $filesaveVal = strtolower($filesave);
+        if($filesave!=='Stata') {
+            $filesaveVal = strtolower($filesave);
+        }
+        else {
+            $filesaveVal = "";
+        }
+
         /*if($filesave=='Excel') {
             $filesaveVal = ' excel';
         } else if($filesave=='Csv') {
