@@ -12,14 +12,12 @@ smart_klips 명령어
 2020-11-09: 22차 까지 업데이트
 2021-02-01: KLI 요청사항 업데이트
 2021-04-09: 제이슨티지 인찬호 codebook zip 파일처리 변경
-2021-05-17: 제이슨티지 인찬호 소스 줄 맞춤(tab ==> space(4) 변경 
-                       zip파일 처리 수정
 ==============================================*/
 	program define smart_klips_v3, rclass
 	version 14.0
 	clear
 	set more off
-    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) save(string) add_h(string) add_p(string) add_a1(string) add_a2(string) add_a3(string) a1_wave(string) a2_wave(string) a3_wave(string) excel csv ] wave(string)
+    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) save(string) add_h(string) add_p(string) add_a1(string) add_a2(string) add_a3(string) a1_wave(string) a2_wave(string) a3_wave(string) excel csv stata sas spss] wave(string)
 
 	/*================================================================*/
 	* error message displayed
@@ -618,27 +616,39 @@ smart_klips 명령어
     capture    erase klips_add_a21.dta
     capture    erase klips_add_a22.dta
 
-    /* ==================================================================================
-    * 2021-05-17 제이슨티지 인찬호 zip처리 로직 변경 시작 
-    *                       dta 파일과 codebook파일(xlsx, csv파일이 항상 저장 가능하게 수정
-    * ================================================================================== */
+ 
+   /* =============================================================================
+   * 2021-04-09  제이슨티지 인찬호 codebook zip 파일처리 추가 시작
+   * =============================================================================*/
     quietly {
         if "`save'" ~= "" {
-            if "`csv'"=="" {
-                
+            if "`csv'"==""  &  "`excel'"=="" {
+            
+                 zipfile    "`save'*.*", saving ("`save'.zip", replace )
+                 zipfile    "`save'.dta" "`save'_codebook.xlsx" "`save'_codebook.csv", saving ("`save'.zip", replace )
+                 capture    erase "`save'.dta"
+            } 
+            if "`csv'"~=""  ||  "`excel'"~="" {
+                 capture    erase "`save'.dta"
+                 zipfile    "`save'.csv" "`save'.xlsx" "`save'_codebook.xlsx" "`save'_codebook.csv", saving ("`save'.zip", replace )
             }
-            zipfile    "`save'.dta" "`save'.xlsx" "`save'.csv" "`save'_codebook.xlsx" "`save'_codebook.csv", saving ("`save'.zip", replace )
-            capture    erase "`save'.dta"
             capture    erase "`save'.xlsx"
             capture    erase "`save'_codebook.xlsx"
             capture    erase "`save'.csv"
             capture    erase "`save'_codebook.csv"
             capture    erase klips_final.dta
-        }
+        } 
+        
         if "`save'" == "" {
             capture    erase "klips_final_add.dta"
-            zipfile    "klips_final.dta" "klips_final.xlsx" "klips_final.csv" "klips_final_codebook.xlsx" "klips_final_codebook.csv", saving ("klips_final.zip", replace )
-            capture    erase "klips_final.dta"
+            if "`csv'"==""  &  "`excel'"=="" {
+                 zipfile    "klips_final.dta" "klips_final_codebook.xlsx" "klips_final_codebook.csv" , saving ("klips_final.zip", replace )
+                 capture    erase "klips_final.dta"
+            }
+            if "`csv'"~=""  ||  "`excel'"~="" {
+                 capture    erase "klips_final.dta"
+                 zipfile    "klips_final.xlsx" "klips_final_add.xlsx" "klips_final.csv" "klips_final_add.csv" "klips_final_codebook.xlsx" "klips_final_codebook.csv" , saving ("klips_final.zip", replace )
+            }
             capture    erase "klips_final.xlsx"
             capture    erase "klips_final_add.xlsx"
             capture    erase "klips_final_codebook.xlsx"
@@ -646,46 +656,8 @@ smart_klips 명령어
             capture    erase "klips_final_add.csv"
             capture    erase "klips_final_codebook.csv"
         }
-        /* =============================================================================
-        * 2021-04-09  제이슨티지 인찬호 codebook zip 파일처리 추가 시작
-        * =============================================================================
-        * if "`save'" ~= "" {
-        *     if "`csv'"==""  &  "`excel'"=="" {
-        *          zipfile    "`save'*.*", saving ("`save'.zip", replace )
-        *          capture    erase "`save'.dta"
-        *     } 
-        *     if "`csv'"~=""  ||  "`excel'"~="" {
-        *          capture    erase "`save'.dta"
-        *          zipfile    "`save'*.*", saving ("`save'.zip", replace )
-        *     }
-        *     capture    erase "`save'.xlsx"
-        *     capture    erase "`save'_codebook.xlsx"
-        *     capture    erase "`save'.csv"
-        *     capture    erase "`save'_codebook.csv"
-        *     capture    erase klips_final.dta
-        * } 
-        * 
-        * if "`save'" == "" {
-        *     capture    erase "klips_final_add.dta"
-        *     if "`csv'"==""  &  "`excel'"=="" {
-        *          zipfile    "klips_final*.*", saving ("klips_final.zip", replace )
-        *          capture    erase "klips_final.dta"
-        *     }
-        *     if "`csv'"~=""  ||  "`excel'"~="" {
-        *          capture    erase "klips_final.dta"
-        *          zipfile    "klips_final*.*", saving ("klips_final.zip", replace )
-        *     }
-        *     capture    erase "klips_final.xlsx"
-        *     capture    erase "klips_final_add.xlsx"
-        *     capture    erase "klips_final_codebook.xlsx"
-        *     capture    erase "klips_final.csv"
-        *     capture    erase "klips_final_add.csv"
-        *     capture    erase "klips_final_codebook.csv"
-        * } 
-        * =============================================================================
-        * 2021-04-09  제이슨티지 인찬호 codebook zip 파일처리 추가 종료
-   * ==================================================================================
-   * 2021-05-17 제이슨티지 인찬호 zip처리 로직 변경 종료
-   * ================================================================================== */
-   }
+    }
+   /* =============================================================================
+   * 2021-04-09  제이슨티지 인찬호 codebook zip 파일처리 추가 종료
+   * =============================================================================*/
 end
