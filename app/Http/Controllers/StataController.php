@@ -249,12 +249,12 @@ class StataController extends Controller
         $hp = request('hp');
         $word = request('word');
 
-        $arFile = request('filesave')??[];
-        $arFile = Arr::where($arFile, function ($val, $key) {
-           return $key != 'Stata';
-        });
-        $filesave = implode(" ", $arFile);
-
+//        $arFile = request('filesave')??[];
+//        $arFile = Arr::where($arFile, function ($val, $key) {
+//           return $key != 'Stata';
+//        });
+//        $filesave = implode(" ", $arFile);
+        $filesave = request('filesave')??'';
         $filesaveVal = strtolower($filesave);
         /*if($filesave=='Excel') {
             $filesaveVal = ' excel';
