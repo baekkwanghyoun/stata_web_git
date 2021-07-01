@@ -329,7 +329,7 @@ class StataController extends Controller
         $add_p = $add_p!=''?" add_p({$add_p})":'';*/
 
         if($tab==='create') {//C:\\ado\\plus\\s
-            $text .= "smart_klips_v3 ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p}"; //D:\\0.silver
+            $text .= "smart_klips_v4 ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p}"; //D:\\0.silver
 
         }
         else if($tab==='search') {
