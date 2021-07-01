@@ -19,6 +19,7 @@ use App\Http\Controllers\TestController;
 });*/
 
 Route::get('/', [StataController::class, 'quasar'])->name('quasar.index');
+Route::get('/gatest', [StataController::class, 'gatest'])->name('quasar.index');
 
 
 /*

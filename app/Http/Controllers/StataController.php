@@ -13,8 +13,36 @@ use Mockery\Exception;
 use phpDocumentor\Reflection\Types\Array_;
 use Symfony\Component\VarDumper\VarDumper;
 
+/*use Analytics;
+use Spatie\Analytics\Period;*/
+
 class StataController extends Controller
 {
+    public function gatest()
+    {
+        /*
+        //fetch the most visited pages for today and the past week
+        $a = Analytics::fetchMostVisitedPages(Period::days(7));
+        dump($a);
+
+        echo "Most visited pages";
+        $b = Analytics::fetchMostVisitedPages(Period::months(6));
+        dump($b);
+
+        echo "Top referrer";
+        dump(Analytics::fetchTopReferrers(Period::months(6)));
+
+        echo "User Types";
+        dump(Analytics::fetchUserTypes(Period::months(6)));
+
+        echo "Top browsers";
+        dump(Analytics::fetchTopBrowsers(Period::months(6)));
+
+        //fetch visitors and page views for the past week
+        //Analytics::fetchVisitorsAndPageViews(Period::days(7));
+        */
+    }
+
     public function chart()
     {
         // ExampleController.php
@@ -374,7 +402,7 @@ class StataController extends Controller
                     return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success',]);
                 }
                 else {
-                    return response()->json(['errors'=>['data가 조회되지 않았습니다.'], 'message'=>'data가 조회되지 않았습니다.'], 422);
+                    return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.'], 422);
                 }
             }
             else if($tab==='search') {
