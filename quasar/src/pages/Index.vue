@@ -384,7 +384,7 @@
                                     <div class="q-mb-xl"></div>
                                     <!-- 제출 -->
                                     <div class="q-mt-md row justify-center q-gutter-sm">
-                                        <q-btn class="glossy" type="submit" color="primary" label="데이터 추출2" />
+                                        <q-btn class="glossy" type="submit" color="primary" label="데이터 추출" />
                                         <q-btn class="glossy" @click="searchInit()"  color="white" text-color="black" label="초기화" />
                                     </div>
 
