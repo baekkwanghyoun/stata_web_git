@@ -77,17 +77,17 @@
                                             </template>
                                             <div class="row">
                                                 <div class="q-pa-sm q-ma-md bg-grey-2  rounded-borders">
-                                                    <q-option-group @input="waveSelectChg('wave')" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
+                                                    <q-option-group class="text-subtitle1" @input="waveSelectChg('wave')" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
                                                     <q-item dense>
                                                         <q-item-section class="itemSectionWave" avatar>
-                                                            <q-checkbox    v-model="wave" :val=waveLabel(index) />
+                                                            <q-checkbox  @input="waveSelectDataChg()"  v-model="wave" :val=waveLabel(index) />
                                                         </q-item-section>
                                                         <q-item-section>
-                                                            <q-item-label>{{waveLabel(index)}}차수</q-item-label>
+                                                            <q-item-label >{{waveLabel(index)}}차수</q-item-label>
                                                         </q-item-section>
                                                     </q-item>
                                                 </div>
@@ -768,7 +768,6 @@
         Spss:'',
         waveCount:22,
         waveSelect:'',
-        waveSelect2:'',
         //waveSelectTab2:'',
         waveSelectOptions:[
           {
@@ -776,11 +775,19 @@
             value: 'all'
           },
           {
-            label: '최근 5개차수',
+            label: '최근1개차수',
+            value: '1'
+          },
+          {
+            label: '최근3개차수',
+            value: '3'
+          },
+          {
+            label: '최근5개차수',
             value: '5'
           },
           {
-            label: '최근 10개차수',
+            label: '최근10개차수',
             value: '10'
           },
           {
@@ -862,8 +869,8 @@
         if(this.wave) {
           return this.wave.sort();
         }
-
       },
+
       waveSelectChg(wavename){
         //if(this.waveSelect==='all') {
         var selectName="";
@@ -886,6 +893,18 @@
         else if(this[selectName]==='cancel') {
           this[wavename] = [];
         }
+        else if(this[selectName]==='1') {
+          this[wavename] = [];
+          for(let i=this.waveCount; i> this.waveCount-1; i--) {
+            this[wavename].push(this.waveLabel(i))
+          }
+        }
+        else if(this[selectName]==='3') {
+          this[wavename] = [];
+          for(let i=this.waveCount; i> this.waveCount-3; i--) {
+            this[wavename].push(this.waveLabel(i))
+          }
+        }
         else if(this[selectName]==='5') {
           this[wavename] = [];
           for(let i=this.waveCount; i> this.waveCount-5; i--) {
@@ -900,6 +919,44 @@
         }
       },
 
+      //차수 체크박스 변경시 (상단 최근 1~10차수 선택 옵션 변경을 위해)
+      waveSelectDataChg(evt) {
+        //debugger
+        if(this.wave.sort(function(a, b){return b-a}).toString()==[this.waveCount].toString() ) {
+          this.waveSelect = "1";
+        } else if(this.wave.sort(function(a, b){return b-a}).toString()==[this.waveCount, this.waveCount-1, this.waveCount-2].toString() ) {
+          this.waveSelect = "3";
+        } else if(this.wave.sort(function(a, b){return b-a}).toString()==[this.waveCount, this.waveCount-1, this.waveCount-2, this.waveCount-3, this.waveCount-4].toString() ) {
+          this.waveSelect = "5";
+        } else if(this.wave.sort(function(a, b){return b-a}).toString()==[this.waveCount, this.waveCount-1, this.waveCount-2, this.waveCount-3, this.waveCount-4, this.waveCount-5, this.waveCount-6, this.waveCount-7, this.waveCount-8, this.waveCount-9].toString() ) {
+          this.waveSelect = "10";
+        } else if( this.wave.length == this.waveCount) {
+          this.waveSelect = "all";
+        } else {
+          this.waveSelect = "";
+        }
+        /*
+        for(let i=this.waveCount; i> this.waveCount-10; i--) {
+
+
+          const found = this.containsAny(this.wave, [this.waveCount-1])
+          if(found) {
+
+          }*/
+
+/*        if(this.kt_select2_3.length === this.kt_select2_3_data.length) {
+          this.waveSelect2='all';
+        }
+        else {
+          this.waveSelect2='';
+        }*/
+      },
+      containsAny(source,target)
+      {
+        var result = source.filter(function(item){ return target.indexOf(item) > -1});
+        return (result.length > 0);
+      },
+      /*step2*/
       waveSelect2Chg(evt){
         if(this.waveSelect2==='all') {
           this.kt_select2_3 = [];
@@ -911,9 +968,17 @@
           this.kt_select2_3 = [];
         }
       },
+
       waveSelect2DataChg(evt) {
-        this.waveSelect2='';
+        if(this.kt_select2_3.length === this.kt_select2_3_data.length) {
+          this.waveSelect2='all';
+        }
+        else {
+          this.waveSelect2='';
+        }
       },
+
+      /*step3*/
       waveSelect3Chg(evt){
         if(this.waveSelect3==='all') {
           this.kt_select2_4 = [];
@@ -926,14 +991,17 @@
           this.kt_select2_4 = [];
         }
       },
+
       waveSelect3DataChg(evt) {
-        this.waveSelect3='';
+        //this.waveSelect3='';
+        if(this.kt_select2_4.length === this.kt_select2_4_data.length) {
+          this.waveSelect3='all';
+        }
+        else {
+          this.waveSelect3='';
+        }
       },
-      onSubmit(evt) {
-        console.log('@submit - do something here', evt)
-        //Notify.create({message: e.message, type: 'negative', html: true})
-        this.saveFile()
-      },
+
       searchInit(){
         this.waveSelect2=''
         this.waveSelect3=''
@@ -981,6 +1049,35 @@
         } finally {
           Loading.hide()
         }
+      },
+
+      onSubmit(evt) {
+        console.log('@submit - do something here', evt)
+        //Notify.create({message: e.message, type: 'negative', html: true})
+
+        // (step1 전체 선택, 1,3,5,10 중에 하나여야 하고 ), step2(가구용, 개인용 전체선택이고, 원자료 검색 없을경우)
+        if(
+          ( this.waveSelect === '1' || this.waveSelect === '3' || this.waveSelect === '5'  || this.waveSelect === '10' || this.waveSelect === 'all')
+          && this.waveSelect2 === 'all' && this.waveSelect3 === 'all' && this.add_h=== '' && this.add_p === '') {
+          this.downloadStaticFile(this.waveSelect)
+        } else {
+          this.saveFile()
+        }
+      },
+
+      downloadStaticFile(waveSelectName) {
+        var filename = this.filesave+"_"+waveSelectName+'.zip';
+        Swal.fire({
+          title: '파일을 다운 받으시겠습니까?',
+          text: filename+' 파일이 생성되었습니다.',
+          icon: 'success',
+          confirmButtonColor: '',
+          confirmButtonText: '저장하기',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.open(process.env.API+'/'+filename, "_blank");
+          }
+        })
       },
 
       async saveFile(ctx, p) {
