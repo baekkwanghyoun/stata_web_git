@@ -62,8 +62,8 @@ module.exports = function ( ctx ) {
                 //  API: JSON.stringify('http://jangtu.test:8086'),
                 //API: 'http://127.0.0.1  ',
 
-                API: 'http://52.79.82.226',
-                //API: 'https://smartklips.kli.re.kr',
+                //API: 'http://52.79.82.226',
+                API: 'https://smartklips.kli.re.kr',
 
 
                 //API: 'http://203.254.185.13',
