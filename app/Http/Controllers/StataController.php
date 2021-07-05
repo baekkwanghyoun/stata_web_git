@@ -18,6 +18,11 @@ use Spatie\Analytics\Period;*/
 
 class StataController extends Controller
 {
+    public function jat()
+    {
+        echo "jat";
+    }
+
     public function gatest()
     {
         /*
