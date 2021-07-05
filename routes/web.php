@@ -18,7 +18,7 @@ use App\Http\Controllers\TestController;
     return view('welcome');
 });*/
 
-Route::get('jat', [StataController::class, 'jat'])->name('jat.index');
+Route::get('jat', [StataController::class, 'jat'])->name('jat.index1');
 
 Route::get('/', [StataController::class, 'quasar'])->name('quasar.index');
 Route::get('/gatest', [StataController::class, 'gatest'])->name('quasar.index');
