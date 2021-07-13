@@ -233,6 +233,7 @@ class StataController extends Controller
                 'kt_select2_3' => 'bail:required_without:kt_select2_4',
                 'kt_select2_4' => 'required_without:kt_select2_3',
                 'filename' => 'required',
+                'filesave' => 'required',
             ],[
                 'kt_select2_5.required' => '- 차수를 선택해야 합니다. ',
                 'kt_select2_3.required_without' => '- 가구 레벨 변수 또는 가구원 레벨 변수를 선택해야 합니다',
@@ -240,6 +241,7 @@ class StataController extends Controller
                 'kt_select2_3.required' => '- 가구 레벨 변수를 선택해야 합니다',
                 'kt_select2_4.required' => '- 가구원 레벨 변수를 선택해야 합니다',
                 'filename.required' => '- 저장할 파일명을 입력해야합니다',
+                'filesave.required' => '- 저장할 파일타입을 선택해야합니다',
             ]);
         }
         else if($tab=='search') {
@@ -277,18 +279,18 @@ class StataController extends Controller
         $hp = request('hp');
         $word = request('word');
 
-//        $arFile = request('filesave')??[];
+        /*체크박스일경우*/
+        $arFile = request('filesave')??[];
 //        $arFile = Arr::where($arFile, function ($val, $key) {
 //           return $key != 'Stata';
 //        });
-//        $filesave = implode(" ", $arFile);
-        $filesave = request('filesave')??'';
-        if($filesave!=='Stata') {
-            $filesaveVal = strtolower($filesave);
-        }
-        else {
-            $filesaveVal = "";
-        }
+
+        /**/
+        $filesave = implode(" ", $arFile);
+
+//        $filesave = request('filesave')??'';
+
+        $filesaveVal = strtolower($filesave);
 
         /*if($filesave=='Excel') {
             $filesaveVal = ' excel';
