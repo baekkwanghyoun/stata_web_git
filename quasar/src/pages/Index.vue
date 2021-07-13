@@ -345,9 +345,9 @@
 
                                                             <!--<label>STATA(*.dta)</label>-->
 
-                                                            <q-radio v-model="filesave" val="Stata" label="STATA(*.dta)" />
-                                                            <q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />
-                                                            <q-radio v-model="filesave" val="Csv" label="Text(*.csv)" />
+                                                            <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" />
+                                                            <!--<q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />-->
+                                                            <q-checkbox v-model="filesave" val="Csv" label="Text(*.csv)" />
                                                             <!--<q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
                                                             <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>-->
                                                         </div>
@@ -720,7 +720,7 @@
         expansionSearchResult:false,
         tab: 'create', //'',
         color: 'cyan',
-        filesave:'Stata',//['Stata'],
+        filesave:['Stata'],//'Stata',//['Stata'],
         filename:'',
         wave:[],
         wave2:[],

@@ -332,7 +332,7 @@ class StataController extends Controller
 
         if($tab==='create') {//C:\\ado\\plus\\s
             $ado_name = '';
-            if($add_h=='' || $add_p=='') {
+            if($add_h=='' && $add_p=='') {
                 $ado_name = 'smart_klips_v4';
             }
             else {
