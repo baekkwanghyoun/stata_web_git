@@ -331,7 +331,14 @@ class StataController extends Controller
         $add_p = $add_p!=''?" add_p({$add_p})":'';*/
 
         if($tab==='create') {//C:\\ado\\plus\\s
-            $text .= "smart_klips_v4 ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p}"; //D:\\0.silver
+            $ado_name = '';
+            if($add_h=='' || $add_p=='') {
+                $ado_name = 'smart_klips_v4';
+            }
+            else {
+                $ado_name = 'smart_klips_v3';
+            }
+            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p}"; //D:\\0.silver
 
         }
         else if($tab==='search') {
@@ -401,7 +408,7 @@ class StataController extends Controller
         if($request->wantsJson()) {
             if($tab==='create') {
                 if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
-                    return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success',]);
+                    return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success','ado_name' => $ado_name,]);
                 }
                 else {
                     return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.'], 422);

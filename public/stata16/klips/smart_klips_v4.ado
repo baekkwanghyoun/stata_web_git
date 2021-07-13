@@ -21,7 +21,7 @@ program define smart_klips_v4
 	keep if `ifexp'
 	
 	
-	if "`excel'"=="" & "`csv'"=="" {
+	if "`stata'"!="" {
 		save `save', replace
 		local flist="`save'.dta"
 	}

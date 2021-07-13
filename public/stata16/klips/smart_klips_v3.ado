@@ -622,16 +622,19 @@ smart_klips 명령어
    * =============================================================================*/
     quietly {
         if "`save'" ~= "" {
-            if "`csv'"==""  &  "`excel'"=="" {
+            if "`csv'" == ""  &  "`excel'" == "" {
             
                  zipfile    "`save'*.*", saving ("`save'.zip", replace )
                  zipfile    "`save'.dta" "`save'_codebook.xlsx" "`save'_codebook.csv", saving ("`save'.zip", replace )
                  capture    erase "`save'.dta"
             } 
-            if "`csv'"~=""  ||  "`excel'"~="" {
-                 capture    erase "`save'.dta"
-                 zipfile    "`save'.csv" "`save'.xlsx" "`save'_codebook.xlsx" "`save'_codebook.csv", saving ("`save'.zip", replace )
+            if "`csv'" ~= ""  ||  "`excel'"~="" {
+                 if "`stata'" == ""   {
+                    capture    erase "`save'.dta"
+                 }
+                 zipfile    "`save'.dta" "`save'.csv" "`save'.xlsx" "`save'_codebook.xlsx" "`save'_codebook.csv", saving ("`save'.zip", replace )
             }
+            capture    erase "`save'.dta"
             capture    erase "`save'.xlsx"
             capture    erase "`save'_codebook.xlsx"
             capture    erase "`save'.csv"
