@@ -1052,7 +1052,7 @@
       },
 
       onSubmit(evt) {
-        console.log('@submit - do something here', evt)
+        //console.log('@submit - do something here', evt)
         //Notify.create({message: e.message, type: 'negative', html: true})
 
         // (step1 전체 선택, 1,3,5,10 중에 하나여야 하고 ), step2(가구용, 개인용 전체선택이고, 원자료 검색 없을경우)

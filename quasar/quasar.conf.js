@@ -51,26 +51,26 @@ module.exports = function ( ctx ) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
         vueRouterMode: 'history', // available values: 'hash', 'history'
+
         env: ctx.dev
             ? { // so on dev we'll have
                 API: 'http://stataweb.test:9011',
                 //API: 'http://52.79.82.226',
-
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             }
             : { // and on build (production):
                 //  API: JSON.stringify('http://jangtu.test:8086'),
                 //API: 'http://127.0.0.1  ',
-
-                //API: 'http://52.79.82.226',
-                API: 'https://smartklips.kli.re.kr',
-
-
+                API: 'http://52.79.82.226',
+                //API: 'https://smartklips.kli.re.kr',
+                
                 //API: 'http://203.254.185.13',
                 //API: 'http://10.215.1.66',
                 //PUBLISHABLE_KEY   : "pk_test_bTIg6jp85wgbq6dEiqXj4dr2"
             },
-        //publicPath:'http://52.79.82.226'
+
+
+
         publicPath:'klips'
 
       // transpile: false,
