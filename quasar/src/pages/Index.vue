@@ -1067,6 +1067,7 @@
 
       downloadStaticFile(waveSelectName) {
         var filename = this.filesave+"_"+waveSelectName+'.zip';
+        filename = filename.replace(',', '');
         Swal.fire({
           title: '파일을 다운 받으시겠습니까?',
           text: filename+' 파일이 생성되었습니다.',
