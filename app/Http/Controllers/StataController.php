@@ -332,7 +332,7 @@ class StataController extends Controller
 
         if($tab==='create') {//C:\\ado\\plus\\s
             $ado_name = '';
-            if($add_h=='' && $add_p=='') {
+            if(request('add_h')==null && request('add_p')==null) {
                 $ado_name = 'smart_klips_v4';
             }
             else {
@@ -411,7 +411,7 @@ class StataController extends Controller
                     return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success','ado_name' => $ado_name,]);
                 }
                 else {
-                    return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.'], 422);
+                    return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name], 422);
                 }
             }
             else if($tab==='search') {
