@@ -826,6 +826,7 @@
         searchResult:'',
         word:'',
         hp:'h',
+        tyCd:'',
         hpOptions:[ { label: '가구용', value: 'h' }, { label: '개인용', value: 'p' }],
         loadingMsg:'<b>자료추출시스템은 <span class="text-orange text-weight-bold">크롬</span> 또는 <span class="text-orange text-weight-bold">MS-Edge</span> 브라우저에 최적화 되어있으니,<br>해당 브라우져 사용을 권장합니다</b>'
       }
@@ -1003,6 +1004,7 @@
       },
 
       searchInit(){
+        this.tyCd = '';
         this.waveSelect2=''
         this.waveSelect3=''
         this.kt_select2_3 = [];
@@ -1018,6 +1020,7 @@
       },
 
       searchInit2(){
+        this.tyCd = '';
         this.wave2=false
         this.waveSelect2=null;
         this.word = '';
@@ -1056,13 +1059,31 @@
         //Notify.create({message: e.message, type: 'negative', html: true})
 
         // (step1 전체 선택, 1,3,5,10 중에 하나여야 하고 ), step2(가구용, 개인용 전체선택이고, 원자료 검색 없을경우)
+        /*
         if(
           ( this.waveSelect === '1' || this.waveSelect === '3' || this.waveSelect === '5'  || this.waveSelect === '10' || this.waveSelect === 'all')
           && this.waveSelect2 === 'all' && this.waveSelect3 === 'all' && this.add_h=== '' && this.add_p === '') {
           this.downloadStaticFile(this.waveSelect)
+          this.saveFile()
         } else {
           this.saveFile()
         }
+*/
+        if( ( this.waveSelect === '1' || this.waveSelect === '3' || this.waveSelect === '5'  || this.waveSelect === '10' || this.waveSelect === 'all')
+            && this.waveSelect2 === 'all' && this.waveSelect3 === 'all' && this.add_h=== '' && this.add_p === '') {
+          let _waveSElect = '';
+          if(this.waveSelect == 'all') {
+            _waveSElect = 99; // stata 요청 값이라 변경함.
+          } else {
+            _waveSElect = this.waveSelect;
+          }
+          this.tyCd = 'tyCd('+_waveSElect+')';
+        }
+        else {
+          this.tyCd = '';
+        }
+
+        this.saveFile()
       },
 
       downloadStaticFile(waveSelectName) {
@@ -1082,6 +1103,7 @@
       },
 
       async saveFile(ctx, p) {
+        debugger
         try {
           Loading.show({message: this.loadingMsg})
           /*
@@ -1103,6 +1125,7 @@
               filename:this.filename,
               add_h:this.add_h,
               add_p:this.add_p,
+              tyCd:this.tyCd,
             })
           }
           catch (e) {

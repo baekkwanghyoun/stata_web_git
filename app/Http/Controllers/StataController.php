@@ -302,6 +302,9 @@ class StataController extends Controller
         $add_h = request('add_h', '');
         $add_p = request('add_p', '');
         $this->parsingVariable($add_h, $add_p);
+
+        $tyCd = request('tyCd', '');
+
         /*///////////////////////////////////////////////////
         // h010150 : 7자리수에 2,3번째 글자가 숫자일경우 체크
         if (strlen($add_h) == 7 && is_numeric(substr($add_h, 1,2)) ) {
@@ -338,7 +341,7 @@ class StataController extends Controller
             else {
                 $ado_name = 'smart_klips_v3';
             }
-            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p}"; //D:\\0.silver
+            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$tyCd} {$add_p}"; //D:\\0.silver
 
         }
         else if($tab==='search') {
@@ -444,7 +447,12 @@ class StataController extends Controller
     {
         ////////////////////////////////
         // 가구 "H" 변수 파싱
-        $ar_add_h = explode(' ', $add_h);
+        //$ar_add_h = explode(' ', $add_h);
+        $ar_add_h = [];
+        if($add_h != '') {
+            $ar_add_h = explode(' ', $add_h);
+        }
+
         $add_h = '';
         foreach ($ar_add_h as $item) {
             ///////////////////////////////////////////////////
@@ -465,7 +473,13 @@ class StataController extends Controller
 
         ////////////////////////////////
         // 가구원 "P" 변수 파싱
-        $ar_add_p = explode(' ', $add_p);
+
+        //$ar_add_p = explode(' ', $add_p);
+        $ar_add_p = [];
+        if($add_p != '') {
+            $ar_add_p = explode(' ', $add_p);
+        }
+
         $add_p = '';
         foreach ($ar_add_p as $item_p) {
             if (strlen($item_p) == 7 && is_numeric(substr($item_p, 1,2))  ) {
