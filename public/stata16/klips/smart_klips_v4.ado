@@ -1,9 +1,10 @@
 cap program drop smart_klips_v4
 program define smart_klips_v4
-	syntax anything, [wd(string) website(string) save(string) add_h(string) add_p(string) add_a1(string) add_a2(string) add_a3(string) a1_wave(string) a2_wave(string) a3_wave(string) excel csv stata sas spss] wave(string)
+	syntax anything, [wd(string) website(string) save(string) add_h(string) add_p(string) add_a1(string) add_a2(string) add_a3(string) a1_wave(string) a2_wave(string) a3_wave(string) tyCd(string) excel csv stata sas spss] wave(string)
 	
+	timer clear
+	timer on 1
 	
-	// cd "`wd'"
 	use  klip_users, clear
 	
 	keep pid hhid wave year `anything'
@@ -18,18 +19,35 @@ program define smart_klips_v4
 		}
 		local i=`i'+1
 	}
+	
 	keep if `ifexp'
-	
-	
-	if "`stata'"!="" {
+    
+    if "`tyCd'" != "" & "`stata'"!=""  {
+		shell copy Stata_`tyCd'.dta "`save'.dta"
+		local flist="`flist' `save'.dta"
+	}
+    
+	if "`tyCd'" != "" & "`excel'"!=""  {
+		shell copy Excel_`tyCd'.xlsx "`save'.xlsx"
+		local flist="`flist' `save'.xlsx"
+    }
+
+	if "`tyCd'" != "" & "`csv'"!=""  {
+		shell copy Csv_`tyCd'.csv "`save'.csv"
+		local flist="`flist' `save'.csv"
+    }
+    
+	if "`tyCd'" == "" & "`excel'"=="" & "`csv'"==""  {
 		save `save', replace
 		local flist="`save'.dta"
 	}
-	if "`excel'"!="" {
+    
+	if "`tyCd'" == "" & "`excel'"!="" {
 		export excel using "`save'.xlsx", firstrow(variables)
 		local flist="`flist' `save'.xlsx"
 	}
-	if "`csv'"!="" {
+    
+	if "`tyCd'" == "" & "`csv'"!="" {
 		export delimited using `save', replace
 		local flist="`flist' `save'.csv"
 	}
@@ -66,4 +84,7 @@ program define smart_klips_v4
 	cap erase klips_final_var.xlsx
 	cap erase `fname'_codebook.xlsx
 	cap erase `fname'_codebook.csv
+	
+	timer off 1
+	timer list
 end
