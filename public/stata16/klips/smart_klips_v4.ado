@@ -6,7 +6,6 @@ program define smart_klips_v4
 	timer on 1
 	
 	use  klip_users, clear
-	
 	keep pid hhid wave year `anything'
 	
 	local i=1
@@ -23,17 +22,17 @@ program define smart_klips_v4
 	keep if `ifexp'
     
     if "`tyCd'" != "" & "`stata'"!=""  {
-		shell copy Stata_`tyCd'.dta "`save'.dta"
-		local flist="`flist' `save'.dta"
+		copy "Stata_`tyCd'.dta" "`save'.dta"
+		local flist= "`flist' `save'.dta"
 	}
     
 	if "`tyCd'" != "" & "`excel'"!=""  {
-		shell copy Excel_`tyCd'.xlsx "`save'.xlsx"
+		copy "Excel_`tyCd'.xlsx" "`save'.xlsx"
 		local flist="`flist' `save'.xlsx"
     }
 
 	if "`tyCd'" != "" & "`csv'"!=""  {
-		shell copy Csv_`tyCd'.csv "`save'.csv"
+		copy "Csv_`tyCd'.csv" "`save'.csv"
 		local flist="`flist' `save'.csv"
     }
     
@@ -51,7 +50,7 @@ program define smart_klips_v4
 		export delimited using `save', replace
 		local flist="`flist' `save'.csv"
 	}
-	
+	di "`flist'"
 	use code_book_all, clear
 	gen mark=.
 	replace mark=1 if vname=="pid"
