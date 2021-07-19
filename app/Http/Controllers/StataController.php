@@ -341,7 +341,7 @@ class StataController extends Controller
             else {
                 $ado_name = 'smart_klips_v3';
             }
-            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$tyCd} {$add_p}"; //D:\\0.silver
+            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$tyCd} {$add_h} {$add_p}"; //D:\\0.silver
 
         }
         else if($tab==='search') {
