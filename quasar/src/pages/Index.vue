@@ -828,7 +828,7 @@
         hp:'h',
         tyCd:'',
         hpOptions:[ { label: '가구용', value: 'h' }, { label: '개인용', value: 'p' }],
-        loadingMsg:'<b>자료추출시스템은 <span class="text-orange text-weight-bold">크롬</span> 또는 <span class="text-orange text-weight-bold">MS-Edge</span> 브라우저에 최적화 되어있으니,<br>해당 브라우져 사용을 권장합니다</b>'
+        loadingMsg:'<b>다운로드중입니다. 잠시만 기다려주세요</b>'
       }
     },
     mounted() {
