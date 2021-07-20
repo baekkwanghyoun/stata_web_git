@@ -828,7 +828,7 @@
         hp:'h',
         tyCd:'',
         hpOptions:[ { label: '가구용', value: 'h' }, { label: '개인용', value: 'p' }],
-        loadingMsg:'<b>다운로드중입니다. 잠시만 기다려주세요</b>'
+        loadingMsg:'<b>다운로드중입니다. 잠시만 기다려주세요.<br>최대 2분정도 소요될 예정입니다.</b>'
       }
     },
     mounted() {
