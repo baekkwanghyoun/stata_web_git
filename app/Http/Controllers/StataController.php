@@ -387,7 +387,7 @@ class StataController extends Controller
         */
         //Storage::move('stata16/klips/'.$filename.'.data', 'stata16/result/'.$filename.'.dta');
         //Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$filename.'.xlsx');
-
+//log
 
          $fileread = Storage::get('stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 //      $fileread = file_get_contents(public_path() . "\\" . "${filename}.log", true);// $fileread = htmlentities($fileread);
