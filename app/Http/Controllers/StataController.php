@@ -104,7 +104,7 @@ class StataController extends Controller
         $acceptDomain = ['http://stataweb.test:9011/','http://jat.co.kr/', 'https://www.kli.re.kr/', 'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
         $referer = request()->headers->get('referer');
-        $this->remotelog($referer);
+        //$this->remotelog($referer);
 
         //dd($referer);
         $result = in_array($referer, $acceptDomain);
@@ -125,6 +125,7 @@ class StataController extends Controller
 
     public function remotelog($v)
     {
+        return;
         if($v==null || $v=='') {
             $v = "null";
         }
