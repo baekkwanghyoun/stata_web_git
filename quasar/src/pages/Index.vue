@@ -380,6 +380,50 @@
                                             -->
                                         </q-expansion-item>
                                         <q-separator class="q-my-lg"></q-separator>
+
+                                        <!-- 4단계 -->
+                                        <q-expansion-item   >
+                                            <template v-slot:header>
+                                                <q-item-section avatar>
+                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 4</q-chip>
+                                                </q-item-section>
+
+                                                <q-item-section>
+                                                    <div class="text-grey-9 q-gutter-xs">
+                                                        <span class="text-weight-bolder"  >KLIPS 원자료 변수 추가(부가조사)</span>
+                                                        <span class="text-red-14 text-weight-bold text-caption"  >최대 3개 동시 선택 가능</span>
+                                                    </div>
+                                                </q-item-section>
+                                            </template>
+                                            <div class="row">
+                                                <div class="col-12 scroll overflow-hidden" >
+                                                    <q-item class="row items-center q-gutter-lg" v-for="(n, index) in 3" v-bind:key="index">
+<!--                                                        v-bind:key="n"-->
+                                                        <div class="col-5">
+                                                            <q-select outlined  v-model="a_wave[n]" :options="additionalSearchOptions" label="'부가용' 원변수 입력" clearable/>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <q-input outlined  v-model=" add_a[n]"  placeholder="추가할 변수를 선택하세요" clearable />
+                                                        </div>
+
+                                                    </q-item>
+
+
+<!--                                                    <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>-->
+                                                </div>
+                                            </div>
+                                            <!--
+                                            <q-item v-for="index in 21" tag="label" v-ripple>
+                                                <q-item-section avatar>
+                                                    <q-checkbox    v-model="wave" :val=waveLabel(index) />
+                                                </q-item-section>
+                                                <q-item-section>
+                                                    <q-item-label>{{waveLabel(index)}}차수</q-item-label>
+                                                </q-item-section>
+                                            </q-item>
+                                            -->
+                                        </q-expansion-item>
+                                        <q-separator class="q-my-lg"></q-separator>
                                     </q-list>
                                     <div class="q-mb-xl"></div>
                                     <!-- 제출 -->
@@ -766,7 +810,7 @@
         Csv:'Csv',
         Sas:'',
         Spss:'',
-        waveCount:22,
+        waveCount:23,
         waveSelect:'',
         //waveSelectTab2:'',
         waveSelectOptions:[
@@ -822,6 +866,91 @@
             value: 'none'
           }
         ],
+          a_wave:[],
+          add_a:[],
+
+/*          additionalSearch1:[],
+          add_a1:[],
+          additionalSearch2:[],
+          add_a2:[],*/
+          additionalSearchOptions:[
+              {
+                  label: '청년',
+                  value: 'all',
+                  wave: '03'
+              },
+              {
+                  label: '건강과 은퇴',
+                  value: '04',
+                  wave: '04'
+              },
+              {
+                  label: '중고령자',
+                  value: '06',
+                  wave: '06'
+              },
+              {
+                  label: '근로시간 과여가',
+                  value: '07',
+                  wave: '07'
+              },
+              {
+                  label: '노동조합과 노사',
+                  value: '08',
+                  wave: '08'
+              },
+              {
+                  label: '청년',
+                  value: '09',
+                  wave: '09'
+              },
+              {
+                  label: '고용형태',
+                  value: '10',
+                  wave: '10'
+              },
+              {
+                  label: '교육',
+                  value: '11',
+                  wave: '11'
+              },
+              {
+                  label: '시간 사용과 삶의 질',
+                  value: '17',
+                  wave: '17'
+              },
+              {
+                  label: '삶의인식/장년',
+                  value: '18',
+                  wave: '18'
+              },
+              {
+                  label: '청년',
+                  value: '19',
+                  wave: '19'
+              },
+              {
+                  label: '의사결정',
+                  value: '20',
+                  wave: '20'
+              },
+              {
+                  label: '고용형태',
+                  value: '21',
+                  wave: '21'
+              },
+              {
+                  label: '비임금',
+                  value: '22',
+                  wave: '22'
+              },
+              {
+                  label: '코로나19',
+                  value: '23',
+                  wave: '23'
+              }
+          ],
+
         // 2번째 탭 검색
         searchResult:'',
         word:'',
@@ -866,6 +995,11 @@
     },
     methods: {
       openURL,
+      add_a_clear(n) {
+        alert(this.add_a[n])
+        this.add_a[n]='';
+      },
+
       waveOrderby(){
         if(this.wave) {
           return this.wave.sort();
@@ -1103,7 +1237,7 @@
       },
 
       async saveFile(ctx, p) {
-        debugger
+        //debugger
         try {
           Loading.show({message: this.loadingMsg})
           /*
@@ -1126,6 +1260,8 @@
               add_h:this.add_h,
               add_p:this.add_p,
               tyCd:this.tyCd,
+              a_wave:this.a_wave,
+              add_a:this.add_a,
             })
           }
           catch (e) {

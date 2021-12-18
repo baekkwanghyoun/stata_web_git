@@ -304,6 +304,21 @@ class StataController extends Controller
         $add_p = request('add_p', '');
         $this->parsingVariable($add_h, $add_p);
 
+        $a_wave = request('a_wave');
+        $add_a = request('add_a');
+
+        //smart_klips_v3 h_resid_type p_age , wave(01 03 04 06) add_h(h0141) add_p(p0111) add_a1(a0101) add_a2(a1101) add_a3(a1725) a1_wave(03) a2_wave(04) a3_wave(06)
+        $addTxt='';
+        if(isset($a_wave[1]) && isset($add_a[1])) {
+            $addTxt = ' a1_wave('.$a_wave[1]['value'].') add_a1('.$add_a[1].')';
+        }
+        if(isset($a_wave[2]) && isset($add_a[2])) {
+            $addTxt .= ' a2_wave('.$a_wave[2]['value'].') add_a2('.$add_a[2].')';
+        }
+        if(isset($a_wave[3]) && isset($add_a[3])) {
+            $addTxt .= ' a3_wave('.$a_wave[3]['value'].') add_a3('.$add_a[3].')';
+        }
+
         $tyCd = request('tyCd', '');
 
         /*///////////////////////////////////////////////////
@@ -342,7 +357,7 @@ class StataController extends Controller
             else {
                 $ado_name = 'smart_klips_v3';
             }
-            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$tyCd} {$add_h} {$add_p}"; //D:\\0.silver
+            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$tyCd} {$add_h} {$add_p} {$addTxt}"; //D:\\0.silver
 
         }
         else if($tab==='search') {
@@ -354,6 +369,8 @@ class StataController extends Controller
         fwrite($fo, $text);
         fclose($fo);
 
+        // 안될때 php.ini의 shell_exec ;
+        // output은 원래 없음
         if (env('APP_ENV') == 'local') {
             $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/do/${nowDate}/${filename_req}.do");
         } else {
@@ -415,7 +432,7 @@ class StataController extends Controller
                     return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success','ado_name' => $ado_name,]);
                 }
                 else {
-                    return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name], 422);
+                     return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name], 422);
                 }
             }
             else if($tab==='search') {
