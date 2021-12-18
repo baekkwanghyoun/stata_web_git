@@ -109,7 +109,7 @@ class StataController extends Controller
         //dd($referer);
         $result = in_array($referer, $acceptDomain);
 
-        if($result || request()->getHttpHost()=='stataweb.test:9011') {
+        if($result || request()->getHttpHost()=='stataweb.test:9011' ||'http://52.79.82.226') {
             return view('quasar');
         }
         else if(Str::contains($referer, 'jat.co.kr')) {
