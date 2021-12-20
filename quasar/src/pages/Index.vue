@@ -876,7 +876,7 @@
           additionalSearchOptions:[
               {
                   label: '청년',
-                  value: 'all',
+                  value: '03',
                   wave: '03'
               },
               {
