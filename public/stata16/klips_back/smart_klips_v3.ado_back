@@ -1,0 +1,377 @@
+/*=============================================
+ 가구패널과 개인패널 합치기
+ 2014-01-17
+ smart_klips 명령어 
+
+2015-09-03 작업
+2017-06-30: 19차 업데이트 
+2018-06-29: 20차 업데이트 
+2019-10-15: 21차 업데이터 
+2019-11-09: Version 3 (21차 까지 사용)
+==============================================*/
+	program define smart_klips_v3, rclass 
+	version 14.0 
+	clear 
+	set more off
+    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) save(string) add_h(string) add_p(string) add_a1(string) add_a2(string) add_a3(string) a1_wave(string) a2_wave(string) a3_wave(string) ] wave(string) 
+	
+	local plist="" 
+	local hlist="" 
+	
+	
+	foreach v in `varlist'  {
+	  local vv1=regexm("`v'","h_")
+	  local vv2=2*regexm("`v'","p_")
+	  
+	  	  
+	   qui if `vv1'==1   {	    	   
+	   local hlist `hlist'  `v'    // 띄어쓰기 아주 중요함 
+	   }
+	   
+	   qui else if `vv2'==2 { 
+	   local plist `plist' `v'   // 띄어쓰기 아주 중요함   
+	   }
+	    	   
+	}
+	
+	local Nhlist=wordcount("`hlist'")
+	local Nplist=wordcount("`plist'")
+	
+	/*=================================================================================*/
+	* add_h와 add_p에 변수가 있는 경우 
+	if "`add_h'"~="" {
+	    if "`website'"=="" {
+			smart_klips_add_h_v3 `add_h' , wd(`wd') wave(`wave') 
+	    }
+		else {
+			smart_klips_add_h_v3 `add_h' , wd(`wd') wave(`wave') website(`website') 
+		}	
+	}
+	
+	if "`add_p'"~="" {
+		if "`website'"=="" {
+			smart_klips_add_p_v3 `add_p' , wd(`wd') wave(`wave') 
+	    }
+		else {
+			smart_klips_add_p_v3 `add_p' , wd(`wd') wave(`wave') website(`website') 
+		}
+	
+	}
+	
+	if "`add_a1'"~="" {
+		if "`website'"=="" {
+			smart_klips_add_a`a1_wave'_v3 `add_a1' , wd(`wd') 
+	    }
+		else {
+			smart_klips_add_a`a1_wave'_v3 `add_a1' , wd(`wd') website(`website') 
+		}	
+	}
+	
+	if "`add_a2'"~="" {
+		if "`website'"=="" {
+			smart_klips_add_a`a2_wave'_v3 `add_a2' , wd(`wd') 
+	    }
+		else {
+			smart_klips_add_a`a2_wave'_v3 `add_a2' , wd(`wd') website(`website') 
+		}
+	}
+	
+	if "`add_a3'"~="" {
+		if "`website'"=="" {
+			smart_klips_add_a`a3_wave'_v3 `add_a3' , wd(`wd') 
+	    }
+		else {
+			smart_klips_add_a`a3_wave'_v3 `add_a3' , wd(`wd') website(`website') 
+		}	
+	}
+	
+    if  "`add_a1'"~=""&   "`add_a2'"==""& "`add_a3'"=="" {
+		use klips_add_a`a1_wave', clear
+		save klips_add_a, replace 
+	
+	}
+	else if  "`add_a1'"~=""&   "`add_a2'"~=""& "`add_a3'"=="" {
+		use klips_add_a`a1_wave', clear
+		append using klips_add_a`a2_wave', force 
+		save klips_add_a, replace 
+	
+	}
+	else if  "`add_a1'"~=""&   "`add_a2'"~=""& "`add_a3'"~="" {
+		use klips_add_a`a1_wave', clear
+		append using klips_add_a`a2_wave', force
+		append using klips_add_a`a3_wave', force
+		save klips_add_a, replace 
+	
+	}
+		
+	
+	/*=================================================================================*/
+	
+	* Case 1 
+	if `Nhlist'==0 & `Nplist'~=0 {
+			
+				if "`website'"=="" {
+				smart_klips_p_v3 `plist' , wd(`wd') wave(`wave') 
+				}
+				else {
+				smart_klips_p_v3 `plist' , wd(`wd') wave(`wave') website(`website') 
+				}	
+				 
+			  save klips_final, replace	
+		
+		/*
+		    if "`wide'"=="wide" {
+					if "`website'"=="" {
+					smart_klips_p_v3 `plist' , wd(`wd') wave(`wave') wide 
+					}
+					else {
+					smart_klips_p_v3 `plist' , wd(`wd') wave(`wave') wide website(`website') 
+					}	
+			  save klips_final_`wide', replace 	
+			}
+		*/
+		
+		}	
+
+	* Case 2
+	else if `Nplist'==0 & `Nhlist'~=0 {			
+			
+			if "`website'"=="" {
+			smart_klips_h_v3 `hlist' , wd(`wd') wave(`wave') 
+			}
+			else {
+			smart_klips_h_v3 `hlist' , wd(`wd') wave(`wave') website(`website') 
+			}
+			
+			save klips_final, replace
+			
+			/*
+		    if "`wide'"=="wide" {		
+					if "`website'"=="" {
+					smart_klips_h_v3 `hlist' , wd(`wd') wave(`wave') wide 
+					}
+					else {
+					smart_klips_h_v3 `hlist' , wd(`wd') wave(`wave') wide  website(`website') 
+					} 
+			  save klips_final_wide, replace				
+			}
+	     */
+	}
+	* Case 3 
+	else if  `Nhlist'~=0 & `Nplist'~=0  {
+	
+				if "`website'"=="" {
+				smart_klips_h_v3 `hlist' , wd(`wd') wave(`wave') 
+				smart_klips_p_v3 `plist' , wd(`wd') wave(`wave') 
+				}
+				else {
+				smart_klips_h_v3 `hlist' , wd(`wd') wave(`wave') website(`website') 
+				smart_klips_p_v3 `plist' , wd(`wd') wave(`wave') website(`website') 
+				}				
+	
+				use klips_h_final,clear 
+				merge 1:m hhid wave using klips_p_final, nogen
+				aorder
+				order hhid pid wave year 
+				sort hhid pid wave
+			    save klips_final, replace 					
+		/*
+			if "`wide'"=="wide" {
+				capture drop year 
+				drop if pid==.
+				reshape wide hhid h_* p_*, i(pid) j(wave)
+				aorder 
+				order pid hhid*
+				
+		        save klips_final_`wide', replace 
+				}		
+		*/		
+	}
+
+/*=============================================================================*/	
+* 기본 파일과 add 파일의 merge 
+	* case 1: 기본 파일에 h만 있는 경우 
+	        use klips_final, clear 
+			qui ds
+			local aaa1=regexm(r(varlist), "hhid")
+			local aaa2=regexm(r(varlist), "pid")
+			local aaa3=`aaa1'+`aaa2'
+			if `aaa3'==1 {
+				local mastertype "h"
+			}
+			else if `aaa3'==2 {
+				local mastertype "p"
+			}
+			
+			if "`mastertype'"=="h" {
+					* case 1-1 : add_h만 있는 경우 (1 0 0)
+					if "`add_h'"~=""& "`add_p'"=="" & "`add_a1'"==""  {
+							merge 1:1 hhid wave using klips_add_h, nogen 
+							order hhid wave 
+							sort hhid wave
+							drop if hhid==.
+							save klips_final_add, replace
+					}
+					
+					* case 1-2: add_p만 있는 경우 (0 1 0)
+					if "`add_h'"==""& "`add_p'"~=""& "`add_a1'"==""  {			        
+							merge 1:m hhid wave using klips_add_p, nogen 
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+					
+					* case 1-2-1: add_p만 있는 경우 (0 1 0)
+					if "`add_h'"==""& "`add_p'"~=""& "`add_a1'"~=""  {			        
+							merge 1:m hhid wave using klips_add_p, nogen 
+							merge 1:1 pid wave using klips_add_a, nogen 
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+					
+					
+					* case 1-3 : add-h, add-p가 모두 있는 경우					
+					if "`add_h'"~=""& "`add_p'"~="" & "`add_a1'"==""  {							
+							merge 1:1 hhid wave using klips_add_h, nogen 
+							merge 1:m hhid wave using klips_add_p, nogen 
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+					
+					* case 1-3-1 : add-h, add-p가 모두 있는 경우					
+					if "`add_h'"~=""& "`add_p'"~="" & "`add_a1'"~=""  {							
+							merge 1:1 hhid wave using klips_add_h, nogen 
+							merge 1:m hhid wave using klips_add_p, nogen 
+							merge 1:1 pid wave using klips_add_a, nogen 
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+												
+					
+					if "`add_h'"==""& "`add_p'"=="" & "`add_a1'"=="" {
+						save klips_final_add , replace 
+					}
+					
+	          }  // case 1 
+	
+	* case 2: 기본파일에 p(또는 h and p)만 있는 경우 
+	         if "`mastertype'"=="p" {
+					* case 1-1 : add_h만 있는 경우 
+					if "`add_h'"~=""& "`add_p'"==""& "`add_a1'"==""  {
+					        drop if pid==.
+							merge m:1 hhid wave using klips_add_h, nogen 
+							order hhid pid wave 
+							sort  pid wave
+							drop if hhid==.
+							save klips_final_add, replace
+					}
+					if "`add_h'"~=""& "`add_p'"==""& "`add_a1'"~=""  {
+					        drop if pid==.
+							merge m:1 hhid wave using klips_add_h, nogen 
+							merge 1:1 pid wave using klips_add_a, nogen							
+							order hhid pid wave 
+							sort  pid wave
+							drop if hhid==.
+							save klips_final_add, replace
+					}
+					
+					
+					* case 1-2: add_p만 있는 경우 
+					if "`add_h'"==""& "`add_p'"~=""& "`add_a1'"=="" {	
+							drop if pid==.
+							merge 1:1 pid wave using klips_add_p, nogen 							
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+					
+					if "`add_h'"==""& "`add_p'"~=""& "`add_a1'"~="" {	
+							drop if pid==.
+							merge 1:1 pid wave using klips_add_p, nogen 
+							merge 1:1 pid wave using klips_add_a, nogen
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+					
+					
+					* case 1-3: add_p와 add_h가 모두 있는 경우 
+					if "`add_h'"~=""& "`add_p'"~=""& "`add_a1'"==""  {		
+							drop if pid==.
+							merge 1:1 pid wave using klips_add_p, nogen
+							merge m:1 hhid wave using klips_add_h, nogen 
+							 
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+					if "`add_h'"~=""& "`add_p'"~=""& "`add_a1'"~=""  {		
+							drop if pid==.
+							merge 1:1 pid wave using klips_add_p, nogen
+							merge m:1 hhid wave using klips_add_h, nogen 
+							merge 1:1 pid wave using klips_add_a, nogen
+							 
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+					
+					if "`add_h'"==""& "`add_p'"==""& "`add_a1'"~="" {
+						drop if pid==.
+							merge 1:1 pid wave using klips_add_a, nogen
+							 
+							order hhid pid wave 
+							sort pid wave
+							drop if pid==.
+							save klips_final_add, replace
+					}
+										
+					if "`add_h'"==""& "`add_p'"==""& "`add_a1'"=="" {
+						save klips_final_add , replace 
+					}	
+	
+			}  // case 2 
+/*=============================================================================*/			
+if "`save'"~=""  {
+		use klips_final_add, clear
+		save `save', replace 
+		capture erase klips_final_add.dta
+				
+}
+
+
+capture	erase klips_h_final.dta 
+capture	erase klips_p_final.dta 	
+capture	erase klips_add_h.dta
+capture	erase klips_add_p.dta 
+capture	erase klips_add_a.dta
+capture	erase klips_final.dta
+capture	erase klips_add_a03.dta
+capture	erase klips_add_a04.dta
+capture	erase klips_add_a06.dta
+capture	erase klips_add_a07.dta
+capture	erase klips_add_a08.dta
+capture	erase klips_add_a09.dta
+capture	erase klips_add_a10.dta
+capture	erase klips_add_a11.dta
+capture	erase klips_add_a17.dta
+capture	erase klips_add_a18.dta
+capture	erase klips_add_a19.dta
+capture erase klips_add_a20.dta
+capture	erase klips_add_a21.dta
+
+end
+
+	
+	

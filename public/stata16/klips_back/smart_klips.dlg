@@ -1,0 +1,279 @@
+/*=======================================================================
+KLIPS 패널데이터 만들어주는 db
+smart_klips and smart_klips_add
+2015-09-03
+
+ 2016-06-22 
+ 1차 ~ 18차 수정 작업
+ 
+ 2019-08-06
+ 1차 ~ 21차 수정 작업 
+ Version Label 추가 
+ 
+ 2019-11-18
+ Version 수정 작업 
+ 
+ 2020-02-01
+ Version 수정 작업 
+ 
+ 2020-02-26
+ Version 수정 작업 
+=======================================================================*/
+VERSION 13.0
+POSITION . . 630 570   //600
+
+DIALOG main, label("KLIPS 패널데이터 만들기") tabtitle("KLIPS") 
+BEGIN 
+     
+	 TEXT tx_wave00    60 20 120 ., label("select command : ")
+	 *COMBOBOX cb_stat1  120 @ 100 ., option("wide") dropdownlist contents(stat_list) values(stat_value) 	 	 
+	 RADIO rd_wave00   170 @ 100 .,  first label("smart_klips") option(smart_klips) default(1)
+	 RADIO rd_wave01   270  @ 100 ., middle label("smart_search") option(smart_search) default(0)
+	 RADIO rd_wave02   370  @ 120 ., last label("smart_klips_add") option(smart_klips_add) default(0)
+	 TEXT tx_wave000   550 20 100 ., label("v.2020-02-28")
+	 		 
+	 GROUPBOX gb_opts0 10 +50 570 150 , label("smart_klips") 
+	 	 
+	 TEXT tx_wave1  20 +20 100 ., label("가구레벨변수")
+	 COMBOBOX vl_dta1 20 +20 520 240, dropdown contents(region_list1) append default("")
+	 
+	 TEXT tx_wave2  20 +30 100 ., label("가구원레벨변수")
+	 COMBOBOX vl_dta2 20 +20 520 240, dropdown contents(region_list2) append default("")	 
+	 
+	 	 
+	 TEXT tx_wd1 20 +30 70 ., label("save file")
+	 EDIT ed_wd1 80 @ 120 .,  error("save ")
+	 CHECKBOX ck_wpanel  230 @ 120 . , option(wide) label("wide panel")
+	 
+	 * smart_search 
+	 GROUPBOX gb_opts1 10 +40 570 45 , label("smart_search") 
+	 TEXT tx_wave1_5    20 +20 200 ., label("h or p (REQUIRED)")
+	 RADIO rd_wave1_6    140 @ 110 .,  first label("household") option(h)
+	 RADIO rd_wave1_7    240  @ 110 .,  last label("person") option(p)
+	 
+	 TEXT tx_wave1_9 340 @ 80 ., label("word: ")
+	 EDIT ed_wave1_9 380 @ 150 .,  error("word")		 
+	  
+	 * smart_klips_add  
+	 GROUPBOX gb_opts2 10 +40 570 150 , label("smart_klips_add") 
+	 TEXT tx_wave5    20 +20 200 ., label("mastertype (REQUIRED)")
+	 RADIO rd_wave6    220 @ 110 .,  first label("household") option(h)
+	 RADIO rd_wave7    320  @ 110 .,  last label("person") option(p)
+	 
+	 TEXT tx_wave6    20 +20 200 ., label("addtype (REQUIRED)")
+	 RADIO rd_wave8    220 @ 110 .,  first label("household") option(h)
+	 RADIO rd_wave9    320  @ 110 .,  last label("person") option(p)	 
+	 
+	 
+	 TEXT tx_wave8  20 +30 250 ., label("추가하고자 하는 변수이름 (REQUIRED)")
+	 EDIT ed_wave2 20 +20 550 .,  error("추가하고자 하는 변수이름")
+	
+	 TEXT tx_wave9 20 +30 80 ., label("master file")
+	 EDIT ed_wave9 90 @ 200 .,  error("master file")
+	 
+	 TEXT tx_wave10 300 @ 60 ., label("save file")
+	 EDIT ed_wave10 360 @ 200 .,  error("save file")	
+	/*================================================================*/ 
+	 TEXT tx_wave3  20 +40 250 ., label("Waves: 01~21 (REQUIRED)") 
+	 COMBOBOX vl_dta3 20 +20 520 240, dropdown contents(region_list3) append default("")	 
+	 	 
+	 TEXT tx_wd2 20 +30 30 ., label("wd :")
+	 EDIT ed_wd2 50 @ 430 .,  error("wd")	 
+	 TEXT tx_wd3 20 +30 180 ., label("website (http:// 로 시작) : ")
+	 EDIT ed_wd3 190 @ 300 .,  error("website")	
+	 
+END
+
+LIST region_list1
+BEGIN
+	h_resid_type
+	h_hprice
+	h_region
+	h_hsex
+	h_hage
+	h_kidage06
+	h_kidage712
+	h_kidage1315
+	h_hmarital
+	h_num
+	h_hedu
+	h_inc_1
+	h_inc_2
+	h_inc_3
+	h_inc_4
+	h_inc_5
+	h_inc_6
+	h_inc_total
+	h_asset_1
+	h_asset_2_1
+	h_asset_2_2
+	h_asset_3_1
+	h_asset_3_2
+	h_debt_total
+	h_debt_pay
+	h_kid
+	h_weight_1
+	h_weight_2
+	h_incomeq
+	h_eqscale_ori
+	h_eqscale_mod
+	h_sample98
+	h_sample09	
+END
+
+LIST region_list2
+BEGIN
+	p_sex
+	p_age
+	p_rel
+	p_edu
+	p_religion
+	p_married
+	p_region
+	p_econstat
+	p_jobtype
+	p_wage
+	p_hours
+	p_employ_type
+	p_job_status
+	p_ind2000
+	p_ind2007
+	p_ind2017
+	p_jobfam2000
+	p_jobfam2007
+	p_jobfam2017
+	p_firm_size
+	p_job_begin
+	p_weight_1
+	p_weight_2
+	p_weight_3
+	p_weight_4
+	p_sample98
+	p_sample09
+END
+
+LIST region_list3
+BEGIN
+	01
+	02
+	03
+	04
+	05
+	06
+	07
+	08
+	09
+	10
+	11
+	12
+	13
+	14
+	15
+	16
+	17
+	18
+	19
+	20
+	21
+END
+
+
+OK ok1, label("OK")
+CANCEL can1, label("Cancel")
+SUBMIT sub1, label("Submit")
+COPY copy1,
+HELP hlp1, view("help smart_klips")
+RESET res1
+
+PROGRAM command
+BEGIN 
+if main.rd_wave00 {
+	  
+    put "smart_klips  " 	
+	   put main.vl_dta1 
+	   put main.vl_dta2
+	   put " , "
+	   
+	   * beginoptions 
+	   put "wave("
+	   put main.vl_dta3
+	   put ") "
+	   
+	   put "wd( "
+	   put main.ed_wd2 
+	   put ")  "
+	   put "website( "
+	   put main.ed_wd3
+	   put ") "
+	   put "save( "
+	   put main.ed_wd1
+	   put ") "
+	   if main.ck_wpanel {
+	   put "wide"
+	   }	  	  
+}
+
+if main.rd_wave01 {	  
+       put "smart_search  " 	
+	   put " , "
+	   
+	   * beginoptions 
+	   put "wave("
+	   put main.vl_dta3
+	   put ") "
+	    	   	   
+	   put "wd( "
+	   put main.ed_wd2 
+	   put ")  "
+	   put "website( "
+	   put main.ed_wd3
+	   put ") "
+	   if main.rd_wave1_6 {
+	   put "hp(h) "
+	   }	   
+	   if main.rd_wave1_7 {
+	   put "hp(p) "
+	   } 
+	   put "word("
+	   put main.ed_wave1_9
+	   put ") "
+}
+
+if main.rd_wave02 {	  
+       put "smart_klips_add  " 	
+	   put main.ed_wave2   
+	   put " , "
+	   
+	   * beginoptions 
+	   put "wave("
+	   put main.vl_dta3
+	   put ") "
+	   
+	   if main.rd_wave6 {
+	   put "mastertype(h) "
+	   }	   
+	   if main.rd_wave7 {
+	   put "mastertype(p) "
+	   }
+	   if main.rd_wave8 {
+	   put "addtype(h) "
+	   }	   
+	   if main.rd_wave9 {
+	   put "addtype(p) "
+	   }   
+	   	   
+	   put "wd( "
+	   put main.ed_wd2 
+	   put ")  "
+	   put "website( "
+	   put main.ed_wd3
+	   put ") "
+	   put "save( "
+	   put main.ed_wave10
+	   put ") "
+	   put "master( "
+	   put main.ed_wave9
+	   put ") "	   	     	  
+}
+ 		   		   
+END

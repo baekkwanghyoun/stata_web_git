@@ -1,0 +1,124 @@
+/*=======================================================================
+2018-01-09 : smart_klips version 2 
+=======================================================================*/
+VERSION 13.0
+POSITION . . 630 450   //600
+
+DIALOG main, label("KLIPS 패널데이터 만들기: version 2.0") tabtitle("KLIPS") 
+BEGIN 
+     
+	 TEXT tx_wave00    20 20 520 ., label("제1단계: 가구레벨/가구원레벨/가구-가구원레벨 중 선택해 주세요")
+	 TEXT tx_wave000   530 20 100 ., label("v.2018-01-09")
+	 RADIO rd_wave00   100 +20 100 .,  first label("only H")  default(1) onclickon(script button1) 
+	 RADIO rd_wave01   220  @ 100 ., middle label("only P")  default(0) onclickon(script button2) 
+	 RADIO rd_wave02   320  @ 120 ., last label("H and P")  default(0) onclickon(script button3) 
+	 
+	 TEXT tx_wave3  20 +40 250 ., label("2단계: wave를 선택해 주세요") 
+	 COMBOBOX vl_dta3 20 +25 520 240, dropdown contents(region_list3) append default("")	 
+	 
+	 TEXT tx_wave4  20 +40 250 ., label("3단계: 변수이름을 입력해주세요") 
+	 TEXT tx_wave5  20 +30 250 ., label("가구(H)레벨 변수이름")
+	 EDIT ed_wave1  20 +20 520 .
+	 TEXT tx_wave6  20 +30 250 ., label("가구원(P)레벨 변수이름")
+	 EDIT ed_wave2  20 +20 520 .
+	  
+		
+	/*================================================================*/ 
+	
+	 GROUPBOX gb_opts3 10 +40 550 80 , label("Options")	 
+	 TEXT tx_wd2 20 +20 30 ., label("wd :")
+	 EDIT ed_wd2 60 @ 430 .,  error("wd")	 
+	 TEXT tx_wave10 20 +30 50 ., label("save : ")
+	 EDIT ed_wave10 60 @ 200 .,  error("save file")
+	 TEXT textbox1 20 +40 550 ., label("주1) 변수이름은 KLIPS 코드북(엑셀파일)의 가구 또는 가구원 sheet에 제시된 대로 입력해야 합니다") left
+	 TEXT textbox2 20 +20 550 ., label("ex) h__0361 또는 p__0101") center
+	 TEXT textbox3 20 +20 550 ., label("주2) 가구id(hhid), 가구원id(pid), 조사wave(wave), 가중치 변수는 자동으로 생성됩니다") left
+
+END
+
+LIST region_list3
+BEGIN
+	01
+	02
+	03
+	04
+	05
+	06
+	07
+	08
+	09
+	10
+	11
+	12
+	13
+	14
+	15
+	16
+	17
+	18
+	19
+END
+
+SCRIPT button1 
+BEGIN	
+	main.tx_wave6.disable
+	main.ed_wave2.disable
+	main.tx_wave5.enable
+	main.ed_wave1.enable		
+END
+
+SCRIPT button2
+BEGIN	
+	main.tx_wave5.disable
+	main.ed_wave1.disable	
+	main.tx_wave6.enable
+	main.ed_wave2.enable
+END
+
+
+SCRIPT button3
+BEGIN
+	main.tx_wave6.enable
+	main.ed_wave2.enable
+	main.tx_wave5.enable
+	main.ed_wave1.enable
+END
+
+OK ok1, label("OK")
+CANCEL can1, label("Cancel")
+SUBMIT sub1, label("Submit")
+COPY copy1,
+HELP hlp1, view("help smart_klips_v2")
+RESET res1
+
+PROGRAM command
+BEGIN 
+  
+    put "smart_klips_v2 " 	
+	   put main.ed_wave1 
+	   put main.ed_wave2
+	   put " , "
+	   
+	   * beginoptions 
+	   put "wave("
+	   put main.vl_dta3
+	   put ") "
+	   
+	   put "wd( "
+	   put main.ed_wd2 
+	   put ")  "	   
+	   put "save( "
+	   put main.ed_wave10
+	   put ") "	   
+	   if main.rd_wave00 {
+	   put "type(h) "
+	   }
+	   if main.rd_wave01 {
+	   put "type(p) "
+	   }
+	   if main.rd_wave02 {
+	   put "type(hp) "
+	   }   
+ 
+END
+
