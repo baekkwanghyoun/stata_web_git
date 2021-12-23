@@ -242,7 +242,7 @@ class StataController extends Controller
                 'kt_select2_3.required' => '- 가구 레벨 변수를 선택해야 합니다',
                 'kt_select2_4.required' => '- 가구원 레벨 변수를 선택해야 합니다',
                 'filename.required' => '- 저장할 파일명을 입력해야합니다',
-                'filesave.required' => '- 저장할 파일타입을 선택해야합니다',
+                'filesave.required' => '- 저장할 파일타입을 선택해야합니다 ',
             ]);
         }
         else if($tab=='search') {
