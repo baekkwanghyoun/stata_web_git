@@ -309,14 +309,14 @@ class StataController extends Controller
 
         //smart_klips_v3 h_resid_type p_age , wave(01 03 04 06) add_h(h0141) add_p(p0111) add_a1(a0101) add_a2(a1101) add_a3(a1725) a1_wave(03) a2_wave(04) a3_wave(06)
         $addTxt='';
+        if(isset($a_wave[0]) && isset($add_a[0])) {
+            $addTxt = ' a1_wave('.$a_wave[0]['value'].') add_a1('.$add_a[0].')';
+        }
         if(isset($a_wave[1]) && isset($add_a[1])) {
-            $addTxt = ' a1_wave('.$a_wave[1]['value'].') add_a1('.$add_a[1].')';
+            $addTxt .= ' a2_wave('.$a_wave[1]['value'].') add_a2('.$add_a[1].')';
         }
         if(isset($a_wave[2]) && isset($add_a[2])) {
-            $addTxt .= ' a2_wave('.$a_wave[2]['value'].') add_a2('.$add_a[2].')';
-        }
-        if(isset($a_wave[3]) && isset($add_a[3])) {
-            $addTxt .= ' a3_wave('.$a_wave[3]['value'].') add_a3('.$add_a[3].')';
+            $addTxt .= ' a3_wave('.$a_wave[2]['value'].') add_a3('.$add_a[2].')';
         }
 
         $tyCd = request('tyCd', '');
@@ -351,7 +351,7 @@ class StataController extends Controller
 
         if($tab==='create') {//C:\\ado\\plus\\s
             $ado_name = '';
-            if(request('add_h')==null && request('add_p')==null) {
+            if(request('add_h')==null && request('add_p')==null && $addTxt == '') {
                 $ado_name = 'smart_klips_v4';
             }
             else {

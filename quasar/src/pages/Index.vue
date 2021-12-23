@@ -206,7 +206,7 @@
                                         </q-expansion-item>
 
                                         <!-- 2단계-3 -->
-                                        <q-expansion-item  class="step2-3" icon="family_restroom" label="추가 변수 입력" header-class="text-grey-10" >
+                                        <q-expansion-item  class="step2-3 q-mb-lg" icon="family_restroom" label="추가 변수 입력" header-class="text-grey-10" >
                                             <template v-slot:header>
                                                 <q-item-section avatar class="q-ml-xl">
                                                 </q-item-section>
@@ -268,6 +268,46 @@
                                                 </div>
                                             </div>
                                         </q-expansion-item>
+
+                                        <!-- 2단계-4 -->
+                                        <q-expansion-item  class="step2-4" icon="family_restroom" label="" header-class="text-grey-10" >
+                                          <template v-slot:header>
+                                            <q-item-section avatar class="q-ml-xl">
+                                            </q-item-section>
+                                            <q-item-section style="margin-left: 10px">
+                                              <q-item-label class="text-weight-bold " style="color: #400080" >
+                                                <q-badge style="background-color: #400080" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">4</q-badge>
+                                                KLIPS 원자료 변수 추가(부가조사)
+                                                <q-badge v-if="a_wave.length>0 || add_a.length>0" class="q-ml-md" color="green-6" align="middle" >
+                                                  <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
+                                                </q-badge>
+                                                <q-badge v-else class="q-ml-md" color="grey" align="middle" >
+                                                  <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
+                                                </q-badge>
+                                              </q-item-label>
+
+                                              <span class="text-weight-bolder" ></span>
+
+                                            </q-item-section>
+                                          </template>
+                                          <div class="row">
+                                            <div class="col-12 q-pb-lg " >
+                                              <div class="col-12 scroll overflow-hidden" >
+                                                <q-item class="row items-center q-gutter-lg" v-for="(n, index) in 3" v-bind:key="n">
+                                                  <div class="col-5">
+                                                    <q-select outlined  v-model="a_wave[index]" :options="additionalSearchOptions" label="'부가용' 원변수 입력" clearable/>
+                                                  </div>
+                                                  <div class="col-6">
+                                                    <q-input outlined  v-model=" add_a[index]"  placeholder="추가할 변수를 선택하세요" clearable />
+                                                  </div>
+                                                </q-item>
+                                                <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>
+                                              </div>
+                                              <q-item-label class="q-pl-lg text-black text-bold" caption></q-item-label>
+                                            </div>
+                                          </div>
+                                      </q-expansion-item>
+
                                         <q-separator class="q-my-lg"></q-separator>
                                         <!-- 2-1단계 원변수 -->
                                         <!--
@@ -381,49 +421,6 @@
                                         </q-expansion-item>
                                         <q-separator class="q-my-lg"></q-separator>
 
-                                        <!-- 4단계 -->
-                                        <q-expansion-item   >
-                                            <template v-slot:header>
-                                                <q-item-section avatar>
-                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 4</q-chip>
-                                                </q-item-section>
-
-                                                <q-item-section>
-                                                    <div class="text-grey-9 q-gutter-xs">
-                                                        <span class="text-weight-bolder"  >KLIPS 원자료 변수 추가(부가조사)</span>
-                                                        <span class="text-red-14 text-weight-bold text-caption"  >최대 3개 동시 선택 가능</span>
-                                                    </div>
-                                                </q-item-section>
-                                            </template>
-                                            <div class="row">
-                                                <div class="col-12 scroll overflow-hidden" >
-                                                    <q-item class="row items-center q-gutter-lg" v-for="(n, index) in 3" v-bind:key="index">
-<!--                                                        v-bind:key="n"-->
-                                                        <div class="col-5">
-                                                            <q-select outlined  v-model="a_wave[n]" :options="additionalSearchOptions" label="'부가용' 원변수 입력" clearable/>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <q-input outlined  v-model=" add_a[n]"  placeholder="추가할 변수를 선택하세요" clearable />
-                                                        </div>
-
-                                                    </q-item>
-
-
-<!--                                                    <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>-->
-                                                </div>
-                                            </div>
-                                            <!--
-                                            <q-item v-for="index in 21" tag="label" v-ripple>
-                                                <q-item-section avatar>
-                                                    <q-checkbox    v-model="wave" :val=waveLabel(index) />
-                                                </q-item-section>
-                                                <q-item-section>
-                                                    <q-item-label>{{waveLabel(index)}}차수</q-item-label>
-                                                </q-item-section>
-                                            </q-item>
-                                            -->
-                                        </q-expansion-item>
-                                        <q-separator class="q-my-lg"></q-separator>
                                     </q-list>
                                     <div class="q-mb-xl"></div>
                                     <!-- 제출 -->
@@ -995,6 +992,7 @@
     },
     methods: {
       openURL,
+
       add_a_clear(n) {
         alert(this.add_a[n])
         this.add_a[n]='';
@@ -1377,6 +1375,9 @@
     }
     .step2-3.q-expansion-item--expanded {
         background-color: #E0E0E0;
+    }
+    .step2-4.q-expansion-item--expanded {
+      background-color: #F4EEFF;
     }
     .swal2-styled.swal2-confirm {
         font-size: 1em !important;
