@@ -13,6 +13,7 @@ smart_klips and smart_klips_add
 2021-02-02: 노동패널팀 수정 
 1) Optional : add variables 부분 라벨 변경 
 2) h_weight18, p_weight18_l, p_weight_c 변수추가에 따란 목록 추가  
+2021-12-23 23차 업데이트 
 =======================================================================*/
 VERSION 14.0
 POSITION . . 630 600   //600
@@ -24,7 +25,7 @@ BEGIN
 	 *COMBOBOX cb_stat1  120 @ 100 ., option("wide") dropdownlist contents(stat_list) values(stat_value) 	 	 
 	 RADIO rd_wave00   120 @ 100 .,  first label("smart_klips_v3") option(smart_klips_v3) default(1) onclickon(script button1) 
 	 RADIO rd_wave01   250  @ 140 ., last label("smart_klips_search_v3") option(smart_klips_search_v3) default(0) onclickon(script button2) 	 
-	 TEXT tx_wave000   450 20 100 ., label("v.2021-02-02")
+	 TEXT tx_wave000   450 20 100 ., label("v.2021-12-23")
 	 		 
 	 GROUPBOX gb_opts0 10 +20 600 360 , label("smart_klips_v3") 
 	 	 
@@ -72,7 +73,7 @@ BEGIN
 	 EDIT ed_wave1_9 380 @ 150 .,  error("word")		 
 		
 	/*================================================================*/ 
-	 TEXT tx_wave33  20 +40 450 ., label("Waves: 01~22 (REQUIRED), 주) hyphen을 이용하여 입력가능(ex: 05-08)") 
+	 TEXT tx_wave33  20 +40 450 ., label("Waves: 01~23 (REQUIRED), 주) hyphen을 이용하여 입력가능(ex: 05-08)") 
 	 COMBOBOX vl_dta3 20 +20 520 240, dropdown contents(region_list3) append default("")	 
 	 	 
 	 TEXT tx_wd2 20 +30 30 ., label("wd :")
@@ -264,25 +265,27 @@ BEGIN
 	20
 	21
 	22
+	23
 END
 
 LIST stat_list1
 BEGIN
     ""     
-	3차_청년 
-	4차_건강과은퇴 
-	6차_중고령자 
-	7차_근로시간과여가  
-	8차_노동조합과노사 
-	9차_청년
-	10차_고용형태  
-	11차_교육 
-	17차_시간사용과삶의질  
-	18차_삶의인식/장년  	 
-	19차_청년 
-	20차_의사결정  
-	21차_고용형태  
-	22차_비임금
+	청년(3차)
+	건강과은퇴(4차)
+	중고령자(6차)
+	근로시간과여가(7차)
+	노동조합과노사(8차)
+	청년(9차)
+	고용형태(10차)
+	교육(11차)
+	시간사용과삶의질(17차)
+	삶의인식/장년(18차)
+	청년(19차)
+	의사결정(20차)
+	고용형태(21차)
+	비임금(22차)
+	코로나19(23차)
 END
 
 LIST stat_value1
@@ -302,6 +305,7 @@ BEGIN
 	20
 	21
 	22
+	23
 END
 
 
