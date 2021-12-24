@@ -351,13 +351,14 @@ class StataController extends Controller
 
         if($tab==='create') {//C:\\ado\\plus\\s
             $ado_name = '';
-            if(request('add_h')==null && request('add_p')==null && $addTxt == '') {
+/*            if(request('add_h')==null && request('add_p')==null && $addTxt == '') {
                 $ado_name = 'smart_klips_v4';
             }
             else {
                 $ado_name = 'smart_klips_v3';
-            }
-            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) wd( )  website( ) save({$filename_req})  {$filesaveVal} {$tyCd} {$add_h} {$add_p} {$addTxt}"; //D:\\0.silver
+            }*/
+            $ado_name = 'smart_klips_v3';
+            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p} {$addTxt}"; //{$tyCd}
 
         }
         else if($tab==='search') {
