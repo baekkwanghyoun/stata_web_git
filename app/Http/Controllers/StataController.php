@@ -362,10 +362,10 @@ class StataController extends Controller
 
         }
         else if($tab==='search') {
-            $text .= "smart_klips_search_v3 , wave( {$waves}) wd() hp(${hp}) word({$word}) ";
+            $text .= "smart_klips_search_v3, wave( {$waves}) wd() hp(${hp}) word({$word}) ";
         }
 
-        Storage::makeDirectory('stata16/do/'.$nowDate);
+        Storage::makeDirectory('stata16/do/'.$nowDate) ;
         $fo = fopen('stata16/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
         fwrite($fo, $text);
         fclose($fo);
