@@ -47,7 +47,7 @@ KLIPS 변수 추가하기
 							
 						keep pid `hhlist'
 						gen wave=3						
-						capture ren a`v'* a*
+						capture ren a`v'* a*_`v'rd
 						
 						* a로 시작하는 모든 변수 
 						qui ds a*, 

@@ -13,37 +13,37 @@ smart_klips and smart_klips_add
 2021-02-02: 노동패널팀 수정 
 1) Optional : add variables 부분 라벨 변경 
 2) h_weight18, p_weight18_l, p_weight_c 변수추가에 따란 목록 추가  
-2021-07-12: 23차 추가 
+2021-12-23 23차 업데이트 
 =======================================================================*/
 VERSION 14.0
 POSITION . . 630 600   //600
 
-DIALOG main, label("Smart KLIPS") tabtitle("KLIPS") 
+DIALOG main, label("KLIPS 패널데이터 만들기 : Version 3") tabtitle("KLIPS") 
 BEGIN 
      
-	 TEXT tx_wave00    60 20 120 ., label("선택 : ")
+	 TEXT tx_wave00    60 20 120 ., label("select : ")
 	 *COMBOBOX cb_stat1  120 @ 100 ., option("wide") dropdownlist contents(stat_list) values(stat_value) 	 	 
-	 RADIO rd_wave00   140 @ 140 .,  first label("통합 패널데이터 생성") option(smart_klips_v3) default(1) onclickon(script button1) 
-	 RADIO rd_wave01   330  @ 140 ., last label("KLIPS원자료 변수 검색") option(smart_klips_search_v3) default(0) onclickon(script button2) 	 
-	 
+	 RADIO rd_wave00   120 @ 100 .,  first label("smart_klips_v3") option(smart_klips_v3) default(1) onclickon(script button1) 
+	 RADIO rd_wave01   250  @ 140 ., last label("smart_klips_search_v3") option(smart_klips_search_v3) default(0) onclickon(script button2) 	 
+	 TEXT tx_wave000   450 20 100 ., label("v.2021-12-23")
 	 		 
-	 GROUPBOX gb_opts0 10 +20 600 360 , label("통합 패널데이터 생성") 
+	 GROUPBOX gb_opts0 10 +20 600 360 , label("smart_klips_v3") 
 	 	 
-	 TEXT tx_wave1  20 +20 100 ., label("가구용 가공 변수")
+	 TEXT tx_wave1  20 +20 100 ., label("가구레벨변수")
 	 COMBOBOX vl_dta1 20 +20 550 240, dropdown contents(region_list1) append default("")	 
-	 TEXT tx_wave2  20 +30 100 ., label("개인용 가공 변수")
+	 TEXT tx_wave2  20 +30 100 ., label("가구원레벨변수")
 	 COMBOBOX vl_dta2 20 +20 550 240, dropdown contents(region_list2) append default("")	 
 	
 /***** 노동패널팀 수정: Optional : add variables (가구레벨)부분 라벨 수정 *****/
 
-	 TEXT tx_wave3  20 +30 300 ., label("(선택사항) KLIPS원자료 변수 추가(가구용) (예: h0141)")
+	 TEXT tx_wave3  20 +30 300 ., label("Optional : add variables (가구레벨) (ex: h0141)")
 	 EDIT ed_wave3 20 +20 550 .,  error("추가하고자 하는 변수이름")
 	 
 /***** 노동패널팀 수정: Optional : add variables (가구원 레벨)부분 라벨 수정 *****/
-	 TEXT tx_wave4  20 +30 300 ., label("(선택사항) KLIPS원자료 변수 추가(개인용) (예: p0111)")
+	 TEXT tx_wave4  20 +30 300 ., label("Optional : add variables (가구원레벨) (ex: p0111)")
 	 EDIT ed_wave4 20 +20 550 .,  error("추가하고자 하는 변수이름")	  
 	 
-	 TEXT tx_wave5 20 +30 450 ., label("(선택사항) KLIPS원자료 변수 추가(부가조사) 최대 3개 동시 선택 가능 (예: a0111)")
+	 TEXT tx_wave5 20 +30 450 ., label("Optional : add variables (부가조사) 최대 3개 부가조사 동시 선택 가능")
 	 *TEXT tx_wave5_0 20 +20 580 ., label("주의사항: 부가조사 변수를 가져오기 위해서는 위쪽 메뉴에서 가구원레벨 변수를 최소 1개 선택해야 합니다")
 	 COMBOBOX ed_wave5_1 20 +20 150 ., option("") dropdownlist contents(stat_list1) values(stat_value1) onselchangelist(sel_list1)
 	 EDIT ed_wave5_2     180 @ 390 .,  error("추가하고자 하는 변수이름")	 
@@ -53,9 +53,9 @@ BEGIN
 	 EDIT ed_wave7_2     180 @ 390 .,  error("추가하고자 하는 변수이름")
 	 	 
 	 
-	 TEXT tx_wd1 20 +30 70 ., label("저장 파일명")
-	 EDIT ed_wd1 100 @ 190 .,  error("save ")
-	 CHECKBOX ck_w1  300 @ 100 . , option(excel) label("Excel")
+	 TEXT tx_wd1 20 +30 70 ., label("save file")
+	 EDIT ed_wd1 80 @ 190 .,  error("save ")
+	 CHECKBOX ck_w1  300 @ 100 . , option(excel) label("excel")
 	 CHECKBOX ck_w2  400 @ 100 . , option(csv) label("csv")
 	* TEXT tx_wd1_1 450 @ 40 ., label("sfolder")
 	* EDIT ed_wd1_1 500 @ 100 .,  error("sfolder ")
@@ -64,22 +64,22 @@ BEGIN
 	 * CHECKBOX ck_wpanel  230 @ 120 . , option(wide) label("wide panel")
 	 
 	 * smart_klips_search_v3 
-	 GROUPBOX gb_opts1 10 +40 600 45 , label("KLIPS 원자료 변수 검색") 
-	 TEXT tx_wave1_5    20 +20 200 ., label("가구용 또는 개인용 (필수)")
-	 RADIO rd_wave1_6    180 @ 110 .,  first label("가구용") option(h)
-	 RADIO rd_wave1_7    240  @ 110 .,  last label("개인용") option(p)
+	 GROUPBOX gb_opts1 10 +40 600 45 , label("smart_klips_search_v3") 
+	 TEXT tx_wave1_5    20 +20 200 ., label("h or p (REQUIRED)")
+	 RADIO rd_wave1_6    140 @ 110 .,  first label("household") option(h)
+	 RADIO rd_wave1_7    240  @ 110 .,  last label("person") option(p)
 	 
-	 TEXT tx_wave1_9 340 @ 100 ., label("검색어")
+	 TEXT tx_wave1_9 340 @ 80 ., label("word: ")
 	 EDIT ed_wave1_9 380 @ 150 .,  error("word")		 
 		
 	/*================================================================*/ 
-	 TEXT tx_wave33  20 +40 450 ., label("차수선택 : 1차~23차 (필수) ('-'을 이용하여 입력가능(예: 12-23))") 
+	 TEXT tx_wave33  20 +40 450 ., label("Waves: 01~23 (REQUIRED), 주) hyphen을 이용하여 입력가능(ex: 05-08)") 
 	 COMBOBOX vl_dta3 20 +20 520 240, dropdown contents(region_list3) append default("")	 
 	 	 
-	 TEXT tx_wd2 20 +30 450 ., label("KLIPS원자료 저장 경로")
-	 *EDIT ed_wd2 160 @ 430 .,  error("wd")
-	 FILE dbsamex  160 @ 400 ., label ("찾아보기...") directory tooltip("working directory 설정") nomemory  option("inisave") 
-	 TEXT tx_wd3 20 +30 150 ., label("website (http:// 로 시작)")
+	 TEXT tx_wd2 20 +30 30 ., label("wd :")
+	 *EDIT ed_wd2 50 @ 430 .,  error("wd")
+	 FILE dbsamex  60 @ 400 ., label ("Browse...") directory tooltip("working directory 설정") nomemory  option("inisave")  
+	 TEXT tx_wd3 20 +30 150 ., label("website (http:// 로 시작) : ")
 	 EDIT ed_wd3 160 @ 320 .,  error("website")	
 	 
 END
@@ -193,12 +193,12 @@ BEGIN
 	h_debt_total
 	h_debt_pay
 	h_kid
-	h_incomeq
-	h_eqscale_ori
-	h_eqscale_mod
 	h_weight98
 	h_weight09
 	h_weight18
+	h_incomeq
+	h_eqscale_ori
+	h_eqscale_mod
 	h_sample98
 	h_sample09	
 	h_sample18
@@ -271,19 +271,19 @@ END
 LIST stat_list1
 BEGIN
     ""     
-	청년(3차) 
-	건강과은퇴(4차) 
-	중고령자(6차) 
-	근로시간과여가(7차)  
+	청년(3차)
+	건강과은퇴(4차)
+	중고령자(6차)
+	근로시간과여가(7차)
 	노동조합과노사(8차)
 	청년(9차)
-	고용형태(10차)  
-	교육(11차) 
-	시간사용과삶의질(17차)  
-	삶의인식/장년(18차)  	 
-	청년(19차) 
-	의사결정(20차)  
-	고용형태 (21차) 
+	고용형태(10차)
+	교육(11차)
+	시간사용과삶의질(17차)
+	삶의인식/장년(18차)
+	청년(19차)
+	의사결정(20차)
+	고용형태(21차)
 	비임금(22차)
 	코로나19(23차)
 END
@@ -359,12 +359,13 @@ BEGIN
 END
 
 
-*OK ok1, label("확인")
-*CANCEL can1, label("취소")
-SUBMIT sub1, label("확인")
+OK ok1, label("OK")
+CANCEL can1, label("Cancel")
+SUBMIT sub1, label("Submit")
 COPY copy1,
 HELP hlp1, view("help smart_klips_v3")
-RESET res1,
+RESET res1
+
 PROGRAM command
 BEGIN 
 if main.rd_wave00 {

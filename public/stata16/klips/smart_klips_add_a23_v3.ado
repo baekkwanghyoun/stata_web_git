@@ -1,9 +1,9 @@
 /*=============================================
 KLIPS 변수 추가하기 
 부가조사 데이터에서 변수 추가 
-2021-12-23: Version 3 (23차 까지 사용)
+2019-11-09: Version 3 (21차 까지 사용)
 최대 3개까지 선택가능하게 만든다. 
-2021-12-23: 23차 업데이트 
+2020-11-09 : 4차와 같은 변수이름 해결 
 ==============================================*/
 	program define smart_klips_add_a23_v3 , rclass 
 	version 14.0 
@@ -47,8 +47,8 @@ KLIPS 변수 추가하기
 							}	
 							
 						keep pid `hhlist'
-						gen wave=23						
-						capture ren a`v'* a*_`v'차
+						gen wave=23					
+						capture ren a`v'* a*_`v'rd
 						* a로 시작하는 모든 변수 
 						qui ds a*, 
 						foreach v2 in `r(varlist)' {

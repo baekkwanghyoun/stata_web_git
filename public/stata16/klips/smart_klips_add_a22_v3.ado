@@ -48,8 +48,8 @@ KLIPS 변수 추가하기
 							}	
 							
 						keep pid `hhlist'
-						gen wave=22						
-						capture ren a`v'* a*_`v'차
+						gen wave=22				
+						capture ren a`v'* a*_`v'nd
 						* a로 시작하는 모든 변수 
 						qui ds a*, 
 						foreach v2 in `r(varlist)' {
