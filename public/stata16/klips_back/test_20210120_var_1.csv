@@ -1,5 +1,0 @@
-vname,lname
-hhid,가구id
-wave,서베이차수
-year,조사년도
-h_resid_type,"주택점유형태(1=자가, 2=전세, 3=월세, 4=기타) "

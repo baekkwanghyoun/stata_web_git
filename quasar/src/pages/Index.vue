@@ -1,751 +1,752 @@
 <template>
-    <q-page-container>
-        <q-page  class="q-pa-md  " >
-            <div class="	" style="max-width: 900px; margin-right: auto;; margin-left: auto;">
+  <q-page-container>
+    <q-page  class="q-pa-md  " >
+      <div class="	" style="max-width: 900px; margin-right: auto;; margin-left: auto;">
 
-                <q-card>
-                    <q-card dark  class="my-card q-pa-lg " style="background-color: #233D64;background-position: right 20px top 20px;  background-repeat: no-repeat; background-size: 80px; background-image:url('./symbol.png')" >
-                        <q-card-section class="row">
-                            <div class="col-12 col-sm-3 q-mb-md q-mt-md"> <!--gt-sm-->
-                                <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
-                                    <!--<q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" ></q-icon>-->
-                                    <q-img class="" src="~assets/logo_new.png" style="max-width: 190px" ></q-img>
-                                </a>
+        <q-card>
+          <q-card dark  class="my-card q-pa-lg " style="background-color: #233D64;background-position: right 20px top 20px;  background-repeat: no-repeat; background-size: 80px; background-image:url('./symbol.png')" >
+            <q-card-section class="row">
+              <div class="col-12 col-sm-3 q-mb-md q-mt-md"> <!--gt-sm-->
+                <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
+                  <!--<q-icon class="text-white "  name="addchart"  :size="$q.screen.lt.sm?'sm':'xl'" ></q-icon>-->
+                  <q-img class="" src="~assets/logo_new.png" style="max-width: 190px" ></q-img>
+                </a>
+              </div>
+              <div class="col-9   q-pl-sm q-pl-lg-lg" >
+                <span class="text-h6  text-bold q-mr-sm" style="color: #FFFF00; ">'자료추출 시스템'</span>은 사용자가 원하는 변수 및 차수를 선택하여<br>
+                자료를 원하는 형태로 병합하여 가공하는 <span class="text-h6  text-bold" style="color: #FFFF00">시스템</span>입니다.
+                <!--병합하여  원하는 데이터 형태로 생성하는 <span class="text-h6  text-bold" style="color: #FFFF00">‘데이터추출’</span> 시스템입니다.-->
+              </div>
+            </q-card-section>
+          </q-card>
+          <q-space style="height: 10px; background-color: #233D64;" ></q-space>
+          <q-tabs active-color="white"  align="justify" class="text-grey q-px-md shadow-up-5" style="background-color: #233D64" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
+            <q-tab icon="addchart" label="통합 패널데이터 생성" name="create" class="toptab  glossy" style=""/>
+            <q-tab icon="youtube_searched_for" label="KLIPS 원자료 변수 검색" name="search"  class="toptab glossy"/>
+            <q-tab icon="contact_support" label="사용법 및 주의사항" name="howto"  class="toptab glossy"/>
+            <q-tab icon="contact_support" label="FAQ" name="faq"  class="toptab glossy"/>
+          </q-tabs>
+
+          <q-tab-panels class="q-pa-md" animated v-model="tab">
+            <!-- 1번째 탭 : 통합 패널데이터 생성-->
+            <q-tab-panel  name="create">
+              <q-form  @submit="onSubmit" >
+                <div class="">
+                  <q-list>
+                    <!-- 1단계 -->
+                    <q-expansion-item   ><!--default-opened expand-separator-->
+                      <template v-slot:header>
+                        <q-item-section avatar>
+                          <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
+                        </q-item-section>
+
+                        <q-item-section >
+                          <div class="text-grey-9 q-gutter-xs">
+                            <span class="text-weight-bolder" >차수선택</span>
+                            <span class="text-red-14 text-weight-bolder text-caption"  >(필수)</span>
+                            <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
+                          </div>
+                          <!--선택한 값 적용-->
+                          <q-card v-if="wave.length>0" class="my-card border q-mt-sm">
+                            <q-card-section class="q-pa-sm">
+                              <span class="  " style="word-break: break-all" >{{sortedWave.join('&nbsp;&nbsp;')}}</span>
+                            </q-card-section>
+                          </q-card>
+                        </q-item-section>
+                        <!--
+                                                                     반응형 샘플
+                                                                    <div class="row full-width">
+                                                                        <q-item-section avatar class="col-12 col-sm-2 q-pb-sm">
+                                                                            <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
+                                                                        </q-item-section>
+
+                                                                        <q-item-section class="col-12 col-sm-9"  >
+                                                                            <div class="text-grey-9 q-gutter-xs">
+                                                                                <span class="text-weight-bolder" >차수선택</span>
+                                                                                <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                                                                                &lt;!&ndash;<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>&ndash;&gt;
+                                                                            </div>
+                                                                            &lt;!&ndash;선택한 값 적용&ndash;&gt;
+                                                                            <q-card v-if="wave.length>0" class="my-card border q-mt-sm">
+                                                                                <q-card-section class="q-pa-sm">
+                                                                                    <span class="  " style="word-break: break-all" >{{sortedWave.join('&nbsp;&nbsp;')}}</span>
+                                                                                </q-card-section>
+                                                                            </q-card>
+                                                                        </q-item-section>
+                                                                    </div>-->
+                      </template>
+                      <div class="row">
+                        <div class="q-pa-sm q-ma-md bg-grey-2  rounded-borders">
+                          <q-option-group class="text-subtitle1" @input="waveSelectChg('wave')" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
+                          <q-item dense>
+                            <q-item-section class="itemSectionWave" avatar>
+                              <q-checkbox  @input="waveSelectDataChg()"  v-model="wave" :val=waveLabel(index) />
+                            </q-item-section>
+                            <q-item-section>
+                              <q-item-label >{{waveLabel(index)}}차수</q-item-label>
+                            </q-item-section>
+                          </q-item>
+                        </div>
+                      </div>
+                    </q-expansion-item>
+                    <q-separator class="q-my-lg"></q-separator>
+
+
+                    <!-- 2단계-1 -->
+                    <q-item>
+                      <q-item-section avatar > <!--class="bg-grey-3 q-pa-sm"-->
+                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
+                      </q-item-section>
+                      <q-item-section >
+                        <div class="text-grey-9 q-gutter-xs">
+                          <span class="text-weight-bolder text-subtitle2" >가구용 또는 개인용 가공 변수를 반드시 하나 이상 선택해야 합니다.</span>
+                        </div>
+                        <!--선택한 값 적용-->
+                        <!-- <q-card v-if="kt_select2_3.length>0" class="my-card border q-mt-sm">
+                             <q-card-section class="q-pa-sm">
+                                 <span class="  " style="word-break: break-all; color: black" >{{kt_select2_3.join('&nbsp;&nbsp;&nbsp;')}}</span>
+                             </q-card-section>
+                         </q-card>-->
+                      </q-item-section>
+                    </q-item>
+                    <q-expansion-item  class="step2-1 q-mb-lg" label="" header-class="text-teal">
+                      <template v-slot:header>
+                        <q-item-section avatar class="q-ml-xl">
+                          <!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
+                        </q-item-section>
+                        <!--                                    <q-item-section avatar>
+                                                                <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
+                                                            </q-item-section>-->
+                        <q-item-section style="margin-left: 10px">
+                          <q-item-label class="text-weight-bolder">
+                            <q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
+                            가구용 가공 변수 선택
+                            <q-badge v-if="kt_select2_3.length>0" class="q-ml-md" color="green-6" align="middle" >
+                              <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
+                            </q-badge>
+                            <!--privacy_tip-->
+                            <q-badge v-else  class="q-ml-md" color="grey" align="middle" >
+                              <q-icon name="search_off" size="xs" class=""></q-icon>선택안함
+                            </q-badge>
+                          </q-item-label>
+                        </q-item-section>
+                      </template>
+                      <q-scroll-area style="height: 400px;">
+                        <div class="row q-ma-lg">
+                          <div class="full-width q-pa-sm q-pr-lg bg-grey-2  rounded-borders">
+                            <q-option-group @input="waveSelect2Chg()" v-model="waveSelect2" :options="waveSelect2Options" color="primary" inline/>
+                          </div>
+                        </div>
+
+                        <q-item v-for="(list, index) in kt_select2_3_data" :key="index" tag="label" v-ripple>
+                          <q-item-section avatar>
+                            <q-checkbox @input="waveSelect2DataChg()" color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
+                          </q-item-section>
+                          <q-item-section>
+                            <q-item-label>{{list[0]}}</q-item-label>
+                            <q-item-label caption>{{list[1]}}</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-scroll-area>
+                    </q-expansion-item>
+
+
+                    <!-- 2단계-2 -->
+                    <q-expansion-item  class="step2-2  q-mb-lg" icon="family_restroom" label="개인용 변수" header-class="text-blue-8" >
+                      <template v-slot:header>
+                        <q-item-section avatar class="q-ml-xl">
+                          <!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
+                        </q-item-section>
+                        <!--                                    <q-item-section avatar>
+                                                                <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
+                                                            </q-item-section>-->
+                        <q-item-section style="margin-left: 10px">
+                          <q-item-label class="text-weight-bolder" style="color: #03B0F3">
+                            <q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
+                            개인용 가공 변수 선택
+                            <q-badge v-if="kt_select2_4.length>0" class="q-ml-md" color="green-6" align="middle" >
+                              <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
+                            </q-badge>
+                            <!--privacy_tip-->
+                            <q-badge v-else  class="q-ml-md" color="grey" align="middle" >
+                              <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
+                            </q-badge>
+                          </q-item-label>
+
+                          <!--선택한 값 적용-->
+                          <!--<q-card v-if="kt_select2_4.length>0" class="my-card border q-mt-sm">
+                              <q-card-section class="q-pa-sm">
+                                  <span class="  " style="word-break: break-all; color: black" >{{kt_select2_4.join('&nbsp;&nbsp;&nbsp;')}}</span>
+                              </q-card-section>
+                          </q-card>-->
+                        </q-item-section>
+                      </template>
+                      <q-scroll-area style="height: 400px;">
+                        <div class="row q-ma-lg">
+                          <div class="full-width q-pa-sm q-pr-lg bg-grey-2  rounded-borders">
+                            <q-option-group @input="waveSelect3Chg()" v-model="waveSelect3" :options="waveSelect3Options" color="primary" inline/>
+                          </div>
+                        </div>
+
+
+                        <q-item v-for="(list, index) in kt_select2_4_data" :key="index"  tag="label" v-ripple>
+                          <q-item-section avatar>
+                            <q-checkbox  @input="waveSelect3DataChg()" color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
+                          </q-item-section>
+                          <q-item-section>
+                            <q-item-label>{{list[0]}}</q-item-label>
+                            <q-item-label caption>{{list[1]}}</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-scroll-area>
+                    </q-expansion-item>
+
+                    <!-- 2단계-3 -->
+                    <q-expansion-item  class="step2-3 q-mb-lg" icon="family_restroom" label="추가 변수 입력" header-class="text-grey-10" >
+                      <template v-slot:header>
+                        <q-item-section avatar class="q-ml-xl">
+                        </q-item-section>
+                        <q-item-section style="margin-left: 10px">
+                          <q-item-label class="text-weight-bold " style="color: #B79958" >
+                            <q-badge style="background-color: #B79958" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">3</q-badge>
+                            KLIPS 원자료 변수 추가
+                            <q-badge v-if="add_h.length>0 || add_p.length>0" class="q-ml-md" color="green-6" align="middle" >
+                              <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
+                            </q-badge>
+                            <q-badge v-else class="q-ml-md" color="grey" align="middle" >
+                              <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
+                            </q-badge>
+                          </q-item-label>
+
+                          <!--선택한 값 적용-->
+                          <!--
+                          <div v-if="add_h" class="text-grey-8 q-gutter-xs q-mb-sm">
+                              <span class="text-caption text-weight-bold " style="word-break: break-all" >가구용:{{add_h}}</span>
+                          </div>
+
+                          <div v-if="add_p" class="text-grey-8 q-gutter-xs">
+                              <span class="text-caption text-weight-bold" style="word-break: break-all" >개인용:{{add_p}}</span>
+                          </div>-->
+                        </q-item-section>
+                      </template>
+                      <div class="row">
+                        <div class="col-12 q-pb-lg " >
+                          <q-item class="row items-center">
+                            <div class="col-4">
+                              <q-item-section avatar class="q-pl-md">
+                                <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
+                              </q-item-section>
                             </div>
-                            <div class="col-9   q-pl-sm q-pl-lg-lg" >
-                                <span class="text-h6  text-bold q-mr-sm" style="color: #FFFF00; ">'자료추출 시스템'</span>은 사용자가 원하는 변수 및 차수를 선택하여<br>
-                                자료를 원하는 형태로 병합하여 가공하는 <span class="text-h6  text-bold" style="color: #FFFF00">시스템</span>입니다.
-                                <!--병합하여  원하는 데이터 형태로 생성하는 <span class="text-h6  text-bold" style="color: #FFFF00">‘데이터추출’</span> 시스템입니다.-->
+                            <div class="col-8">
+                              <q-item-section>
+                                <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_h" style=""  placeholder="추가할 변수를 입력 하세요. 예1) h0141      예2) h0151 h0152"  />
+                              </q-item-section>
                             </div>
-                        </q-card-section>
-                    </q-card>
-                    <q-space style="height: 10px; background-color: #233D64;" ></q-space>
-                    <q-tabs active-color="white"  align="justify" class="text-grey q-px-md shadow-up-5" style="background-color: #233D64" dense indicator-color="primary" inline-label narrow-indicator v-model="tab">
-                        <q-tab icon="addchart" label="통합 패널데이터 생성" name="create" class="toptab  glossy" style=""/>
-                        <q-tab icon="youtube_searched_for" label="KLIPS 원자료 변수 검색" name="search"  class="toptab glossy"/>
-                        <q-tab icon="contact_support" label="사용법 및 주의사항" name="howto"  class="toptab glossy"/>
-                        <q-tab icon="contact_support" label="FAQ" name="faq"  class="toptab glossy"/>
-                    </q-tabs>
+                          </q-item>
+                          <q-item class="row items-center">
+                            <div class="col-4">
+                              <q-item-section avatar class="q-pl-md">
+                                <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
+                              </q-item-section>
+                            </div>
+                            <div class="col-8">
+                              <q-item-section>
+                                <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_p" style=""  placeholder="추가할 변수를 입력 하세요. 예1) p0101      예2) p0201 p0202"  />
+                              </q-item-section>
+                            </div>
+                          </q-item>
+                          <q-item-label class="q-pl-lg text-black text-bold" caption> 추가할 KLIPS 원자료 변수를 입력할 때는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다. 예) h220141 -> h0141 또는 p220201 p220202 -> p0201 p0202
+                            <!--<span class="text-red text-bold">(선택사항)</span>-->
+                          </q-item-label>
+                          <!-- <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
+                           <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
+                           <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>-->
+                        </div>
+                      </div>
+                    </q-expansion-item>
 
-                    <q-tab-panels class="q-pa-md" animated v-model="tab">
-                        <!-- 1번째 탭 : 통합 패널데이터 생성-->
-                        <q-tab-panel  name="create">
-                            <q-form  @submit="onSubmit" >
-                                <div class="">
-                                    <q-list>
-                                        <!-- 1단계 -->
-                                        <q-expansion-item   ><!--default-opened expand-separator-->
-                                            <template v-slot:header>
-                                                <q-item-section avatar>
-                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
-                                                </q-item-section>
+                    <!-- 2단계-4 -->
+                    <q-expansion-item  class="step2-4" icon="family_restroom" label="" header-class="text-grey-10" >
+                      <template v-slot:header>
+                        <q-item-section avatar class="q-ml-xl">
+                        </q-item-section>
+                        <q-item-section style="margin-left: 10px">
+                          <q-item-label class="text-weight-bold " style="color: #400080" >
+                            <q-badge style="background-color: #400080" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">4</q-badge>
+                            KLIPS 원자료 변수 추가(부가조사)
+                            <q-badge v-if="chk_add_a()" class="q-ml-md" color="green-6" align="middle" >
+                              <!--                                                <q-badge v-if="a_wave.length>0 || add_a.length>0" class="q-ml-md" color="green-6" align="middle" >-->
+                              <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
+                            </q-badge>
+                            <q-badge v-else class="q-ml-md" color="grey" align="middle" >
+                              <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
+                            </q-badge>
+                          </q-item-label>
 
-                                                <q-item-section >
-                                                    <div class="text-grey-9 q-gutter-xs">
-                                                        <span class="text-weight-bolder" >차수선택</span>
-                                                        <span class="text-red-14 text-weight-bolder text-caption"  >(필수)</span>
-                                                        <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
-                                                    </div>
-                                                    <!--선택한 값 적용-->
-                                                    <q-card v-if="wave.length>0" class="my-card border q-mt-sm">
-                                                        <q-card-section class="q-pa-sm">
-                                                            <span class="  " style="word-break: break-all" >{{sortedWave.join('&nbsp;&nbsp;')}}</span>
-                                                        </q-card-section>
-                                                    </q-card>
-                                                </q-item-section>
-                                                <!--
-                                                                                             반응형 샘플
-                                                                                            <div class="row full-width">
-                                                                                                <q-item-section avatar class="col-12 col-sm-2 q-pb-sm">
-                                                                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
-                                                                                                </q-item-section>
+                          <span class="text-weight-bolder" ></span>
 
-                                                                                                <q-item-section class="col-12 col-sm-9"  >
-                                                                                                    <div class="text-grey-9 q-gutter-xs">
-                                                                                                        <span class="text-weight-bolder" >차수선택</span>
-                                                                                                        <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
-                                                                                                        &lt;!&ndash;<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>&ndash;&gt;
-                                                                                                    </div>
-                                                                                                    &lt;!&ndash;선택한 값 적용&ndash;&gt;
-                                                                                                    <q-card v-if="wave.length>0" class="my-card border q-mt-sm">
-                                                                                                        <q-card-section class="q-pa-sm">
-                                                                                                            <span class="  " style="word-break: break-all" >{{sortedWave.join('&nbsp;&nbsp;')}}</span>
-                                                                                                        </q-card-section>
-                                                                                                    </q-card>
-                                                                                                </q-item-section>
-                                                                                            </div>-->
-                                            </template>
-                                            <div class="row">
-                                                <div class="q-pa-sm q-ma-md bg-grey-2  rounded-borders">
-                                                    <q-option-group class="text-subtitle1" @input="waveSelectChg('wave')" v-model="waveSelect" :options="waveSelectOptions" color="primary" inline/>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
-                                                    <q-item dense>
-                                                        <q-item-section class="itemSectionWave" avatar>
-                                                            <q-checkbox  @input="waveSelectDataChg()"  v-model="wave" :val=waveLabel(index) />
-                                                        </q-item-section>
-                                                        <q-item-section>
-                                                            <q-item-label >{{waveLabel(index)}}차수</q-item-label>
-                                                        </q-item-section>
-                                                    </q-item>
-                                                </div>
-                                            </div>
-                                        </q-expansion-item>
-                                        <q-separator class="q-my-lg"></q-separator>
+                        </q-item-section>
+                      </template>
+                      <div class="row">
+                        <div class="col-12 q-pb-lg " >
+                          <div class="col-12 scroll overflow-hidden" >
+                            <q-item class="row items-center q-gutter-lg" v-for="(n, index) in 3" v-bind:key="n">
+                              <div class="col-5">
+                                <q-select outlined  v-model="a_wave[index]" :options="additionalSearchOptions" label="'부가용' 원변수 입력" clearable/>
+                              </div>
+                              <div class="col-6">
+                                <q-input outlined  v-model=" add_a[index]"  placeholder="추가할 변수를 선택하세요" clearable />
+                              </div>
+                            </q-item>
+                            <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>
+                          </div>
+                          <q-item-label class="q-pl-lg text-black text-bold" caption></q-item-label>
+                        </div>
+                      </div>
+                    </q-expansion-item>
 
+                    <q-separator class="q-my-lg"></q-separator>
+                    <!-- 2-1단계 원변수 -->
+                    <!--
+                    <q-expansion-item   >
+                        <template v-slot:header>
+                            <q-item-section avatar>
+                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
+                            </q-item-section>
 
-                                        <!-- 2단계-1 -->
-                                        <q-item>
-                                            <q-item-section avatar > <!--class="bg-grey-3 q-pa-sm"-->
-                                                <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
-                                            </q-item-section>
-                                            <q-item-section >
-                                                <div class="text-grey-9 q-gutter-xs">
-                                                    <span class="text-weight-bolder text-subtitle2" >가구용 또는 개인용 가공 변수를 반드시 하나 이상 선택해야 합니다.</span>
-                                                </div>
-                                                <!--선택한 값 적용-->
-                                                <!-- <q-card v-if="kt_select2_3.length>0" class="my-card border q-mt-sm">
-                                                     <q-card-section class="q-pa-sm">
-                                                         <span class="  " style="word-break: break-all; color: black" >{{kt_select2_3.join('&nbsp;&nbsp;&nbsp;')}}</span>
-                                                     </q-card-section>
-                                                 </q-card>-->
-                                            </q-item-section>
-                                        </q-item>
-                                        <q-expansion-item  class="step2-1 q-mb-lg" label="" header-class="text-teal">
-                                            <template v-slot:header>
-                                                <q-item-section avatar class="q-ml-xl">
-                                                    <!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
-                                                </q-item-section>
-                                                <!--                                    <q-item-section avatar>
-                                                                                        <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
-                                                                                    </q-item-section>-->
-                                                <q-item-section style="margin-left: 10px">
-                                                    <q-item-label class="text-weight-bolder">
-                                                        <q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
-                                                        가구용 가공 변수 선택
-                                                        <q-badge v-if="kt_select2_3.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                            <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
-                                                        </q-badge>
-                                                        <!--privacy_tip-->
-                                                        <q-badge v-else  class="q-ml-md" color="grey" align="middle" >
-                                                            <q-icon name="search_off" size="xs" class=""></q-icon>선택안함
-                                                        </q-badge>
-                                                    </q-item-label>
-                                                </q-item-section>
-                                            </template>
-                                            <q-scroll-area style="height: 400px;">
-                                                <div class="row q-ma-lg">
-                                                    <div class="full-width q-pa-sm q-pr-lg bg-grey-2  rounded-borders">
-                                                        <q-option-group @input="waveSelect2Chg()" v-model="waveSelect2" :options="waveSelect2Options" color="primary" inline/>
-                                                    </div>
-                                                </div>
-
-                                                <q-item v-for="(list, index) in kt_select2_3_data" :key="index" tag="label" v-ripple>
-                                                    <q-item-section avatar>
-                                                        <q-checkbox @input="waveSelect2DataChg()" color="teal" keep-color   v-model="kt_select2_3" :val=list[0] />
-                                                    </q-item-section>
-                                                    <q-item-section>
-                                                        <q-item-label>{{list[0]}}</q-item-label>
-                                                        <q-item-label caption>{{list[1]}}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                            </q-scroll-area>
-                                        </q-expansion-item>
-
-
-                                        <!-- 2단계-2 -->
-                                        <q-expansion-item  class="step2-2  q-mb-lg" icon="family_restroom" label="개인용 변수" header-class="text-blue-8" >
-                                            <template v-slot:header>
-                                                <q-item-section avatar class="q-ml-xl">
-                                                    <!--                                        <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>-->
-                                                </q-item-section>
-                                                <!--                                    <q-item-section avatar>
-                                                                                        <q-avatar icon="format_list_numbered_rtl" color=" " text-color="" />
-                                                                                    </q-item-section>-->
-                                                <q-item-section style="margin-left: 10px">
-                                                    <q-item-label class="text-weight-bolder" style="color: #03B0F3">
-                                                        <q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
-                                                        개인용 가공 변수 선택
-                                                        <q-badge v-if="kt_select2_4.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                            <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
-                                                        </q-badge>
-                                                        <!--privacy_tip-->
-                                                        <q-badge v-else  class="q-ml-md" color="grey" align="middle" >
-                                                            <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
-                                                        </q-badge>
-                                                    </q-item-label>
-
-                                                    <!--선택한 값 적용-->
-                                                    <!--<q-card v-if="kt_select2_4.length>0" class="my-card border q-mt-sm">
-                                                        <q-card-section class="q-pa-sm">
-                                                            <span class="  " style="word-break: break-all; color: black" >{{kt_select2_4.join('&nbsp;&nbsp;&nbsp;')}}</span>
-                                                        </q-card-section>
-                                                    </q-card>-->
-                                                </q-item-section>
-                                            </template>
-                                            <q-scroll-area style="height: 400px;">
-                                                <div class="row q-ma-lg">
-                                                    <div class="full-width q-pa-sm q-pr-lg bg-grey-2  rounded-borders">
-                                                        <q-option-group @input="waveSelect3Chg()" v-model="waveSelect3" :options="waveSelect3Options" color="primary" inline/>
-                                                    </div>
-                                                </div>
-
-
-                                                <q-item v-for="(list, index) in kt_select2_4_data" :key="index"  tag="label" v-ripple>
-                                                    <q-item-section avatar>
-                                                        <q-checkbox  @input="waveSelect3DataChg()" color="blue-8" keep-color  v-model="kt_select2_4" :val=list[0] />
-                                                    </q-item-section>
-                                                    <q-item-section>
-                                                        <q-item-label>{{list[0]}}</q-item-label>
-                                                        <q-item-label caption>{{list[1]}}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                            </q-scroll-area>
-                                        </q-expansion-item>
-
-                                        <!-- 2단계-3 -->
-                                        <q-expansion-item  class="step2-3 q-mb-lg" icon="family_restroom" label="추가 변수 입력" header-class="text-grey-10" >
-                                            <template v-slot:header>
-                                                <q-item-section avatar class="q-ml-xl">
-                                                </q-item-section>
-                                                <q-item-section style="margin-left: 10px">
-                                                    <q-item-label class="text-weight-bold " style="color: #B79958" >
-                                                        <q-badge style="background-color: #B79958" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">3</q-badge>
-                                                        KLIPS 원자료 변수 추가
-                                                        <q-badge v-if="add_h.length>0 || add_p.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                            <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
-                                                        </q-badge>
-                                                        <q-badge v-else class="q-ml-md" color="grey" align="middle" >
-                                                            <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
-                                                        </q-badge>
-                                                    </q-item-label>
-
-                                                    <!--선택한 값 적용-->
-                                                    <!--
-                                                    <div v-if="add_h" class="text-grey-8 q-gutter-xs q-mb-sm">
-                                                        <span class="text-caption text-weight-bold " style="word-break: break-all" >가구용:{{add_h}}</span>
-                                                    </div>
-
-                                                    <div v-if="add_p" class="text-grey-8 q-gutter-xs">
-                                                        <span class="text-caption text-weight-bold" style="word-break: break-all" >개인용:{{add_p}}</span>
-                                                    </div>-->
-                                                </q-item-section>
-                                            </template>
-                                            <div class="row">
-                                                <div class="col-12 q-pb-lg " >
-                                                    <q-item class="row items-center">
-                                                        <div class="col-4">
-                                                            <q-item-section avatar class="q-pl-md">
-                                                                <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
-                                                            </q-item-section>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <q-item-section>
-                                                                <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_h" style=""  placeholder="추가할 변수를 입력 하세요. 예1) h0141      예2) h0151 h0152"  />
-                                                            </q-item-section>
-                                                        </div>
-                                                    </q-item>
-                                                    <q-item class="row items-center">
-                                                        <div class="col-4">
-                                                            <q-item-section avatar class="q-pl-md">
-                                                                <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
-                                                            </q-item-section>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <q-item-section>
-                                                                <q-input @keydown.enter.prevent="submit" outlined dense v-model="add_p" style=""  placeholder="추가할 변수를 입력 하세요. 예1) p0101      예2) p0201 p0202"  />
-                                                            </q-item-section>
-                                                        </div>
-                                                    </q-item>
-                                                    <q-item-label class="q-pl-lg text-black text-bold" caption> 추가할 KLIPS 원자료 변수를 입력할 때는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다. 예) h220141 -> h0141 또는 p220201 p220202 -> p0201 p0202
-                                                        <!--<span class="text-red text-bold">(선택사항)</span>-->
-                                                    </q-item-label>
-                                                    <!-- <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
-                                                     <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
-                                                     <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>-->
-                                                </div>
-                                            </div>
-                                        </q-expansion-item>
-
-                                        <!-- 2단계-4 -->
-                                        <q-expansion-item  class="step2-4" icon="family_restroom" label="" header-class="text-grey-10" >
-                                          <template v-slot:header>
-                                            <q-item-section avatar class="q-ml-xl">
-                                            </q-item-section>
-                                            <q-item-section style="margin-left: 10px">
-                                              <q-item-label class="text-weight-bold " style="color: #400080" >
-                                                <q-badge style="background-color: #400080" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">4</q-badge>
-                                                KLIPS 원자료 변수 추가(부가조사)
-                                                <q-badge v-if="a_wave.length>0 || add_a.length>0" class="q-ml-md" color="green-6" align="middle" >
-                                                  <q-icon name="verified_user" size="xs" class=""></q-icon> 선택완료
-                                                </q-badge>
-                                                <q-badge v-else class="q-ml-md" color="grey" align="middle" >
-                                                  <q-icon name="search_off" size="xs" class=""></q-icon> 선택안함
-                                                </q-badge>
-                                              </q-item-label>
-
-                                              <span class="text-weight-bolder" ></span>
-
-                                            </q-item-section>
-                                          </template>
-                                          <div class="row">
-                                            <div class="col-12 q-pb-lg " >
-                                              <div class="col-12 scroll overflow-hidden" >
-                                                <q-item class="row items-center q-gutter-lg" v-for="(n, index) in 3" v-bind:key="n">
-                                                  <div class="col-5">
-                                                    <q-select outlined  v-model="a_wave[index]" :options="additionalSearchOptions" label="'부가용' 원변수 입력" clearable/>
-                                                  </div>
-                                                  <div class="col-6">
-                                                    <q-input outlined  v-model=" add_a[index]"  placeholder="추가할 변수를 선택하세요" clearable />
-                                                  </div>
-                                                </q-item>
-                                                <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>
-                                              </div>
-                                              <q-item-label class="q-pl-lg text-black text-bold" caption></q-item-label>
-                                            </div>
-                                          </div>
-                                      </q-expansion-item>
-
-                                        <q-separator class="q-my-lg"></q-separator>
-                                        <!-- 2-1단계 원변수 -->
-                                        <!--
-                                        <q-expansion-item   >
-                                            <template v-slot:header>
-                                                <q-item-section avatar>
-                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
-                                                </q-item-section>
-
-                                                <q-item-section>원변수 입력</q-item-section>
-                                            </template>
-                                            <div class="row">
-                                                <div class="col-12 " >
-                                                    <q-item class="row items-center">
-                                                        <div class="col-4">
-                                                            <q-item-section avatar class="q-pl-md">
-                                                                <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
-                                                            </q-item-section>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <q-item-section>
-                                                                <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력"  />
-                                                            </q-item-section>
-                                                        </div>
-                                                    </q-item>
-                                                    <q-item class="row items-center">
-                                                        <div class="col-4">
-                                                            <q-item-section avatar class="q-pl-md">
-                                                                <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
-                                                            </q-item-section>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <q-item-section>
-                                                                <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력"  />
-                                                            </q-item-section>
-                                                        </div>
-                                                    </q-item>
-                                                    <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
-                                                    <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
-                                                    <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
-                                                    <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
-                                                </div>
-                                            </div>
-                                        </q-expansion-item>
-                                        <q-separator class="q-my-lg"></q-separator>
-                                        -->
-                                        <!-- 3단계 -->
-                                        <q-expansion-item   >
-                                            <template v-slot:header>
-                                                <q-item-section avatar>
-                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
-                                                </q-item-section>
-
-                                                <q-item-section>
-                                                    <div class="text-grey-9 q-gutter-xs">
-                                                        <span class="text-weight-bolder"  >저장파일</span>
-                                                        <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
-                                                    </div>
-                                                </q-item-section>
-                                            </template>
-                                            <div class="row">
-                                                <div class="col-12 " >
-                                                    <q-item class="row items-center">
-                                                        <div class="col-2">
-                                                            <q-item-label class="q-mr-md">저장할 파일명 : </q-item-label>
-                                                        </div>
-                                                        <div class="col-10">
-                                                            <q-input outlined dense v-model="filename" style="width: 300px"  placeholder="예 : save_20201220"  />
-                                                        </div>
-                                                    </q-item>
-
-                                                    <q-item class="row items-center">
-                                                        <div class="col-2">파일타입 :</div>
-                                                        <div class="col-10 " >
-
-                                                            <!--<label>STATA(*.dta)</label>-->
-
-                                                            <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" />
-                                                            <!--<q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />-->
-                                                            <q-checkbox v-model="filesave" val="Csv" label="Text(*.csv)" />
-                                                            <!--<q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
-                                                            <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>-->
-                                                        </div>
-                                                    </q-item>
-                                                    <!--
-                                                                                            <q-item class="row items-center ">
-                                                                                                <div class="col">
-                                                                                                    변수라벨 파일 :
-                                                                                                    <q-radio v-model="Stata" val="Stata" label="변수라벨(*.xlsx)" />
-                                                                                                    <q-radio v-model="Excel" val="Excel" label="변수라벨(*.csv)" />
-                                                                                                </div>
-                                                                                                <q-space></q-space>
-                                                                                            </q-item>
-                                                                                            -->
-                                                    <q-item-label class="q-pl-md text-black text-bold" caption>- 다른 저장 포멧(SAS, SPSS)은 추후 지원예정</q-item-label>
-                                                    <!--<q-item-label class="q-pl-md text-black text-bold" caption>- STATA파일은 기본적으로 저장이 됩니다.</q-item-label>-->
-                                                    <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
-                 -->
-                                                </div>
-                                            </div>
-                                            <!--
-                                            <q-item v-for="index in 21" tag="label" v-ripple>
-                                                <q-item-section avatar>
-                                                    <q-checkbox    v-model="wave" :val=waveLabel(index) />
-                                                </q-item-section>
-                                                <q-item-section>
-                                                    <q-item-label>{{waveLabel(index)}}차수</q-item-label>
-                                                </q-item-section>
-                                            </q-item>
-                                            -->
-                                        </q-expansion-item>
-                                        <q-separator class="q-my-lg"></q-separator>
-
-                                    </q-list>
-                                    <div class="q-mb-xl"></div>
-                                    <!-- 제출 -->
-                                    <div class="q-mt-md row justify-center q-gutter-sm">
-                                        <q-btn class="glossy" type="submit" color="primary" label="데이터 추출" />
-                                        <q-btn class="glossy" @click="searchInit()"  color="white" text-color="black" label="초기화" />
-                                    </div>
-
-                                    <div class="q-pt-lg text-center">
-                                        <label class="text-overline">* 자료추출시스템은 <span class="text-orange text-weight-bold">크롬</span> 또는 <span class="text-orange text-weight-bold">MS-Edge</span> 브라우저에 최적화 되어있으니, 해당 브라우져 사용을 권장합니다</label>
-                                    </div>
-                                </div>
-                            </q-form>
-                        </q-tab-panel>
-
-
-                        <!-- 2번째 탭 : 추가변수 검색 -->
-                        <q-tab-panel name="search" >
-                            <q-form id="frmSearch"  @submit="onSearch">
-                                <div class="">
-                                    <q-list>
-                                        <!-- 1단계 -->
-                                        <q-expansion-item   ><!--default-opened expand-separator-->
-                                            <template v-slot:header>
-
-                                                <q-item-section avatar>
-                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
-                                                </q-item-section>
-
-                                                <q-item-section >
-                                                    <div class="text-grey-9 q-gutter-xs">
-                                                        <span class="text-weight-bolder"  >차수선택</span>
-                                                        <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
-                                                        <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
-                                                    </div>
-                                                </q-item-section>
-                                            </template>
-                                            <div class="row">
-                                                <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
-                                                    <q-option-group @input="waveSelectChg('wave2')" v-model="waveSelect2" :options="waveSelectOptions" color="primary" inline/>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
-                                                    <q-item dense>
-                                                        <q-item-section class="itemSectionWave" avatar>
-                                                            <q-checkbox    v-model="wave2" :val=waveLabel(index) />
-                                                        </q-item-section>
-                                                        <q-item-section>
-                                                            <q-item-label>{{waveLabel(index)}}차수</q-item-label>
-                                                        </q-item-section>
-                                                    </q-item>
-                                                </div>
-                                            </div>
-                                        </q-expansion-item>
-                                        <q-separator class="q-my-lg"></q-separator>
-
-                                        <q-expansion-item>
-                                            <template v-slot:header>
-                                                <q-item-section avatar>
-                                                    <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
-                                                </q-item-section>
-
-                                                <q-item-section>
-                                                    <div class="text-grey-9 q-gutter-xs">
-                                                        <span class="text-weight-bolder"  >가구용 또는 개인용 선택</span>
-                                                        <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
-                                                    </div>
-                                                </q-item-section>
-                                            </template>
-                                            <div class="row">
-                                                <div class="col-12 " >
-                                                    <q-item class="row items-center">
-                                                        <div class="col-4">
-                                                            <q-item-section avatar class="q-pl-md">
-                                                                <q-option-group v-model="hp" :options="hpOptions" color="primary" inline/>
-                                                            </q-item-section>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <q-item-section>
-                                                                <q-input outlined dense v-model="word" style=""  placeholder="검색할 단어를 입력하세요. 예) 소득"  />
-                                                            </q-item-section>
-                                                        </div>
-                                                    </q-item>
-                                                    <!--
-                                                     <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
-                                                     <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
-                                                     <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
-                                                     <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
-                                                     -->
-                                                </div>
-                                            </div>
-                                        </q-expansion-item>
-                                        <q-separator class="q-my-lg"></q-separator>
-                                        <!-- 제출 -->
-                                        <div class="q-mt-md q-mb-xl row justify-center q-gutter-sm">
-                                            <q-btn type="submit" class="glossy"  color="primary" label="검색하기" />
-                                            <q-btn @click="searchInit2" class="glossy"  color="white" text-color="black" label="초기화" />
-                                        </div>
-                                        <q-expansion-item v-model="expansionSearchResult">
-                                            <template v-slot:header>
-                                                <q-item-section avatar>
-                                                    <q-chip class="glossy" color="red-8" text-color="white" icon="star">검색결과</q-chip>
-                                                </q-item-section>
-
-                                                <q-item-section></q-item-section>
-                                                <!--<q-item-section>여기를 클릭하시면 open / close가 가능합니다.</q-item-section>-->
-                                            </template>
-                                            <div class="row">
-                                                <pre id="searchResult" class="" style="width: 100%" v-html="searchResult" ></pre>
-                                            </div>
-                                        </q-expansion-item>
-                                    </q-list>
-                                    <div class="q-mb-xl"></div>
-
-
-                                </div>
-                            </q-form>
-                        </q-tab-panel>
-
-                        <!-- 3번째 탭 : 사용법 안내 -->
-                        <q-tab-panel name="howto">
-
-                            <q-list bordered class="rounded-borders ">
-                                <q-expansion-item group="somegroup"    label="">
-                                    <template v-slot:header>
-                                        <q-item-section avatar>
-                                            <q-chip class="glossy" color="primary" text-color="white" icon="star">'통합 패널데이터 생성' 탭 사용법 안내</q-chip>
+                            <q-item-section>원변수 입력</q-item-section>
+                        </template>
+                        <div class="row">
+                            <div class="col-12 " >
+                                <q-item class="row items-center">
+                                    <div class="col-4">
+                                        <q-item-section avatar class="q-pl-md">
+                                            <q-item-label  ><span class="text-primary text-bold">"가구용"</span> 원변수 입력</q-item-label>
                                         </q-item-section>
-                                    </template>
-                                    <div class="q-pa-lg">
-                                        <div class="q-mb-xl">
-                                            <!--<p class="text-h5 text-bold">"통합 패널데이터 생성" 탭 사용법 안내</p>-->
-                                            <p class="text-subtitle1 text-bold text-bold" ><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
-                                            <p class="text-body2">사용자가 원하는 데이터의 차수를 선택합니다.</p>
-                                            <q-card bordered  flat>
-                                                <q-card-section>
-                                                    <q-img bordered class="border" src="~assets/howto/1-1.jpg" transition="fade" />
-                                                </q-card-section>
-                                            </q-card>
-                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <q-item-section>
+                                            <q-input outlined dense v-model="add_h" style=""  placeholder="추가할 변수 입력"  />
+                                        </q-item-section>
+                                    </div>
+                                </q-item>
+                                <q-item class="row items-center">
+                                    <div class="col-4">
+                                        <q-item-section avatar class="q-pl-md">
+                                            <q-item-label  ><span class="text-primary text-bold">"개인용"</span> 원변수 입력</q-item-label>
+                                        </q-item-section>
+                                    </div>
+                                    <div class="col-8">
+                                        <q-item-section>
+                                            <q-input outlined dense v-model="add_p" style=""  placeholder="추가할 변수 입력"  />
+                                        </q-item-section>
+                                    </div>
+                                </q-item>
+                                <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
+                                <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
+                                <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
+                                <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
+                            </div>
+                        </div>
+                    </q-expansion-item>
+                    <q-separator class="q-my-lg"></q-separator>
+                    -->
+                    <!-- 3단계 -->
+                    <q-expansion-item   >
+                      <template v-slot:header>
+                        <q-item-section avatar>
+                          <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 3</q-chip>
+                        </q-item-section>
 
-                                        <div class="q-mb-xl">
-                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 가구용 / 개인용 가공변수 선택(둘 중 하나 이상 선택 <span class="text-red">필수</span>)</p>
-                                            <p class="text-body2">사용자가 원하는
-                                                <label class=" text-green" ><q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
-                                                    <span class="text-weight-bolder">가구용</span>
-                                                </label>
-                                                ,
-                                                <label  style="color: #03B0F3" ><q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
-                                                    <span class="text-weight-bolder">개인용</span>
-                                                </label>
+                        <q-item-section>
+                          <div class="text-grey-9 q-gutter-xs">
+                            <span class="text-weight-bolder"  >저장파일</span>
+                            <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                          </div>
+                        </q-item-section>
+                      </template>
+                      <div class="row">
+                        <div class="col-12 " >
+                          <q-item class="row items-center">
+                            <div class="col-2">
+                              <q-item-label class="q-mr-md">저장할 파일명 : </q-item-label>
+                            </div>
+                            <div class="col-10">
+                              <q-input outlined dense v-model="filename" style="width: 300px"  placeholder="예 : save_20201220"  />
+                            </div>
+                          </q-item>
 
-                                                변수를 선택합니다. (둘 다 선택도 가능합니다)<br>해당 변수는 사용자가 편하게 사용할 수 있도록 KLIPS 원변수를 활용해 가공한 변수들입니다.<br>만약, KLIPS 원변수를 가공 데이터에 추가하고 싶다면, 아래의
-                                                <span>
+                          <q-item class="row items-center">
+                            <div class="col-2">파일타입 :</div>
+                            <div class="col-10 " >
+
+                              <!--<label>STATA(*.dta)</label>-->
+
+                              <q-checkbox v-model="filesave" val="Stata" label="STATA(*.dta)" />
+                              <!--<q-radio v-model="filesave" val="Excel" label="Excel(*.xlsx)" />-->
+                              <q-checkbox v-model="filesave" val="Csv" label="Text(*.csv)" />
+                              <!--<q-radio v-model="Sas" val="Sas" label="SAS(*.sas7bdat)" disable/>
+                              <q-radio v-model="Sas" val="Spss" label="SPSS(*.sav)" disable/>-->
+                            </div>
+                          </q-item>
+                          <!--
+                                                                  <q-item class="row items-center ">
+                                                                      <div class="col">
+                                                                          변수라벨 파일 :
+                                                                          <q-radio v-model="Stata" val="Stata" label="변수라벨(*.xlsx)" />
+                                                                          <q-radio v-model="Excel" val="Excel" label="변수라벨(*.csv)" />
+                                                                      </div>
+                                                                      <q-space></q-space>
+                                                                  </q-item>
+                                                                  -->
+                          <q-item-label class="q-pl-md text-black text-bold" caption>- 다른 저장 포멧(SAS, SPSS)은 추후 지원예정</q-item-label>
+                          <!--<q-item-label class="q-pl-md text-black text-bold" caption>- STATA파일은 기본적으로 저장이 됩니다.</q-item-label>-->
+                          <!-- <q-item-label icon="star" caption> - 3가지 타입중 한가지 선택</q-item-label>
+-->
+                        </div>
+                      </div>
+                      <!--
+                      <q-item v-for="index in 21" tag="label" v-ripple>
+                          <q-item-section avatar>
+                              <q-checkbox    v-model="wave" :val=waveLabel(index) />
+                          </q-item-section>
+                          <q-item-section>
+                              <q-item-label>{{waveLabel(index)}}차수</q-item-label>
+                          </q-item-section>
+                      </q-item>
+                      -->
+                    </q-expansion-item>
+                    <q-separator class="q-my-lg"></q-separator>
+
+                  </q-list>
+                  <div class="q-mb-xl"></div>
+                  <!-- 제출 -->
+                  <div class="q-mt-md row justify-center q-gutter-sm">
+                    <q-btn class="glossy" type="submit" color="primary" label="데이터 추출" />
+                    <q-btn class="glossy" @click="searchInit()"  color="white" text-color="black" label="초기화" />
+                  </div>
+
+                  <div class="q-pt-lg text-center">
+                    <label class="text-overline">* 자료추출시스템은 <span class="text-orange text-weight-bold">크롬</span> 또는 <span class="text-orange text-weight-bold">MS-Edge</span> 브라우저에 최적화 되어있으니, 해당 브라우져 사용을 권장합니다</label>
+                  </div>
+                </div>
+              </q-form>
+            </q-tab-panel>
+
+
+            <!-- 2번째 탭 : 추가변수 검색 -->
+            <q-tab-panel name="search" >
+              <q-form id="frmSearch"  @submit="onSearch">
+                <div class="">
+                  <q-list>
+                    <!-- 1단계 -->
+                    <q-expansion-item   ><!--default-opened expand-separator-->
+                      <template v-slot:header>
+
+                        <q-item-section avatar>
+                          <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 1</q-chip>
+                        </q-item-section>
+
+                        <q-item-section >
+                          <div class="text-grey-9 q-gutter-xs">
+                            <span class="text-weight-bolder"  >차수선택</span>
+                            <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                            <!--<span class="q-pl-md"  >차수 : 01 ~ 21 (필수)</span>-->
+                          </div>
+                        </q-item-section>
+                      </template>
+                      <div class="row">
+                        <div class="q-pa-md q-ma-md bg-grey-2  rounded-borders">
+                          <q-option-group @input="waveSelectChg('wave2')" v-model="waveSelect2" :options="waveSelectOptions" color="primary" inline/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-sm-6 col-md-2 "  v-for="index in waveCount">
+                          <q-item dense>
+                            <q-item-section class="itemSectionWave" avatar>
+                              <q-checkbox    v-model="wave2" :val=waveLabel(index) />
+                            </q-item-section>
+                            <q-item-section>
+                              <q-item-label>{{waveLabel(index)}}차수</q-item-label>
+                            </q-item-section>
+                          </q-item>
+                        </div>
+                      </div>
+                    </q-expansion-item>
+                    <q-separator class="q-my-lg"></q-separator>
+
+                    <q-expansion-item>
+                      <template v-slot:header>
+                        <q-item-section avatar>
+                          <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
+                        </q-item-section>
+
+                        <q-item-section>
+                          <div class="text-grey-9 q-gutter-xs">
+                            <span class="text-weight-bolder"  >가구용 또는 개인용 선택</span>
+                            <span class="text-red-14 text-weight-bold text-caption"  >(필수)</span>
+                          </div>
+                        </q-item-section>
+                      </template>
+                      <div class="row">
+                        <div class="col-12 " >
+                          <q-item class="row items-center">
+                            <div class="col-4">
+                              <q-item-section avatar class="q-pl-md">
+                                <q-option-group v-model="hp" :options="hpOptions" color="primary" inline/>
+                              </q-item-section>
+                            </div>
+                            <div class="col-8">
+                              <q-item-section>
+                                <q-input outlined dense v-model="word" style=""  placeholder="검색할 단어를 입력하세요. 예) 소득"  />
+                              </q-item-section>
+                            </div>
+                          </q-item>
+                          <!--
+                           <q-item-label class="q-pl-lg" caption> - 원변수 추가 가능(<span class="text-red text-bold">선택사항</span>이므로 이 단계를 건너뛰어도 됨)</q-item-label>
+                           <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">검색</span>을 통해 추가 가능</q-item-label>
+                           <q-item-label class="q-pl-lg" caption>- <span class="text-red text-bold">코드북</span>을 통해 추가 가능</q-item-label>
+                           <q-item-label class="q-pl-lg" caption>- Step 2에서 가구, 가구원 모두 선택했다면 Step 3도 모두 입력가능</q-item-label>
+                           -->
+                        </div>
+                      </div>
+                    </q-expansion-item>
+                    <q-separator class="q-my-lg"></q-separator>
+                    <!-- 제출 -->
+                    <div class="q-mt-md q-mb-xl row justify-center q-gutter-sm">
+                      <q-btn type="submit" class="glossy"  color="primary" label="검색하기" />
+                      <q-btn @click="searchInit2" class="glossy"  color="white" text-color="black" label="초기화" />
+                    </div>
+                    <q-expansion-item v-model="expansionSearchResult">
+                      <template v-slot:header>
+                        <q-item-section avatar>
+                          <q-chip class="glossy" color="red-8" text-color="white" icon="star">검색결과</q-chip>
+                        </q-item-section>
+
+                        <q-item-section></q-item-section>
+                        <!--<q-item-section>여기를 클릭하시면 open / close가 가능합니다.</q-item-section>-->
+                      </template>
+                      <div class="row">
+                        <pre id="searchResult" class="" style="width: 100%" v-html="searchResult" ></pre>
+                      </div>
+                    </q-expansion-item>
+                  </q-list>
+                  <div class="q-mb-xl"></div>
+
+
+                </div>
+              </q-form>
+            </q-tab-panel>
+
+            <!-- 3번째 탭 : 사용법 안내 -->
+            <q-tab-panel name="howto">
+
+              <q-list bordered class="rounded-borders ">
+                <q-expansion-item group="somegroup"    label="">
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-chip class="glossy" color="primary" text-color="white" icon="star">'통합 패널데이터 생성' 탭 사용법 안내</q-chip>
+                    </q-item-section>
+                  </template>
+                  <div class="q-pa-lg">
+                    <div class="q-mb-xl">
+                      <!--<p class="text-h5 text-bold">"통합 패널데이터 생성" 탭 사용법 안내</p>-->
+                      <p class="text-subtitle1 text-bold text-bold" ><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
+                      <p class="text-body2">사용자가 원하는 데이터의 차수를 선택합니다.</p>
+                      <q-card bordered  flat>
+                        <q-card-section>
+                          <q-img bordered class="border" src="~assets/howto/1-1.jpg" transition="fade" />
+                        </q-card-section>
+                      </q-card>
+                    </div>
+
+                    <div class="q-mb-xl">
+                      <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 가구용 / 개인용 가공변수 선택(둘 중 하나 이상 선택 <span class="text-red">필수</span>)</p>
+                      <p class="text-body2">사용자가 원하는
+                        <label class=" text-green" ><q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
+                          <span class="text-weight-bolder">가구용</span>
+                        </label>
+                        ,
+                        <label  style="color: #03B0F3" ><q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
+                          <span class="text-weight-bolder">개인용</span>
+                        </label>
+
+                        변수를 선택합니다. (둘 다 선택도 가능합니다)<br>해당 변수는 사용자가 편하게 사용할 수 있도록 KLIPS 원변수를 활용해 가공한 변수들입니다.<br>만약, KLIPS 원변수를 가공 데이터에 추가하고 싶다면, 아래의
+                        <span>
                                                     <q-chip class="glossy" color="primary" text-color="white" icon="star">STEP 2</q-chip>
                                                     <q-badge style="background-color: black" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">3</q-badge>
                                                     <span class="text-weight-bolder">KLIPS 원자료 변수 추가</span>
                                                 </span>
-                                                를 이용하시기 바랍니다.
+                        를 이용하시기 바랍니다.
 
-                                            </p>
-                                            <q-card bordered  flat>
-                                                <q-card-section>
-                                                    <q-img bordered class="border" src="~assets/howto/2-1.jpg" transition="fade" />
-                                                </q-card-section>
-                                            </q-card>
-                                        </div>
-
-                                        <div class="q-mb-xl">
-                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 KLIPS 원변수 변수 추가(필수 아님)</p>
-                                            <p class="text-body2" style="white-space: pre-wrap;">사용자가 원하는 임의의 KLIPS 원변수를 추가하여 데이터를 생성할 수 있습니다.<br>
-                                                <label class=" text-green" ><q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
-                                                    <span class="text-weight-bolder">가구용</span>
-                                                </label>, <label  style="color: #03B0F3" ><q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
-                                                    <span class="text-weight-bolder">개인용</span>
-                                                </label> 변수를 구분하여 입력란에 넣으면 그 변수를 포함한 데이터가 생성됩니다.<br>변수 입력시에는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다.<br>단, 변수를 여러 개 입력시 변수간에는 공백으로 구분하면 됩니다.
-                                            </p>
-                                            <q-card bordered  flat>
-                                                <q-card-section>
-                                                    <q-img bordered class="border" src="~assets/howto/3-1.jpg" transition="fade" />
-                                                </q-card-section>
-                                            </q-card>
-                                        </div>
-
-                                        <div class="q-mb-xl">
-                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP3 저장파일 <span class="text-red">(필수)</span></p>
-                                            <p class="text-body2" style="white-space: pre-wrap;">사용자는 저장하고자 하는 파일명을 직접 입력합니다.<br>저장할 파일형식은 Stata, Excel 또는 Text 중에서 선택할 수 있습니다. (다른 포맷의 데이터는 추후 업데이트 예정)</p>
-                                            <q-card bordered  flat>
-                                                <q-card-section>
-                                                    <q-img bordered class="border" src="~assets/howto/4-1.jpg" transition="fade" />
-                                                </q-card-section>
-                                            </q-card>
-                                        </div>
-                                    </div>
-                                </q-expansion-item>
-
-                                <q-separator class="q-my-xs"></q-separator>
-
-
-                                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                                <!-- 추가 변수 검색 -->
-                                <q-expansion-item group="somegroup"    label="">
-                                    <template v-slot:header>
-                                        <q-item-section avatar>
-                                            <q-chip class="glossy" color="primary" text-color="white" icon="star">'KLIPS 원자료 변수 검색' 탭 사용법 안내</q-chip>
-                                        </q-item-section>
-                                    </template>
-
-                                    <div class="q-pa-lg">
-                                        <div class="q-mb-xl">
-                                            <!--<p class="text-h5 text-bold">"추가변수 검색" 탭 사용법 안내</p>-->
-                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
-                                            <p class="text-body2" style="white-space: pre-wrap;">이전 “데이터생성” 탭에서 선택한 차수를 그대로 사용합니다.<br>만약 차수를 변경하면 “데이터생성” 탭의 차수도 자동으로 변경됩니다.</p>
-                                            <q-card bordered  flat>
-                                                <q-card-section>
-                                                    <q-img bordered class="border" src="~assets/howto/1-1.jpg" transition="fade" />
-                                                </q-card-section>
-                                            </q-card>
-                                        </div>
-
-                                        <div class="q-mb-xl">
-                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP2 가구용 또는 개인용 선택<span class="text-red">(필수)</span></p>
-                                            <p class="text-body2" style="white-space: pre-wrap;">검색할 변수가 가구용 데이터에 있으면 <label class=" text-green" ><q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
-                                                <span class="text-weight-bolder">가구용</span>
-                                            </label> 을 선택하고, 개인용 데이터에 있으면 <label  style="color: #03B0F3" ><q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
-                                                <span class="text-weight-bolder">개인용</span>
-                                            </label> 을 선택합니다.<br>가령 “소득”이라고 입력하고 키보드의 엔터키를 누르거나 “검색하기” 버튼을 누르면 해당 차수의 원변수 중에서<br>“소득”이 포함되어 있는 모든 변수가 검색창에 나타납니다.<br><br>* 한 단어만 검색 가능합니다.
-                                            </p>
-                                            <q-card bordered  flat>
-                                                <q-card-section>
-                                                    <q-img bordered class="border" src="~assets/howto/5.jpg" transition="fade" />
-                                                </q-card-section>
-                                            </q-card>
-                                        </div>
-
-                                        <div class="q-mb-xl">
-                                            <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 검색결과</p>
-                                            <p class="text-body2" style="white-space: pre-wrap;">STEP 1, 2의 조건을 반영한 결과가 화면에 나타납니다.<br>이때 사용자는 원하는 변수명을 마우스로 복사하여 첫번째 “데이터생성” 탭의 “추가변수 입력”란에<br>붙여넣기 하여 그 변수가 포함된 데이터를 생성할 수 있습니다.<br><br>* 추가로 단어를 검색하여 “데이터생성” 탭 “추가변수 입력”란에 계속 추가할 수 있습니다.
-
-                                            </p>
-                                            <q-card bordered  flat>
-                                                <q-card-section>
-                                                    <q-img bordered class="border" src="~assets/howto/6.jpg" transition="fade" />
-                                                </q-card-section>
-                                            </q-card>
-                                        </div>
-                                    </div>
-                                </q-expansion-item>
-                            </q-list>
-
-
-
-                        </q-tab-panel>
-
-                        <!-- 4번째 탭 : FAQ -->
-                        <q-tab-panel name="faq">
-
-                            <q-list bordered class="rounded-borders ">
-
-                                <q-expansion-item group="somegroup" header-style="font-weight: bolder" switch-toggle-side  label="질문 1) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
-                                    <q-card>
-                                        <q-card-section style="white-space: pre-wrap;">Stata 버전 14 이상에서만 사용이 가능합니다.
-
-                                            Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터를 추출한 후,
-
-                                            해당 프로그램에서 데이터를 불러오시기 바랍니다.</q-card-section>
-                                    </q-card>
-                                </q-expansion-item>
-                                <q-separator />
-                                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label='질문 2) “KLIPS 원자료 변수 검색” 탭에서 단어검색은 한 개만 가능한가요?'>
-                                    <q-card>
-                                        <q-card-section>
-                                            네, 단어는 1개씩만 검색할 수 있습니다. 그러나 반복하여 여러 개를 검색할 수 있습니다.
-                                        </q-card-section>
-                                    </q-card>
-                                </q-expansion-item>
-                                <q-separator />
-                                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label="질문 3) SAS, SPSS 사용자가 자료추출을 하고자 하면 어떻게 하나요?">
-                                    <q-card>
-                                        <q-card-section style="white-space: pre-wrap;">STATA로 지정하여 dta 파일로 추출한 후 해당 프로그램의 '불러오기' 기능을 이용해 보시기 바랍니다.
-
-                                            또는 Excel혹은 Text로 추출하면 변수리스트 파일까지 한꺼번에 추출됩니다.
-
-                                            이 파일을 이용해 해당 통계패키지에서 데이터에 라벨을 붙이기 바랍니다.
-                                        </q-card-section>
-                                    </q-card>
-                                </q-expansion-item>
-
-                                <q-separator />
-                                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label="질문 4) Internet Explorer사용시 에러가 발생합니다.">
-                                    <q-card>
-                                        <q-card-section style="white-space: pre-wrap;">자료추출시스템은 크롬 또는 마이크로소프트 Edge 브라우저에 최적화 되어있으니,
-
-                                            해당 브라우져 사용을 권장합니다. Internet Explorer 사용시 정상적으로 작동하지 않을 수 있습니다.
-                                        </q-card-section>
-                                    </q-card>
-                                </q-expansion-item>
-                            </q-list>
-                            <div class="q-pt-lg  vertical-middle">
-                                한국노동패널조사에 대하여 문의해주세요.
-                                <q-btn @click="openURL('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=87&key=442')"  target="_blank" icon="mail"  class="q-ml-lg glossy" type="submit" color="primary" label="문의하기" />
-                            </div>
-                        </q-tab-panel>
-                    </q-tab-panels>
-
-                    <q-card dark  class="my-card  q-mb-sm" style="background-color: #233D64;">
-                        <q-card-section class="row">
-                            <div class="col-12 col-sm-3 q-mb-md ">
-                                <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
-                                    <q-img class="" src="~assets/logo_new.png" style="max-width: 190px" ></q-img>
-                                </a>
-                            </div>
-
-                            <div class="col-9 text-bold " >
-                                <p class="text-caption text-bold q-mb-xs " style="">COPYRIGHT KOREA LABOR INSTITUTE.ALL RIGHTS RESERVED BY KOREA LABOR INSTITUTE.</p>
-                                <p class="text-caption  q-mb-none" style=""><span class="text-bold">E-MAIL</span> : klips@kli.re.kr
-                                    <span class="q-pl-xl text-bold">TEL</span> : 044-287-6651, 6652, 6653, 6654 </p>
-                            </div>
+                      </p>
+                      <q-card bordered  flat>
+                        <q-card-section>
+                          <q-img bordered class="border" src="~assets/howto/2-1.jpg" transition="fade" />
                         </q-card-section>
-                    </q-card>
-                </q-card>
-            </div>
-        </q-page>
-    </q-page-container>
+                      </q-card>
+                    </div>
+
+                    <div class="q-mb-xl">
+                      <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 2 KLIPS 원변수 변수 추가(필수 아님)</p>
+                      <p class="text-body2" style="white-space: pre-wrap;">사용자가 원하는 임의의 KLIPS 원변수를 추가하여 데이터를 생성할 수 있습니다.<br>
+                        <label class=" text-green" ><q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
+                          <span class="text-weight-bolder">가구용</span>
+                        </label>, <label  style="color: #03B0F3" ><q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
+                          <span class="text-weight-bolder">개인용</span>
+                        </label> 변수를 구분하여 입력란에 넣으면 그 변수를 포함한 데이터가 생성됩니다.<br>변수 입력시에는 변수의 6자리 숫자 중 조사차수를 의미하는 첫 2자리 숫자를 제외한 나머지 4자리 숫자만을 포함한 변수명을 입력해야 합니다.<br>단, 변수를 여러 개 입력시 변수간에는 공백으로 구분하면 됩니다.
+                      </p>
+                      <q-card bordered  flat>
+                        <q-card-section>
+                          <q-img bordered class="border" src="~assets/howto/3-1.jpg" transition="fade" />
+                        </q-card-section>
+                      </q-card>
+                    </div>
+
+                    <div class="q-mb-xl">
+                      <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP3 저장파일 <span class="text-red">(필수)</span></p>
+                      <p class="text-body2" style="white-space: pre-wrap;">사용자는 저장하고자 하는 파일명을 직접 입력합니다.<br>저장할 파일형식은 Stata, Excel 또는 Text 중에서 선택할 수 있습니다. (다른 포맷의 데이터는 추후 업데이트 예정)</p>
+                      <q-card bordered  flat>
+                        <q-card-section>
+                          <q-img bordered class="border" src="~assets/howto/4-1.jpg" transition="fade" />
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                  </div>
+                </q-expansion-item>
+
+                <q-separator class="q-my-xs"></q-separator>
+
+
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                <!-- 추가 변수 검색 -->
+                <q-expansion-item group="somegroup"    label="">
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-chip class="glossy" color="primary" text-color="white" icon="star">'KLIPS 원자료 변수 검색' 탭 사용법 안내</q-chip>
+                    </q-item-section>
+                  </template>
+
+                  <div class="q-pa-lg">
+                    <div class="q-mb-xl">
+                      <!--<p class="text-h5 text-bold">"추가변수 검색" 탭 사용법 안내</p>-->
+                      <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP 1 차수선택<span class="text-red">(필수)</span></p>
+                      <p class="text-body2" style="white-space: pre-wrap;">이전 “데이터생성” 탭에서 선택한 차수를 그대로 사용합니다.<br>만약 차수를 변경하면 “데이터생성” 탭의 차수도 자동으로 변경됩니다.</p>
+                      <q-card bordered  flat>
+                        <q-card-section>
+                          <q-img bordered class="border" src="~assets/howto/1-1.jpg" transition="fade" />
+                        </q-card-section>
+                      </q-card>
+                    </div>
+
+                    <div class="q-mb-xl">
+                      <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> STEP2 가구용 또는 개인용 선택<span class="text-red">(필수)</span></p>
+                      <p class="text-body2" style="white-space: pre-wrap;">검색할 변수가 가구용 데이터에 있으면 <label class=" text-green" ><q-badge color="green" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">1</q-badge>
+                        <span class="text-weight-bolder">가구용</span>
+                      </label> 을 선택하고, 개인용 데이터에 있으면 <label  style="color: #03B0F3" ><q-badge style="background-color: #03B0F3" align="middle" class="q-mr-sm text-weight-bolder q-py-xs q-mb-xs">2</q-badge>
+                        <span class="text-weight-bolder">개인용</span>
+                      </label> 을 선택합니다.<br>가령 “소득”이라고 입력하고 키보드의 엔터키를 누르거나 “검색하기” 버튼을 누르면 해당 차수의 원변수 중에서<br>“소득”이 포함되어 있는 모든 변수가 검색창에 나타납니다.<br><br>* 한 단어만 검색 가능합니다.
+                      </p>
+                      <q-card bordered  flat>
+                        <q-card-section>
+                          <q-img bordered class="border" src="~assets/howto/5.jpg" transition="fade" />
+                        </q-card-section>
+                      </q-card>
+                    </div>
+
+                    <div class="q-mb-xl">
+                      <p class="text-subtitle1 text-bold"><q-icon name="star" color="primary"></q-icon> 검색결과</p>
+                      <p class="text-body2" style="white-space: pre-wrap;">STEP 1, 2의 조건을 반영한 결과가 화면에 나타납니다.<br>이때 사용자는 원하는 변수명을 마우스로 복사하여 첫번째 “데이터생성” 탭의 “추가변수 입력”란에<br>붙여넣기 하여 그 변수가 포함된 데이터를 생성할 수 있습니다.<br><br>* 추가로 단어를 검색하여 “데이터생성” 탭 “추가변수 입력”란에 계속 추가할 수 있습니다.
+
+                      </p>
+                      <q-card bordered  flat>
+                        <q-card-section>
+                          <q-img bordered class="border" src="~assets/howto/6.jpg" transition="fade" />
+                        </q-card-section>
+                      </q-card>
+                    </div>
+                  </div>
+                </q-expansion-item>
+              </q-list>
+
+
+
+            </q-tab-panel>
+
+            <!-- 4번째 탭 : FAQ -->
+            <q-tab-panel name="faq">
+
+              <q-list bordered class="rounded-borders ">
+
+                <q-expansion-item group="somegroup" header-style="font-weight: bolder" switch-toggle-side  label="질문 1) 생성된 Stata 파일은 모든 버전에서 사용이 가능한가요?">
+                  <q-card>
+                    <q-card-section style="white-space: pre-wrap;">Stata 버전 14 이상에서만 사용이 가능합니다.
+
+                      Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터를 추출한 후,
+
+                      해당 프로그램에서 데이터를 불러오시기 바랍니다.</q-card-section>
+                  </q-card>
+                </q-expansion-item>
+                <q-separator />
+                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label='질문 2) “KLIPS 원자료 변수 검색” 탭에서 단어검색은 한 개만 가능한가요?'>
+                  <q-card>
+                    <q-card-section>
+                      네, 단어는 1개씩만 검색할 수 있습니다. 그러나 반복하여 여러 개를 검색할 수 있습니다.
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+                <q-separator />
+                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label="질문 3) SAS, SPSS 사용자가 자료추출을 하고자 하면 어떻게 하나요?">
+                  <q-card>
+                    <q-card-section style="white-space: pre-wrap;">STATA로 지정하여 dta 파일로 추출한 후 해당 프로그램의 '불러오기' 기능을 이용해 보시기 바랍니다.
+
+                      또는 Excel혹은 Text로 추출하면 변수리스트 파일까지 한꺼번에 추출됩니다.
+
+                      이 파일을 이용해 해당 통계패키지에서 데이터에 라벨을 붙이기 바랍니다.
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+
+                <q-separator />
+                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label="질문 4) Internet Explorer사용시 에러가 발생합니다.">
+                  <q-card>
+                    <q-card-section style="white-space: pre-wrap;">자료추출시스템은 크롬 또는 마이크로소프트 Edge 브라우저에 최적화 되어있으니,
+
+                      해당 브라우져 사용을 권장합니다. Internet Explorer 사용시 정상적으로 작동하지 않을 수 있습니다.
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+              </q-list>
+              <div class="q-pt-lg  vertical-middle">
+                한국노동패널조사에 대하여 문의해주세요.
+                <q-btn @click="openURL('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=87&key=442')"  target="_blank" icon="mail"  class="q-ml-lg glossy" type="submit" color="primary" label="문의하기" />
+              </div>
+            </q-tab-panel>
+          </q-tab-panels>
+
+          <q-card dark  class="my-card  q-mb-sm" style="background-color: #233D64;">
+            <q-card-section class="row">
+              <div class="col-12 col-sm-3 q-mb-md ">
+                <a href="https://www.kli.re.kr/klips/index.do" target="_blank">
+                  <q-img class="" src="~assets/logo_new.png" style="max-width: 190px" ></q-img>
+                </a>
+              </div>
+
+              <div class="col-9 text-bold " >
+                <p class="text-caption text-bold q-mb-xs " style="">COPYRIGHT KOREA LABOR INSTITUTE.ALL RIGHTS RESERVED BY KOREA LABOR INSTITUTE.</p>
+                <p class="text-caption  q-mb-none" style=""><span class="text-bold">E-MAIL</span> : klips@kli.re.kr
+                  <span class="q-pl-xl text-bold">TEL</span> : 044-287-6651, 6652, 6653, 6654 </p>
+              </div>
+            </q-card-section>
+          </q-card>
+        </q-card>
+      </div>
+    </q-page>
+  </q-page-container>
 </template>
 
 <script>
@@ -863,90 +864,90 @@
             value: 'none'
           }
         ],
-          a_wave:[],
-          add_a:[],
+        a_wave:[],
+        add_a:[],
 
-/*          additionalSearch1:[],
-          add_a1:[],
-          additionalSearch2:[],
-          add_a2:[],*/
-          additionalSearchOptions:[
-              {
-                  label: '청년',
-                  value: '03',
-                  wave: '03'
-              },
-              {
-                  label: '건강과 은퇴',
-                  value: '04',
-                  wave: '04'
-              },
-              {
-                  label: '중고령자',
-                  value: '06',
-                  wave: '06'
-              },
-              {
-                  label: '근로시간 과여가',
-                  value: '07',
-                  wave: '07'
-              },
-              {
-                  label: '노동조합과 노사',
-                  value: '08',
-                  wave: '08'
-              },
-              {
-                  label: '청년',
-                  value: '09',
-                  wave: '09'
-              },
-              {
-                  label: '고용형태',
-                  value: '10',
-                  wave: '10'
-              },
-              {
-                  label: '교육',
-                  value: '11',
-                  wave: '11'
-              },
-              {
-                  label: '시간 사용과 삶의 질',
-                  value: '17',
-                  wave: '17'
-              },
-              {
-                  label: '삶의인식/장년',
-                  value: '18',
-                  wave: '18'
-              },
-              {
-                  label: '청년',
-                  value: '19',
-                  wave: '19'
-              },
-              {
-                  label: '의사결정',
-                  value: '20',
-                  wave: '20'
-              },
-              {
-                  label: '고용형태',
-                  value: '21',
-                  wave: '21'
-              },
-              {
-                  label: '비임금',
-                  value: '22',
-                  wave: '22'
-              },
-              {
-                  label: '코로나19',
-                  value: '23',
-                  wave: '23'
-              }
-          ],
+        /*          additionalSearch1:[],
+                  add_a1:[],
+                  additionalSearch2:[],
+                  add_a2:[],*/
+        additionalSearchOptions:[
+          {
+            label: '청년(3차)',
+            value: '03',
+            wave: '03'
+          },
+          {
+            label: '건강과 은퇴(4차)',
+            value: '04',
+            wave: '04'
+          },
+          {
+            label: '중고령자(6차)',
+            value: '06',
+            wave: '06'
+          },
+          {
+            label: '근로시간 과여가(7차)',
+            value: '07',
+            wave: '07'
+          },
+          {
+            label: '노동조합과 노사(8차)',
+            value: '08',
+            wave: '08'
+          },
+          {
+            label: '청년(9차)',
+            value: '09',
+            wave: '09'
+          },
+          {
+            label: '고용형태(10차)',
+            value: '10',
+            wave: '10'
+          },
+          {
+            label: '교육(11차)',
+            value: '11',
+            wave: '11'
+          },
+          {
+            label: '시간 사용과 삶의 질(17차)',
+            value: '17',
+            wave: '17'
+          },
+          {
+            label: '삶의인식/장년(18차)',
+            value: '18',
+            wave: '18'
+          },
+          {
+            label: '청년(19차)',
+            value: '19',
+            wave: '19'
+          },
+          {
+            label: '의사결정(20차)',
+            value: '20',
+            wave: '20'
+          },
+          {
+            label: '고용형태(21차)',
+            value: '21',
+            wave: '21'
+          },
+          {
+            label: '비임금(22차)',
+            value: '22',
+            wave: '22'
+          },
+          {
+            label: '코로나19(23차)',
+            value: '23',
+            wave: '23'
+          }
+        ],
 
         // 2번째 탭 검색
         searchResult:'',
@@ -993,9 +994,23 @@
     methods: {
       openURL,
 
-      add_a_clear(n) {
-        alert(this.add_a[n])
-        this.add_a[n]='';
+      chk_add_a() {
+        let selected_add_a=false;
+        this.a_wave.forEach(function(obj) {
+          if(obj != null) {
+            selected_add_a = true;
+          }
+          console.log(obj);
+        })
+
+        this.add_a.forEach(function(obj2) {
+          if(obj2 != null) {
+            selected_add_a = true;
+          }
+          console.log(obj2);
+        })
+
+        return selected_add_a
       },
 
       waveOrderby(){
@@ -1077,12 +1092,12 @@
 
           }*/
 
-/*        if(this.kt_select2_3.length === this.kt_select2_3_data.length) {
-          this.waveSelect2='all';
-        }
-        else {
-          this.waveSelect2='';
-        }*/
+        /*        if(this.kt_select2_3.length === this.kt_select2_3_data.length) {
+                  this.waveSelect2='all';
+                }
+                else {
+                  this.waveSelect2='';
+                }*/
       },
       containsAny(source,target)
       {
@@ -1202,7 +1217,7 @@
         }
 */
         if( ( this.waveSelect === '1' || this.waveSelect === '3' || this.waveSelect === '5'  || this.waveSelect === '10' || this.waveSelect === 'all')
-            && this.waveSelect2 === 'all' && this.waveSelect3 === 'all' && this.add_h=== '' && this.add_p === '') {
+          && this.waveSelect2 === 'all' && this.waveSelect3 === 'all' && this.add_h=== '' && this.add_p === '') {
           let _waveSElect = '';
           if(this.waveSelect == 'all') {
             _waveSElect = 99; // stata 요청 값이라 변경함.
@@ -1321,84 +1336,84 @@
 
 </script>
 <style>
-    #swal2-content {
-        text-align: left;
-        font-size:15px;
-    }
+  #swal2-content {
+    text-align: left;
+    font-size:15px;
+  }
 
-    #q-app {
-        font-size: 16px;
-    }
-    /*    .itemSectionWave {
-            padding-right: 0;
-        }*/
-    #searchResult{
-        /*white-space: pre-wrap;*/
-        /*word-break: break-all;*/
-        border-radius: 8px;
-        padding: 20px;
-        font-weight: bold !important;
-        border-style: solid;
-        border-width: 1px;
-        /*background-color: #18171B;*/
-        line-height: 1.2em;
-        font-size: 12px;
-        /*color: #56DB3A;*/
-        color: #343434;
-        font: 12px Menlo, Monaco, Consolas, monospace;
-        font-style: normal;
-        font-variant-ligatures: normal;
-        font-variant-caps: normal;
-        font-variant-numeric: normal;
-        font-variant-east-asian: normal;
-        font-weight: normal;
-        font-stretch: normal;
-        font-family: Menlo, Monaco, Consolas, monospace;
-    }
+  #q-app {
+    font-size: 16px;
+  }
+  /*    .itemSectionWave {
+          padding-right: 0;
+      }*/
+  #searchResult{
+    /*white-space: pre-wrap;*/
+    /*word-break: break-all;*/
+    border-radius: 8px;
+    padding: 20px;
+    font-weight: bold !important;
+    border-style: solid;
+    border-width: 1px;
+    /*background-color: #18171B;*/
+    line-height: 1.2em;
+    font-size: 12px;
+    /*color: #56DB3A;*/
+    color: #343434;
+    font: 12px Menlo, Monaco, Consolas, monospace;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-family: Menlo, Monaco, Consolas, monospace;
+  }
 
-    a:link {
-        text-decoration: none;
-    }
+  a:link {
+    text-decoration: none;
+  }
 
-    .bg_step2{
-        /*background: #e0e0e0 !important;*/
-    }
+  .bg_step2{
+    /*background: #e0e0e0 !important;*/
+  }
 
-    /*    .q-item.q-item-type.row.no-wrap.q-item--clickable.q-link.cursor-pointer.q-focusable.q-hoverable {
-            background: #e0e0e0 !important;
-        }*/
-    .step2-1.q-expansion-item--expanded {
-        background-color: #D8E5E4;
-    }
-    .step2-2.q-expansion-item--expanded {
-        background-color: #E9EEF5;
-    }
-    .step2-3.q-expansion-item--expanded {
-        background-color: #E0E0E0;
-    }
-    .step2-4.q-expansion-item--expanded {
-      background-color: #F4EEFF;
-    }
-    .swal2-styled.swal2-confirm {
-        font-size: 1em !important;
-    }
-    /*    .swal2-confirm {
-            display: inline-block;background-color: white;border: 1px;border-style: solid;border-color: gray;color: gray !important;
-        }*/
+  /*    .q-item.q-item-type.row.no-wrap.q-item--clickable.q-link.cursor-pointer.q-focusable.q-hoverable {
+          background: #e0e0e0 !important;
+      }*/
+  .step2-1.q-expansion-item--expanded {
+    background-color: #D8E5E4;
+  }
+  .step2-2.q-expansion-item--expanded {
+    background-color: #E9EEF5;
+  }
+  .step2-3.q-expansion-item--expanded {
+    background-color: #E0E0E0;
+  }
+  .step2-4.q-expansion-item--expanded {
+    background-color: #F4EEFF;
+  }
+  .swal2-styled.swal2-confirm {
+    font-size: 1em !important;
+  }
+  /*    .swal2-confirm {
+          display: inline-block;background-color: white;border: 1px;border-style: solid;border-color: gray;color: gray !important;
+      }*/
 
-    .toptab {
-        font-weight: bold;
-        background-color: #007EC5;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        margin-right:2px;
-    }
-    .q-tab--inactive {
-        background-color: #F2F2F2;
-    }
-    .q-tab__label {
-        font-weight: bolder;
-        /*font-size: medium;*/
-    }
+  .toptab {
+    font-weight: bold;
+    background-color: #007EC5;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right:2px;
+  }
+  .q-tab--inactive {
+    background-color: #F2F2F2;
+  }
+  .q-tab__label {
+    font-weight: bolder;
+    /*font-size: medium;*/
+  }
 </style>
 
