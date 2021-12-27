@@ -299,10 +299,12 @@
                                 <q-select outlined  v-model="a_wave[index]" :options="additionalSearchOptions" label="'부가용' 원변수 입력" clearable/>
                               </div>
                               <div class="col-6">
-                                <q-input outlined  v-model=" add_a[index]"  placeholder="추가할 변수를 선택하세요" clearable />
+                                <q-input outlined  v-model=" add_a[index]"  placeholder="추가할 변수를 입력하세요. 예1) a1101 예2) a1201 a1202" clearable />
                               </div>
                             </q-item>
                             <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>
+                            <q-item-label class="q-pl-md text-black text-bold" caption>- 부가조사 변수입력시 첫 2자리 숫자를 제외한 나머지 4자리 숫자를 포함한 변수명을 입력해야 합니다. 예) a221101 → a1101
+                            </q-item-label>
                           </div>
                           <q-item-label class="q-pl-lg text-black text-bold" caption></q-item-label>
                         </div>
@@ -686,16 +688,15 @@
                   <q-card>
                     <q-card-section style="white-space: pre-wrap;">Stata 버전 14 이상에서만 사용이 가능합니다.
 
-                      Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터를 추출한 후,
+Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터를 추출한 후,
 
-                      해당 프로그램에서 데이터를 불러오시기 바랍니다.</q-card-section>
+해당 프로그램에서 데이터를 불러오시기 바랍니다.</q-card-section>
                   </q-card>
                 </q-expansion-item>
                 <q-separator />
                 <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label='질문 2) “KLIPS 원자료 변수 검색” 탭에서 단어검색은 한 개만 가능한가요?'>
                   <q-card>
-                    <q-card-section>
-                      네, 단어는 1개씩만 검색할 수 있습니다. 그러나 반복하여 여러 개를 검색할 수 있습니다.
+                    <q-card-section>네, 단어는 1개씩만 검색할 수 있습니다. 그러나 반복하여 여러 개를 검색할 수 있습니다.
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
@@ -704,9 +705,9 @@
                   <q-card>
                     <q-card-section style="white-space: pre-wrap;">STATA로 지정하여 dta 파일로 추출한 후 해당 프로그램의 '불러오기' 기능을 이용해 보시기 바랍니다.
 
-                      또는 Excel혹은 Text로 추출하면 변수리스트 파일까지 한꺼번에 추출됩니다.
+또는 Excel혹은 Text로 추출하면 변수리스트 파일까지 한꺼번에 추출됩니다.
 
-                      이 파일을 이용해 해당 통계패키지에서 데이터에 라벨을 붙이기 바랍니다.
+이 파일을 이용해 해당 통계패키지에서 데이터에 라벨을 붙이기 바랍니다.
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
@@ -716,10 +717,19 @@
                   <q-card>
                     <q-card-section style="white-space: pre-wrap;">자료추출시스템은 크롬 또는 마이크로소프트 Edge 브라우저에 최적화 되어있으니,
 
-                      해당 브라우져 사용을 권장합니다. Internet Explorer 사용시 정상적으로 작동하지 않을 수 있습니다.
+해당 브라우져 사용을 권장합니다. Internet Explorer 사용시 정상적으로 작동하지 않을 수 있습니다.
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
+
+                <q-separator />
+                <q-expansion-item group="somegroup"  header-style="font-weight: bolder" switch-toggle-side  label="질문 5) 설문지, 코드북 유저가이드는 어디서 다운받을 수 있나요?">
+                  <q-card>
+                    <q-card-section style="white-space: pre-wrap;">한국노동패널 홈페이지의 ‘데이터 가이드’에서 설문지, 코드북, 유저가이드를 다운받으실 수 있습니다.
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+
               </q-list>
               <div class="q-pt-lg  vertical-middle">
                 한국노동패널조사에 대하여 문의해주세요.
@@ -1216,6 +1226,31 @@
           this.saveFile()
         }
 */
+        //debugger
+        /*
+        for(var i=0; i<3; i++) {
+          if(this.a_wave[i]!=null && this.add_a[i]==null) {
+            Swal.fire({
+              title: '입력 확인',
+              html: '<b>'+this.a_wave[i].label + '</b> ‘부가용 원변수 입력’에서  차수를 선택 후 변수를 입력하지 않은 경우 해당 변수는 추출되지 않습니다.',
+              icon: 'error',
+              confirmButtonText: '닫기',
+            })
+            return;
+          }
+
+          if(this.a_wave[i]==null && this.add_a[i]!=null) {
+            Swal.fire({
+              title: '입력 확인',
+              html: '<b>'+this.add_a[i] + '</b> ‘부가용 원변수 입력’에서 차수를 선택하지 않고 오른쪽에 변수만 입력할 경우 해당변수는 추출되지 않습니다.',
+              icon: 'error',
+              confirmButtonText: '닫기',
+            })
+            return;
+          }
+        }
+*/
+
         if( ( this.waveSelect === '1' || this.waveSelect === '3' || this.waveSelect === '5'  || this.waveSelect === '10' || this.waveSelect === 'all')
           && this.waveSelect2 === 'all' && this.waveSelect3 === 'all' && this.add_h=== '' && this.add_p === '') {
           let _waveSElect = '';
