@@ -296,16 +296,14 @@
                           <div class="col-12 scroll overflow-hidden" >
                             <q-item class="row items-center q-gutter-lg" v-for="(n, index) in 3" v-bind:key="n">
                               <div class="col-5">
-                                <q-select outlined  v-model="a_wave[index]" :options="additionalSearchOptions" label="'부가용' 원변수 입력" clearable/>
+                                <q-select outlined  v-model="a_wave[index]" :options="additionalSearchOptions" label="부가조사 차수선택" clearable/>
                               </div>
                               <div class="col-6">
                                 <q-input outlined  v-model=" add_a[index]"  placeholder="추가할 변수를 입력하세요. 예1) a1101 예2) a1201 a1202" clearable />
                               </div>
                             </q-item>
-                            <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>
-                            <q-item-label class="q-pl-md text-black text-bold" caption>- 부가조사 변수입력시 첫 2자리 숫자를 제외한 나머지 4자리 숫자를 포함한 변수명을 입력해야 합니다. 예) a221101 → a1101 </q-item-label>
-                            <q-item-label class="q-pl-md text-black text-bold" caption>- a를 포함한 숫자 6자리는 자동으로 4자리 숫자로 변환됩니다.
-                            </q-item-label>
+                            <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개차수 동시선택 가능</q-item-label>
+                            <q-item-label class="q-pl-md text-black text-bold" caption>- 부가조사 변수 입력시 부가조사 차수를 선택하신 후 첫 2자리 숫자(차수)를 제외한 나머지 4자리 숫자를 포함한 변수명을 입력해야 합니다. 예) a221101 → a1101 </q-item-label>
                           </div>
                           <q-item-label class="q-pl-lg text-black text-bold" caption></q-item-label>
                         </div>
