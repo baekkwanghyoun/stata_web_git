@@ -303,7 +303,8 @@
                               </div>
                             </q-item>
                             <q-item-label class="q-pl-md text-black text-bold" caption>- 최대 3개 선택 동시가능</q-item-label>
-                            <q-item-label class="q-pl-md text-black text-bold" caption>- 부가조사 변수입력시 첫 2자리 숫자를 제외한 나머지 4자리 숫자를 포함한 변수명을 입력해야 합니다. 예) a221101 → a1101
+                            <q-item-label class="q-pl-md text-black text-bold" caption>- 부가조사 변수입력시 첫 2자리 숫자를 제외한 나머지 4자리 숫자를 포함한 변수명을 입력해야 합니다. 예) a221101 → a1101 </q-item-label>
+                            <q-item-label class="q-pl-md text-black text-bold" caption>- a를 포함한 숫자 6자리는 자동으로 4자리 숫자로 변환됩니다.
                             </q-item-label>
                           </div>
                           <q-item-label class="q-pl-lg text-black text-bold" caption></q-item-label>
@@ -1227,14 +1228,45 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
         }
 */
         //debugger
-        /*
-        for(var i=0; i<3; i++) {
+
+        for(let j=0; j<this.add_a.length; j++) {
+          let arAdd_a = this.add_a[j].split(' ');
+          //this.add_a[j] = '';
+          let arValues = [];
+          for(let k=0; k<arAdd_a.length; k++) {
+            let str = arAdd_a[k];
+            // 1. a로 시작하는지
+            if(str.substring(0,1) !=='a') {
+              Swal.fire({
+                title: '입력 확인', html: '<b>'+str + '</b> 변수는 a로 시작해야 합니다.', icon: 'error', confirmButtonText: '닫기',
+              })
+              return
+            }
+            // 2. a다음 4자리거나 6자리만 성공
+            if(str.length !== 5 && str.length !== 7) {
+              Swal.fire({
+                title: '입력 확인', html: '<b>'+str + '</b> 변수의 자리수가 틀립니다.', icon: 'error', confirmButtonText: '닫기',
+              })
+              return
+            }
+
+            if( str.length === 7) {
+              arValues.push('a'+str.substring(3, 7))
+              //this.add_a[j] = this.add_a[j]+ ' a'+str.substring(3, 7);
+            }
+            else if( str.length == 5) {
+              arValues.push(str)
+              //this.add_a[j] = this.add_a[j]+ ' ' +str;
+            }
+            this.add_a[j] = arValues.join(' ');
+          }
+        }
+
+        for(let i=0; i<3; i++) {
           if(this.a_wave[i]!=null && this.add_a[i]==null) {
             Swal.fire({
-              title: '입력 확인',
+              title: '입력 확인',icon: 'error',confirmButtonText: '닫기',
               html: '<b>'+this.a_wave[i].label + '</b> ‘부가용 원변수 입력’에서  차수를 선택 후 변수를 입력하지 않은 경우 해당 변수는 추출되지 않습니다.',
-              icon: 'error',
-              confirmButtonText: '닫기',
             })
             return;
           }
@@ -1249,7 +1281,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
             return;
           }
         }
-*/
+
 
         if( ( this.waveSelect === '1' || this.waveSelect === '3' || this.waveSelect === '5'  || this.waveSelect === '10' || this.waveSelect === 'all')
           && this.waveSelect2 === 'all' && this.waveSelect3 === 'all' && this.add_h=== '' && this.add_p === '') {
