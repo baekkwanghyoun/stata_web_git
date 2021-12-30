@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://smartklips.kli.re.kr'],
 
     'allowed_origins_patterns' => [],
 
