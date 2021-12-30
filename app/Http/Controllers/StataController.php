@@ -115,7 +115,7 @@ class StataController extends Controller
         else if(Str::contains($referer, 'jat.co.kr')) {
             return view('quasar');
         }
-        else if(Str::contains($referer, 'kli.re.kr')) {
+        else if(Str::contains($referer, 'www.kli.re.kr')) {
             return view('quasar');
         }
         else {
