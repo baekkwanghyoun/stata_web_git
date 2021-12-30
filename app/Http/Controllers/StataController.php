@@ -104,9 +104,15 @@ class StataController extends Controller
         $acceptDomain = ['http://52.79.82.226','http://stataweb.test:9011/','http://jat.co.kr/', 'https://www.kli.re.kr/', 'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
         $referer = request()->headers->get('referer');
+
+        if($referer==null) {
+            return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');
+        }
+
         //$this->remotelog($referer);
 
-        //dd($referer);
+        dump($referer);
+
         $result = in_array($referer, $acceptDomain);
 
         if($result || request()->getHttpHost()=='stataweb.test:9011' ||'http://52.79.82.226') {
