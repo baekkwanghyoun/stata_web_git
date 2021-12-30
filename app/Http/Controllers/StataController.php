@@ -111,7 +111,7 @@ class StataController extends Controller
 
         //$this->remotelog($referer);
 
-        dump($referer);
+        //dump($referer);
 
         $result = in_array($referer, $acceptDomain);
 
