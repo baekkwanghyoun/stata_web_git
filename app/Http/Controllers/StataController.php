@@ -105,9 +105,9 @@ class StataController extends Controller
 
         $referer = request()->headers->get('referer');
 
-        if($referer==null) {
+/*        if($referer==null) {
             return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');
-        }
+        }*/
 
         //$this->remotelog($referer);
 
