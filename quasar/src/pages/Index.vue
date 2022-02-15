@@ -263,7 +263,7 @@
                           <q-item class="row items-start">
                             <div style="width: 30px">
                               <q-item-section avatar class="q-pl-md">
-                                <q-item-label  caption><span class="text-primary text-bold">※</span></q-item-label>
+                                <q-item-label  caption><span class=" text-bold">※</span></q-item-label>
                               </q-item-section>
                             </div>
                             <div>
