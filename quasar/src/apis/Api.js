@@ -3,7 +3,10 @@ import axios from "axios";
 //let Api = axios.create();
 axios.defaults.withCredentials = true;
 
-
+axios.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': window.csrf_token
+};
 
 
 let BaseApi = axios.create(

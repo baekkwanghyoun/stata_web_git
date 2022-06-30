@@ -815,10 +815,10 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
         kt_select2_3:[],
         kt_select2_4:[],
         kt_select2_3_data: [
-          ['h_hregion',	'거주지역 (16개시도, 19=세종시) (KLIPS 코드북 참조)'],
+          ['h_region',	'거주지역 (16개시도, 19=세종시) (KLIPS 코드북 참조)'],
           ['h_num',	'가구원 수'],
           ['h_hsex',	'가구주 성별 (1=남자, 2=여자)'],
-          ['h_hhage',	'가구주 나이'],
+          ['h_hage',	'가구주 나이'],
           ['h_hedu',	'가구주 교육수준 (1=무학, 2=고졸미만, 3=고졸, 4=대재/중퇴, 5=전문대졸, 6=대졸이상)'],
           ['h_hmarital',	'가구주 혼인상태 (1=미혼, 2=기혼유배우, 3=기혼무배우)'],
           ['h_kid',	'0세 ~ 고등학교 자녀 수'],
@@ -826,7 +826,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
           ['h_kidage712',	'7세~12세 자녀 수'],
           ['h_kidage1315',	'13세~15세 자녀 수'],
           ['h_resid_type',	'주택점유형태 (1=자가, 2=전세, 3=월세, 4=기타)'],
-          ['h_hprice', 	'소유주택 시가 (단위: 만원)'],
+          ['h_price', 	'소유주택 시가 (단위: 만원)'],
           ['h_inc_total',	'총소득 (단위: 만원)'],
           ['h_inc_1',	'이전소득 (단위: 만원)'],
           ['h_inc_2',	'사회보험소득 (단위: 만원)'],
@@ -1281,6 +1281,8 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
         this.waveSelect=null;
         this.waveSelect='';
         this.expansionSearchResult=false;
+        this.add_a = [];
+        this.a_wave = [];
       },
 
       searchInit2(){
@@ -1459,6 +1461,7 @@ Stata 13 이하 버전 사용자께서는 Excel 혹은 text 형태의 데이터�
             //window.open(process.env.API+res.data.name+'.zip', "_blank");
             Swal.fire({
               title: '파일을 다운 받으시겠습니까?',
+
               /*
               html:'<a href="'+process.env.API+res.data.name+'.dta" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(48, 133, 214);">Dta 저장</a>' +
                 '<a href="'+process.env.API+res.data.name+'.csv" target="_blank"  class="swal2-confirm swal2-styled" style="display: inline-block; background-color: rgb(0, 151, 123);">Excel 저장</a>' +
