@@ -54,3 +54,9 @@ Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('
 });
 //Route::resource('test', 'TestController');
 /*Route::get('test', 'NowayController@index')->name('profile');*/
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+    Route::get('/stat/savefiletype', [\App\Http\Controllers\StatsController::class, 'savefiletype'])->name('stat.savefiletype');
+});

@@ -1,0 +1,55 @@
+.btn.btn-primary {
+    color: #fff;
+    opacity: .9;
+    background: #062739 !important;
+    border: 0;
+    border-radius: 3px;
+}
+
+#toolbar .btn.btn-primary {
+    border: 1px solid #919191 !important;
+}
+
+
+.voyager .btn.btn-success {
+    background: #5b8f8f;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    /*opacity: .9;*/
+}
+
+.voyager .btn.btn-danger {
+    background: #ea8a55;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    /*opacity: .9;*/
+}
+.voyager .btn.btn-warning {
+    background: #f4c964;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    /*opacity: .9;*/
+}
+.voyager .btn.btn-info {
+    background-color: #8cb369;
+    /*color: #fff;*/
+    border-color: #e9f1f7;
+}
+
+.voyager .pagination .active>a, .voyager .pagination .active>a:focus, .voyager .pagination .active>a:hover, .voyager .pagination .active>span:focus, .voyager .pagination .active>span:hover, .voyager .pagination .active span {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #202c39;
+    border-color: #202c39;
+    outline: none;
+}
+
+
+.page-content.read .panel .panel-body:not(:last-child) {
+    border-bottom: 1px solid #aaa;
+    border-bottom-style: dashed !important;
+}
