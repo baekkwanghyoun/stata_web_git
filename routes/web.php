@@ -19,6 +19,12 @@ use App\Http\Controllers\TestController;
 });*/
 
 Route::get('/', [StataController::class, 'quasar'])->name('quasar.index');
+
+
+Route::get('/phpinfo', function () {
+    return  phpinfo();;
+});
+
 Route::get('/gatest', [StataController::class, 'gatest'])->name('quasar.index');
 
 
@@ -36,6 +42,7 @@ Route::get('/quasar', [StataController::class, 'quasar'])->name('quasar.index');
 Route::get('/klipstest', function () {
     return view('stata.klipstest');
 });
+
 
 
 

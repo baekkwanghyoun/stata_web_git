@@ -63,10 +63,10 @@
                                 ?>
                                 @foreach(Voyager::model('Permission')->all()->groupBy('table_name') as $table => $permission)
                                     {{--@dump($table)--}}
-                                    @if($table=='settings' || $table=='menus' || $table==''){{--//silver--}}
+{{--                                    @if($table=='settings' || $table=='menus')--}}{{--//silver  || $table==''--}}{{--
                                         @continue
-                                    @endif
-                                    <li>
+                                    @endif--}}
+                                    <li @if($table=='settings' || $table=='menus' || $table=='') style="display: none" @endif > {{--//silver  || $table==''--}}
                                         <input type="checkbox" id="{{$table}}" class="permission-group">
                                         <label for="{{$table}}"><strong>{{\Illuminate\Support\Str::title(str_replace('_',' ', $table))}}</strong></label>
                                         <ul>
