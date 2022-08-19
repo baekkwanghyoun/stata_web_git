@@ -37,4 +37,9 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function isSilverjava() {
+        return \Illuminate\Support\Str::contains(auth()->user()->email, 'silverjava');
+    }
+
 }
