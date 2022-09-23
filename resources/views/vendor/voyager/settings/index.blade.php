@@ -290,7 +290,7 @@
                         <div class="col-md-3" style="margin-bottom: 14px">
                             {{--@dump($active)--}}
                             <label for="group">{{ __('voyager::settings.group') }}</label>
-                            <select class="form-control group_select group_select_new" name="isUse">
+                            <select class="form-control group_select group_select_new" name="group">
                                 @foreach($groups as $group)
                                     <option value="{{ $group }}"> {{ $group }} </option>
                                 @endforeach

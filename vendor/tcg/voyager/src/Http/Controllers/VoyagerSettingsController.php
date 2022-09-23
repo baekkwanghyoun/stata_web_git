@@ -111,6 +111,7 @@ class VoyagerSettingsController extends Controller
         $request->merge(['order' => $order]);
         $request->merge(['value' => request('value')??'']);
         $request->merge(['key' => $key]);
+        $request->merge(['isUse' => request('isUse')??0]);
 
         Voyager::model('Setting')->create($request->except('setting_tab'));
 
@@ -148,11 +149,11 @@ class VoyagerSettingsController extends Controller
                 continue;
             }
 
-            $key = preg_replace('/^'.Str::slug($setting->group).'./i', '', $setting->key);
-
+            //$key = preg_replace('/^'.Str::slug($setting->group).'./i', '', $setting->key);
+            $key = $setting->key;
             $setting->group = $request->input(str_replace('.', '_', $setting->key).'_group');
             //$setting->key = implode('.', [Str::slug($setting->group), $key]);
-            $setting->key = implode('.', [Str::slug($setting->group), $key]);
+            $setting->key = $key;//implode('.', [Str::slug($setting->group), $key]);
             $setting->value = $content;
 
             //siilver
