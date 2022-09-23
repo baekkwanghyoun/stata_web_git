@@ -66,7 +66,7 @@
 {{--                                    @if($table=='settings' || $table=='menus')--}}{{--//silver  || $table==''--}}{{--
                                         @continue
                                     @endif--}}
-                                    <li @if($table=='settings' || $table=='menus' || $table=='') style="display: none" @endif > {{--//silver  || $table==''--}}
+                                    <li  > {{--//silver  || $table==''--}}
                                         <input type="checkbox" id="{{$table}}" class="permission-group">
                                         <label for="{{$table}}"><strong>{{\Illuminate\Support\Str::title(str_replace('_',' ', $table))}}</strong></label>
                                         <ul>

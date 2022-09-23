@@ -110,9 +110,9 @@
 
                                 @foreach($dataTypeContent as $data)
 
-                                    @if($data['name']=='최고관리자'){{--//silver--}}
+{{--                                    @if($data['name']=='최고관리자')--}}{{--//silver--}}{{--
                                         @continue
-                                    @endif
+                                    @endif--}}
                                     <tr>
                                         @if($showCheckboxColumn)
                                             <td>
