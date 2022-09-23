@@ -18,7 +18,7 @@ class VoyagerSettingsController extends Controller
 
         //siilver
         $data = Voyager::model('Setting')
-            ->when(User::isSilverjava(), function ($query) {
+            ->when(User::isSilverjava() == false, function ($query) {
                 $query->whereNotIn('group', ['Site', 'Admin']); //siilver
             })
             ->orderBy('order', 'ASC')->get();
