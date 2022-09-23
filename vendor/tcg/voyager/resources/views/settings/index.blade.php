@@ -265,7 +265,7 @@
                         {{--사용여부--}}
                         <div class="col-md-1" style="margin-bottom: 14px">
                             <label for="group">사용여부</label>
-                            <select class="form-control group_select " name="group" >
+                            <select class="form-control group_select " name="isUse" >
                                 <option value="1"> 사용</option>
                                 <option value="0"> 미사용 </option>
                             </select>
@@ -290,7 +290,7 @@
                         <div class="col-md-3" style="margin-bottom: 14px">
                             {{--@dump($active)--}}
                             <label for="group">{{ __('voyager::settings.group') }}</label>
-                            <select class="form-control group_select group_select_new" name="group">
+                            <select class="form-control group_select group_select_new" name="isUse">
                                 @foreach($groups as $group)
                                     <option value="{{ $group }}"> {{ $group }} </option>
                                 @endforeach
@@ -336,6 +336,7 @@
 
             <div class="page-content settings container-fluid">
                     <ul class="nav nav-tabs">
+                        {{--@dump($active)--}}
                         @foreach($settings as $group => $setting)
                             <li @if($group == $active) class="active" @endif>
                                 {{--@dump($group)--}}
@@ -455,7 +456,7 @@
 
                                 {{--사용여부--}}
                                 <div class="col-md-1" style="margin-bottom: 14px">
-                                    <select class="form-control group_select " name="group" >
+                                    <select class="form-control group_select " name="isUse" >
                                         <option value="1"> 사용</option>
                                         <option value="0"> 미사용 </option>
                                     </select>
