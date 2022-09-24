@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Mockery\Exception;
 use phpDocumentor\Reflection\Types\Array_;
+use Spatie\Activitylog\Models\Activity;
 use Symfony\Component\VarDumper\VarDumper;
 
 /*use Analytics;
@@ -20,6 +21,11 @@ class StataController extends Controller
 {
     public function gatest()
     {
+        $activity = Activity::all()->last();
+        dump($activity->description); //returns 'created'
+        dump($activity->subject); //returns the instance of NewsItem that was created
+        dump($activity->changes); //returns ['attributes' => ['name' => 'original name', 'text' => 'Lorum']];
+
         /*
         //fetch the most visited pages for today and the past week
         $a = Analytics::fetchMostVisitedPages(Period::days(7));
