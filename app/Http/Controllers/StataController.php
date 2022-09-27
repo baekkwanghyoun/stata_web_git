@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
@@ -106,6 +107,12 @@ class StataController extends Controller
 
     public function quasar()
     {
+        visits(Stat::class,'tag1')->increment();
+        //visits(Stat::class)->forceIncrement();
+
+        dump(visits(Stat::class)->period('day')->count());
+        dump(visits(Stat::class, 'tag1')->languages());
+        //visits()->visit();
         $isSuccess = false;
         $acceptDomain = ['http://52.79.82.226','http://stataweb.test:9011/','http://jat.co.kr/', 'https://www.kli.re.kr/', 'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
