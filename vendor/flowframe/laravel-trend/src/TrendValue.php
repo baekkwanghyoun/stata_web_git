@@ -16,7 +16,7 @@ class TrendValue
 
         public string $windows,
         public string $mac,
-        public string $phone,
+        public string $phone, // 폰
     ) {
     }
 }

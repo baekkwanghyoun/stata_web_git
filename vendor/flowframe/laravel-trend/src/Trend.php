@@ -138,7 +138,7 @@ class Trend
             mac: $value->mac??'0',
             phone: $value->phone??'0',
 
-            cnt: '0',
+            cnt: '0',  // 카운트
         ));
 
         $placeholders = $this->getDatePeriod()->map(
