@@ -76,7 +76,7 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
                     DB::raw(
                         'count(case when browser = "chrome" then 1 end) as "chrome",
                             count(case when browser = "edge" then 1 end) as "edge",
-                            count(case when browser = "safari" then 1 end) as "safari",
+                            count(case when browser = "mozilla" then 1 end) as "mozilla",
                             count(case when browser = "firefox" then 1 end) as "firefox"',
                     )
                 )
@@ -87,7 +87,7 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
                 Visit::query()->select(
                     DB::raw(
                         'count(case when platform = "windows" then 1 end) as "windows",
-                            count(case when platform = "mac" then 1 end) as "mac",
+                            count(case when platform = "ios" then 1 end) as "ios",
                             count(case when platform = "phone" then 1 end) as "phone"',
                     )
                 )
