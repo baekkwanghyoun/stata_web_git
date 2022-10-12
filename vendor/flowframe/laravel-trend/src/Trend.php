@@ -130,12 +130,12 @@ class Trend
             aggregate: $value->aggregate,
 
             chrome: $value->chrome??'0',
-            safari: $value->safari??'0',
+            mozilla: $value->mozilla??'0',
             edge: $value->edge??'0',
             firefox: $value->firefox??'0',
 
             windows: $value->windows??'0',
-            mac: $value->mac??'0',
+            ios: $value->ios??'0',
             phone: $value->phone??'0',
 
             cnt: '0',  // 카운트
@@ -147,12 +147,12 @@ class Trend
                 aggregate: 0,
 
                 chrome: 0,
-                safari: 0,
+                mozilla: 0,
                 edge: 0,
                 firefox: 0,
 
                 windows:0,
-                mac:0,
+                ios:0,
                 phone:0,
 
                 cnt: 0,

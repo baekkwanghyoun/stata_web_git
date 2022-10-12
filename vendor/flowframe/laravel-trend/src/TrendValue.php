@@ -10,12 +10,12 @@ class TrendValue
         public mixed $cnt=null,
 
         public string $chrome,
-        public string $safari,
+        public string $mozilla,
         public string $edge,
         public string $firefox,
 
         public string $windows,
-        public string $mac,
+        public string $ios,
         public string $phone, // 폰
     ) {
     }

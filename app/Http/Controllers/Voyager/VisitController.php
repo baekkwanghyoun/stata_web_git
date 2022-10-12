@@ -144,12 +144,12 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
                 ->datasets([
                     [
                         "label" => "firefox",
-                        'data' => $trend->map(fn (TrendValue $value) => $value->safari),
+                        'data' => $trend->map(fn (TrendValue $value) => $value->firefox),
                         'backgroundColor' => "rgb(198, 235, 197,0.3)",
                     ],
                     [
-                        "label" => "safari",
-                        'data' => $trend->map(fn (TrendValue $value) => $value->safari),
+                        "label" => "mozilla",
+                        'data' => $trend->map(fn (TrendValue $value) => $value->mozilla),
                         'backgroundColor' => "rgb(161, 194, 152,0.4)",
                     ],
                     [
@@ -189,8 +189,8 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
                         'backgroundColor' => "rgb(198, 235, 197,0.3)",
                     ],
                     [
-                        "label" => "mac",
-                        'data' => $trend->map(fn (TrendValue $value) => $value->mac),
+                        "label" => "ios",
+                        'data' => $trend->map(fn (TrendValue $value) => $value->ios),
                         'backgroundColor' => "rgb(161, 194, 152,0.4)",
                     ],
                     [
