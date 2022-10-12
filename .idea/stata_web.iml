@@ -139,6 +139,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/jaybizzle/crawler-detect" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/torann/geoip" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-referer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-stats" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ua-parser/uap-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jenssegers/agent" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/shetabit/visitor" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/flowframe/laravel-trend" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fx3costa/laravelchartjs" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

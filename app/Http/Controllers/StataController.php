@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stat;
+use App\Models\StatsStep;
+use App\Models\User;
+use App\Models\Visit;
+use App\Stats\StepStats;
+use Flowframe\Trend\Trend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
@@ -13,10 +18,14 @@ use Illuminate\Support\Str;
 use Mockery\Exception;
 use phpDocumentor\Reflection\Types\Array_;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\Stats\StatsQuery;
+use Spatie\Stats\StatsWriter;
 use Symfony\Component\VarDumper\VarDumper;
 
 /*use Analytics;
 use Spatie\Analytics\Period;*/
+
+use Spatie\Stats\Traits\HasStats;
 
 class StataController extends Controller
 {
@@ -107,11 +116,46 @@ class StataController extends Controller
 
     public function quasar()
     {
-        visits(Stat::class,'tag1')->increment();
-        //visits(Stat::class)->forceIncrement();
 
-        dump(visits(Stat::class)->period('day')->count());
-        dump(visits(Stat::class, 'tag1')->languages());
+
+        visitor()->visit();
+
+        StatsWriter::for(StatsStep::class, ['name'=>'123'])->increase(1);
+        //StatsWriter::for(StatsStep::class, ['name'=>'123'])->increase();
+
+
+        //StepStats::increase();
+
+
+/*        $stats = StepStats::query()
+            ->start(now()->subMonths(2))
+            ->end(now()->subSecond())
+            ->groupByDay()
+            ->get()->toArray();*/
+
+        /*
+         * StatsQuery.php
+         * */
+        /*
+        $stats = StatsQuery::for(StatsStep::class, ['name'=>'12'])
+            ->start(now()->subMonths(2))
+            ->end(now()->subSecond())
+            ->groupByDay()
+            ->get()->toArray();
+
+        dump($stats);*/
+
+
+//        visits('App\Models\Stat')->increment();
+
+
+        //visits(Stat::class)->forceIncrement();
+/*
+        dump(visits(Stat::class, 'tag1')->period('day')->count());
+        dump(visits(Stat::class, 'tag1')->languages());*/
+
+        /*dump(visits('App\Models\Stat')->period('week')->count());*/
+
         //visits()->visit();
         $isSuccess = false;
         $acceptDomain = ['http://52.79.82.226','http://stataweb.test:9011/','http://jat.co.kr/', 'https://www.kli.re.kr/', 'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
@@ -244,7 +288,7 @@ class StataController extends Controller
     /* 실 api 호출 */
     public function storeKlips(Request $request)
     {
-
+        visitor()->visit();
         $tab = request('tab');
 
         if($tab=='create') {

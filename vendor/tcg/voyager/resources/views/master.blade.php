@@ -30,6 +30,11 @@
 
     <!-- Few Dynamic Styles -->
     <style type="text/css">
+        .voyager .nav-tabs>li.active>a:hover {
+            color: grey;
+            border-bottom: white;
+        }
+
         .voyager .side-menu .navbar-header {
             background:{{ config('voyager.primary_color','#22A7F0') }};
             border-color:{{ config('voyager.primary_color','#22A7F0') }};

@@ -66,4 +66,7 @@ Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::get('/stat/savefiletype', [\App\Http\Controllers\StatsController::class, 'savefiletype'])->name('stat.savefiletype');
+    Route::get('/stat/visit', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
+    Route::get('/stat/browser', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.browser');
+    Route::get('/stat/os', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
 });
