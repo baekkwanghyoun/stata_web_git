@@ -68,10 +68,13 @@ dump($macAddr);
         $localIP = getHostByName(getHostName());
         dump($localIP);
         dump(request()->ip());*/
-        dump($this->getCurrentMacAddress('eth0'));
+        //dump($this->getCurrentMacAddress('eth0', 'ipconfig'));
         //$this->getCurrentMacAddress('eth0', 'ifconfig');
 
-
+        dump(shell_exec('ipconfig'));
+        dump(shell_exec('ifconfig'));
+        dump(shell_exec('dir'));
+        dump(shell_exec('ll'));
 
     }
 
