@@ -30,12 +30,28 @@ use Spatie\Stats\Traits\HasStats;
 class StataController extends Controller
 {
 
+    public function unix_os(){
+        ob_start();
+        system('ifconfig -a');
+        $mycom = ob_get_contents(); // Capture the output into a variable
+        ob_clean(); // Clean (erase) the output buffer
+        $findme = "Physical";
+        //Find the position of Physical text
+        $pmac = strpos($mycom, $findme);
+        $mac = substr($mycom, ($pmac + 37), 18);
+
+        dump($mycom);
+        dump($mac);
+    }
+
     public function getmacAddr()
     {
+$this->unix_os();
 
         $localIP = getHostByName(getHostName());
         dump($localIP);
         dump(request()->ip());
+
 
     }
 
