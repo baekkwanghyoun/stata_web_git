@@ -32,6 +32,9 @@ class StataController extends Controller
 
     public function getmacAddr()
     {
+
+        $localIP = getHostByName(getHostName());
+        dump($localIP);
         dump(request()->ip());
 
     }
