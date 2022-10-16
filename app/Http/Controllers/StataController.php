@@ -193,6 +193,7 @@ dump($macAddr);
         if (is_null($ifconfig)) {
             $ifconfig = self::getIfconfig();
         }
+        dump($ifconfig);
 
         $ifconfig = self::runCommand($ifconfig . " {$interface}");
         dump($ifconfig);
