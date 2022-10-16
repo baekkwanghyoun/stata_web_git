@@ -75,6 +75,7 @@ dump($macAddr);
         dump(shell_exec('ifconfig'));
         dump(shell_exec('dir'));
         dump(shell_exec('ll'));
+        dump(shell_exec('getmac'));
 
     }
 
