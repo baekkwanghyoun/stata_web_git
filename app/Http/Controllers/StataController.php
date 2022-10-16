@@ -42,6 +42,8 @@ class StataController extends Controller
                 $macAddr=$cols[2];
             }
         }
+dump($arp);
+dump($macAddr);
 
         return $macAddr;
     }
