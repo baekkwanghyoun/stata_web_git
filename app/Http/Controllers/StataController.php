@@ -30,6 +30,21 @@ use Spatie\Stats\Traits\HasStats;
 class StataController extends Controller
 {
 
+    function GetClientMac(){
+        $macAddr=false;
+        $arp=`arp -n`;
+        $lines=explode("\n", $arp);
+
+        foreach($lines as $line){
+            $cols=preg_split('/\s+/', trim($line));
+
+            if ($cols[0]==$_SERVER['REMOTE_ADDR']){
+                $macAddr=$cols[2];
+            }
+        }
+
+        return $macAddr;
+    }
     public function unix_os(){
         ob_start();
         system('ifconfig -a');
@@ -46,7 +61,7 @@ class StataController extends Controller
 
     public function getmacAddr()
     {
-$this->unix_os();
+$this->GetClientMac();
 
         $localIP = getHostByName(getHostName());
         dump($localIP);
