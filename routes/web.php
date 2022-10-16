@@ -26,6 +26,7 @@ Route::get('/phpinfo', function () {
 });
 
 Route::get('/gatest', [StataController::class, 'gatest'])->name('quasar.index');
+Route::get('/getmac', [StataController::class, 'getmacAddr'])->name('getmacAddr');
 
 
 /*

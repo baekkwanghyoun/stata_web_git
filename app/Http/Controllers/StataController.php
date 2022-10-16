@@ -29,6 +29,51 @@ use Spatie\Stats\Traits\HasStats;
 
 class StataController extends Controller
 {
+    function GetMAC(){
+
+
+        ob_start();
+        system('getmac');
+        $Content = ob_get_contents();
+        ob_clean();
+        return substr($Content, strpos($Content,'\\')-20, 17);
+    }
+    public function getmacAddr()
+    {
+        ob_start();
+        system('ifconfig -a');
+        $mycom = ob_get_contents(); // Capture the output into a variable
+        ob_clean(); // Clean (erase) the output buffer
+        $findme = "Physical";
+        //Find the position of Physical text
+        $pmac = strpos($mycom, $findme);
+        $mac = substr($mycom, ($pmac + 37), 18);
+dump($mac);
+
+        ob_start();
+        system('ipconfig /all');
+        $mycom=ob_get_contents();
+        dump($mycom);
+
+        ob_clean();
+        $findme = 'physique';
+        $pmac = strpos($mycom, $findme);
+        $mac=substr($mycom,($pmac+33),17);
+        echo $mac;
+
+        echo $this->GetMAC();
+
+        $shellexec = shell_exec('getmac');
+        dump($shellexec);
+
+
+        $shellexec = exec('getmac');
+        dump($shellexec);
+        $shellexec = system('getmac');
+        dump($shellexec);
+    }
+
+
     public function gatest()
     {
         $activity = Activity::all()->last();
