@@ -9,36 +9,8 @@ class HowtosController extends Controller
 {
     public function index()
     {
-        //
+        $v = Howto::latest()->get();
+        return json_encode($v);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Howto $howto)
-    {
-        //
-    }
-
-    public function edit(Howto $howto)
-    {
-        //
-    }
-
-    public function update(Request $request, Howto $howto)
-    {
-        //
-    }
-
-    public function destroy(Howto $howto)
-    {
-        //
-    }
 }

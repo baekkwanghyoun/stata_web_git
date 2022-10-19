@@ -9,36 +9,8 @@ class FaqsController extends Controller
 {
     public function index()
     {
-        //
+        $v = Faq::latest()->get();
+        return json_encode($v);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Faq $faq)
-    {
-        //
-    }
-
-    public function edit(Faq $faq)
-    {
-        //
-    }
-
-    public function update(Request $request, Faq $faq)
-    {
-        //
-    }
-
-    public function destroy(Faq $faq)
-    {
-        //
-    }
 }

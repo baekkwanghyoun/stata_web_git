@@ -19,6 +19,12 @@ use App\Http\Controllers\TestController;
 });*/
 
 Route::get('/', [StataController::class, 'quasar'])->name('quasar.index');
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/getcode/{group}', [\App\Http\Controllers\SettingsController::class, 'getCode']);
+    Route::get('/howto/', [\App\Http\Controllers\HowtosController::class, 'index']);
+    Route::get('/faq/', [\App\Http\Controllers\FaqsController::class, 'index']);
+});
+
 
 
 Route::get('/phpinfo', function () {
