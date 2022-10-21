@@ -32,6 +32,12 @@ class StataController extends Controller
 
     function get_client_ip() {
         $ipaddress = '';
+        dump(getenv('HTTP_CLIENT_IP'));
+        dump(getenv('HTTP_X_FORWARDED_FOR'));
+        dump(getenv('HTTP_X_FORWARDED'));
+        dump(getenv('HTTP_FORWARDED_FOR'));
+        dump(getenv('HTTP_FORWARDED'));
+        dump(getenv('REMOTE_ADDR'));
         if (getenv('HTTP_CLIENT_IP'))
             $ipaddress = getenv('HTTP_CLIENT_IP');
         else if(getenv('HTTP_X_FORWARDED_FOR'))
