@@ -31,7 +31,8 @@ class StataController extends Controller
 {
 
     function get_client_ip() {
-        $ipaddress = '';
+        dump($_SERVER);
+        /*$ipaddress = '';
         dump(getenv('HTTP_CLIENT_IP'));
         dump(getenv('HTTP_X_FORWARDED_FOR'));
         dump(getenv('HTTP_X_FORWARDED'));
@@ -52,7 +53,7 @@ class StataController extends Controller
             $ipaddress = getenv('REMOTE_ADDR');
         else
             $ipaddress = 'UNKNOWN';
-        return $ipaddress;
+        return $ipaddress;*/
     }
 
     function GetClientMac(){
