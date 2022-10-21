@@ -30,6 +30,25 @@ use Spatie\Stats\Traits\HasStats;
 class StataController extends Controller
 {
 
+    function get_client_ip() {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
+
     function GetClientMac(){
         $macAddr=false;
         $arp=`arp -n`;
@@ -63,7 +82,10 @@ dump($macAddr);
 
     public function getmacAddr()
     {
-       $this->GetClientMac();
+        dump($_SERVER['REMOTE_ADDR']);
+        dump($this->get_client_ip());
+
+       /*$this->GetClientMac();
 
         $localIP = getHostByName(getHostName());
         dump($localIP);
@@ -75,7 +97,7 @@ dump($macAddr);
         dump(shell_exec('ifconfig'));
         dump(shell_exec('dir'));
         dump(shell_exec('ll'));
-        dump(shell_exec('getmac'));
+        dump(shell_exec('getmac'));*/
 
     }
 
