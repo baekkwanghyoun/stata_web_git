@@ -11,7 +11,14 @@ class SettingsController extends Controller
     public function getCode($group)
     {
         $v = Setting::select(['display_name', 'value'])->where('group', $group)->orderBy('order')->get();
-        
+
+        return json_encode($v);
+    }
+
+    public function getIp()
+    {
+        $ip = \Request::ip();
+        $v = ['ip'=>$ip];
         return json_encode($v);
     }
 

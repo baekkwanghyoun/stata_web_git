@@ -23,6 +23,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/getcode/{group}', [\App\Http\Controllers\SettingsController::class, 'getCode']);
     Route::get('/howto/', [\App\Http\Controllers\HowtosController::class, 'index']);
     Route::get('/faq/', [\App\Http\Controllers\FaqsController::class, 'index']);
+    Route::get('/getclientip/', [\App\Http\Controllers\SettingsController::class, 'getIp']);
 });
 
 
