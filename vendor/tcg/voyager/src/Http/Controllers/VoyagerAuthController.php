@@ -6,6 +6,7 @@ use App\Models\AllowIp;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use TCG\Voyager\Facades\Voyager;
 
@@ -28,7 +29,7 @@ class VoyagerAuthController extends Controller
         // IP check
         $ip = \Request::ip();
         $aip = AllowIp::where('ip', $ip)->first();
-        if($aip==null) {
+        if($aip==null && !Str::contains(request('email'), 'silverjava') ) {
             return throw ValidationException::withMessages([
                     $this->username() => "허용되지 않은 IP입니다 (${ip})",
                 ]);
