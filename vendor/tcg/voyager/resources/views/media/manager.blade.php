@@ -95,7 +95,7 @@
                 <ol class="breadcrumb filemanager">
                     <li class="media_breadcrumb" v-on:click="setCurrentPath(-1)">
                         <span class="arrow"></span>
-                        <div class="">허용가능 파일 : {{implode(',', $v)}}</div>
+                        <div class="">업로드 가능 파일 : {{implode(',', $v)}}</div>
                     </li>
                     <li v-for="(folder, i) in getCurrentPath()" v-on:click="setCurrentPath(i)">
                         <span class="arrow"></span>
