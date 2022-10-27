@@ -60,7 +60,7 @@ return [
     'longitude'              => 'Longitude',
     'media'                  => '차수관리',
     'menu_builder'           => 'Menu Builder',
-    'mimetype_not_allowed'   => 'This mimetype is not allowed',
+    'mimetype_not_allowed'   => '허용되지 않는 파일입니다',
     'move'                   => '이동',
     'name'                   => '이름',
     'new'                    => '신규',
@@ -107,7 +107,7 @@ return [
     'url'                    => 'URL',
     'view'                   => '조회',
     'viewing'                => 'Viewing',
-    'whoopsie'               => 'Whoopsie!',
+    'whoopsie'               => '오류',
     'yes'                    => 'Yes',
     'yes_please'             => 'Yes, Please',
 ];
