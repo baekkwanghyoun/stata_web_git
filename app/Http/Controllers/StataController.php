@@ -550,7 +550,8 @@ dump($macAddr);
             $text = "cd E:\project\stata_web\public\stata16\klips\n";
             //$text = "cd C:\project\stata_web\public\stata16\klips\n";
         } else {
-            $text = "cd C:\www\klips3\public\stata16\klips\n";
+            $text = "cd C:\www\klips3\storage\app\public\\round\n";
+            //$text = "cd C:\www\klips3\public\stata16\klips\n";
         }
 
 
