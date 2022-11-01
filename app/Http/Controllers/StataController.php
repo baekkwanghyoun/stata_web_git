@@ -447,68 +447,7 @@ dump($macAddr);
     public function create()
     {
 
-        // /b 옵션으로 완료 여부를 알수 있네.
-        //$output = shell_exec(\Storage::disk('public')->get("stata/exe.bat"));
-        //dump($output);
-//
-//        $data = shell_exec("dir");
-//        $data = mb_convert_encoding($data, "UTF-8", "euc-kr");
-//        dump($data);
     }
-/*
-    public function store(Request $request)
-    {
-        $sid = session()->getId();
-//        try {
-            if (!empty($_POST['filename'])) {
-
-            $text = $_POST["textdata"];
-            $filename = $_POST['filename'];
-            $fo = fopen('stata16/'.$filename. ".do","w+");
-            fwrite($fo,$text);
-            fclose($fo);
-
-            if(env('APP_ENV')=='local')
-            {
-                $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/${filename}.do");
-            }
-            else {
-                $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/${filename}.do");
-            }
-
-
-
-
-            $fileread = file_get_contents(public_path()."\\"."${filename}.log", true);
-//            $fileread = htmlentities($fileread);
-            $fileread = preg_replace("/(\r\n\r\n)/i","<br />\n", $fileread);
-            $fileread = preg_replace("/  /i","&nbsp;&nbsp;", $fileread);
-            $fileread = preg_replace("/(<br\s*\/>)+/", "", $fileread);
-            //$fileread = preg_replace('/[\n\r]+/', '', $fileread);
-
-            //$fileread = Str::replaceFirst('&rt;br',"", $fileread);
-            //echo($fileread);
-            //session()->flashInput([$fileread]);
-            session()->flashInput($request->input());
-            $isSuccess = false;
-            return view('stata.index', compact('fileread', 'isSuccess'));
-            //return back()->withInput();
-
-
-            //dump($fileread);
-            //VarDumper::dump($fileread);
-
-            //$output = shell_exec(\Storage::disk('public')->get("stata/exe.bat"));
-            //Stata.exe /q /e do stata16/b.do
-
-            }
-       /* }catch(\Throwable $e){
-            Log::debug($e);
-        }
-
-
-
-    }*/
 
 
     /* 실 api 호출 */
@@ -650,7 +589,7 @@ dump($macAddr);
                 $ado_name = 'smart_klips_v3';
             }*/
             $ado_name = 'smart_klips_v3';
-            $text .= $ado_name." ${households} {$persons} , 1wave( {$waves}) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p} {$addTxt}"; //{$tyCd}
+            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p} {$addTxt}"; //{$tyCd}
 
         }
         else if($tab==='search') {
@@ -689,29 +628,10 @@ dump($macAddr);
                 $error = $ex->getMessage();
             }
         }
-        /*
-        if(file_exists('stata16/klips/'.$filename.'.dta') ) {
-            $isSuccess = true;
-            Storage::move('stata16/klips/'.$filename.'.dta', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.dta');
-        }
-        if(file_exists('stata16/klips/'.$filename.'.csv') ) {
-            Storage::move('stata16/klips/'.$filename.'.csv', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.csv');
-        }
-        if(file_exists('stata16/klips/'.$filename.'.xlsx') ) {
-            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.xlsx');
-        }
-        if(file_exists('stata16/klips/'.$filename.'.xlsx') ) {
-            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.xlsx');
-        }
-        if(file_exists('stata16/klips/'.$filename.'.xlsx') ) {
-            Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.xlsx');
-        }
-        */
-        //Storage::move('stata16/klips/'.$filename.'.data', 'stata16/result/'.$filename.'.dta');
-        //Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$filename.'.xlsx');
-//log
 
-//         $fileread = Storage::get('stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+
+
+
 //      $fileread = file_get_contents(public_path() . "\\" . "${filename}.log", true);// $fileread = htmlentities($fileread);
 //      $fileread = preg_replace("/(\r\n\r\n)/i", "<br />\n", $fileread);
 //      $fileread = preg_replace("/  /i", "&nbsp;&nbsp;", $fileread);
@@ -730,39 +650,34 @@ dump($macAddr);
         session()->flashInput($request->input());
         //return view('stata.index', compact('fileread', 'isSuccess'));
 
-        if(true) {
-        //if($request->wantsJson()) {
-            if($tab==='create') {
-                if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
-                    return response()->json(['name' => URL::to('/').Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
-                }
-                else {
-                    $content = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
-                    //$content = fopen(Storage::path("/storage/stata16/log/fd123.log"),'r');
+        if($tab==='create') {
+            if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
+                return response()->json(['name' => URL::to('/').Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
+            }
+            else {
+                $content = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
+                //$content = fopen(Storage::path("/storage/stata16/log/fd123.log"),'r');
 
-                    $idxLine = 0;
-                    $errlog = "";
-                    while(!feof($content)){
-                        $idxLine++;
-                        $line = fgets($content);
-                        if($idxLine == 8) {
-                            //$line = fgets($content);
-                            $errlog .= $line;
-                        }
-                        echo $line."<br>";
+                $idxLine = 0;
+                $errlog = "";
+                while(!feof($content)){
+                    $idxLine++;
+                    $line = fgets($content);
+                    if($idxLine == 8) {
+                        //$line = fgets($content);
+                        $errlog .= $line;
                     }
-
-                    return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name, 'err'=>$errlog], 422);
                 }
-            }
-            else if($tab==='search') {
-               // return response()->json($fileread);
+                $errlog = '';
+                return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name, 'err'=>$errlog], 422);
             }
         }
-        else {
-            Session::flash('isSuccess', true);
-            return back()->withInput();
+        else if($tab==='search') {
+            //$fileread = Storage::get('stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+            $fileread = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
+           return response()->json($fileread);
         }
+
 
 
         //dump($fileread);
