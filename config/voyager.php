@@ -238,9 +238,9 @@ return [
         'path'                => 'round',
         'show_folders'        => true,
         'allow_upload'        => true,
-        'allow_move'          => true,
+        'allow_move'          => false,
         'allow_delete'        => true,
-        'allow_create_folder' => true,
+        'allow_create_folder' => false,
         'allow_rename'        => true,
         /*'watermark'           => [
             'source'         => 'watermark.png',
