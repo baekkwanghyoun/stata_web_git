@@ -672,7 +672,9 @@ dump($macAddr);
             //$output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata16/do/${nowDate}/${filename_req}.do");
         }
 
-        Storage::move($filename_req.'.log', '../storage/app/public/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+        //Storage::move($filename_req.'.log', '../storage/app/public/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+        Storage::move($filename_req.'.log', 'stata16/log2/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+
 
 
 
