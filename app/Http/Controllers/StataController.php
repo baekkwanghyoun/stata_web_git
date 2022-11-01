@@ -664,18 +664,25 @@ dump($macAddr);
         // output은 원래 없음
         if (env('APP_ENV') == 'local') {
             //d에 stata프로그램은 있고 . do파일은 프로젝트 안에 있음
-            $output = shell_exec("D:/stata16/Stata16/Stata.exe /q /e do E:/project/stata_web/public/stata16/do/${nowDate}/${filename_req}.do");
+            // local에서는 sail때문에 테스트 안됨. 일반 윈도우로 땡겨서 테스트 해야함. 착오방지를 위해 주석..
+            //$output = shell_exec("D:/stata16/Stata16/Stata.exe /q /e do E:/project/stata_web/public/stata16/do/${nowDate}/${filename_req}.do");
         } else {
-            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata16/do/${nowDate}/${filename_req}.do");
+            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/storage/app/public/stata16/do/${nowDate}/${filename_req}.do");
+            //$output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata16/do/${nowDate}/${filename_req}.do");
         }
-        /*C:/stata/isstata/Stata.exe /e  do "C:\www\klips3\public\stata16\do\20210419\test222.do"*/
+
         Storage::move($filename_req.'.log', 'stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 
 
 
-        if(file_exists('stata16/klips/'.$filename_req.'.zip') ) {
+        if(Storage::disk('public')->exists('round/'.$filename_req.'.zip')) {
+        //if(file_exists('stata16/klips/'.$filename_req.'.zip') ) {
             $isSuccess = true;
-            Storage::move('stata16/klips/'.$filename_req.'.zip', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.zip');
+            try {
+                Storage::disk('public')->move('round/'.$filename_req.'.zip', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.zip');
+            } catch (\Exception $ex) {
+                $error = $ex->getMessage();
+            }
         }
         /*
         if(file_exists('stata16/klips/'.$filename.'.dta') ) {

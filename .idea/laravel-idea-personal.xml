@@ -3,7 +3,7 @@
   <component name="LaravelIdeaPersonalSettings">
     <option name="generationStringOptionValues">
       <map>
-        <entry key="createPolicy.userClass" value="\App\Models\User" />
+        <entry key="createModel.createMigration" value="1" />
       </map>
     </option>
   </component>
