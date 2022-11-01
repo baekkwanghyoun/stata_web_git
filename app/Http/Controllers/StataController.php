@@ -651,7 +651,7 @@ dump($macAddr);
                 $ado_name = 'smart_klips_v3';
             }*/
             $ado_name = 'smart_klips_v3';
-            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p} {$addTxt}"; //{$tyCd}
+            $text .= $ado_name." ${households} {$persons} , 1wave( {$waves}) save({$filename_req})  {$filesaveVal} {$add_h} {$add_p} {$addTxt}"; //{$tyCd}
 
         }
         else if($tab==='search') {
@@ -750,7 +750,6 @@ dump($macAddr);
             else if($tab==='search') {
                 return response()->json($fileread);
             }
-            //return response()->json(['name' => "/klips/klips_final.dta", 'status' => 'success',]);
         }
         else {
             Session::flash('isSuccess', true);
