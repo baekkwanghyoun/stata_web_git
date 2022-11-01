@@ -674,7 +674,9 @@ dump($macAddr);
 
         //Storage::move($filename_req.'.log', '../storage/app/public/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
         //Storage::move($filename_req.'.log', '/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
-        Storage::move($filename_req.'.log', './storage/app/public/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+
+        //  여기에서 ./storage는 root에서 윈도우 심볼릭 링크가 걸린 C:\www\klips3\public\storage를 말함
+        Storage::move($filename_req.'.log', './storage/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 
 
 
