@@ -674,7 +674,7 @@ dump($macAddr);
 
         //Storage::move($filename_req.'.log', '../storage/app/public/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
         //Storage::move($filename_req.'.log', '/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
-        Storage::move($filename_req.'.log', './loggggggg/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+        Storage::move($filename_req.'.log', './storage/app/public/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 
 
 
