@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Mockery\Exception;
 use phpDocumentor\Reflection\Types\Array_;
@@ -513,6 +514,8 @@ dump($macAddr);
     /* 실 api 호출 */
     public function storeKlips(Request $request)
     {
+
+
         visitor()->visit();
         $tab = request('tab');
 
@@ -737,7 +740,8 @@ dump($macAddr);
                 if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
 
                     //return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success','ado_name' => $ado_name,]);
-                    return response()->json(['name' => '/'.Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
+                    //return response()->json(['name' => URL::to('/').Storage::url("stata16/result/"), 'status' => 'success','ado_name' => 'a',]);
+                    return response()->json(['name' => URL::to('/').Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
                 }
                 else {
                      return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name], 422);
