@@ -515,7 +515,6 @@ dump($macAddr);
     public function storeKlips(Request $request)
     {
 
-
         visitor()->visit();
         $tab = request('tab');
 
@@ -675,9 +674,6 @@ dump($macAddr);
             //$output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata16/do/${nowDate}/${filename_req}.do");
         }
 
-        //Storage::move($filename_req.'.log', '../storage/app/public/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
-        //Storage::move($filename_req.'.log', '/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
-
         //  여기에서 ./storage는 root에서 윈도우 심볼릭 링크가 걸린 C:\www\klips3\public\storage를 말함
         Storage::move($filename_req.'.log', './storage/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 
@@ -715,7 +711,7 @@ dump($macAddr);
         //Storage::move('stata16/klips/'.$filename.'.xlsx', 'stata16/result/'.$filename.'.xlsx');
 //log
 
-         $fileread = Storage::get('stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+//         $fileread = Storage::get('stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 //      $fileread = file_get_contents(public_path() . "\\" . "${filename}.log", true);// $fileread = htmlentities($fileread);
 //      $fileread = preg_replace("/(\r\n\r\n)/i", "<br />\n", $fileread);
 //      $fileread = preg_replace("/  /i", "&nbsp;&nbsp;", $fileread);
@@ -738,17 +734,29 @@ dump($macAddr);
         //if($request->wantsJson()) {
             if($tab==='create') {
                 if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
-
-                    //return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success','ado_name' => $ado_name,]);
-                    //return response()->json(['name' => URL::to('/').Storage::url("stata16/result/"), 'status' => 'success','ado_name' => 'a',]);
                     return response()->json(['name' => URL::to('/').Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
                 }
                 else {
-                     return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name], 422);
+                    $content = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
+                    //$content = fopen(Storage::path("/storage/stata16/log/fd123.log"),'r');
+
+                    $idxLine = 0;
+                    $errlog = "";
+                    while(!feof($content)){
+                        $idxLine++;
+                        $line = fgets($content);
+                        if($idxLine == 8) {
+                            //$line = fgets($content);
+                            $errlog .= $line;
+                        }
+                        echo $line."<br>";
+                    }
+
+                    return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name, 'err'=>$errlog], 422);
                 }
             }
             else if($tab==='search') {
-                return response()->json($fileread);
+               // return response()->json($fileread);
             }
         }
         else {
