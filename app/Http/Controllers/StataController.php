@@ -547,9 +547,10 @@ dump($macAddr);
         //$text = "log using \"dd.txt\", text \n";
 //        try {
         if (env('APP_ENV') == 'local') {
-            $text = "cd C:\project\stata_web\public\stata16\klips\n";
+            $text = "cd E:\project\stata_web\public\stata16\klips\n";
+            //$text = "cd C:\project\stata_web\public\stata16\klips\n";
         } else {
-            $text = "cd C:\www\stata_web_git\public\stata16\klips\n";
+            $text = "cd C:\www\klips3\public\stata16\klips\n";
         }
 
 
@@ -661,11 +662,12 @@ dump($macAddr);
         // 안될때 php.ini의 shell_exec ;
         // output은 원래 없음
         if (env('APP_ENV') == 'local') {
-            $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/do/${nowDate}/${filename_req}.do");
+            //d에 stata프로그램은 있고 . do파일은 프로젝트 안에 있음
+            $output = shell_exec("D:/stata16/Stata16/Stata.exe /q /e do E:/project/stata_web/public/stata16/do/${nowDate}/${filename_req}.do");
         } else {
-            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/do/${nowDate}/${filename_req}.do");
+            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata16/do/${nowDate}/${filename_req}.do");
         }
-        /*C:/stata/isstata/Stata.exe /e  do "C:\www\stata_web_git\public\stata16\do\20210419\test222.do"*/
+        /*C:/stata/isstata/Stata.exe /e  do "C:\www\klips3\public\stata16\do\20210419\test222.do"*/
         Storage::move($filename_req.'.log', 'stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 
 
@@ -715,7 +717,8 @@ dump($macAddr);
         session()->flashInput($request->input());
         //return view('stata.index', compact('fileread', 'isSuccess'));
 
-        if($request->wantsJson()) {
+        if(true) {
+        //if($request->wantsJson()) {
             if($tab==='create') {
                 if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
                     return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success','ado_name' => $ado_name,]);
@@ -835,7 +838,7 @@ dump($macAddr);
                 //$text = "cd C:\project\stata_web\public\klips\n";
             }
             else {
-                $text = "cd C:\www\stata_web_git\public\klips\n";
+                $text = "cd C:\www\klips3\public\klips\n";
             }
 
 
@@ -861,7 +864,7 @@ dump($macAddr);
                 $output = shell_exec("Stata.exe /q /e do C:/project/stata_web/public/stata16/${filename}.do");
             }
             else {
-                $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/stata_web_git/public/stata16/${filename}.do");
+                $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata16/${filename}.do");
             }
 
             $fileread = file_get_contents(public_path()."\\"."${filename}.log", true);
