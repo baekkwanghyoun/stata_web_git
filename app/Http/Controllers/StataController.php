@@ -656,7 +656,7 @@ dump($macAddr);
         }
 
         Storage::disk('public')->makeDirectory('stata16/do/'.$nowDate) ;
-        $fo = fopen('/storage/app/public/stata16/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
+        $fo = fopen('../storage/app/public/stata16/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
         //$fo = fopen('stata16/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
         fwrite($fo, $text);
         fclose($fo);
