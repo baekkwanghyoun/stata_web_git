@@ -737,7 +737,7 @@ dump($macAddr);
                 if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
 
                     //return response()->json(['name' => "/stata16/result/${nowDate}/${foldername}/${filename_req}", 'status' => 'success','ado_name' => $ado_name,]);
-                    return response()->json(['name' => Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
+                    return response()->json(['name' => '/'.Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
                 }
                 else {
                      return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name], 422);
