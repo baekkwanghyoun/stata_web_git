@@ -676,7 +676,7 @@ dump($macAddr);
             //$fileread = Storage::get('stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
             //$fileread = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
 
-            $fileread = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/klips_final.log"),'r');
+            $fileread = file_get_contents(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/klips_final.log"),'r');
            return response()->json($fileread);
         }
 
