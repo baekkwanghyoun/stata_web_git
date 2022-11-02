@@ -677,7 +677,18 @@ dump($macAddr);
             //$fileread = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
 
             $fileread = file_get_contents(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/klips_final.log"),'r');
-           return response()->json($fileread);
+            $idxLine = 0;
+            $searchlog = "";
+            while(!feof($fileread)){
+                $idxLine++;
+                $line = fgets($fileread);
+                if($idxLine == 8) {
+                    //$line = fgets($content);
+                    $searchlog .= $line;
+                }
+            }
+            $errlog = '';
+           return response()->json($searchlog);
         }
 
 
