@@ -682,7 +682,7 @@ dump($macAddr);
             while(!feof($fileread)){
                 $idxLine++;
                 $line = fgets($fileread);
-                if($idxLine == 8) {
+                if($idxLine > 8) {
                     //$line = fgets($content);
                     $searchlog .= $line;
                 }
