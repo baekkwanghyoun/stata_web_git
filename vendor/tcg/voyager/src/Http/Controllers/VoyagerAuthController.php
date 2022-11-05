@@ -3,9 +3,11 @@
 namespace TCG\Voyager\Http\Controllers;
 
 use App\Models\AllowIp;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use TCG\Voyager\Facades\Voyager;
@@ -66,6 +68,30 @@ class VoyagerAuthController extends Controller
      */
     public function redirectTo()
     {
+
+        ////////////////////////////////////////////////////////////////////////////////////////
+        // 패스워드 변경 일자 3개월 지났는지 체크
+        ////////////////////////////////////////////////////////////////////////////////////////
+        $user = \auth()->user();
+        if ($user->pwchanged_at == null) {
+            //$changedDate = Carbon::now()->subMonths(5); // null이라면 5개월 이전으로 돌려버림
+            $changedDate = Carbon::parse($user->created_at);
+        } else {
+            $changedDate = Carbon::parse($user->pwchanged_at);
+        }
+        $changedDate = $changedDate->addMonths(3);
+        $today = Carbon::now();
+
+        // login시간 업데이트
+        $user->login_at = Carbon::now();
+        $user->save();
+        //fill(['login_at' => Carbon::now()])->save();
+
+        if ($changedDate <= $today) {
+            //Session::flash('message', '3개월이 지났기때문에 비밀번호 변경을 하셔야합니다.');
+            return "/admin/auth/pwchange";
+        }
+
         return config('voyager.user.redirect', route('voyager.dashboard'));
     }
 
