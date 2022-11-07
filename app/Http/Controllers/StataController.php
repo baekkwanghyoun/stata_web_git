@@ -514,7 +514,7 @@ dump($macAddr);
         /*체크박스일경우*/
         $arFile = request('filesave')??[];
         $arFile = Arr::where($arFile, function ($val, $key) {
-           return $key != 'stata';
+           return $val != 'Stata';
         });
 
         /**/
