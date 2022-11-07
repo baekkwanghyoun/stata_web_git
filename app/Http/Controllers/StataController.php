@@ -619,11 +619,11 @@ dump($macAddr);
 
 
 
-        if(Storage::disk('public')->exists('round/'.$filename_req.'_'.$foldername.'.zip')) {
+        if(Storage::disk('public')->exists('round/'.$filename_req.'_20'.$foldername.'.zip')) {
         //if(file_exists('stata/klips/'.$filename_req.'.zip') ) {
             $isSuccess = true;
             try {
-                Storage::disk('public')->move('round/'.$filename_req.'_'.$foldername.'.zip', 'stata/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'_'.$foldername.'.zip');
+                Storage::disk('public')->move('round/'.$filename_req.'_20'.$foldername.'.zip', 'stata/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'_20'.$foldername.'.zip');
             } catch (\Exception $ex) {
                 $error = $ex->getMessage();
             }
