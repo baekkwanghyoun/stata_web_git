@@ -619,11 +619,11 @@ dump($macAddr);
 
 
 
-        if(Storage::disk('public')->exists('round/'.$filename_req.'.zip')) {
+        if(Storage::disk('public')->exists('round/'.$filename_req.'_'.$foldername.'.zip')) {
         //if(file_exists('stata/klips/'.$filename_req.'.zip') ) {
             $isSuccess = true;
             try {
-                Storage::disk('public')->move('round/'.$filename_req.'.zip', 'stata/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.zip');
+                Storage::disk('public')->move('round/'.$filename_req.'_'.$foldername.'.zip', 'stata/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'_'.$foldername.'.zip');
             } catch (\Exception $ex) {
                 $error = $ex->getMessage();
             }
@@ -669,7 +669,8 @@ dump($macAddr);
                     }
                 }
                 //$errlog = '';
-                return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name, 'err'=>$errlog], 422);
+                return response()->json(['errors'=>[$errlog], 'message'=>$errlog,'ado_name' => $ado_name, 'err'=>$errlog], 422);
+                //return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name, 'err'=>$errlog], 422);
             }
         }
         else if($tab==='search') {
