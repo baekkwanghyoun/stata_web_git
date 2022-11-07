@@ -668,8 +668,8 @@ dump($macAddr);
                         $errlog .= $line;
                     }
                 }
-                $errlog = '';
-                return response()->json(['errors'=>['- data가 조회되지 않았습니다1.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name, 'err'=>$errlog], 422);
+                //$errlog = '';
+                return response()->json(['errors'=>['- data가 조회되지 않았습니다.'], 'message'=>'- data가 조회되지 않았습니다.','ado_name' => $ado_name, 'err'=>$errlog], 422);
             }
         }
         else if($tab==='search') {
