@@ -663,7 +663,7 @@ dump($macAddr);
                 while(!feof($content)){
                     $idxLine++;
                     $line = fgets($content);
-                    if($idxLine == 8) {
+                    if($idxLine == 7) {
                         //$line = fgets($content);
                         $errlog .= $line;
                     }
