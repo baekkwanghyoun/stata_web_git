@@ -658,7 +658,8 @@ dump($macAddr);
         if($tab==='create') {
             if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
                 //return response()->json(['name' => '/'.Storage::url("stata/result/${nowDate}/${foldername}/${filename_req}_${filenameAddDate}"), 'status' => 'success','ado_name' => $ado_name,]);
-                return response()->json(['name' => URL::to('/').Storage::url("stata/result/${nowDate}/${foldername}/${filename_req}_${filenameAddDate}"), 'status' => 'success','ado_name' => $ado_name,]);
+                return response()->json(['name' => URL::to('/').Storage::url("stata/result/${nowDate}/${foldername}/${filename_req}_${filenameAddDate}"),
+                    'status' => 'success','ado_name' => $ado_name,]);
             }
             else {
                 $content = fopen(Storage::path("/storage/stata/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
