@@ -4,18 +4,20 @@ KLIPS 변수 추가하기
 2019-11-09: Version 3 (21차 까지 사용)
 최대 3개까지 선택가능하게 만든다. 
 ==============================================*/
-	program define smart_klips_add_a10_v3 , rclass 
+	program define smart_klips_add_a03_v3 , rclass 
 	version 14.0 
 	clear 
 	set more off
-    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) ]  
+	
+// (KIS) "변경" 최대 가능 변수추가 개수 20000개 수정 
+    syntax newvarlist(min=1 max=20000 numeric generate) , [wd(string) website(string)]  
 	qui cd "`wd'" 
 	local NV=wordcount("`varlist'")
 	return scalar NV=`NV'			
-	local v="10"	
+	local v="03"	
 	
 	/*================================================================================*/
-	* addtype: a4
+	* addtype: a3
 	/*================================================================================*/								
 					if "`website'"=="" {
 						use klips`v'a, clear					
@@ -46,14 +48,16 @@ KLIPS 변수 추가하기
 							}	
 							
 						keep pid `hhlist'
-						gen wave=10					
-						capture ren a`v'* a*_`v'th 
+						gen wave=3						
+						* capture ren a`v'* a*_`v'rd
+						
 						* a로 시작하는 모든 변수 
 						qui ds a*, 
 						foreach v2 in `r(varlist)' {
 							local v3: variable label `v2'
 							label variable `v2' "`v'차_`v3'"							
 						}
+						
 						*tempfile klips`v'h_1 
 						*save "`klips`v'h_1'", replace 				
 					
@@ -62,8 +66,7 @@ KLIPS 변수 추가하기
 					  compress
 					  format pid %15.0g
 					  order pid wave 
-					  drop if pid==.
-					  
+					  drop if pid==.					 
 					  save klips_add_a`v', replace				
 
 end 

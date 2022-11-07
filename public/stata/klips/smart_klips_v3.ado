@@ -11,13 +11,17 @@ smart_klips 명령어
 2020-11-06: Web버전을 위한 수정 
 2020-11-09: 22차 까지 업데이트 
 2021-02-01: KLI 요청사항 업데이트 
+2021-07-19: 23차 부가조사 업데이트 
 2021-12-24: 제이슨티지 인찬호 codebook zip 파일처리 변경
+2022-02-17: (KLI)라벨 관련 일부 오류 수정 
+2022-08-27: 라벨오류 수정  
+2022-08-27: 데이터 추출 일시 변수 생성 및 파일명 변경 
 ==============================================*/
 	program define smart_klips_v3, rclass 
 	version 14.0 
 	clear 
 	set more off
-    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) save(string) add_h(string) add_p(string) add_a1(string) add_a2(string) add_a3(string) a1_wave(string) a2_wave(string) a3_wave(string) excel csv stata sas spss] wave(string) 
+    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) save(string) add_h(string) add_p(string) add_a1(string) add_a2(string) add_a3(string) a1_wave(string) a2_wave(string) a3_wave(string) excel csv ] wave(string) 
 	
 	/*================================================================*/
 	* error message displayed 
@@ -472,19 +476,29 @@ smart_klips 명령어
 	
 			}  // case 2 
 			
-			 
+			
+//// (KIS) 라벨 지정 /////////////////////////////////////////////////////////////
+
+/// 2022-08-27: "(추가)" 참조 ///
+
 			capture label var h0141 "현주소(광역시/도)"
 			capture label var h0142 "현주소(시/군/구)" 
 			
 			snapshot save 
 			local snum=r(snapshot)
 			qui ds, has(varlabel "")
-			local m=wordcount("`wave'") 
-			local mm=word("`wave'",`m')
+			*local m=wordcount("`wave'") 
+			*local mm=word("`wave'",`m')
 			
 						foreach v22 in `r(varlist)' {
-							
-							if ustrleft("`v22'",1)=="p" {
+						
+************************** (KIS) (1) 개인용 추가변수***************************** 
+
+						//(KIS) "(추가)" p_orghid98 제거 이유: 모든 차수에 조사된 변수이므로
+							if ustrleft("`v22'",1)=="p" | ustrleft("`v22'",2)=="pa" | "`v22'"=="p_orghid09" | "`v22'"=="p_orghid18" | "`v22'" == "jobclass" | "`v22'" == "jobnum" { 
+							 cap local v33_p "" // (KIS) "(추가)" variable label local을 초기화하고 loop 돌리기
+							 
+							 foreach mm in `wave' {
 								if "`website'"=="" {
 								    qui cd "`wd'"
 									use klips`mm'p, clear
@@ -492,25 +506,50 @@ smart_klips 명령어
 								else if "`website'"~="" {		
 									use `website'/klips`mm'p, clear
 								}
+								
+								// (KIS) (1) p로 시작하는 변수 (p**0101 or p**orghid98, p**orig09, p**orig18)
 												local a1=substr("`v22'",1,1)  
 												local a2=substr("`v22'",2,.)	
-												local ccc=substr("`v22'",1,2)
-												local a3="`a1'"+"`mm'"+"`a2'"	
-														if "`ccc'"=="pa" {
-															local a1=substr("`v22'",1,2)  // 시작이 pa인 경우 
+												local c1=substr("`v22'",1,2) // (KIS) "(추가)" (ccc -> c1변경)pa** 변수를 위한 local 지정: pa5101 -> pa 
+												local c2=substr("`v22'",3,.) // (KIS) "(추가)" p_orghid09, p_orghid18 변수를 위한 local 지정: p_orghid09 -> orghid09 
+												local a3="`a1'"+"`mm'"+"`a2'"
+												
+								// (KIS) (2) pa로 시작하는 변수 (pa*5101)
+														if "`c1'"=="pa" { // (KIS) "(추가)" (ccc -> c1변경)
+															local a1=substr("`v22'",1,2)   
 															local a2=substr("`v22'",3,.)
 															local a3="`a1'"+"`mm'"+"`a2'"
-														}
-												capture {		
-													local v33_p: variable label `a3'
+														}	
+								// (KIS) (3) // (KIS) "(추가)" 차수에 따라 변수명이 변하지 않는 변수(orghid09, orghid18)				
+											else if "`v22'"=="p_orghid09" | "`v22'"=="p_orghid18"  {
+										local a3 = "`c2'"
+										}
+
+								// (KIS) (4) // (KIS) "(추가)" 차수에 따라 변수명이 변하지 않는 변수(jobclass, jobnum)			
+									
+											else if "`v22'" == "jobclass" | "`v22'" == "jobnum" {
+										local a3 = "`v22'"
+										}
+										
+										capture {		
+											local v33_p: variable label `a3'
+												}
 												}
 												snapshot restore `snum'
 												label variable `v22' "`v33_p'"
 												snapshot save 
 												local snum=r(snapshot)
-							}  // p 변수 
+							}  
 							
-							else if ustrleft("`v22'",1)=="h" {
+
+************************** (KIS) (2) 가구용 추가변수***************************** 
+
+						//(KIS) "(추가)" orghid98 제거 이후: 모든 차수에 조사된 변수이므로
+							else if ustrleft("`v22'",1)=="h" | ustrleft("`v22'",2)=="fh" | "`v22'"=="h_orghid09" | "`v22'"=="h_orghid18" {
+							
+							 local v33 "" // (KIS) "(추가)" variable label local을 초기화하고 loop 돌리기
+															
+							 foreach mm in `wave' {
 							    if "`website'"=="" {
 								    qui cd "`wd'"
 									use klips`mm'h, clear
@@ -518,23 +557,52 @@ smart_klips 명령어
 								else if "`website'"~="" {		
 									use `website'/klips`mm'h, clear
 								}
-											local a1=substr("`v22'",1,1)   
-											local a2=substr("`v22'",2,.)								
-											local a3="`a1'"+"`mm'"+"`a2'"								
-											
-											capture {
+								// (KIS) (1) h로 시작하는 변수 (h**0151)
+												local a1=substr("`v22'",1,1)  
+												local a2=substr("`v22'",2,.)	
+												local c1=substr("`v22'",1,2) // (KIS) "(추가)" fh** 변수를 위한 local 지정: fh1511 -> fh
+												local c2=substr("`v22'",3,.) // (KIS) "(추가)" p_hwaveent, h_orghid98, h_orghid09, h_orghid18 라벨 지정 	
+												local a3="`a1'"+"`mm'"+"`a2'"	
+												
+								// (KIS) (2) "(추가)" fh로 시작하는 변수 (fh**1511)
+														if "`c1'"=="fh" {
+															local a1=substr("`v22'",1,2)  
+															local a2=substr("`v22'",3,.)
+															local a3="`a1'"+"`mm'"+"`a2'"
+														}
+														
+								// (KIS) (3) "(추가)" 차수에 따라 변수명이 변하지 않는 변수(orghid09, orghid18)
+											else if "`v22'" == "h_orghid09" | "`v22'" == "h_orghid18" {
+										local a3 = "`c2'"
+										}
+*/
+														
+										capture {
 												local v33: variable label `a3'
+											}
 											}
 											snapshot restore `snum'
 											label variable `v22' "`v33'"
 											snapshot save 
 											local snum=r(snapshot)
+
 							}
+				
 														
-						}	// h 변수 			
-			
-			save klips_final_add , replace 			
-			
+						}	 			
+
+						
+////////////////////////////////////////////////////////////////////////////////
+	
+
+/// (KIS) "(추가)" 날짜변수 생성 ///
+gen extract_date = clock(c(current_date)+c(current_time), "DMYhms") // (KIS)현재 일시 변수 생성 
+format %tcCCYY/NN/DD_HH:MM extract_date // (KIS)형식지정(2022/08/29 14:15) 
+lab var extract_date "데이터추출 일시"
+
+					
+	save klips_final_add , replace 				
+	
 /*=============================================================================*/	
 if "`save'"==""  & "`excel'"=="excel" {
 					export excel using "klips_final_add.xlsx", replace first(variable)	
@@ -543,20 +611,22 @@ if "`save'"==""  &  "`csv'"=="csv" {
 					export delimited using "klips_final_add.csv", replace 
 }
 				
-				
+local date: display %tdYYNNDD date(c(current_date), "DMY")
+local date = subinstr("`date'", "" , "",.)
+
 if "`save'"~=""  {
-		save `save', replace 
+		save `save'_`date', replace 
 		capture erase klips_final_add.dta
 		if "`excel'"=="excel" {
-					export excel using "`save'.xlsx", replace first(variable)	
+					export excel using "`save'_`date'.xlsx", replace first(variable) // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
 		}
 		if "`csv'"=="csv" {
-					export delimited using "`save'.csv", replace 
+					export delimited using "`save'_`date'.csv", replace // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
 		}		
 				
 }
 
-/*==========================================================*/
+/*=============================================================================*/	
 snapshot save 
 local snum300=r(snapshot)
 
@@ -578,26 +648,28 @@ forvalues i=1(1)`nn'  {
 
 keep vname lname
 drop if vname==""
+
   /* ==================================================================================
    * 2021-12-24  제이슨티지 인찬호 codebook zip 파일처리 변경 시작
    * ================================================================================== */
     quietly {
         if "`save'"=="" {
-             export excel using "klips_final_codebook.xlsx", replace first(variable)
+             export excel using "klips_final_codebook.xlsx", replace first(variable) 
              export delimited using "klips_final_var.csv", replace
              unicode convertfile klips_final_var.csv klips_final_codebook.csv, dstencoding(cp949) replace
              capture erase klips_final_var.csv
         }
         if "`save'" ~= "" {
-             export excel using "`save'_codebook.xlsx", replace first(variable)
-             export delimited using "`save'_var.csv", replace
-             unicode convertfile "`save'_var.csv" "`save'_codebook.csv", dstencoding(cp949) replace
-             capture erase "`save'_var.csv"
+             export excel using "`save'_`date'_codebook.xlsx", replace first(variable) // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
+             export delimited using "`save'_`date'_var.csv", replace // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
+             unicode convertfile "`save'_`date'_var.csv" "`save'_`date'_codebook.csv", dstencoding(cp949) replace // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
+             capture erase "`save'_`date'_var.csv" // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
         }
     }
    /* ==================================================================================
    * 2021-12-24  제이슨티지 인찬호 codebook zip 파일처리 변경 종료
    * ================================================================================== */
+   
 snapshot restore `snum300'
 /*=====================================================================*/
 					
@@ -628,17 +700,17 @@ capture	erase klips_add_a23.dta
  *     zip생성 로직은 Web에서는 파일명 입력이 필수이므로 예외로직은 처리하지 않음
  * =============================================================================*/
 if "`save'"~=""  {
-        local flist = "`flist' `save'.dta"
-        local flist = "`flist' `save'.xlsx"
-        local flist = "`flist' `save'.csv"
+        local flist = "`flist' `save'_`date'.dta" // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
+        local flist = "`flist' `save'_`date'.xlsx" // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
+        local flist = "`flist' `save'_`date'.csv" // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
 
-        zipfile `flist' `save'_codebook.xlsx `save'_codebook.csv, saving ("`save'.zip", replace )
+        zipfile `flist' `save'_`date'_codebook.xlsx `save'_`date'_codebook.csv, saving ("`save'_`date'.zip", replace ) // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
         
        	foreach l of local flist {
             capture erase `l'
         }
-        capture	erase  `save'_codebook.xlsx
-        capture	erase  `save'_codebook.csv
+        capture	erase  `save'_`date'_codebook.xlsx // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
+        capture	erase  `save'_`date'_codebook.csv // (KIS) "(추가)" 저장파일명 뒤에 추출일시 붙이기 
 }
 /* =============================================================================
  * 2021-12-24  제이슨티지 인찬호 codebook zip 파일처리 추가 종료

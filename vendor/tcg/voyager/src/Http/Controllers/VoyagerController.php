@@ -30,15 +30,24 @@ class VoyagerController extends Controller
     public function pwchangeUpdate(Request $request)
     {
 
+        $user = \auth()->user();
         $request->validate([
             'new_password' => ['required',
+                function ($attribute, $value, $fail) use ($user) {
+                    if (Hash::check($value, $user->password)) {
+                        $fail('이전비밀번호를 입력하실수 없습니다.');
+                    }
+                },
+
                 Password::min(9)
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
                     //->uncompromised(),
                 ],
-            'new_confirm_password' => ['same:new_password'],
+            'new_confirm_password' => [
+                'same:new_password'
+            ],
         ],
             [
                 'new_password.required' => '비밀번호를 입력하셔야 합니다.',

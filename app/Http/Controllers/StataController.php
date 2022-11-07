@@ -488,11 +488,11 @@ dump($macAddr);
         //$text = "log using \"dd.txt\", text \n";
 //        try {
         if (env('APP_ENV') == 'local') {
-            $text = "cd E:\project\stata_web\public\stata16\klips\n";
-            //$text = "cd C:\project\stata_web\public\stata16\klips\n";
+            $text = "cd E:\project\stata_web\public\stata\klips\n";
+            //$text = "cd C:\project\stata_web\public\stata\klips\n";
         } else {
             $text = "cd C:\www\klips3\storage\app\public\\round\n";
-            //$text = "cd C:\www\klips3\public\stata16\klips\n";
+            //$text = "cd C:\www\klips3\public\stata\klips\n";
         }
 
 
@@ -596,9 +596,9 @@ dump($macAddr);
             $text .= "smart_klips_search_v3, wave( {$waves}) wd() hp(${hp}) word({$word}) ";
         }
 
-        Storage::disk('public')->makeDirectory('stata16/do/'.$nowDate) ;
-        $fo = fopen('../storage/app/public/stata16/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
-        //$fo = fopen('stata16/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
+        Storage::disk('public')->makeDirectory('stata/do/'.$nowDate) ;
+        $fo = fopen('../storage/app/public/stata/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
+        //$fo = fopen('stata/do/'.$nowDate.'/' . $filename_req . ".do", "w+");
         fwrite($fo, $text);
         fclose($fo);
 
@@ -607,23 +607,23 @@ dump($macAddr);
         if (env('APP_ENV') == 'local') {
             //d에 stata프로그램은 있고 . do파일은 프로젝트 안에 있음
             // local에서는 sail때문에 테스트 안됨. 일반 윈도우로 땡겨서 테스트 해야함. 착오방지를 위해 주석..
-            //$output = shell_exec("D:/stata16/Stata16/Stata.exe /q /e do E:/project/stata_web/public/stata16/do/${nowDate}/${filename_req}.do");
+            //$output = shell_exec("D:/stata/Stata/Stata.exe /q /e do E:/project/stata_web/public/stata/do/${nowDate}/${filename_req}.do");
         } else {
-            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/storage/app/public/stata16/do/${nowDate}/${filename_req}.do");
-            //$output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata16/do/${nowDate}/${filename_req}.do");
+            $output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/storage/app/public/stata/do/${nowDate}/${filename_req}.do");
+            //$output = shell_exec("C:/stata/isstata/Stata.exe /q /e do C:/www/klips3/public/stata/do/${nowDate}/${filename_req}.do");
         }
 
         //  여기에서 ./storage는 root에서 윈도우 심볼릭 링크가 걸린 C:\www\klips3\public\storage를 말함
-        Storage::move($filename_req.'.log', './storage/stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+        Storage::move($filename_req.'.log', './storage/stata/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
 
 
 
 
         if(Storage::disk('public')->exists('round/'.$filename_req.'.zip')) {
-        //if(file_exists('stata16/klips/'.$filename_req.'.zip') ) {
+        //if(file_exists('stata/klips/'.$filename_req.'.zip') ) {
             $isSuccess = true;
             try {
-                Storage::disk('public')->move('round/'.$filename_req.'.zip', 'stata16/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.zip');
+                Storage::disk('public')->move('round/'.$filename_req.'.zip', 'stata/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.zip');
             } catch (\Exception $ex) {
                 $error = $ex->getMessage();
             }
@@ -652,11 +652,11 @@ dump($macAddr);
 
         if($tab==='create') {
             if($isSuccess) { // 검색결과가 존재하지 않아서  파일이 생성되지 않으면 .. (step3에서 둘다 동시에 h010221 넣었었을경우에 발생)
-                return response()->json(['name' => URL::to('/').Storage::url("stata16/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
+                return response()->json(['name' => URL::to('/').Storage::url("stata/result/${nowDate}/${foldername}/${filename_req}"), 'status' => 'success','ado_name' => $ado_name,]);
             }
             else {
-                $content = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
-                //$content = fopen(Storage::path("/storage/stata16/log/fd123.log"),'r');
+                $content = fopen(Storage::path("/storage/stata/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
+                //$content = fopen(Storage::path("/storage/stata/log/fd123.log"),'r');
 
                 $idxLine = 0;
                 $errlog = "";
@@ -673,10 +673,10 @@ dump($macAddr);
             }
         }
         else if($tab==='search') {
-            //$fileread = Storage::get('stata16/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
-            //$fileread = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
+            //$fileread = Storage::get('stata/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
+            //$fileread = fopen(Storage::path("/storage/stata/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
 
-            $fileread = fopen(Storage::path("/storage/stata16/log/${nowDate}/${foldername}/klips_final.log"),'r');
+            $fileread = fopen(Storage::path("/storage/stata/log/${nowDate}/${foldername}/klips_final.log"),'r');
             $idxLine = 0;
             $searchlog = "";
             while(!feof($fileread)){
@@ -697,7 +697,7 @@ dump($macAddr);
         //VarDumper::dump($fileread);
 
         //$output = shell_exec(\Storage::disk('public')->get("stata/exe.bat"));
-        //Stata.exe /q /e do stata16/b.do
+        //Stata.exe /q /e do stata/b.do
         /* }catch(\Throwable $e){
              Log::debug($e);
          }*/

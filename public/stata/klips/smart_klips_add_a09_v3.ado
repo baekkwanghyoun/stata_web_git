@@ -8,14 +8,16 @@ KLIPS 변수 추가하기
 	version 14.0 
 	clear 
 	set more off
-    syntax newvarlist(min=1 max=200 numeric generate) , [wd(string) website(string) ]  
+	
+// (KIS) "변경" 최대 가능 변수추가 개수 20000개 수정 
+    syntax newvarlist(min=1 max=20000 numeric generate) , [wd(string) website(string) ]  
 	qui cd "`wd'" 
 	local NV=wordcount("`varlist'")
 	return scalar NV=`NV'			
 	local v="09"	
 	
 	/*================================================================================*/
-	* addtype: a4
+	* addtype: a09
 	/*================================================================================*/								
 					if "`website'"=="" {
 						use klips`v'a, clear					
@@ -47,7 +49,7 @@ KLIPS 변수 추가하기
 							
 						keep pid `hhlist'
 						gen wave=9					
-						capture ren a`v'* a*_`v'th 
+						* capture ren a`v'* a*_`v'th 
 						* a로 시작하는 모든 변수 
 						qui ds a*, 
 						foreach v2 in `r(varlist)' {
