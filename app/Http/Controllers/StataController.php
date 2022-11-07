@@ -622,7 +622,7 @@ dump($macAddr);
         $filenameAddDate = Str::substr($nowDate, 2, 6);
         Log::info(Carbon::now());
         Log::info($filenameAddDate);
-        $filenameAddDate = '221108';
+        //$filenameAddDate = '221108';
         if(Storage::disk('public')->exists('round/'.$filename_req.'_'.$filenameAddDate.'.zip')) {
         //if(file_exists('stata/klips/'.$filename_req.'.zip') ) {
             $isSuccess = true;
