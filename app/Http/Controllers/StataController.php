@@ -620,6 +620,7 @@ dump($macAddr);
 
 
         $filenameAddDate = Str::substr($nowDate, 2, 6);
+        Log::info($nowDate);
         Log::info($filenameAddDate);
         $filenameAddDate = '221108';
         if(Storage::disk('public')->exists('round/'.$filename_req.'_'.$filenameAddDate.'.zip')) {
