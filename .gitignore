@@ -13,5 +13,9 @@ npm-debug.log
 yarn-error.log
 *.dta
 .idea
-
+/public/stata/do
+/public/stata/log
+/public/stata/result
+/public/stata/
+/public/stata/klips/
 
