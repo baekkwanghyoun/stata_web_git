@@ -721,7 +721,7 @@ dump($macAddr);
         $add_h = '';
         foreach ($ar_add_h as $item) {
             ///////////////////////////////////////////////////
-            // h010150 : 7자리수에 2,3번째 글자가 숫자일경우 체크
+            // h010150 : 7자리수에 2,3번째 글자가 숫자일경우 체크 !!
             if (strlen($item) == 7 && is_numeric(substr($item, 1,2)) ) {
                 $add_h = $add_h.' '.substr($item, 0,1).substr($item, 3,strlen($item)).' ';
             }
