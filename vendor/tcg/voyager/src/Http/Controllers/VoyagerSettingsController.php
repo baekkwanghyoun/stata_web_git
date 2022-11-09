@@ -111,7 +111,7 @@ class VoyagerSettingsController extends Controller
         $request->merge(['order' => $order]);
         $request->merge(['value' => request('value')??'']);
         $request->merge(['key' => $key]);
-        $request->merge(['isUse' => request('isUse')??0]);
+        //$request->merge(['isUse' => request('isUse')??0]);
 
         Voyager::model('Setting')->create($request->except('setting_tab'));
 
@@ -158,6 +158,7 @@ class VoyagerSettingsController extends Controller
 
             //siilver
             $setting->display_name = $request->input(str_replace('.', '_', $setting->key).'_desc')??'-';
+            $setting->isUse = $request->input(str_replace('.', '_', $setting->key).'_isUse')??'1';
 
             $setting->save();
         }

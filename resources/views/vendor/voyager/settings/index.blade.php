@@ -265,6 +265,7 @@
                         {{--사용여부--}}
                         <div class="col-md-1" style="margin-bottom: 14px">
                             <label for="group">사용여부</label>
+
                             <select class="form-control group_select " name="isUse" >
                                 <option value="1"> 사용</option>
                                 <option value="0"> 미사용 </option>
@@ -456,9 +457,9 @@
 
                                 {{--사용여부--}}
                                 <div class="col-md-1" style="margin-bottom: 14px">
-                                    <select class="form-control group_select " name="isUse" >
-                                        <option value="1"> 사용</option>
-                                        <option value="0"> 미사용 </option>
+                                    <select class="form-control group_select " name="{{ $setting->key.'_isUse' }}" >
+                                        <option value="1" @if($setting->isUse == 1) selected @endif> 사용</option>
+                                        <option value="0" @if($setting->isUse == 0) selected @endif > 미사용 </option>
                                     </select>
                                 </div>
 

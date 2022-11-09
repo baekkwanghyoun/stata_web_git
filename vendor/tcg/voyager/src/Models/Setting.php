@@ -11,7 +11,7 @@ class Setting extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['key', 'type', 'display_name', 'value', 'group', 'order'];
+    protected $fillable = ['key', 'type', 'display_name', 'value', 'group', 'order','isUse'];
 
 
     protected $table = 'settings';
@@ -28,7 +28,7 @@ class Setting extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['display_name', 'value', 'group', 'order'])
+            ->logOnly(['display_name', 'value', 'group', 'order', 'isUse'])
             ->logOnlyDirty();
         // Chain fluent methods for configuration options
     }
