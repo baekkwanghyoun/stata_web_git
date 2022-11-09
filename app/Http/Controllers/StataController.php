@@ -504,12 +504,23 @@ dump($macAddr);
         //$filename = 'klips_final_' .$foldername;
         $filename_req = request('filename','download_klips' );
 
+        // kt_select2_3, kt_select2_4, add_h, add_p
         $households = implode(" ", is_array(request('kt_select2_3')) ? request('kt_select2_3') : array(request('kt_select2_3')));
         $persons = implode(" ", is_array(request('kt_select2_4')) ? request('kt_select2_4') : array(request('kt_select2_4')));
         $waves = implode(" ", is_array(request('kt_select2_5')) ? request('kt_select2_5') : array(request('kt_select2_5')));
         //$text .= "smart_klips ${households} {$persons} , wave( {$waves}) wd( ) website( ) save( )";
         $hp = request('hp');
         $word = request('word');
+
+        $len_kt_select2_3 = count(request('kt_select2_3'));
+        $len_kt_select2_4 = count(request('kt_select2_4'));
+        $len_add_h = request('add_h')?count(explode(' ', request('add_h'))):0;
+        $len_add_p = request('add_p')?count(explode(' ', request('add_p'))):0;
+        $totLen = $len_kt_select2_3 + $len_kt_select2_4 + $len_add_h + $len_add_p;
+        if($totLen >= 5) {
+            $msg  = '가구용 가공변수 + 개인용 가공변수 + 원자료변수(가구용 + 개인용)를  200개이상 선택하실수 없습니다.';
+            return response()->json(['errors'=>[$msg], 'message'=>$msg], 422);
+        }
 
         /*체크박스일경우*/
         $arFile = request('filesave')??[];
