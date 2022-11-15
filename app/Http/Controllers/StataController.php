@@ -517,7 +517,7 @@ dump($macAddr);
         $len_add_h = request('add_h')?count(explode(' ', request('add_h'))):0;
         $len_add_p = request('add_p')?count(explode(' ', request('add_p'))):0;
         $totLen = $len_kt_select2_3 + $len_kt_select2_4 + $len_add_h + $len_add_p;
-        if($totLen >= 5) {
+        if($totLen > 200) {
             $msg  = '가구용 가공변수 + 개인용 가공변수 + 원자료변수(가구용 + 개인용)를  200개이상 선택하실수 없습니다.';
             return response()->json(['errors'=>[$msg], 'message'=>$msg], 422);
         }
