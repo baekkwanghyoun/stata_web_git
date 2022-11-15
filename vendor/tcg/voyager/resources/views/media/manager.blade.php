@@ -109,7 +109,7 @@
                         <li v-for="(file) in files" v-on:click="selectFile(file, $event)" v-on:dblclick="openFile(file)"
                             v-if="filter(file)">
                             <div :class="'file_link ' + (isFileSelected(file) ? 'selected' : '')">
-                                <div class="link_icon">
+                                {{--<div class="link_icon">
                                     <template v-if="fileIs(file, 'image')">
                                         <div class="img_icon" :style="imgIcon(file.path)"></div>
                                     </template>
@@ -128,10 +128,10 @@
                                     <template v-else>
                                         <i class="icon voyager-file-text"></i>
                                     </template>
-                                </div>
+                                </div>--}}
                                 <div class="details">
                                     <div :class="file.type">
-                                        <h4>@{{ file.name }}</h4>
+                                        <h4 style="text-align: center">@{{ file.name }}</h4>
                                         <small v-if="!fileIs(file, 'folder')">
                                             <span class="file_size">@{{ bytesToSize(file.size) }}</span>
                                         </small>
