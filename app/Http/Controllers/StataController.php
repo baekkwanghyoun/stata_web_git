@@ -512,8 +512,8 @@ dump($macAddr);
         $hp = request('hp');
         $word = request('word');
 
-        $len_kt_select2_3 = count(request('kt_select2_3'));
-        $len_kt_select2_4 = count(request('kt_select2_4'));
+        $len_kt_select2_3 = count(request('kt_select2_3')??[]);
+        $len_kt_select2_4 = count(request('kt_select2_4')??[]);
         $len_add_h = request('add_h')?count(explode(' ', request('add_h'))):0;
         $len_add_p = request('add_p')?count(explode(' ', request('add_p'))):0;
         $totLen = $len_kt_select2_3 + $len_kt_select2_4 + $len_add_h + $len_add_p;
