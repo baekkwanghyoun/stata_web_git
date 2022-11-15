@@ -695,7 +695,7 @@ dump($macAddr);
             //$fileread = Storage::get('stata/log/'.$nowDate.'/'.$foldername.'/'.$filename_req.'.log');
             //$fileread = fopen(Storage::path("/storage/stata/log/${nowDate}/${foldername}/${filename_req}.log"),'r');
 
-            $fileread = fopen(Storage::path("/storage/stata/log/${nowDate}/${foldername}/klips_final.log"),'r');
+            $fileread = fopen(Storage::path("/storage/stata/log/${nowDate}/${foldername}/download_klips.log"),'r');
             $idxLine = 0;
             $searchlog = "";
             while(!feof($fileread)){
