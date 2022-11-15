@@ -80,4 +80,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/stat/visit', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
     Route::get('/stat/browser', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.browser');
     Route::get('/stat/os', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
+
+    Route::get('/analysis/{type}', [\App\Http\Controllers\AnalysisController::class, 'index'])->name('stat.analysis');
 });
