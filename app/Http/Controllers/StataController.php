@@ -441,7 +441,7 @@ dump($macAddr);
     public function index2()
     {
         $isSuccess = false;
-        return view('stata.index2', compact('isSuccess'));
+     //   return view('stata.index2', compact('isSuccess'));
     }
 
     public function create()
