@@ -455,6 +455,10 @@ dump($macAddr);
     {
 
         visitor()->visit();
+
+        $ac = new AnalysisController();
+        $ac->store();
+
         $tab = request('tab');
 
         if($tab=='create') {

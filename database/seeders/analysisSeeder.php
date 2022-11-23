@@ -83,7 +83,7 @@ class analysisSeeder extends Seeder
 
             /* 두번째 탭 */
 
-            // 원자료 변수 검새 차수
+            // 원자료 변수 검색 차수
             Analysis::create([
                 'type'=> fake()->randomElement(['s_wave']),
                 'value'=>fake()->numberBetween(1, 23),
@@ -93,7 +93,7 @@ class analysisSeeder extends Seeder
             // 가구용 변수 타입
             Analysis::create([
                 'type'=> fake()->randomElement(['s_type']),
-                'value'=>fake()->numberBetween('h', 'p'),
+                'value'=>fake()->randomElement(['h', 'p']),
                 'created_at'=>fake()->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
             ]);
 
@@ -104,7 +104,12 @@ class analysisSeeder extends Seeder
                 'created_at'=>fake()->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
             ]);
 
-
+            // step2
+            Analysis::create([
+                'type'=> fake()->randomElement(['step2']),
+                'value'=>fake()->randomElement(['h', 'p', 'src', 'src_a']), //  가구용, 개인용, 원자료 변수추가, 원자료 부가조사
+                'created_at'=>fake()->dateTimeBetween($startDate = '-1 years', $endDate = 'now')
+            ]);
 
         }
 

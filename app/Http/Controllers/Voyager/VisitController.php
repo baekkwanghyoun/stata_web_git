@@ -230,7 +230,6 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
             'ended_atC',
             'chartjs',
             'type',
-
         ));
     }
 }
