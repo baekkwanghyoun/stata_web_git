@@ -42,7 +42,7 @@ class AnalysisController extends Controller
 
 
 
-        dump(request()->all());
+        //dump(request()->all());
     }
 
     public function index($type)
