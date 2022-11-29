@@ -456,6 +456,7 @@ dump($macAddr);
 
         visitor()->visit();
 
+        // 추후 validation 후로 위치 변경해야함
         $ac = new AnalysisController();
         $ac->store();
 
