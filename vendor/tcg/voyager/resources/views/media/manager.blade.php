@@ -201,6 +201,17 @@
                                        @keydown.enter.prevent="renameFile">
                                 <p v-else>@{{ selected_file.name }}</p>
                             </span>
+
+                                <span style="margin-top: 20px">
+                                    <h4>파일용량:</h4>
+                                    <p><span
+                                            class="selected_file_size">@{{ bytesToSize(selected_file.size) }}</span></p>
+                                </span>
+
+                                <span>
+                                    <h4>다운로드:</h4>
+                                    <p><a :href="selected_file.path" target="_blank">{{ __('voyager::generic.click_here') }}</a></p>
+                                </span>
                                 {{--                            <span>
                                                                 <h4>{{ __('voyager::media.type') }}:</h4>
                                                                 <p>@{{ selected_file.type }}</p>
@@ -224,15 +235,15 @@
                                 </template>
 
                                 <span v-if="fileIs(selected_file, 'image') && selected_file.thumbnails.length > 0">
-                                <h4>Thumbnails</h4><br>
-                                <ul>
-                                    <li v-for="thumbnail in selected_file.thumbnails">
-                                        <a :href="thumbnail.path" target="_blank">
-                                            @{{ thumbnail.thumb_name }}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </span>
+                                    <h4>Thumbnails</h4><br>
+                                    <ul>
+                                        <li v-for="thumbnail in selected_file.thumbnails">
+                                            <a :href="thumbnail.path" target="_blank">
+                                                @{{ thumbnail.thumb_name }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </span>
                             </div>
                         </div>
                         <div v-else class="right_none_selected">

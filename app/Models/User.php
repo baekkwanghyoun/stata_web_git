@@ -6,10 +6,17 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends \TCG\Voyager\Models\User
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LogsActivity    ;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logOnly(['role_id', 'name', 'email' ])->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.

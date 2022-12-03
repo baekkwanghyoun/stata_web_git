@@ -30,6 +30,8 @@ class VoyagerUserController extends VoyagerBaseController
     {
 
         $request->validate([
+            'name' => 'required|max:10',
+            'email' => 'required|email|unique:users',
             'password' => ['required',
 
                 Password::min(9)
@@ -43,6 +45,9 @@ class VoyagerUserController extends VoyagerBaseController
             ],
         ],
             [
+                'name.required' => '이름을 입력하셔야 합니다.',
+                'email.required' => '이메일을 입력하셔야 합니다.',
+                'email.unique' => '이미 등록된 이메일입니다.',
                 'password.required' => '비밀번호를 입력하셔야 합니다.',
                 'password.min' => '비밀번호는 9자 이상이어야 합니다.',
                 'password.validation.password.symbols' => '비밀번호는 대문자, 소문자가 포함되어야 합니다.',
@@ -80,25 +85,38 @@ class VoyagerUserController extends VoyagerBaseController
     // POST BR(E)AD
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'password' => ['required',
 
-                Password::min(9)
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-                //->uncompromised(),
+        if(request('password')) {
+            $request->validate([
+                'password' => ['required',
+                    Password::min(9)
+                        ->mixedCase()
+                        ->numbers()
+                        ->symbols()
+                    //->uncompromised(),
+                ],
+                'new_confirm_password' => [
+                    'same:new_password'
+                ],
             ],
-            'new_confirm_password' => [
-                'same:new_password'
+                [
+                    'password.required' => '비밀번호를 입력하셔야 합니다.',
+                    'password.min' => '비밀번호는 9자 이상이어야 합니다.',
+                    'password.validation.password.symbols' => '비밀번호는 대문자, 소문자가 포함되어야 합니다.',
+                ]
+            );
+        }
+        else {
+            $request->validate([
+                'name' => 'required|max:10',
+                'email' => 'required|email',
             ],
-        ],
-            [
-                'password.required' => '비밀번호를 입력하셔야 합니다.',
-                'password.min' => '비밀번호는 9자 이상이어야 합니다.',
-                'password.validation.password.symbols' => '비밀번호는 대문자, 소문자가 포함되어야 합니다.',
-            ]
-        );
+                [
+                    'name.required' => '이름을 입력하셔야 합니다.',
+                    'email.required' => '이메일을 입력하셔야 합니다.',
+                ]
+            );
+        }
 
         if (Auth::user()->getKey() == $id) {
             $request->merge([
