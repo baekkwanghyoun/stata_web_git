@@ -27,10 +27,10 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 
-
+/*
 Route::get('/phpinfo', function () {
     return  phpinfo();;
-});
+});*/
 
 Route::get('/gatest', [StataController::class, 'gatest'])->name('quasar.index');
 Route::get('/getmac', [StataController::class, 'getmacAddr'])->name('getmacAddr');

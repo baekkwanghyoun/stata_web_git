@@ -15,6 +15,7 @@ class AnalysisController extends Controller
 
     public function store()
     {
+        $step2Arr = [];
         $tab = request('tab');
         if($tab=='create') {
             /////////////////////////////////////
@@ -114,7 +115,10 @@ class AnalysisController extends Controller
 
             /////////////////////////////////////
             // step2 추이초사
-            Analysis::insert($step2Arr);
+            if(count($step2Arr) > 0) {
+                Analysis::insert($step2Arr);
+            }
+
         }
 
 
