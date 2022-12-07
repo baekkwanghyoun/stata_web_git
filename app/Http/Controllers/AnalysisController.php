@@ -181,7 +181,7 @@ class AnalysisController extends Controller
 
         $r = $this->chgValueToLb($type, $r);
 
-        /* 원 */
+        /* 원차트 */
         if(in_array($type, ['file', 'step2','s_type'])) {
             $chartjs = app()->chartjs
                 ->name('lineChartTest')

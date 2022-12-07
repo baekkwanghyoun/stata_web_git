@@ -115,6 +115,12 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
         /* make chart for type */
         /*@@@@@@@@@@@@@@@@@@@@@*/
         if($type=='visit') {
+
+            $excel = $trend->map(function ($t) {
+                return collect($t)->only(['date', 'aggregate']);
+            });
+
+
             $chartjs = app()->chartjs
                 ->name('lineChartTest')
                 ->type('bar')
@@ -136,6 +142,11 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
                 ->options(['responsive',true]);
         }
         else if($type=='browser') {
+
+            $excel = $trend->map(function ($t) {
+                return collect($t)->only(['date', 'firefox', 'mozilla', 'edge', 'chrome']);
+            });
+
             $chartjs = app()->chartjs
                 ->name('lineChartTest')
                 ->type('line')
@@ -177,6 +188,13 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
                 );
         }
         else if($type=='os') {
+
+            $a  = $trend->map(fn (TrendValue $value) => $value->date);
+
+            $excel = $trend->map(function ($t) {
+                return collect($t)->only(['date', 'windows', 'ios', 'phone']);
+            });
+
             $chartjs = app()->chartjs
                 ->name('lineChartTest')
                 ->type('line')
@@ -225,11 +243,64 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
             $view = "voyager::Visit.browse";
         }*/
 
-        return view('voyager::shetabit-visits.browse', compact(
-            'started_atC',
-            'ended_atC',
-            'chartjs',
-            'type',
-        ));
+        if ($request->get('type') === 'csv') {
+            $now = (new \Carbon\Carbon())->format("ymd");
+            $filename = "campaigns_{$now}.csv";
+
+            return response()->stream(function () use($filename, $excel, $type) {
+                $handle = fopen('php://output', 'w+');
+                //fputs( $handle, "\xEF\xBB\xBF");
+
+                //fwrite($handle, "\xEF\xBB\xBF");
+                //fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF));
+                // fputs($handle, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
+                //fputs($handle, chr(0xEF) . chr(0xBB) . chr(0xBF) );
+                //fputs("\xEF\xBB\xBF",$handle);
+/*
+                $keys = $excel->first()->keys();
+                foreach ($keys as $k) {
+                    $ar[] = $k;
+                }*/
+
+                foreach ($excel as $e) {
+                    if($type=='visit') {
+                        fputcsv($handle, [$this->ic('날짜'),$this->ic('합계')]);
+                        fputcsv($handle, [$e['date'], $e['aggregate']]);
+                    } else if($type=='browser') {
+                        fputcsv($handle, [$this->ic('날짜'), 'firefox', 'mozilla', 'edge', 'chrome']);
+                        fputcsv($handle, [$e['date'], $e['firefox'], $e['mozilla'], $e['edge'],$e['chrome']]);
+                    } else if($type=='os') {
+                        fputcsv($handle, [$this->ic('날짜'), 'windows', 'ios', 'phone']);
+                        fputcsv($handle, [$e['date'], $e['windows'], $e['ios'], $e['phone']]);
+                    }
+
+                }
+
+                fclose($handle);
+            }, 200, [
+                'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+                'Content-type'        => 'text/csv',
+                'Content-Disposition' => "attachment; filename={$filename}",
+                'Expires'             => '0',
+                'Pragma'              => 'public',
+            ]);
+        }
+        else {
+            return view('voyager::shetabit-visits.browse', compact(
+                'started_atC',
+                'ended_atC',
+                'chartjs',
+                'type',
+            ));
+        }
+    }
+
+    function ic($v) {
+        try {
+            //$v = str_replace('샾','#', $v);
+            return iconv("UTF-8","EUC-KR",$v);
+        } catch (\Exception $e) {
+            return '--';
+        }
     }
 }
