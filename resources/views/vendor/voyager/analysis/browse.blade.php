@@ -41,7 +41,8 @@
 
                     </div>
 
-                    <form method="get" class="form-search">
+                    <form method="post" class="form-search">
+                        @csrf
                         <input type="hidden" name="dv" value="{{request('dv')}}">
                         <div class="col-lg-6"  style="margin-top: 4px; display: flex; justify-content: end">
                             <div class="" style="padding-top: 5px; margin-right: 6px">시작일</div>

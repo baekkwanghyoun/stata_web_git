@@ -44,7 +44,8 @@
                 <div class="panel panel-bordered">
                     <div class="panel-body">
                         @if ($isServerSide)
-                            <form method="get" class="form-search">
+                            <form method="post" class="form-search">
+                                @csrf
                                 <div id="search-input">
                                     <div class="col-2">
                                         <select id="search_key" name="key">

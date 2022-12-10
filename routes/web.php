@@ -73,13 +73,15 @@ Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
     Route::get('/auth/pwchange', [\TCG\Voyager\Http\Controllers\VoyagerController::class, 'pwchange'])->middleware('admin.user')->name('voyager.pwchange');
     Route::post('/auth/pwchangeupdate', [\TCG\Voyager\Http\Controllers\VoyagerController::class, 'pwchangeUpdate'])->name('voyager.pwchange.update');
 
-    Route::get('/stat/savefiletype', [\App\Http\Controllers\StatsController::class, 'savefiletype'])->name('stat.savefiletype');
-    Route::get('/stat/visit', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
-    Route::get('/stat/browser', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.browser');
-    Route::get('/stat/os', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
 
-    Route::get('/analysis/{type}', [\App\Http\Controllers\AnalysisController::class, 'index'])->name('stat.analysis');
+    Route::any('/stat/savefiletype', [\App\Http\Controllers\StatsController::class, 'savefiletype'])->name('stat.savefiletype');
+    Route::any('/stat/visit', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
+    Route::any('/stat/browser', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.browser');
+    Route::any('/stat/os', [\App\Http\Controllers\Voyager\VisitController::class, 'index'])->name('stat.visit');
+
+    Route::any('/analysis/{type}', [\App\Http\Controllers\AnalysisController::class, 'index'])->name('stat.analysis');
 });

@@ -210,7 +210,7 @@
 
                                 <span>
                                     <h4>다운로드:</h4>
-                                    <p><a :href="selected_file.path" target="_blank">{{ __('voyager::generic.click_here') }}</a></p>
+                                    <p><a :href="selected_file.path" target="_blank" download="filename">{{ __('voyager::generic.click_here') }}</a></p>
                                 </span>
                                 {{--                            <span>
                                                                 <h4>{{ __('voyager::media.type') }}:</h4>
