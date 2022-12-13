@@ -107,10 +107,12 @@
                             </a>
 
                             <input type="hidden" name="dv" value="{{request('dv')}}">
+{{--
 
                             <a id="excel" title="다운로드" class="btn btn-sm btn-warning pull-right edit">
                                 <i class="voyager-book-download"></i> <span class="hidden-xs hidden-sm">다운로드</span>
                             </a>
+--}}
 
 
                         </div>

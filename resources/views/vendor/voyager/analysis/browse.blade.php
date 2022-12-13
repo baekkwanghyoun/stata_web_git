@@ -70,10 +70,10 @@
                             <a href="{{url()->current()}}"  class="btn btn-sm btn-info pull-right edit">
                                 <i class="voyager-cancel"></i> <span class="">초기화</span> {{--hidden-xs hidden-sm--}}
                             </a>
-
+{{--
                             <a id="excel" title="다운로드" class="btn btn-sm btn-warning pull-right edit">
                                 <i class="voyager-book-download"></i> <span class="hidden-xs hidden-sm">다운로드</span>
-                            </a>
+                            </a>--}}
                         </div>
                     </form>
                 </div>
