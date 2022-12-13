@@ -37,11 +37,11 @@
             <div class="panel-body">
 
                 <div class="row align-items-center">
-                    <div class="col-lg-4 col-sm-12"  >
+                    <div class="col-lg-3 col-sm-12"  >
 
                     </div>
 
-                    <form method="post" class="form-search">
+                    <form id="frm" name="frm" method="post" class="form-search">
                         @csrf
                         <input type="hidden" name="dv" value="{{request('dv')}}">
                         <div class="col-lg-6"  style="margin-top: 4px; display: flex; justify-content: end">
@@ -62,13 +62,17 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-2 align-items-start" style="display: flex; justify-content: end" >
+                        <div class="col-lg-3 align-items-start" style="display: flex; justify-content: end" >
                             <button title="검색" class="btn btn-sm btn-primary pull-right edit">
                                 <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">검색</span>
                             </button>
 
                             <a href="{{url()->current()}}"  class="btn btn-sm btn-info pull-right edit">
                                 <i class="voyager-cancel"></i> <span class="">초기화</span> {{--hidden-xs hidden-sm--}}
+                            </a>
+
+                            <a id="excel" title="다운로드" class="btn btn-sm btn-warning pull-right edit">
+                                <i class="voyager-book-download"></i> <span class="hidden-xs hidden-sm">다운로드</span>
                             </a>
                         </div>
                     </form>
@@ -98,6 +102,18 @@
 
     <script>
         $(document).ready(function () {
+            $('#excel').click(function() {
+                $("<input>").attr({
+                    name: "type",
+                    id: "type",
+                    type: "hidden",
+                    value: 'csv'
+                }).appendTo("#frm");
+                $( "#frm" ).submit();
+
+                $("#type").remove();//사용후 삭제
+            });
+
             $(".datepicker_silver").datetimepicker({
                 format: 'yyyy-MM-DD'
             });

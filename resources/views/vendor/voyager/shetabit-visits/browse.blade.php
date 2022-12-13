@@ -57,7 +57,7 @@
             <div class="panel-body">
 
                 <div class="row align-items-center">
-                    <div class="col-lg-4"  >
+                    <div class="col-lg-3"  >
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-primary @if(request('dv', 'month')=='month') active @endif "
                                    onclick="javascript:window.location.href='{{url()->current().'?dv=month&started_at='.request("started_at").'&ended_at='.request("ended_at")}}'; ">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    <form method="post" class="form-search">
+                    <form id="frm" name="frm" method="post" class="form-search">
                         @csrf
                         <input type="hidden" name="dv" value="{{request('dv')}}">
 
@@ -97,14 +97,22 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-2 col-sm-4 align-items-start" style="display: flex; justify-content: end" >
+                        <div class="col-lg-3 col-sm-4 align-items-start" style="display: flex; justify-content: end" >
                             <button title="검색" class="btn btn-sm btn-primary pull-right edit">
                                 <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">검색</span>
                             </button>
 
                             <a href="{{url()->current()}}"  class="btn btn-sm btn-info pull-right edit">
-                                <i class="voyager-cancel"></i> <span class="hidden-xs hidden-sm">초기화</span>
+                                <i class="voyager-x"></i> <span class="hidden-xs hidden-sm">초기화</span>
                             </a>
+
+                            <input type="hidden" name="dv" value="{{request('dv')}}">
+
+                            <a id="excel" title="다운로드" class="btn btn-sm btn-warning pull-right edit">
+                                <i class="voyager-book-download"></i> <span class="hidden-xs hidden-sm">다운로드</span>
+                            </a>
+
+
                         </div>
                     </form>
                 </div>
@@ -133,6 +141,18 @@
 
     <script>
         $(document).ready(function () {
+            $('#excel').click(function() {
+                $("<input>").attr({
+                    name: "type",
+                    id: "type",
+                    type: "hidden",
+                    value: 'csv'
+                }).appendTo("#frm");
+                $( "#frm" ).submit();
+
+                $("#type").remove();//사용후 삭제
+            });
+
             $(".datepicker_silver").datetimepicker({
                 format: 'yyyy-MM-DD'
             });

@@ -245,37 +245,32 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
 
         if ($request->get('type') === 'csv') {
             $now = (new \Carbon\Carbon())->format("ymd");
-            $filename = "campaigns_{$now}.csv";
+            $filename = "visit_{$now}.csv";
 
             return response()->stream(function () use($filename, $excel, $type) {
                 $handle = fopen('php://output', 'w+');
-                //fputs( $handle, "\xEF\xBB\xBF");
 
-                //fwrite($handle, "\xEF\xBB\xBF");
-                //fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF));
-                // fputs($handle, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
-                //fputs($handle, chr(0xEF) . chr(0xBB) . chr(0xBF) );
-                //fputs("\xEF\xBB\xBF",$handle);
-/*
-                $keys = $excel->first()->keys();
-                foreach ($keys as $k) {
-                    $ar[] = $k;
-                }*/
+                fputcsv($handle, [$this->ic('검색기간'), ]);
+                fputcsv($handle, [$this->ic('시작일'), request('started_at'), $this->ic('종료일'), request('ended_at')]);
+                fputcsv($handle, []);
+
+                if($type=='visit') {
+                    fputcsv($handle, [$this->ic('날짜'),$this->ic('합계')]);
+                } else if($type=='browser') {
+                    fputcsv($handle, [$this->ic('날짜'), 'firefox', 'mozilla', 'edge', 'chrome']);
+                } else if($type=='os') {
+                    fputcsv($handle, [$this->ic('날짜'), 'windows', 'ios', 'phone']);
+                }
 
                 foreach ($excel as $e) {
                     if($type=='visit') {
-                        fputcsv($handle, [$this->ic('날짜'),$this->ic('합계')]);
                         fputcsv($handle, [$e['date'], $e['aggregate']]);
                     } else if($type=='browser') {
-                        fputcsv($handle, [$this->ic('날짜'), 'firefox', 'mozilla', 'edge', 'chrome']);
                         fputcsv($handle, [$e['date'], $e['firefox'], $e['mozilla'], $e['edge'],$e['chrome']]);
                     } else if($type=='os') {
-                        fputcsv($handle, [$this->ic('날짜'), 'windows', 'ios', 'phone']);
                         fputcsv($handle, [$e['date'], $e['windows'], $e['ios'], $e['phone']]);
                     }
-
                 }
-
                 fclose($handle);
             }, 200, [
                 'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',

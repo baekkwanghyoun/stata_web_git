@@ -3,6 +3,7 @@
   <component name="LaravelIdeaPersonalSettings">
     <option name="generationStringOptionValues">
       <map>
+        <entry key="createConsoleCommand.register" value="1" />
         <entry key="createDatabaseMigration.create" value="" />
         <entry key="createDatabaseMigration.omitDown" value="1" />
       </map>

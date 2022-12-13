@@ -226,12 +226,80 @@ class AnalysisController extends Controller
                     }
                  }");
         }
-        return view('voyager::analysis.browse', compact(
-            'started_atC',
-            'ended_atC',
-            'chartjs',
-            'type',
-        ));
+
+        if (request('type') === 'csv') {
+            $now = (new \Carbon\Carbon())->format("ymd");
+            $filename = "analysis_{$now}.csv";
+
+            return response()->stream(function () use($filename, $r, $type) {
+                $handle = fopen('php://output', 'w+');
+
+                fputcsv($handle, [$this->ic('검색기간'), ]);
+                fputcsv($handle, [$this->ic('시작일'), request('started_at'), $this->ic('종료일'), request('ended_at')]);
+                fputcsv($handle, []);
+
+                if($type=='wave') {
+                    fputcsv($handle, [$this->ic('차수'),$this->ic('합계')]);
+                }
+                else if($type=='h') {
+                    fputcsv($handle, [$this->ic('가구용 가공변수'),$this->ic('합계')]);
+                }
+                else if($type=='p') {
+                    fputcsv($handle, [$this->ic('개인용 가공변수'),$this->ic('합계')]);
+                }
+                else if($type=='h_src') {
+                    fputcsv($handle, [$this->ic('변수추가 가구용'),$this->ic('합계')]);
+                }
+                else if($type=='p_src') {
+                    fputcsv($handle, [$this->ic('변수추가 개인용'),$this->ic('합계')]);
+                }
+                else if($type=='wave_a') {
+                    fputcsv($handle, [$this->ic('차수'),$this->ic('합계')]);
+                }
+                else if($type=='var_a') {
+                    fputcsv($handle, [$this->ic('부가조사 변수추가'),$this->ic('합계')]);
+                }
+
+                else if($type=='file') {
+                    fputcsv($handle, [$this->ic('저장파일타입'),$this->ic('합계')]);
+                }
+                else if($type=='s_wave') {
+                    fputcsv($handle, [$this->ic('차수'),$this->ic('합계')]);
+                }
+                else if($type=='s_type') {
+                    fputcsv($handle, [$this->ic('변수검색 타입'),$this->ic('합계')]);
+                }
+                else if($type=='s_word') {
+                    fputcsv($handle, [$this->ic('변수검색 단어'),$this->ic('합계')]);
+                }
+                else if($type=='step2') {
+                    fputcsv($handle, [$this->ic('변수추가/선택분석'),$this->ic('합계')]);
+                }
+
+
+
+                foreach ($r as $e) {
+                    fputcsv($handle, [$this->ic($e['value']), $e['cnt']]);
+                }
+
+
+                fclose($handle);
+            }, 200, [
+                'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+                'Content-type'        => 'text/csv',
+                'Content-Disposition' => "attachment; filename={$filename}",
+                'Expires'             => '0',
+                'Pragma'              => 'public',
+            ]);
+        }
+        else {
+            return view('voyager::analysis.browse', compact(
+                'started_atC',
+                'ended_atC',
+                'chartjs',
+                'type',
+            ));
+        }
 
 //        dump($r);
     }
@@ -367,5 +435,14 @@ export const CHART_COLORS = {
             $query .= " count(case when value = '${v}' then 1 end) as '${v}', ";
         }
         return $query;
+    }
+
+    function ic($v) {
+        try {
+            //$v = str_replace('샾','#', $v);
+            return iconv("UTF-8","EUC-KR",$v);
+        } catch (\Exception $e) {
+            return '--';
+        }
     }
 }
