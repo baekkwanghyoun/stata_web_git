@@ -2,6 +2,8 @@
 
 namespace TCG\Voyager\Http\Controllers;
 
+use App\Models\Faq;
+use App\Models\Howto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +20,10 @@ class VoyagerController extends Controller
 {
     public function index()
     {
-        return Voyager::view('voyager::index');
+        //siilver
+        $howtos = Howto::select('id', 'title','created_at')->limit(5)->latest()->get();
+        $faqs = Faq::select('id', 'title', 'created_at')->limit(5)->latest()->get();
+        return Voyager::view('voyager::index', compact('howtos', 'faqs'));
     }
 
 

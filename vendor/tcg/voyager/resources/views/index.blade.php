@@ -4,6 +4,58 @@
     <div class="page-content">
         @include('voyager::alerts')
         @include('voyager::dimmers')
+
+        {{--siilver--}}
+        <div class="Dashboard Dashboard--full" id="dashboard1">
+
+            <ul class="FlexGrid FlexGrid--halves">
+                <li class="FlexGrid-item">
+                    <div class="Chartjs">
+                        <header class="Titles">
+                            <h1 class="Titles-main">사용법 및 주의사항</h1>
+                            <div class="Titles-sub"></div>
+                        </header>
+                        <table id="" class="table table-hover dataTable no-footer" role="grid" aria-describedby="dataTable_info">
+                            <tr>
+                                <td>내용</td>
+                                <td>작성일</td>
+                            </tr>
+                            @foreach($howtos as $howto )
+                                <tr>
+                                    <td><a  href="/admin/howtos/{{$howto['id']}}"> {{$howto['title']}}</a></td>
+                                    <td>{{$howto['created_at']}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+
+                    </div>
+                </li>
+
+                <li class="FlexGrid-item">
+                    <div class="Chartjs">
+                        <header class="Titles">
+                            <h1 class="Titles-main">FAQ 내용관리</h1>
+                            <div class="Titles-sub"></div>
+                        </header>
+                        <table id="" class="table table-hover dataTable no-footer" role="grid" aria-describedby="dataTable_info">
+                            <tr>
+                                <td>내용</td>
+                                <td>작성일</td>
+                            </tr>
+                            @foreach($faqs as $faq )
+                                <tr>
+                                    <td><a  href="/admin/faqs/{{$faq['id']}}">{{Str::limit($faq['title'], 90)}}</a></td>
+                                    <td>{{$faq['created_at']}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
         <div class="analytics-container">
            {{-- <?php $google_analytics_client_id = Voyager::setting("admin.google_analytics_client_id"); ?>
             @if (isset($google_analytics_client_id) && !empty($google_analytics_client_id))
