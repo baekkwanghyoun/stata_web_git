@@ -524,7 +524,7 @@
 
                     vm.files = [];
                     for (var i = 0, file; file = data[i]; i++) {
-                        if (vm.filter(file) && file.filename=='') {
+                        if (vm.filter(file)) {
                             vm.files.push(file);
                         }
                     }
