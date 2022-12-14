@@ -22,22 +22,19 @@ class AnalysisController extends Controller
             // 차수
             if(request('kt_select2_5')) {
                 $waves = request('kt_select2_5');
-                $wavesArr = [];
                 foreach ($waves as $wave) {
-                    $wavesArr[] = ['type'=>'wave', 'value'=> (int)$wave];
+                    Analysis::create(['type'=>'wave', 'value'=> (int)$wave]);
                 }
-                Analysis::insert($wavesArr);
+
             }
 
             /////////////////////////////////////
             // 가구용 원자료 변수
             if(request('kt_select2_3')) {
                 $hs = request('kt_select2_3');
-                $hsArr = [];
                 foreach ($hs as $h) {
-                    $hsArr[] = ['type'=>'h', 'value'=> $h];
+                    Analysis::create(['type'=>'h', 'value'=> $h]);
                 }
-                Analysis::insert($hsArr);
                 $step2Arr[] = ['type' => 'step2', 'value' => 'h'];
             }
 
@@ -45,35 +42,29 @@ class AnalysisController extends Controller
             // 개인용 원자료 변수
             if(request('kt_select2_4')) {
                 $ps = request('kt_select2_4');
-                $psArr = [];
                 foreach ($ps as $p) {
-                    $psArr[] = ['type'=>'p', 'value'=> $p];
+                    Analysis::create(['type'=>'p', 'value'=> $p]);
                 }
-                Analysis::insert($psArr);
                 $step2Arr[] = ['type' => 'step2', 'value' => 'p'];
             }
-
 
             /////////////////////////////////////
             // 가구용 Klips 원자료 변수 추가
             if(request('add_h')) {
                 $add_hs = explode(' ', request('add_h'));
-                $addHArr = [];
                 foreach ($add_hs as $add_h) {
-                    $addHArr[] = ['type'=>'h_src', 'value'=> $add_h];
+                    Analysis::create(['type'=>'h_src', 'value'=> $add_h]);
                 }
-                Analysis::insert($addHArr);
                 $step2Arr[] = ['type' => 'step2', 'value' => 'src']; // 원자료 변수 추가
             }
+
             /////////////////////////////////////
             // 개인용 Klips 원자료 변수 추가
             if(request('add_p')) {
                 $add_ps = explode(' ', request('add_p'));
-                $addPArr = [];
                 foreach ($add_ps as $add_p) {
-                    $addPArr[] = ['type'=>'p_src', 'value'=> $add_p];
+                    Analysis::create(['type'=>'p_src', 'value'=> $add_p]);
                 }
-                Analysis::insert($addPArr);
                 $step2Arr[] = ['type' => 'step2', 'value' => 'src']; // 원자료 변수 추가
             }
 
@@ -82,11 +73,10 @@ class AnalysisController extends Controller
             //  부가조사 차수
             if(request('a_wave')) {
                 $a_waves = request('a_wave');
-                $a_wavesArr = [];
                 foreach ($a_waves as $a_wave) {
-                    $a_wavesArr[] = ['type'=>'wave_a', 'value'=> (int)$a_wave['value']];
+                    Analysis::create(['type'=>'wave_a', 'value'=> (int)$a_wave['value']]);
                 }
-                Analysis::insert($a_wavesArr);
+
                 $step2Arr[] = ['type' => 'step2', 'value' => 'src_a']; // 원자료 부가조사
             }
 
@@ -94,29 +84,25 @@ class AnalysisController extends Controller
             // 부가 조사 차수 변수
             if(request('add_a')) {
                 $add_as = request('add_a');
-                $addAArr = [];
                 foreach ($add_as as $add_a) {
-                    $addAArr[] = ['type'=>'var_a', 'value'=> $add_a];
+                    Analysis::create(['type'=>'var_a', 'value'=> $add_a]);
                 }
-                Analysis::insert($addAArr);
+
             }
 
             /////////////////////////////////////
             // 파일 저장 타입
             if(request('filesave')) {
                 $fileSaves = request('filesave');
-                $filesaveArr = [];
                 foreach ($fileSaves as $fileSave) {
-                    $filesaveArr[] = ['type'=>'file', 'value'=> $fileSave];
+                    Analysis::create(['type'=>'file', 'value'=> $fileSave]);
                 }
-                Analysis::insert($filesaveArr);
             }
-
 
             /////////////////////////////////////
             // step2 추이초사
             if(count($step2Arr) > 0) {
-                Analysis::insert($step2Arr);
+                Analysis::create($step2Arr);
             }
 
         }
@@ -129,23 +115,20 @@ class AnalysisController extends Controller
         else if($tab=='search') {
             if(request('kt_select2_5')) {
                 $waves = request('kt_select2_5');
-                $wavesArr = [];
                 foreach ($waves as $wave) {
-                    $wavesArr[] = ['type'=>'s_wave', 'value'=> (int)$wave];
+                    Analysis::create(['type'=>'s_wave', 'value'=> (int)$wave]);
                 }
-                Analysis::insert($wavesArr);
+
             }
 
             if(request('word')) {
                 $word = request('word');
-                $wordArr[] = ['type' => 'word', 'value' => $word];
-                Analysis::insert($wordArr);
+                Analysis::create(['type' => 'word', 'value' => $word]);
             }
 
             if(request('hp')) {
                 $hp = request('hp');
-                $hpArr[] = ['type' => 's_type', 'value' => $hp];
-                Analysis::insert($hpArr);
+                Analysis::create(['type' => 's_type', 'value' => $hp]);
             }
         }
 

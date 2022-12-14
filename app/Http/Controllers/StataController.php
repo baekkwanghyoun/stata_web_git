@@ -403,7 +403,7 @@ class StataController extends Controller
             $text = "cd E:\project\stata_web\public\stata\klips\n";
             //$text = "cd C:\project\stata_web\public\stata\klips\n";
         } else {
-            $text = "cd C:\www\klips3\storage\app\public\\round\n";
+            $text = "cd C:\www\klips3\storage\app\public\\stata\n";
             //$text = "cd C:\www\klips3\public\stata\klips\n";
         }
 
@@ -546,11 +546,11 @@ class StataController extends Controller
         Log::info(Carbon::now());
         Log::info($filenameAddDate);
         //$filenameAddDate = '221108';
-        if(Storage::disk('public')->exists('round/'.$filename_req.'_'.$filenameAddDate.'.zip')) {
+        if(Storage::disk('public')->exists('stata/'.$filename_req.'_'.$filenameAddDate.'.zip')) {
         //if(file_exists('stata/klips/'.$filename_req.'.zip') ) {
             $isSuccess = true;
             try {
-                Storage::disk('public')->move('round/'.$filename_req.'_'.$filenameAddDate.'.zip',
+                Storage::disk('public')->move('stata/'.$filename_req.'_'.$filenameAddDate.'.zip',
                     'stata/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'_'.$filenameAddDate.'.zip');
             } catch (\Exception $ex) {
                 $error = $ex->getMessage();
