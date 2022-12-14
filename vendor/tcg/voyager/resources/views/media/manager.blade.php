@@ -27,8 +27,8 @@
                             </template>
                         </div>
                         <div class="details">
-                            <div class="folder" >
-                                <h4 >@{{ getFileName(file) }}</h4>
+                            <div class="folder">
+                                <h4>@{{ getFileName(file) }}</h4>
                             </div>
                         </div>
                         <i class="voyager-x dd-nodrag" v-on:click="removeFileFromInput(file)"></i>
@@ -108,7 +108,7 @@
                     <ul id="files">
                         <li v-for="(file) in files" v-on:click="selectFile(file, $event)" v-on:dblclick="openFile(file)"
                             v-if="filter(file)">
-                            <div :class="'file_link ' + (isFileSelected(file) ? 'selected' : '')"   >
+                            <div :class="'file_link ' + (isFileSelected(file) ? 'selected' : '')">
                                 {{--<div class="link_icon">
                                     <template v-if="fileIs(file, 'image')">
                                         <div class="img_icon" :style="imgIcon(file.path)"></div>
@@ -130,9 +130,8 @@
                                     </template>
                                 </div>--}}
                                 <div class="details">
-                                    <div :class="file.type" >
-                                        <h4 :class="file.type+'silver'" style="text-align: center; margin-top: 8px; " >
-                                            @{{ file.name }}</h4>
+                                    <div :class="file.type">
+                                        <h4 style="text-align: center">@{{ file.name }}</h4>
                                         <small v-if="!fileIs(file, 'folder')">
                                             <span class="file_size">@{{ bytesToSize(file.size) }}</span>
                                         </small>
@@ -525,9 +524,7 @@
 
                     vm.files = [];
                     for (var i = 0, file; file = data[i]; i++) {
-                        if (vm.filter(file) ) { //siilver
-                            debugger
-                        //if (vm.filter(file) && file.filename!=='schedule') { //siilver
+                        if (vm.filter(file) && file.filename=='') {
                             vm.files.push(file);
                         }
                     }
@@ -1023,11 +1020,6 @@
     });
 </script>
 <style>
-    .foldersilver {
-        font-weight: bold;
-        color: #039be5;
-    }
-
     .dd-placeholder {
         flex: 1;
         width: 100%;
