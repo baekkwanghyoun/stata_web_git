@@ -526,6 +526,7 @@
                     vm.files = [];
                     for (var i = 0, file; file = data[i]; i++) {
                         if (vm.filter(file) ) { //siilver
+                            debugger
                         //if (vm.filter(file) && file.filename!=='schedule') { //siilver
                             vm.files.push(file);
                         }
