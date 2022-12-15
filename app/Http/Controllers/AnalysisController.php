@@ -102,7 +102,10 @@ class AnalysisController extends Controller
             /////////////////////////////////////
             // step2 추이초사
             if(count($step2Arr) > 0) {
-                //Analysis::create($step2Arr);
+                foreach ($step2Arr as $step2Arr_item) {
+                    Analysis::create($step2Arr_item);
+                }
+                //
             }
 
         }
