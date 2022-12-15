@@ -521,7 +521,6 @@
                     _token: '{{ csrf_token() }}',
                     details: vm.details
                 }, function (data) {
-
                     vm.files = [];
                     for (var i = 0, file; file = data[i]; i++) {
                         if (vm.filter(file)) {
@@ -966,7 +965,6 @@
             }
 
             $(document).ready(function () {
-
                 $(".form-edit-add").submit(function (e) {
                     if (vm.hidden_element) {
                         if (vm.maxSelectedFiles > 1) {
