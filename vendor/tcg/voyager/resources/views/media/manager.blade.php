@@ -592,6 +592,7 @@
                 } else if (this.hidden_element) {
                     this.addFileToInput(file);
                 } else {
+                    return;
                     if (this.fileIs(this.selected_file, 'image')) {
                         $('#imagemodal_' + this._uid).modal('show');
                     } else {
