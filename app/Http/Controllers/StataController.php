@@ -516,7 +516,7 @@ class StataController extends Controller
 
         }
         else if($tab==='search') {
-            $text .= "smart_klips_search_v3, wave( {$waves}) wd(C:\www\klips3\storage\app\public\roundstata) hp(${hp}) word({$word}) ";
+            $text .= "smart_klips_search_v3, wave( {$waves}) wd(C:\www\klips3\storage\app\public\\roundstata) hp(${hp}) word({$word}) ";
         }
 
         Storage::disk('public')->makeDirectory('stata/do/'.$nowDate) ;
