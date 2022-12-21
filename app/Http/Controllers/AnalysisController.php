@@ -189,28 +189,62 @@ class AnalysisController extends Controller
                  }");
         }
         else {
-            $chartjs = app()->chartjs
-                ->name('lineChartTest')
-                ->type('line')
-                ->size(['width' => 800, 'height' => 200])
-                ->labels($r->pluck('value')->toArray())
-                ->datasets([
-                    [
-                        "label" => "검색횟수",
-                        'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                        'borderColor' => "rgba(38, 185, 154, 0.7)",
-                        "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                        "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                        "pointHoverBackgroundColor" => "#fff",
-                        "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                        'data' => $r->pluck('cnt')->toArray(),
-                    ],
-                ])->optionsRaw("{
+            //변수추가 가구용, 변수추가 개인용, 부가조사 변수추가 x, y축 변경
+            if(in_array($type, ['h_src', 'p_src', 'var_a'])) {
+                $chartjs = app()->chartjs
+                    ->name('lineChartTest')
+                    ->type('horizontalBar')
+                    ->size(['width' => 800, 'height' => $r->pluck('value')->count()*10])
+                    ->labels($r->pluck('value')->toArray())
+                    ->datasets([
+                        [
+                            "label" => "검색횟수",
+                            'backgroundColor' => "rgba(242, 191, 24, 0.8)",
+                            'borderColor' => "rgba(133, 171, 158, 0.7)",
+                            "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                            "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                            "pointHoverBackgroundColor" => "#fff",
+                            "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                            'data' => $r->pluck('cnt')->toArray(),
+                            'barPercentage'=> 0.7,
+                            /*
+                            'barThickness'=> 8,
+                            'maxBarThickness'=> 8,
+                            'minBarLength'=> 20,*/
+                        ],
+                    ])->optionsRaw("{
+                    indexAxis: 'y',
                     legend: {
                         display: true,
                         position:'bottom',
                     }
                  }");
+            }
+            else {
+                $chartjs = app()->chartjs
+                    ->name('lineChartTest')
+                    ->type('line')
+                    ->size(['width' => 800, 'height' => 300])
+                    ->labels($r->pluck('value')->toArray())
+                    ->datasets([
+                        [
+                            "label" => "검색횟수",
+                            'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                            'borderColor' => "rgba(38, 185, 154, 0.7)",
+                            "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                            "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                            "pointHoverBackgroundColor" => "#fff",
+                            "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                            'data' => $r->pluck('cnt')->toArray(),
+                        ],
+                    ])->optionsRaw("{
+                    legend: {
+                        display: true,
+                        position:'bottom',
+                    }
+                 }");
+            }
+
         }
 
         if (request('type') === 'csv') {
