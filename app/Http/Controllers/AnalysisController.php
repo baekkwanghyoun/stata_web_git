@@ -157,7 +157,7 @@ class AnalysisController extends Controller
         //$q = $this->makeQeuryByType($type) . $dFormat;
 
         $r = Analysis::select(DB::raw('value, count(*) as cnt '))->where('type' ,$type)
-            ->whereBetween('created_at', [$started_atC->toDateTimeString(),$ended_atC->toDateTimeString()])
+            ->whereBetween('created_at', [$started_atC->toDateString(),$ended_atC->format('Y-m-d')." 23:59:59" ])
             ->groupby('value')
             ->when(in_array($type, ['wave', 'wave_a', 's_wave']), function ($query) {
                 return $query->orderby(DB::raw('cast(value  as decimal)'));
