@@ -121,12 +121,11 @@ class AnalysisController extends Controller
                 foreach ($waves as $wave) {
                     Analysis::create(['type'=>'s_wave', 'value'=> (int)$wave]);
                 }
-
             }
 
             if(request('word')) {
                 $word = request('word');
-                Analysis::create(['type' => 'word', 'value' => $word]);
+                Analysis::create(['type' => 's_word', 'value' => $word]);
             }
 
             if(request('hp')) {
