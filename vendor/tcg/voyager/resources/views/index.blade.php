@@ -1,12 +1,95 @@
 @extends('voyager::master')
 
 @section('content')
-    <div class="page-content">
+    <div class="page-content" style="margin-left: 26px">
         @include('voyager::alerts')
         @include('voyager::dimmers')
 
+        {{--tag cloud--}}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">변수추가 가구용</h3>
+                    </div>
+                    <div class="panel-body"  style="height: 500px; ">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">변수추가 가구용</h3>
+                    </div>
+                    <div class="panel-body"  style="height: 500px; ">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         {{--siilver--}}
-        <div class="Dashboard Dashboard--full" id="dashboard1">
+        <div class="Dashboard Dashboard--full" id="dashboard1" style="">
+            <script>
+                window.onload = () => {
+                    const words = [
+                        { key: 'word', value: 10 },
+                        { key: 'words', value: 8 },
+                        { key: 'sprite', value: 7 },
+                        { key: 'placed', value: 5 },
+                        { key: 'layout', value: 4 },
+                        { key: 'algorithm', value: 4 },
+                        { key: 'area', value: 4 },
+                        { key: 'without', value: 3 },
+                        { key: 'step', value: 3 },
+                        { key: 'bounding', value: 3 },
+                        { key: 'retrieve', value: 3 },
+                        { key: 'operation', value: 3 },
+                        { key: 'collision', value: 3 },
+                        { key: 'candidate', value: 3 },
+                        { key: '32', value: 2 },
+                        { key: 'placement', value: 2 },
+                        { key: 'time', value: 2 },
+                        { key: 'possible', value: 2 },
+
+                    ];
+                    const data = {
+                        labels: words.map((d) => d.key),
+                        datasets: [
+                            {
+                                label: '',
+                                data: words.map((d) => 10 + d.value * 10),
+                            },
+                        ],
+                    };
+                    const ctx = document.getElementById('canvas').getContext('2d');
+                    window.myBar = new Chart(ctx, {
+                        type: 'wordCloud',
+                        data: data,
+                        options: {
+                            title: {
+                                display: false,
+                                text: 'Chart.js Word Cloud',
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                            },
+                        },
+                    });
+                };
+            </script>
+
+            {{--
+
+                        <canvas id="word_cloud" class="word_cloud"  width="1000px" ></canvas>
+            --}}
+
 
             <ul class="FlexGrid FlexGrid--halves">
                 <li class="FlexGrid-item">
@@ -132,6 +215,8 @@
 @stop
 
 @section('javascript')
+    <script src="https://unpkg.com/chart.js@4"></script>
+    <script src="https://unpkg.com/chartjs-chart-wordcloud@4"></script>
 
     @if(isset($google_analytics_client_id) && !empty($google_analytics_client_id))
         <script>
