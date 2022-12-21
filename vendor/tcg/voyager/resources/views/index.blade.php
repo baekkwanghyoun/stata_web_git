@@ -6,6 +6,7 @@
         @include('voyager::dimmers')
 
         {{--tag cloud--}}
+        {{--
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
@@ -29,10 +30,11 @@
                 </div>
             </div>
         </div>
-
+--}}
 
 
         {{--siilver--}}
+        {{--
         <div class="Dashboard Dashboard--full" id="dashboard1" style="">
             <script>
                 window.onload = () => {
@@ -85,10 +87,10 @@
                 };
             </script>
 
-            {{--
+            --}}{{--
 
                         <canvas id="word_cloud" class="word_cloud"  width="1000px" ></canvas>
-            --}}
+            --}}{{--
 
 
             <ul class="FlexGrid FlexGrid--halves">
@@ -138,7 +140,7 @@
 
             </ul>
         </div>
-
+--}}
         <div class="analytics-container">
            {{-- <?php $google_analytics_client_id = Voyager::setting("admin.google_analytics_client_id"); ?>
             @if (isset($google_analytics_client_id) && !empty($google_analytics_client_id))
