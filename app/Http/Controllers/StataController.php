@@ -291,7 +291,7 @@ class StataController extends Controller
 
         //visits()->visit();
         $isSuccess = false;
-        $acceptDomain = ['http://52.79.82.226','localhost','http://jat.co.kr/', 'https://www.kli.re.kr/',
+        $acceptDomain = ['http://52.79.82.226','localhost','https://jat.co.kr/', 'https://www.kli.re.kr/',
             'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
         $referer = request()->headers->get('referer');
