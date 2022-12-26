@@ -291,7 +291,7 @@ class StataController extends Controller
 
         //visits()->visit();
         $isSuccess = false;
-        $acceptDomain = ['http://52.79.82.226','localhost','http://jat.co.kra/', 'https://www.kli.re.kr/',
+        $acceptDomain = ['http://52.79.82.226','localhost', 'https://www.kli.re.kr/',
             'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
         $referer = request()->headers->get('referer');
@@ -309,7 +309,7 @@ class StataController extends Controller
         if($result || request()->getHttpHost()=='stataweb.test:9011' ) {
             return view('quasar');
         }
-        else if(Str::contains($referer, 'jat.co.kra')) {
+        else if(Str::contains($referer, 'jat.co.kr')) {
             return view('quasar');
         }
         else if(Str::contains($referer, 'kli.re.kr')) {
