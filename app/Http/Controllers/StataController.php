@@ -291,7 +291,8 @@ class StataController extends Controller
 
         //visits()->visit();
         $isSuccess = false;
-        $acceptDomain = ['http://52.79.82.226','http://stataweb.test:9011/','http://jat.co.kr/', 'https://www.kli.re.kr/', 'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
+        $acceptDomain = ['http://52.79.82.226','localhost','http://jat.co.kra/', 'https://www.kli.re.kr/',
+            'http://designblue.ca/','http://designblue.test:9090/', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
         $referer = request()->headers->get('referer');
 
@@ -305,13 +306,13 @@ class StataController extends Controller
 
         $result = in_array($referer, $acceptDomain);
 
-        if($result || request()->getHttpHost()=='stataweb.test:9011' ||'http://52.79.82.226') {
+        if($result || request()->getHttpHost()=='stataweb.test:9011' ) {
             return view('quasar');
         }
-        else if(Str::contains($referer, 'jat.co.kr')) {
+        else if(Str::contains($referer, 'jat.co.kra')) {
             return view('quasar');
         }
-        else if(Str::contains($referer, 'www.kli.re.kr')) {
+        else if(Str::contains($referer, 'kli.re.kr')) {
             return view('quasar');
         }
         else {
