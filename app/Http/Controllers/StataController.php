@@ -291,24 +291,22 @@ class StataController extends Controller
 
         //visits()->visit();
         $isSuccess = false;
-        $acceptDomain = ['jat.co.kr', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
+        //$acceptDomain = ['jat.co.kr', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
+        //$result = in_array($referer, $acceptDomain);
 
         $referer = request()->headers->get('referer');
 
-/*        if($referer==null) {
-            return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');
-        }*/
+/*        if($referer==null) {return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');}*/
 
-        //$this->remotelog($referer);
-
-        //dump($referer);
-
-        $result = in_array($referer, $acceptDomain);
         Log::info('referer : '. $referer);
 
         // request()->getHttpHost() : 실행되는 도메인
         // $referer : 외부에서 링크로 넘어온 도메인
+
         if(request()->getHttpHost()=='localhost' ) { // 로컬 실행용
+            return view('quasar');
+        }
+        else if(Str::contains($referer, 'jat.co.kr')) {
             return view('quasar');
         }
         else if(Str::contains($referer, 'kli.re.kr')) {
