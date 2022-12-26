@@ -304,7 +304,8 @@ class StataController extends Controller
         // request()->getHttpHost() : 실행되는 도메인
         // $referer : 외부에서 링크로 넘어온 도메인
 
-        if(request()->getHttpHost()=='localhost' || request()->getHttpHost()=='52.79.82.226') { // 로컬 실행용
+        // 개발서버 test시는 추가해주지 않으면 klips로 이동함 :  request()->getHttpHost()=='52.79.82.226'
+        if(request()->getHttpHost()=='localhost' ) { // 로컬 실행용
             return view('quasar');
         }
         else if(Str::contains($referer, 'jat.co.kr')) {
