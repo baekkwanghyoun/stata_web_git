@@ -73,9 +73,20 @@ class AnalysisController extends Controller
             //  부가조사 차수
             if(request('a_wave')) {
                 $a_waves = request('a_wave');
-                foreach ($a_waves as $a_wave) {
-                    Analysis::create(['type'=>'wave_a', 'value'=> (int)$a_wave['value']]);
+                $add_as = request('add_a');
+                $rtnStr='';
+                foreach ([0,1,2] as $i) {
+                    if (isset($a_waves[$i]) && isset($add_as[$i])) {
+                        $arAs = explode(' ', $add_as[$i]);
+                        foreach ($arAs as $a) {
+                            $rtnStr = $a_waves[$i]['label'].'_' . $a;
+                            Analysis::create(['type' => 'wave_a', 'value' => $rtnStr]);
+                        }
+                    }
                 }
+                /*foreach ($a_waves as $a_wave) {
+                    Analysis::create(['type'=>'wave_a', 'value'=> (int)$a_wave['value']]);
+                }*/
 
                 $step2Arr[] = ['type' => 'step2', 'value' => 'src_a']; // 원자료 부가조사
             }
@@ -189,11 +200,11 @@ class AnalysisController extends Controller
         }
         else {
             //변수추가 가구용, 변수추가 개인용, 부가조사 변수추가 x, y축 변경
-            if(in_array($type, ['h_src', 'p_src', 'var_a'])) {
+            if(in_array($type, ['h_src', 'p_src', 'var_a', 'wave_a'])) {
                 $chartjs = app()->chartjs
                     ->name('lineChartTest')
                     ->type('horizontalBar')
-                    ->size(['width' => 800, 'height' => $r->pluck('value')->count()*10])
+                    ->size(['width' => 800, 'height' => $r->pluck('value')->count()>20?$r->pluck('value')->count()*10:300])
                     ->labels($r->pluck('value')->toArray())
                     ->datasets([
                         [
