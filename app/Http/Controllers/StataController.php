@@ -291,7 +291,7 @@ class StataController extends Controller
 
         //visits()->visit();
         $isSuccess = false;
-        $acceptDomain = ['http://52.79.82.226','localhost', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
+        $acceptDomain = ['http://52.79.82.226', 'https://www.kli.re.kr/klips/SmartKlipsTestPage.html'];
 
         $referer = request()->headers->get('referer');
 
@@ -305,11 +305,10 @@ class StataController extends Controller
 
         $result = in_array($referer, $acceptDomain);
         Log::info('referer : '. $referer);
-        Log::info('ref : '. request()->getHttpHost());
-        if($result || request()->getHttpHost()=='localhost' ) {
-            return view('quasar');
-        }
-        else if(Str::contains($referer, 'jat.co.kr')) {
+
+        // request()->getHttpHost() : 실행되는 도메인
+        // $referer : 외부에서 링크로 넘어온 도메인
+        if(request()->getHttpHost()=='localhost' ) { // 로컬 실행용
             return view('quasar');
         }
         else if(Str::contains($referer, 'kli.re.kr')) {
