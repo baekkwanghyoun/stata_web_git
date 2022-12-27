@@ -512,11 +512,11 @@ class StataController extends Controller
                 $ado_name = 'smart_klips_v3';
             }*/
             $ado_name = 'smart_klips_v3';
-            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) save({$filename_req}) wd(C:\www\klips3\storage\app\public\\roundstata) {$filesaveVal} {$add_h} {$add_p} {$addTxt}"; //{$tyCd}
+            $text .= $ado_name." ${households} {$persons} , wave( {$waves}) save({$filename_req}) wd(C:\www\klips3\storage\app\public\\roundstata(dta)) {$filesaveVal} {$add_h} {$add_p} {$addTxt}"; //{$tyCd}
 
         }
         else if($tab==='search') {
-            $text .= "smart_klips_search_v3, wave( {$waves}) wd(C:\www\klips3\storage\app\public\\roundstata) hp(${hp}) word({$word}) ";
+            $text .= "smart_klips_search_v3, wave( {$waves}) wd(C:\www\klips3\storage\app\public\\roundstata(dta)) hp(${hp}) word({$word}) ";
         }
 
         Storage::disk('public')->makeDirectory('stata/do/'.$nowDate) ;
