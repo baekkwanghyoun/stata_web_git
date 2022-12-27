@@ -403,7 +403,7 @@ class StataController extends Controller
             $text = "cd E:\project\stata_web\public\stata\klips\n";
             //$text = "cd C:\project\stata_web\public\stata\klips\n";
         } else {
-            $text = "cd C:\www\klips3\storage\app\public\\roundstata_ado\n";
+            $text = "cd C:\www\klips3\storage\app\public\\roundstata(ado)\n";
             //$text = "cd C:\www\klips3\public\stata\klips\n";
         }
 
