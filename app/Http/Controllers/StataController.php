@@ -299,7 +299,7 @@ class StataController extends Controller
         if($referer==null) {return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');}
 
         Log::info('referer : '. $referer);
-        //Log::info('domain : '. request()->getHttpHost());
+        Log::info('domain : '. request()->getHttpHost());
 
         // request()->getHttpHost() : 실행되는 도메인
         // $referer : 외부에서 링크로 넘어온 도메인
