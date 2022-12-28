@@ -547,11 +547,11 @@ class StataController extends Controller
         Log::info(Carbon::now());
         Log::info($filenameAddDate);
         //$filenameAddDate = '221108';
-        if(Storage::disk('public')->exists('roundstata/'.$filename_req.'_'.$filenameAddDate.'.zip')) {
+        if(Storage::disk('public')->exists('roundstata(dta)/'.$filename_req.'_'.$filenameAddDate.'.zip')) {
         //if(file_exists('stata/klips/'.$filename_req.'.zip') ) {
             $isSuccess = true;
             try {
-                Storage::disk('public')->move('roundstata/'.$filename_req.'_'.$filenameAddDate.'.zip',
+                Storage::disk('public')->move('roundstata(dta)/'.$filename_req.'_'.$filenameAddDate.'.zip',
                     'stata/result/'.$nowDate.'/'.$foldername.'/'.$filename_req.'_'.$filenameAddDate.'.zip');
             } catch (\Exception $ex) {
                 $error = $ex->getMessage();
