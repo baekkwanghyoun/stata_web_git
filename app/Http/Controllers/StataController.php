@@ -253,6 +253,8 @@ class StataController extends Controller
 
         visitor()->visit();
 
+        //dd(request()->getHttpHost());
+
         StatsWriter::for(StatsStep::class, ['name'=>'123'])->increase(1);
         //StatsWriter::for(StatsStep::class, ['name'=>'123'])->increase();
 
@@ -296,7 +298,7 @@ class StataController extends Controller
 
         $referer = request()->headers->get('referer');
 
-        if($referer==null) {return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');}
+        if(request()->getHttpHost()!='localhost' && $referer==null) {return redirect('https://www.kli.re.kr/klips/selectBbsNttList.do?bbsNo=98&key=526');}
 
         Log::info('referer : '. $referer);
         Log::info('domain : '. request()->getHttpHost());
@@ -305,6 +307,7 @@ class StataController extends Controller
         // $referer : 외부에서 링크로 넘어온 도메인
 
         // 개발서버 test시는 추가해주지 않으면 klips로 이동함 :
+
         if(request()->getHttpHost()=='localhost') { // 로컬 실행용
             return view('quasar');
         }
