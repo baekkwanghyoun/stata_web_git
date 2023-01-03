@@ -1,38 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Stat;
 use App\Models\StatsStep;
-use App\Models\User;
-use App\Models\Visit;
-use App\Stats\StepStats;
-use Flowframe\Trend\Trend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
-use Mockery\Exception;
 use phpDocumentor\Reflection\Types\Array_;
 use Spatie\Activitylog\Models\Activity;
-use Spatie\Stats\StatsQuery;
 use Spatie\Stats\StatsWriter;
-use Symfony\Component\VarDumper\VarDumper;
-
-/*use Analytics;
-use Spatie\Analytics\Period;*/
-
-use Spatie\Stats\Traits\HasStats;
 
 class StataController extends Controller
 {
-
-
-
     /**
      * Regular expression for matching and validating a MAC address
      * @var string
@@ -168,28 +150,6 @@ class StataController extends Controller
         dump($activity->description); //returns 'created'
         dump($activity->subject); //returns the instance of NewsItem that was created
         dump($activity->changes); //returns ['attributes' => ['name' => 'original name', 'text' => 'Lorum']];
-
-        /*
-        //fetch the most visited pages for today and the past week
-        $a = Analytics::fetchMostVisitedPages(Period::days(7));
-        dump($a);
-
-        echo "Most visited pages";
-        $b = Analytics::fetchMostVisitedPages(Period::months(6));
-        dump($b);
-
-        echo "Top referrer";
-        dump(Analytics::fetchTopReferrers(Period::months(6)));
-
-        echo "User Types";
-        dump(Analytics::fetchUserTypes(Period::months(6)));
-
-        echo "Top browsers";
-        dump(Analytics::fetchTopBrowsers(Period::months(6)));
-
-        //fetch visitors and page views for the past week
-        //Analytics::fetchVisitorsAndPageViews(Period::days(7));
-        */
     }
 
     public function chart()
@@ -344,19 +304,9 @@ class StataController extends Controller
     }
 
     public function index()
-    {        $isSuccess = false;
-        return view('stata.index', compact('isSuccess'));
-    }
-
-    public function index2()
     {
         $isSuccess = false;
-     //   return view('stata.index2', compact('isSuccess'));
-    }
-
-    public function create()
-    {
-
+        return view('stata.index', compact('isSuccess'));
     }
 
 

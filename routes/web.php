@@ -59,8 +59,6 @@ Route::get('/klips/smartklips.do', [StataController::class, 'quasar'])->name('qu
 //Route::get('/klips/smartklips', [StataController::class, 'quasar'])->name('quasar.index');
 
 Route::get('/stata', [StataController::class, 'index'])->name('stata.index');
-Route::get('/stata2', [StataController::class, 'index2']);
-Route::get('/stata/create', [StataController::class, 'create'])->name('stata.create');
 Route::post('/stata/store', [StataController::class, 'store'])->name('stata.store');
 Route::post('/stata/storeKlips', [StataController::class, 'storeKlips'])->name('stata.storeKlips'); //storeKlipsapi api라우터에서 대체 처리
 
