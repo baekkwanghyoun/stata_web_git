@@ -6,9 +6,8 @@
         @include('voyager::dimmers')
 
         {{--tag cloud--}}
-        {{--
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">변수추가 가구용</h3>
@@ -19,27 +18,21 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">변수추가 가구용</h3>
                     </div>
                     <div class="panel-body"  style="height: 500px; ">
-                        <canvas id="canvas"></canvas>
+                        <canvas id="canvas2"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
---}}
 
-
-        {{--siilver--}}
-        {{--
-        <div class="Dashboard Dashboard--full" id="dashboard1" style="">
             <script>
                 window.onload = () => {
                     const words = [
-                        { key: 'word', value: 10 },
+                        { key: '교육', value: 30 },
                         { key: 'words', value: 8 },
                         { key: 'sprite', value: 7 },
                         { key: 'placed', value: 5 },
@@ -75,7 +68,7 @@
                         options: {
                             title: {
                                 display: false,
-                                text: 'Chart.js Word Cloud',
+                                text: ' Word Cloud',
                             },
                             plugins: {
                                 legend: {
@@ -86,13 +79,11 @@
                     });
                 };
             </script>
-
-            --}}{{--
-
-                        <canvas id="word_cloud" class="word_cloud"  width="1000px" ></canvas>
-            --}}{{--
+        </div>
 
 
+        {{--siilver--}}
+        <div class="Dashboard Dashboard--full" id="dashboard1" style="">
             <ul class="FlexGrid FlexGrid--halves">
                 <li class="FlexGrid-item">
                     <div class="Chartjs">
@@ -140,7 +131,6 @@
 
             </ul>
         </div>
---}}
         <div class="analytics-container">
            {{-- <?php $google_analytics_client_id = Voyager::setting("admin.google_analytics_client_id"); ?>
             @if (isset($google_analytics_client_id) && !empty($google_analytics_client_id))
