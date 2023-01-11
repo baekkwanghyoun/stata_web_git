@@ -245,7 +245,7 @@ class VisitController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControlle
 
         if ($request->get('type') === 'csv') {
             $now = (new \Carbon\Carbon())->format("ymd");
-            $filename = "visit_{$now}.csv";
+            $filename = "visit_{$type}_{$now}.csv";
 
             return response()->stream(function () use($filename, $excel, $type) {
                 $handle = fopen('php://output', 'w+');

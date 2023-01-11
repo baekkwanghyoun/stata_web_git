@@ -259,7 +259,7 @@ class AnalysisController extends Controller
 
         if (request('type') === 'csv') {
             $now = (new \Carbon\Carbon())->format("ymd");
-            $filename = "analysis_{$now}.csv";
+            $filename = "analysis_{$type}_{$now}.csv";
 
             return response()->stream(function () use($filename, $r, $type) {
                 $handle = fopen('php://output', 'w+');

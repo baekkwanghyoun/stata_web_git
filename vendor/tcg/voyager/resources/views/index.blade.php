@@ -18,10 +18,19 @@
                 </div>
             </div>
 
+            @php
+                $rp = \App\Models\Analysis::select(DB::raw('value, count(*) as cnt '))->where('type' ,'p_src')
+                //->whereBetween('created_at', [$started_atC->toDateString(),$ended_atC->format('Y-m-d')." 23:59:59" ]) // now()->endOfYear()
+                ->groupby('value')
+                ->get()->toJson();
+
+            //dump($rp);
+            @endphp
+
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">변수추가 가구용</h3>
+                        <h3 class="panel-title">변수추가 개인용</h3>
                     </div>
                     <div class="panel-body"  style="height: 500px; ">
                         <canvas id="canvas2"></canvas>
@@ -29,39 +38,54 @@
                 </div>
             </div>
 
+            @php
+                $r = \App\Models\Analysis::select(DB::raw('value, count(*) as cnt '))->where('type' ,'h_src')
+                //->whereBetween('created_at', [$started_atC->toDateString(),$ended_atC->format('Y-m-d')." 23:59:59" ]) // now()->endOfYear()
+                ->groupby('value')
+                ->get()->toJson();
+            @endphp
             <script>
                 window.onload = () => {
-                    const words = [
-                        { key: '교육', value: 30 },
-                        { key: 'words', value: 8 },
-                        { key: 'sprite', value: 7 },
-                        { key: 'placed', value: 5 },
-                        { key: 'layout', value: 4 },
-                        { key: 'algorithm', value: 4 },
-                        { key: 'area', value: 4 },
-                        { key: 'without', value: 3 },
-                        { key: 'step', value: 3 },
-                        { key: 'bounding', value: 3 },
-                        { key: 'retrieve', value: 3 },
-                        { key: 'operation', value: 3 },
-                        { key: 'collision', value: 3 },
-                        { key: 'candidate', value: 3 },
-                        { key: '32', value: 2 },
-                        { key: 'placement', value: 2 },
-                        { key: 'time', value: 2 },
-                        { key: 'possible', value: 2 },
 
-                    ];
-                    const data = {
-                        labels: words.map((d) => d.key),
+                    const wordsR = {!!  $rp !!};
+                    const dataR = {
+                        labels: wordsR.map((d) => d.value),
                         datasets: [
                             {
                                 label: '',
-                                data: words.map((d) => 10 + d.value * 10),
+                                data: wordsR.map((d) => d.cnt),
                             },
                         ],
                     };
-                    const ctx = document.getElementById('canvas').getContext('2d');
+                    const ctxR = document.getElementById('canvas').getContext('2d');
+                    window.myBar = new Chart(ctxR, {
+                        type: 'wordCloud',
+                        data: dataR,
+                        options: {
+                            title: {
+                                display: false,
+                                text: ' Word Cloud',
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                            },
+                        },
+                    });
+
+
+                    const words = {!!  $r !!};
+                    const data = {
+                        labels: words.map((d) => d.value),
+                        datasets: [
+                            {
+                                label: '',
+                                data: words.map((d) => d.cnt),
+                            },
+                        ],
+                    };
+                    const ctx = document.getElementById('canvas2').getContext('2d');
                     window.myBar = new Chart(ctx, {
                         type: 'wordCloud',
                         data: data,
@@ -79,6 +103,7 @@
                     });
                 };
             </script>
+
         </div>
 
 
