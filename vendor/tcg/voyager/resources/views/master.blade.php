@@ -48,6 +48,17 @@
         .voyager .breadcrumb a{
             color:{{ config('voyager.primary_color','#22A7F0') }};
         }
+
+        .voyager .side-menu.sidebar-inverse .navbar li.active>a {
+            font-weight: bold !important;
+            opacity: 1;
+        }
+
+        .voyager .side-menu.sidebar-inverse .navbar li>a {
+            color: #d2d2d2;
+            opacity: 0.5;
+        }
+
     </style>
 
     @if(!empty(config('voyager.additional_css')))<!-- Additional CSS -->
