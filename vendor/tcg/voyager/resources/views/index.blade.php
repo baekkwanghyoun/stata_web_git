@@ -10,7 +10,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">변수추가 가구용</h3>
+                        <h3 class="panel-title">변수추가 개인용</h3>
                     </div>
                     <div class="panel-body"  style="height: 500px; ">
                         <canvas id="canvas"></canvas>
@@ -30,7 +30,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">변수추가 개인용</h3>
+                        <h3 class="panel-title">변수추가 가구용</h3>
                     </div>
                     <div class="panel-body"  style="height: 500px; ">
                         <canvas id="canvas2"></canvas>
