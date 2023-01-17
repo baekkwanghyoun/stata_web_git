@@ -59,7 +59,7 @@
             opacity: 0.5;
         }
         .voyager .side-menu.sidebar-inverse .navbar li>a:hover {
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
     </style>

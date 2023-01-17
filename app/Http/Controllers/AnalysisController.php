@@ -200,7 +200,7 @@ class AnalysisController extends Controller
         }
         else {
             //변수추가 가구용, 변수추가 개인용, 부가조사 변수추가 x, y축 변경
-            if(in_array($type, ['h_src', 'p_src', 'var_a', 'wave_a', 'h', 'p'])) {
+            if(in_array($type, ['h_src', 'p_src', 'var_a', 'wave_a', 'h', 'p', 's_word'])) {
                 $chartjs = app()->chartjs
                     ->name('lineChartTest')
                     ->type('horizontalBar')
